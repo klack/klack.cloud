@@ -28,10 +28,10 @@ services:
       frontend:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.plex.rule=Host(`klack.cloud`) && PathPrefix(`/`)"
+      - "traefik.http.routers.plex.rule=Host(`${EXTERNAL_DOMAIN}`) && PathPrefix(`/`)"
       - "traefik.http.routers.plex.service=plex"
       - "traefik.http.routers.plex.entrypoints=plex"
       - "traefik.http.routers.plex.tls.certResolver=myresolver"
       - "traefik.http.services.plex.loadBalancer.server.port=32400"
-      - "stack=klack.cloud"
+      - "stack=${EXTERNAL_DOMAIN}"
     restart: always

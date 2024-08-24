@@ -14,4 +14,4 @@ services:
     network_mode: "host"
     restart: always
     labels:
-      - "stack=klack.cloud"
+      - "stack=${EXTERNAL_DOMAIN}"

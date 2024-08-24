@@ -6,7 +6,7 @@ services:
       frontend:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`klack.cloud`) && Path(`/whoami`)"
+      - "traefik.http.routers.whoami.rule=Host(`${EXTERNAL_DOMAIN}`) && Path(`/whoami`)"
       - "traefik.http.routers.whoami.middlewares=traefik-auth@file"
       - "traefik.http.routers.whoami.tls.certResolver=myresolver"
-      - "stack=klack.cloud"
+      - "stack=${EXTERNAL_DOMAIN}"

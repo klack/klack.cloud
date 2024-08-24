@@ -10,5 +10,5 @@ services:
     networks:
       frontend:
     labels:
-      - "stack=klack.cloud"
+      - "stack=${EXTERNAL_DOMAIN}"
     restart: always

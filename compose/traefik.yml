@@ -25,9 +25,9 @@ services:
       frontend:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=Host(`traefik.klack.internal`)"
+      - "traefik.http.routers.api.rule=Host(`traefik.${INTERNAL_DOMAIN}`)"
       - "traefik.http.routers.api.entrypoints=internal"
       - "traefik.http.routers.api.middlewares=traefik-auth@file"
       - "traefik.http.routers.api.service=api@internal"
-      - "stack=klack.cloud"
+      - "stack=${EXTERNAL_DOMAIN}"
     restart: always

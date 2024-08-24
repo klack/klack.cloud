@@ -18,11 +18,11 @@ services:
     network_mode: service:qbittorrent-wireguard
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.radarr.rule=Host(`radarr.klack.internal`)"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.${INTERNAL_DOMAIN}`)"
       - "traefik.http.routers.radarr.entrypoints=internal"
       - "traefik.http.routers.radarr.service=radarr"
       - "traefik.http.services.radarr.loadBalancer.server.port=7878"
-      - "stack=klack.cloud"
+      - "stack=${EXTERNAL_DOMAIN}"
     restart: always
     # ports:
     #   - "7878:7878"

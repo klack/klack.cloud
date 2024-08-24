@@ -13,14 +13,14 @@ services:
       frontend:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sftpgo-ui.rule=Host(`sftpgo.klack.internal`)"
+      - "traefik.http.routers.sftpgo-ui.rule=Host(`sftpgo.${INTERNAL_DOMAIN}`)"
       - "traefik.http.routers.sftpgo-ui.service=sftpgo-ui"
       - "traefik.http.routers.sftpgo-ui.entrypoints=internal"
       - "traefik.http.routers.sftpgo-ui.tls.certResolver=myresolver"
       - "traefik.http.services.sftpgo-ui.loadBalancer.server.port=8080"
-      - "traefik.http.routers.sftpgo.rule=Host(`klack.cloud`) && PathPrefix(`/dav`)"
+      - "traefik.http.routers.sftpgo.rule=Host(`${EXTERNAL_DOMAIN}`) && PathPrefix(`/dav`)"
       - "traefik.http.routers.sftpgo.service=sftpgo"
       - "traefik.http.routers.sftpgo.tls.certResolver=myresolver"
       - "traefik.http.services.sftpgo.loadBalancer.server.port=80"
-      - "stack=klack.cloud"
+      - "stack=${EXTERNAL_DOMAIN}"
     restart: always
