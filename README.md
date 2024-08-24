@@ -54,11 +54,11 @@ A self-hosted replacement for iCloud, Google Photos, Netflix, Evernote and more.
 # Deployment
 - Rename `.env.example` to `.env` and fill in credentials
 - All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
-- Create `/var/log/sonarr` and `/var/log/radarr`owned by 1000:1000
+- Create `/var/log/sonarr` and `/var/log/radarr` owned by 1000:1000
 - Create a new server key and certificate signed by a self trusted ca.  Place `server.crt` and `server.key` in `/config/traefik/certs` for `.internal` certificates
 - Create `htpasswd` at `./config/traefik/htpasswd` for Trafik basic auth
 - Place `wg0.conf` at `./config/wireguard/wg0.conf` for Wireguard
-- `allup.sh`
+- Run `allup.sh`
 - Add Loki connection to Grafana `http://loki:3100`
 - Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file
 - If there are directory to file mapping errors, open the volume and delete the folder inside
