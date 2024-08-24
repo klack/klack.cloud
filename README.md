@@ -10,7 +10,7 @@
 - Automatic updates
 - Logging, monitoring, and alerts
 
-# Docker Setup
+# Services
 - Plex
 	- Video Server
 - PhotoPrism
