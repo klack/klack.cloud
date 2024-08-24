@@ -35,7 +35,7 @@ A self-hosted replacement for iCloud, Google Photos, Netflix, Evernote and more.
 - Watchtower
     - To auto update docker images
 - Grafanda
-	- Log aggriation, visualization and alerts
+	- Log aggrigation, visualization and alerts
 
 # Endpoints
 | Service | Port | Domain | Path | Link |
@@ -64,7 +64,7 @@ A self-hosted replacement for iCloud, Google Photos, Netflix, Evernote and more.
 - If there are directory to file mapping errors, open the volume and delete the folder inside
 
 # Logs
-- Promtail cannot get logs from containers using another container's network (Jackett, Sonnarr, Radarr), so they are volume linked out of each container to the host's `/var/log/*` and then back into promtail.
+Promtail cannot get logs from containers using another container's network (Jackett, Sonnarr, Radarr), so they are volume linked out of each container to the host's `/var/log/*` and then back into promtail.
 
 ## Rotation
 Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.
