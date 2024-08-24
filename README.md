@@ -52,9 +52,9 @@ Backups are accomplished through a seperate duplicati docker instance
 
 # Deployment
 - Rename `.env.example` to `.env` and fill in credentials
-- All .internal services need a hosts file or router dns pointed to the correct IP
+- All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
 - Create `/var/log/sonarr` and `/var/log/radarr`owned by 1000:1000
-- Create a new server key and certificate signed by a self trusted ca.  Place `server.crt` and `server.key` in `/config/traefik/certs` for klack.internal certificates
+- Create a new server key and certificate signed by a self trusted ca.  Place `server.crt` and `server.key` in `/config/traefik/certs` for `.internal` certificates
 - Create `htpasswd` at `./config/traefik/htpasswd` for Trafik basic auth
 - Place `wg0.conf` at `./config/wireguard/wg0.conf` for Wireguard
 - `allup.sh`
@@ -66,6 +66,6 @@ Backups are accomplished through a seperate duplicati docker instance
 - Promtail cannot get logs from containers using another container's network (Jackett, Sonnarr, Radarr), so they are volume linked out of each container to the host's `/var/log/*` and then back into promtail.
 
 ## Rotation
-Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.  
+Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.
 Copy `./config/logrotate.d/traefik` to `/etc/logrotate.d/traefik` on your host
 Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`
