@@ -1,4 +1,4 @@
-Features
+# Features
 - Download any movie or tv show by entering its name
 - Automatically get new episodes
 - Photo hosting to replace iCloud
