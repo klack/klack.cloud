@@ -1,0 +1,33 @@
+volumes:
+  acme:
+
+services:
+  traefik:
+    image: traefik
+    command:
+      - "--providers.docker"
+      - "--providers.docker.exposedByDefault=false"
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - /var/log/traefik/:/logs/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../config/traefik/dynamic_conf.yml:/config/dynamic_conf.yml
+      - ../config/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ../config/traefik/htpasswd:/htpasswd
+      - ../config/traefik/certs/:/etc/traefik/certs/
+      - acme:/acme/ # 600 perms
+    ports:
+      - "443:443"
+      - "32400:32400"
+      - "4443:4443"
+    networks:
+      frontend:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`traefik.klack.internal`)"
+      - "traefik.http.routers.api.entrypoints=internal"
+      - "traefik.http.routers.api.middlewares=traefik-auth@file"
+      - "traefik.http.routers.api.service=api@internal"
+      - "stack=klack.cloud"
+    restart: always

@@ -1,0 +1,21 @@
+# Serves movies with Plex, Photos with Photoprism.  Provides a sync for Joplin and Photo's via WebDAV.
+name: klack-cloud
+
+include:
+  - ./compose/traefik.yml
+  - ./compose/fail2ban.yml
+  - ./compose/grafana.yml
+  - ./compose/watchtower.yml
+  - ./compose/whoami.yml
+  - ./compose/sftpgo.yml
+  - ./compose/photoprism.yml
+  - ./compose/plex.yml
+  - ./compose/qbittorrent-wireguard.yml
+  - ./compose/radarr.yml
+  - ./compose/sonarr.yml
+  - ./compose/jackett.yml
+  - ./compose/unpackerr.yml
+
+networks:
+  frontend:
+    external: true

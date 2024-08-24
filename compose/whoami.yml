@@ -1,0 +1,12 @@
+services:
+  whoami:
+    # A container that exposes an API to show its IP address
+    image: traefik/whoami
+    networks:
+      frontend:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`klack.cloud`) && Path(`/whoami`)"
+      - "traefik.http.routers.whoami.middlewares=traefik-auth@file"
+      - "traefik.http.routers.whoami.tls.certResolver=myresolver"
+      - "stack=klack.cloud"

@@ -1,0 +1,73 @@
+volumes:
+  qbtw:
+
+services:
+  qbittorrent-wireguard:
+    image: "docker.io/tenseiken/qbittorrent-wireguard"
+    profiles:
+      - downloaders
+    cap_add:
+      - "NET_ADMIN"
+    cap_drop:
+      - "AUDIT_CONTROL"
+      - "BLOCK_SUSPEND"
+      - "DAC_READ_SEARCH"
+      - "IPC_LOCK"
+      - "IPC_OWNER"
+      - "LEASE"
+      - "LINUX_IMMUTABLE"
+      - "MAC_ADMIN"
+      - "MAC_OVERRIDE"
+      - "NET_BROADCAST"
+      - "SYSLOG"
+      - "SYS_ADMIN"
+      - "SYS_BOOT"
+      - "SYS_MODULE"
+      - "SYS_NICE"
+      - "SYS_PACCT"
+      - "SYS_PTRACE"
+      - "SYS_RAWIO"
+      - "SYS_RESOURCE"
+      - "SYS_TIME"
+      - "SYS_TTY_CONFIG"
+      - "WAKE_ALARM"
+    entrypoint:
+      - "/bin/bash"
+      - "/start.sh"
+    environment:
+      - "PUID=1000"
+      - "PGID=1000"
+      - "LAN_NETWORK=192.168.1.0/16"
+      - "QBT_LEGAL_NOTICE=confirm"
+      - "WEBUI_URL=http://localhost:8080" #qBittorrent Web info for updating proton vpn port forwarding
+      - "WEBUI_USER=${QB_WEBUI_USER}"
+      - "WEBUI_PASS=${QB_WEBUI_PASS}"
+      - "ENABLEPROTONVPNPORTFWD=1"
+      - "TZ=${TZ}"
+    ipc: "private"
+    networks:
+      frontend:
+    ports:
+      - "8081:8080"
+    privileged: true
+    security_opt:
+      - "label=disable"
+    stdin_open: true
+    sysctls:
+      - "net.ipv4.conf.all.rp_filter=2"
+      - "net.ipv4.conf.all.src_valid_mark=1"
+      - "net.ipv6.conf.all.disable_ipv6=1"
+    tty: true
+    volumes:
+      - "qbtw:/config"
+      - "../config/wireguard/wg0.conf:/config/wireguard/wg0.conf"
+      - "../data/klack.tv:/data"
+    working_dir: "/opt"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.klack.internal`)"
+      - "traefik.http.routers.qbittorrent.entrypoints=internal"
+      - "traefik.http.routers.qbittorrent.service=qbittorrent"
+      - "traefik.http.services.qbittorrent.loadBalancer.server.port=8080"
+      - "stack=klack.cloud"
+    restart: always

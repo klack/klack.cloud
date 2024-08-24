@@ -1,0 +1,45 @@
+providers:
+  file:
+    fileName: /config/dynamic_conf.yml
+  docker:
+    exposedByDefault: false
+
+accessLog:
+  filePath: /logs/traefik-access.log
+  addInternals: true
+  fields:
+    names:
+      StartUTC: drop #Fixes incorrect timezone in access log
+
+api: true
+entrypoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: web-secure
+          scheme: https
+
+  web-secure:
+    address: ":443"
+    asdefault: true
+    http:
+      tls: true
+
+  plex:
+    address: ":32400"
+    http:
+      tls: true
+
+  internal:
+    address: ":4443"
+    http:
+      tls: true
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: admin@suntrustmail.com
+      storage: /acme/acme.json
+      tlsChallenge: {}

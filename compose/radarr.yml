@@ -1,0 +1,28 @@
+volumes:
+  radarr:
+
+services:
+  radarr:
+    image: ghcr.io/hotio/radarr
+    profiles:
+      - downloaders
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=${TZ}
+    volumes:
+      - radarr:/config
+      - /var/log/radarr:/config/logs
+      - ../data/klack.tv:/data
+    network_mode: service:qbittorrent-wireguard
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.klack.internal`)"
+      - "traefik.http.routers.radarr.entrypoints=internal"
+      - "traefik.http.routers.radarr.service=radarr"
+      - "traefik.http.services.radarr.loadBalancer.server.port=7878"
+      - "stack=klack.cloud"
+    restart: always
+    # ports:
+    #   - "7878:7878"

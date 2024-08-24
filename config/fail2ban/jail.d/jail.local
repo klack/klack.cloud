@@ -1,0 +1,59 @@
+[DEFAULT]
+bantime = 1h
+ignoreip = 127.0.0.1/8 ::1 172.0.0.0/8 192.168.0.0/16
+default_logpath = /logs/traefik/traefik-access.log
+
+#401 Traefik Basic Auth
+[traefik-auth]
+enabled = true
+chain = DOCKER-USER
+port = http,https
+filter = traefik-auth
+mode = aggressive
+logpath = %(default_logpath)s
+
+#401 Traefik Basic Auth
+[traefik-auth-ddos]
+enabled = true
+filter = traefik-auth[mode=ddos]
+
+#Unrouted 404's
+[traefik-errors]
+enabled = true
+chain = DOCKER-USER
+port = http,https
+filter = traefik-errors
+logpath = %(default_logpath)s
+
+#Crawling known directories
+[traefik-botsearch]
+maxretry = 1
+enabled = true
+chain = DOCKER-USER
+port = http,https
+filter = traefik-botsearch
+logpath = %(default_logpath)s
+
+#Plex 401 with fix for unavoidable 401 errors
+[traefik-plex]
+enabled = true
+chain = DOCKER-USER
+port = http,https
+filter = traefik-plex
+logpath = %(default_logpath)s
+
+#SFTPGo 400-498
+[traefik-sftpgo]
+enabled = true
+chain = DOCKER-USER
+port = http,https
+filter = traefik-response-codes[router=sftpgo@docker,coderegex=4(?!99)\d{2}]
+logpath = %(default_logpath)s
+
+#Photoprism 400-498
+[traefik-photoprism]
+enabled = true
+chain = DOCKER-USER
+port = http,https
+filter = traefik-response-codes[router=photoprism@docker,coderegex=4(?!99)\d{2}]
+logpath = %(default_logpath)s

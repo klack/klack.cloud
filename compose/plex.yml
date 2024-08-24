@@ -1,0 +1,37 @@
+volumes:
+  plex:
+
+services:
+  plex:
+    image: plexinc/pms-docker
+    profiles:
+      - apps
+    environment:
+      TZ: ${TZ}
+      PLEX_CLAIM: ${PLEX_CLAIM}
+    hostname: plex
+    volumes:
+      - plex:/config
+      - ${DIR_TRANSCODE}:/transcode
+      - ${DIR_KLACKTV}/library:/data
+    ports:
+      # - "32400:32400/tcp"
+      - "3005:3005/tcp"
+      - "8324:8324/tcp"
+      - "32469:32469/tcp"
+      - "1900:1900/udp"
+      - "32410:32410/udp"
+      - "32412:32412/udp"
+      - "32413:32413/udp"
+      - "32414:32414/udp"
+    networks:
+      frontend:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plex.rule=Host(`klack.cloud`) && PathPrefix(`/`)"
+      - "traefik.http.routers.plex.service=plex"
+      - "traefik.http.routers.plex.entrypoints=plex"
+      - "traefik.http.routers.plex.tls.certResolver=myresolver"
+      - "traefik.http.services.plex.loadBalancer.server.port=32400"
+      - "stack=klack.cloud"
+    restart: always

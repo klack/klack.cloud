@@ -1,0 +1,27 @@
+volumes:
+  sonarr:
+
+services:
+  sonarr:
+    image: ghcr.io/hotio/sonarr
+    profiles:
+      - downloaders
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=${TZ}
+    volumes:
+      - sonarr:/config
+      - /var/log/sonarr:/config/logs
+    network_mode: service:qbittorrent-wireguard
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.klack.internal`)"
+      - "traefik.http.routers.sonarr.entrypoints=internal"
+      - "traefik.http.routers.sonarr.service=sonarr"
+      - "traefik.http.services.sonarr.loadBalancer.server.port=8989"
+      - "stack=klack.cloud"
+    restart: always
+    # ports:
+    #   - "8989:8989"

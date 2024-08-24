@@ -1,0 +1,32 @@
+services:
+  unpackerr:
+    image: golift/unpackerr
+    profiles:
+      - downloaders
+    environment:
+      - TZ=${TZ}
+      # General config
+      - UN_QUIET=false
+      - UN_DEBUG=false
+      - UN_ERROR_STDERR=false
+      - UN_LOG_QUEUES=1m
+      - UN_LOG_FILES=10
+      - UN_LOG_FILE_MB=10
+      - UN_INTERVAL=2m
+      - UN_START_DELAY=1m
+      - UN_RETRY_DELAY=5m
+      - UN_MAX_RETRIES=3
+      - UN_PARALLEL=1
+      - UN_FILE_MODE=0644
+      - UN_DIR_MODE=0755
+      - UN_ACTIVITY=false
+      # Sonarr Config
+      - UN_SONARR_0_URL=http://127.0.0.1:8989
+      - UN_SONARR_0_API_KEY=${UN_SONARR_0_API_KEY}
+      # Radarr Config
+      - UN_RADARR_0_URL=http://12.0.0.1:7878
+      - UN_RADARR_0_API_KEY=${UN_RADARR_0_API_KEY}
+    volumes:
+      - ../data/klack.tv:/data
+    network_mode: service:qbittorrent-wireguard
+    restart: always

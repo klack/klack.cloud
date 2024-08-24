@@ -1,0 +1,10 @@
+.env
+.vscode
+!.keepme
+config/traefik/certs
+config/traefik/htpasswd
+data/*
+config/fail2ban/db/fail2ban.sqlite3
+config/qbittorrent-wireguard/wireguard/wg0.conf
+config/wireguard/wg0.conf
+config/sftpgo/homeuser/sftpgo.db

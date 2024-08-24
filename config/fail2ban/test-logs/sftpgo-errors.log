@@ -1,0 +1,4 @@
+192.168.10.80 - - [04/Aug/2024:20:44:33 +0000] "MKCOL /dav/photos/iPhone/Recents HTTP/1.1" 405 18 "-" "-" 698 "sftpgo@docker" "http://172.22.0.3:80" 0ms
+192.168.10.80 - - [04/Aug/2024:20:44:33 +0000] "MKCOL /dav/photos/iPhone HTTP/1.1" 405 18 "-" "-" 700 "sftpgo@docker" "http://172.22.0.3:80" 0ms
+192.168.10.80 - - [04/Aug/2024:20:44:33 +0000] "MKCOL /dav/photos/iPhone/Recents HTTP/1.1" 405 18 "-" "-" 701 "sftpgo@docker" "http://172.22.0.3:80" 0ms
+192.168.10.80 - - [04/Aug/2024:20:44:37 +0000] "MKCOL /dav/photos/iPhone HTTP/1.1" 405 18 "-" "-" 703 "sftpgo@docker" "http://172.22.0.3:80" 0ms
