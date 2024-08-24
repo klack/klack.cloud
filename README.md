@@ -1,13 +1,17 @@
+# klack.cloud
+A self-hosted replacement for iCloud, Google Photos, Netflix, Evernote and more.  Secure and monitored.
+
 # Features
 - Download any movie or tv show by entering its name
 - Automatically get new episodes
 - Photo hosting to replace iCloud
-- Joplin sync to replace Evernote
+- Joplin to replace Evernote
 - Plex to replace all streaming services
 - VPN with killswitch
 - SSL signed by Letsencrypt
 - Automatic IP banning
-- Automatic updates
+- Automatic updates- Download any movie or tv show by entering its name
+- Automatically get new episodes
 - Logging, monitoring, and alerts
 
 # Services
@@ -47,9 +51,6 @@
 | SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443 |
 | Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443 |
 
-# Backups
-Backups are accomplished through a seperate duplicati docker instance
-
 # Deployment
 - Rename `.env.example` to `.env` and fill in credentials
 - All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
@@ -69,3 +70,6 @@ Backups are accomplished through a seperate duplicati docker instance
 Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.
 Copy `./config/logrotate.d/traefik` to `/etc/logrotate.d/traefik` on your host
 Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`
+
+# Backups
+Backups are accomplished through a seperate duplicati docker instance
