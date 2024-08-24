@@ -8,10 +8,9 @@ A self-hosted replacement for iCloud, Google Photos, Netflix, Evernote and more.
 - Joplin to replace Evernote
 - Plex to replace all streaming services
 - VPN with killswitch
-- SSL signed by Letsencrypt
+- SSL signed by Let's Encrypt
 - Automatic IP banning
-- Automatic updates- Download any movie or tv show by entering its name
-- Automatically get new episodes
+- Automatic updates
 - Logging, monitoring, and alerts
 
 # Services
@@ -42,14 +41,14 @@ A self-hosted replacement for iCloud, Google Photos, Netflix, Evernote and more.
 | --- | --- | --- | --- | --- |
 | PhotoPrism | 443 | klack.cloud | /photos | https://klack.cloud/photos |
 | WebDav | 443 | klack.cloud | /dav | https://klack.cloud/dav/ |
-| Plex | 32400 | klack.cloud | /   | https://klack.cloud:32401 |
-| qBittorrent | 4443 | qbittorrent.klack.internal | /   | https://qbittorrent.klack.internal:4443 |
-| Jackett | 4443 | jackett.klack.internal | /   | https://jackett.klack.internal:4443 |
-| Sonarr | 4443 | sonarr.klack.internal | /   | https://sonarr.klack.internal:4443 |
-| Ronarr | 4443 | radarr.klack.internal | /   | https://radarr.klack.internal:4443 |
-| traefik UI | 4443 | traefik.klack.internal | /   | https://traefik.klack.internal:4443 |
-| SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443 |
-| Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443 |
+| Plex | 32400 | klack.cloud | /   | https://klack.cloud:32401/ |
+| qBittorrent | 4443 | qbittorrent.klack.internal | /   | https://qbittorrent.klack.internal:4443/ |
+| Jackett | 4443 | jackett.klack.internal | /   | https://jackett.klack.internal:4443/ |
+| Sonarr | 4443 | sonarr.klack.internal | /   | https://sonarr.klack.internal:4443/ |
+| Ronarr | 4443 | radarr.klack.internal | /   | https://radarr.klack.internal:4443/ |
+| traefik UI | 4443 | traefik.klack.internal | /   | https://traefik.klack.internal:4443/ |
+| SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443/ |
+| Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ |
 
 # Deployment
 - Rename `.env.example` to `.env` and fill in credentials
