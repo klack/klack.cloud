@@ -34,4 +34,4 @@ services:
       - "traefik.http.routers.plex.tls.certResolver=myresolver"
       - "traefik.http.services.plex.loadBalancer.server.port=32400"
       - "stack=${EXTERNAL_DOMAIN}"
-    restart: always
+    restart: unless-stopped

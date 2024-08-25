@@ -23,4 +23,4 @@ services:
       - "traefik.http.routers.sftpgo.tls.certResolver=myresolver"
       - "traefik.http.services.sftpgo.loadBalancer.server.port=80"
       - "stack=${EXTERNAL_DOMAIN}"
-    restart: always
+    restart: unless-stopped

@@ -1,0 +1,7 @@
+# SPDX-FileCopyrightText: none
+# SPDX-License-Identifier: CC0-1.0
+
+- name: fail2ban
+  config:
+    downloads: "/opt/dionaea/var/log/dionaea/downloads.f2b"
+    offers: "/opt/dionaea/var/log/dionaea/offers.f2b"

@@ -23,6 +23,6 @@ services:
       - "traefik.http.routers.radarr.service=radarr"
       - "traefik.http.services.radarr.loadBalancer.server.port=7878"
       - "stack=${EXTERNAL_DOMAIN}"
-    restart: always
+    restart: unless-stopped
     # ports:
     #   - "7878:7878"

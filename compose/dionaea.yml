@@ -1,0 +1,16 @@
+services:
+  dionaea:
+    image: dinotools/dionaea
+    environment:
+      - "DIONAEA_FORCE_INIT=1"
+    volumes:
+      - ../config/dionaea/log_incident.yaml:/opt/dionaea/etc/dionaea/ihandlers-enabled/log_incident.yaml
+      - ../config/dionaea/fail2ban.yaml:/opt/dionaea/etc/dionaea/ihandlers-enabled/fail2ban.yaml
+      # - ./config/dionaea/dionaea.cfg:/opt/dionaea/etc/dionaea/dionaea.cfg
+      - /var/log/dionaea:/opt/dionaea/var/log/dionaea
+    ports:
+      - 80:80
+      # - 445:445
+    networks:
+      klack:
+    restart: unless-stopped

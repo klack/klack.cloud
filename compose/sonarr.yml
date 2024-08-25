@@ -22,6 +22,6 @@ services:
       - "traefik.http.routers.sonarr.service=sonarr"
       - "traefik.http.services.sonarr.loadBalancer.server.port=8989"
       - "stack=${EXTERNAL_DOMAIN}"
-    restart: always
+    restart: unless-stopped
     # ports:
     #   - "8989:8989"
