@@ -1,9 +1,7 @@
 # klack.cloud
-A self-hosted replacement for iCloud, Google Photos, Netflix, Evernote and more.  Secure and monitored.
+A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.  Secure and monitored.
 
 # Features
-- Download any movie or tv show by entering its name
-- Automatically get new episodes
 - Photo hosting to replace iCloud
 - Joplin to replace Evernote
 - Plex to replace all streaming services
@@ -12,6 +10,8 @@ A self-hosted replacement for iCloud, Google Photos, Netflix, Evernote and more.
 - Automatic IP banning
 - Automatic updates
 - Logging, monitoring, and alerts
+- Download any movie or tv show by entering its name
+- Automatically get new episodes
 
 # Services
 - Plex
@@ -51,6 +51,7 @@ A self-hosted replacement for iCloud, Google Photos, Netflix, Evernote and more.
 | Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ |
 
 # Deployment
+- `docker network create klack`
 - Rename `.env.example` to `.env` and fill in credentials
 - All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
 - Create `/var/log/sonarr` and `/var/log/radarr` owned by 1000:1000
