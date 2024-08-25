@@ -5,4 +5,4 @@
   config:
     handlers:
       #- http://127.0.0.1:8080/
-      - file://var/lib/dionaea/dionaea_incident.json
+      - file:///opt/dionaea/var/log/dionaea/dionaea-incident.json
