@@ -25,7 +25,7 @@ services:
       - "32413:32413/udp"
       - "32414:32414/udp"
     networks:
-      frontend:
+      klack:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plex.rule=Host(`${EXTERNAL_DOMAIN}`) && PathPrefix(`/`)"

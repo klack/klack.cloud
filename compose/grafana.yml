@@ -1,5 +1,5 @@
 networks:
-  frontend:
+  klack:
     external: true
 
 volumes:
@@ -12,7 +12,7 @@ services:
     volumes:
       - ../config/loki:/etc/loki
     networks:
-      - frontend
+      - klack
     labels:
       - "stack=loggers"
     restart: always
@@ -30,7 +30,7 @@ services:
       - /var/log/sonarr:/logs/sonarr
       - /var/log/radarr:/logs/radarr
     networks:
-      - frontend
+      - klack
     labels:
       - "stack=loggers"
     depends_on:
@@ -46,7 +46,7 @@ services:
     volumes:
       - grafana-storage:/var/lib/grafana
     networks:
-      - frontend
+      - klack
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.rule=Host(`grafana.${INTERNAL_DOMAIN}`)"

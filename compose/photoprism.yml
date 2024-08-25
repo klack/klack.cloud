@@ -54,7 +54,7 @@ services:
       - "../data/photos:/photoprism/originals" # Original media files (DO NOT REMOVE)
       - "photoprism:/photoprism/storage" # *Writable* storage folder for cache, database, and sidecar files (DO NOT REMOVE)
     networks:
-      frontend:
+      klack:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.photoprism.rule=Host(`${EXTERNAL_DOMAIN}`) && PathPrefix(`/photos`)"
@@ -86,7 +86,7 @@ services:
     volumes:
       - "photoprism-db:/var/lib/mysql" # DO NOT REMOVE
     networks:
-      frontend:
+      klack:
     labels:
       - "stack=${EXTERNAL_DOMAIN}"
     security_opt:

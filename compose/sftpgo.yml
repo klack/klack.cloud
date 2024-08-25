@@ -10,7 +10,7 @@ services:
       - ${DIR_JOPLIN}:/joplin
       - ${DIR_PHOTOS}../data/photos:/photos
     networks:
-      frontend:
+      klack:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.sftpgo-ui.rule=Host(`sftpgo.${INTERNAL_DOMAIN}`)"

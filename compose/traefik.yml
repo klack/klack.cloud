@@ -22,7 +22,7 @@ services:
       - "32400:32400"
       - "4443:4443"
     networks:
-      frontend:
+      klack:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`traefik.${INTERNAL_DOMAIN}`)"

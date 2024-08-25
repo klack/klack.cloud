@@ -3,7 +3,7 @@ services:
     # A container that exposes an API to show its IP address
     image: traefik/whoami
     networks:
-      frontend:
+      klack:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`${EXTERNAL_DOMAIN}`) && Path(`/whoami`)"

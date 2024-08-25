@@ -46,7 +46,7 @@ services:
       - "TZ=${TZ}"
     ipc: "private"
     networks:
-      frontend:
+      klack:
     ports:
       - "8081:8080"
     privileged: true
