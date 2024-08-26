@@ -1,0 +1,25 @@
+volumes:
+  prometheus-storage:
+
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ../config/prometheus/entrypoint.sh:/entrypoint.sh # Add the entrypoint script
+      - ../config/prometheus/prometheus.yml.template:/etc/prometheus/prometheus.yml.template
+      - ../config/traefik/certs/ca.crt:/etc/prometheus/ca.crt
+      - prometheus-storage:/prometheus
+    environment:
+      NODE_EXPORTER_TARGET: "node-exp.${INTERNAL_DOMAIN}:4443" # Set target endpoint
+      NODE_EXPORTER_USER: ${NODE_EXPORTER_USER}
+      NODE_EXPORTER_PASS: ${NODE_EXPORTER_PASS}
+    entrypoint: ["/entrypoint.sh"]
+    ports:
+      - "9090:9090"
+    networks:
+      - klack
+    extra_hosts:
+      - "node-exp.klack.internal:192.168.20.7"
+    labels:
+      - "stack=loggers"
+    restart: always

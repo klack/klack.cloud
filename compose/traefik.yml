@@ -16,7 +16,7 @@ services:
       - ../config/traefik/traefik.yml:/etc/traefik/traefik.yml
       - ../config/traefik/htpasswd:/htpasswd
       - ../config/traefik/certs/:/etc/traefik/certs/
-      - acme:/acme/ # 600 perms
+      - acme:/acme
     ports:
       - "443:443"
       - "32400:32400"

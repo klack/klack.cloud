@@ -10,8 +10,6 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 - Automatic IP banning
 - Automatic updates
 - Logging, monitoring, and alerts
-- Download any movie or tv show by entering its name
-- Automatically get new episodes
 
 # Services
 - Plex
@@ -22,11 +20,6 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
   	- Webdav is used for PhotoSync from mobile devices and Joplin Sync
 - qBittorrent-wireguard
 	- Combined bitorrent and wireguard image with VPN killswitch
-- Downloaders
-	- Sonarr for TV
-	- Radarr for Movies
-	- Jackett for searching torrent websites
-	- Unpackerr to handle compressed files
 - Traefik
     - For acme SSL and Basic Auth
 - Fail2Ban
@@ -35,6 +28,11 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
     - To auto update docker images
 - Grafanda
 	- Log aggrigation, visualization and alerts
+- File search
+	- Sonarr for TV
+	- Radarr for Movies
+	- Jackett for searching torrent websites
+	- Unpackerr to handle compressed files
 
 # Endpoints
 | Service | Port | Domain | Path | Link |
@@ -49,18 +47,24 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 | traefik UI | 4443 | traefik.klack.internal | /   | https://traefik.klack.internal:4443/ |
 | SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443/ |
 | Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ |
+| Node Exporter | 4443 | node-exp.klack.internal | /   | https://node-exp.klack.internal:4443/ |
 
 # Deployment
 - `docker network create klack`
 - Rename `.env.example` to `.env` and fill in credentials
 - All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
 - Create `/var/log/sonarr` and `/var/log/radarr` owned by 1000:1000
-- Create a new server key and certificate signed by a self trusted ca.  Place `server.crt` and `server.key` in `/config/traefik/certs` for `.internal` certificates
+- Create a new server key and certificate signed by a self trusted ca.  
+- Place `ca.crt`,`server.crt`, and `server.key` in `/config/traefik/certs` for `.internal` certificates
 - Create `htpasswd` at `./config/traefik/htpasswd` for Trafik basic auth
 - Place `wg0.conf` at `./config/wireguard/wg0.conf` for Wireguard
 - Run `allup.sh`
 - Add Loki connection to Grafana `http://loki:3100`
 - Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file
+- Change qBittorrent download path to `/data/downloads`
+- Use `http://localhost:9117` for that Jackett address when creating a torznab indexer
+- Use `/data/library/tv/` as a path for sonarr
+- Use `/data/library/movies/` as a path for radarr
 - If there are directory to file mapping errors, open the volume and delete the folder inside
 
 # Logs

@@ -14,6 +14,7 @@ services:
     volumes:
       - sonarr:/config
       - /var/log/sonarr:/config/logs
+      - ../data/klack.tv:/data      
     network_mode: service:qbittorrent-wireguard
     labels:
       - "traefik.enable=true"
