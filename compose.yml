@@ -6,6 +6,7 @@ include:
   - ./compose/grafana.yml
   - ./compose/watchtower.yml
   - ./compose/dionaea.yml
+  - ./compose/cowrie.yml
   - ./compose/whoami.yml
   - ./compose/sftpgo.yml
   - ./compose/photoprism.yml
@@ -19,3 +20,12 @@ include:
 networks:
   klack:
     external: true
+
+  honey:
+    driver: macvlan
+    driver_opts:
+      parent: ${NETWORK_INTERFACE} # Replace 'eno1' with your actual network interface name
+    ipam:
+      config:
+        - subnet: ${HONEYPOT_SUBNET} # Replace with your network's subnet
+          gateway: ${HONEYPOT_GATEWAY} # Replace with your network's gateway

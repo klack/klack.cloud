@@ -14,13 +14,3 @@ services:
         ipv4_address: ${HONEYPOT_IPV4}
     stop_grace_period: 5s
     restart: unless-stopped
-
-networks:
-  honey:
-    driver: macvlan
-    driver_opts:
-      parent: eno1  # Replace 'eno1' with your actual network interface name
-    ipam:
-      config:
-        - subnet: ${HONEYPOT_SUBNET}  # Replace with your network's subnet
-          gateway: ${HONEYPOT_GATEWAY}     # Replace with your network's gateway
