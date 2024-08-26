@@ -69,5 +69,5 @@ services:
       - "traefik.http.routers.qbittorrent.entrypoints=internal"
       - "traefik.http.routers.qbittorrent.service=qbittorrent"
       - "traefik.http.services.qbittorrent.loadBalancer.server.port=8080"
-      - "stack=${EXTERNAL_DOMAIN}"
+      - "stack=klack.cloud"
     restart: unless-stopped

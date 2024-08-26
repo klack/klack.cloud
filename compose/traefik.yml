@@ -29,5 +29,5 @@ services:
       - "traefik.http.routers.api.entrypoints=internal"
       - "traefik.http.routers.api.middlewares=traefik-auth@file"
       - "traefik.http.routers.api.service=api@internal"
-      - "stack=${EXTERNAL_DOMAIN}"
+      - "stack=klack.cloud"
     restart: always

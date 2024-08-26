@@ -21,7 +21,7 @@ services:
       - "traefik.http.routers.sonarr.entrypoints=internal"
       - "traefik.http.routers.sonarr.service=sonarr"
       - "traefik.http.services.sonarr.loadBalancer.server.port=8989"
-      - "stack=${EXTERNAL_DOMAIN}"
+      - "stack=klack.cloud"
     restart: unless-stopped
     # ports:
     #   - "8989:8989"

@@ -60,7 +60,7 @@ services:
       - "traefik.http.routers.photoprism.rule=Host(`${EXTERNAL_DOMAIN}`) && PathPrefix(`/photos`)"
       - "traefik.http.routers.photoprism.entrypoints=web-secure"
       - "traefik.http.routers.photoprism.tls.certResolver=myresolver"
-      - "stack=${EXTERNAL_DOMAIN}"
+      - "stack=klack.cloud"
     depends_on:
       - photoprism-db
     security_opt:
@@ -88,7 +88,7 @@ services:
     networks:
       klack:
     labels:
-      - "stack=${EXTERNAL_DOMAIN}"
+      - "stack=klack.cloud"
     security_opt:
       - seccomp:unconfined
       - apparmor:unconfined
