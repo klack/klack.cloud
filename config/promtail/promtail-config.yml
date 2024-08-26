@@ -30,7 +30,7 @@ scrape_configs:
       job: log-dump
       stack: ${EXTERNAL_DOMAIN}
 
-      __path__: /logs/**/*.{log,txt}
+      __path__: /logs/**/*.{log,txt,json}
   
 ## docker logs
 

@@ -29,6 +29,7 @@ services:
       - /var/log/traefik:/logs/traefik
       - /var/log/sonarr:/logs/sonarr
       - /var/log/radarr:/logs/radarr
+      - /var/log/dionaea:/logs/dionaea
     networks:
       - klack
     labels:

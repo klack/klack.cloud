@@ -8,6 +8,6 @@
   dateext
   dateformat -%Y-%m-%d-%s
   postrotate
-  docker kill --signal="USR1" $(docker ps | grep klack-cloud-core-traefik | awk '{print $1}')
+  docker kill --signal="USR1" $(docker ps | grep klack-cloud-traefik | awk '{print $1}')
   endscript
 }
