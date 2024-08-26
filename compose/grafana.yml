@@ -30,6 +30,7 @@ services:
       - /var/log/sonarr:/logs/sonarr
       - /var/log/radarr:/logs/radarr
       - /var/log/dionaea:/logs/dionaea
+      - /var/log/cowrie:/logs/cowrie
     networks:
       - klack
     labels:

@@ -1,0 +1,14 @@
+/var/log/cowrie/*.json{
+  su 999 999
+  size 10M
+  rotate 5
+  missingok
+  notifempty
+  delaycompress
+  compress
+  dateext
+  dateformat -%Y-%m-%d-%s
+  postrotate
+  docker restart $(docker ps | grep klack-cloud-cowrie | awk '{print $1}')
+  endscript
+}

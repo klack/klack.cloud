@@ -1,3 +1,6 @@
+volumes:
+  dionaea:
+
 services:
   dionaea:
     image: dinotools/dionaea
@@ -9,6 +12,7 @@ services:
       - ../config/dionaea/smb.yaml:/opt/dionaea/etc/dionaea/ihandlers-enabled/smb.yaml #Needs to have 777 perms
       - ../config/dionaea/dionaea.cfg:/opt/dionaea/etc/dionaea/dionaea.cfg #Needs to have 777 perms
       - /var/log/dionaea:/opt/dionaea/var/log/dionaea
+      - dionaea:/opt/dionaea
     networks:
       honey:
         ipv4_address: ${HONEYPOT_IPV4}
