@@ -1,5 +1,5 @@
 volumes:
-  cowrie:
+  cowrie-downloads: #Files downloaded by an attacker are stored here
 
 services:
   cowrie:
@@ -9,6 +9,7 @@ services:
       - "COWRIE_TELNET_LISTEN_ENDPOINTS=tcp:23:interface=0.0.0.0"
       - "COWRIE_SSH_LISTEN_ENDPOINTS=tcp:22:interface=0.0.0.0"
     volumes:
+      - cowrie-downloads:/cowrie/cowrie-git/var/lib/cowrie/downloads/
       - /var/log/cowrie:/cowrie/cowrie-git/var/log/cowrie
       - cowrie:/cowrie/cowrie-git/
     networks:
