@@ -14,12 +14,18 @@ services:
       NODE_EXPORTER_USER: ${NODE_EXPORTER_USER}
       NODE_EXPORTER_PASS: ${NODE_EXPORTER_PASS}
     entrypoint: ["/entrypoint.sh"]
-    ports:
-      - "9090:9090"
+    # ports:
+    #   - "9090:9090"
     networks:
       - klack
     extra_hosts:
       - "node-exp.klack.internal:192.168.20.7"
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=Host(`prometheus.${INTERNAL_DOMAIN}`)"
+      - "traefik.http.routers.prometheus.entrypoints=internal"
+      - "traefik.http.routers.prometheus.service=prometheus"
+      - "traefik.http.routers.prometheus.middlewares=traefik-auth@file"
+      - "traefik.http.services.prometheus.loadBalancer.server.port=9090"
       - "stack=loggers"
     restart: always

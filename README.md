@@ -47,6 +47,7 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 | traefik UI | 4443 | traefik.klack.internal | /   | https://traefik.klack.internal:4443/ |
 | SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443/ |
 | Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ |
+| Prometheus | 4443 | prometheus.klack.internal | /   | https://prometheus.klack.internal:4443/ |
 | Node Exporter | 4443 | node-exp.klack.internal | /   | https://node-exp.klack.internal:4443/ |
 
 # Deployment
@@ -60,19 +61,28 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 - Place `wg0.conf` at `./config/wireguard/wg0.conf` for Wireguard
 - Run `allup.sh`
 - Add Loki connection to Grafana `http://loki:3100`
-- Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file
+- Add prometheus connecto to Grafanan `http://prometheus:9090`
 - Change qBittorrent download path to `/data/downloads`
 - Use `http://localhost:9117` for that Jackett address when creating a torznab indexer
 - Use `/data/library/tv/` as a path for sonarr
 - Use `/data/library/movies/` as a path for radarr
-- If there are directory to file mapping errors, open the volume and delete the folder inside
+- Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file 
+- If there are directory to file mapping errors, there should of been a config file in a place, but docker did not find it so it created a volume folder.  Delete the volume folder.
+- Install node exporter on the host machine to `/usr/local/bin/node_exporter`
+  - Create a cronjob so that it is run on reboot
+  - setup IPTables to block non-docker containers from it
+    - `sudo iptables -A INPUT -p tcp -s 172.17.0.0/16 --dport 9100 -j ACCEPT`
+    - `sudo iptables -A INPUT -p tcp --dport 9100 -j DROP`
+
+# Metrics
+Node exporter is run on the host machine and read by the prometheus docker instance.  IPTable rules should be created so that only this docker container can talk to node exporter
 
 # Logs
 Promtail cannot get logs from containers using another container's network (Jackett, Sonnarr, Radarr), so they are volume linked out of each container to the host's `/var/log/*` and then back into promtail.
 
 ## Rotation
 Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.
-Copy `./config/logrotate.d/traefik` to `/etc/logrotate.d/traefik` on your host
+Copy `./config/logrotate.d/*` to `/etc/logrotate.d/` on your host
 Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`
 Cowrie needs 999:999 on `/var/log/crowie` to be able to create log files.
 

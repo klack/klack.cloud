@@ -50,6 +50,7 @@ services:
       - "traefik.http.routers.grafana.rule=Host(`grafana.${INTERNAL_DOMAIN}`)"
       - "traefik.http.routers.grafana.entrypoints=internal"
       - "traefik.http.routers.grafana.service=grafana"
+      - "traefik.http.routers.grafana.middlewares=traefik-auth@file"      
       - "traefik.http.services.grafana.loadBalancer.server.port=3000"
       - "stack=loggers"
     depends_on:
