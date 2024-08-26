@@ -1,12 +1,12 @@
 /var/log/traefik/*.log {
-  size 1M
-  rotate 3
+  size 10M
+  rotate 5
   missingok
   notifempty
+  delaycompress
   compress
   dateext
-  dateformat .%Y-%m-%d
-  create 0644 root root
+  dateformat -%Y-%m-%d-%s
   postrotate
   docker kill --signal="USR1" $(docker ps | grep klack-cloud-core-traefik | awk '{print $1}')
   endscript
