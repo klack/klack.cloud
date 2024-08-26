@@ -28,7 +28,7 @@ scrape_configs:
       - localhost
     labels:
       job: log-dump
-      stack: ${EXTERNAL_DOMAIN}
+      stack: klack.cloud
 
       __path__: /logs/**/*.{log,txt,json}
   
