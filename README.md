@@ -81,10 +81,10 @@ Node exporter is run on the host machine and read by the prometheus docker insta
 Promtail cannot get logs from containers using another container's network (Jackett, Sonnarr, Radarr), so they are volume linked out of each container to the host's `/var/log/*` and then back into promtail.
 
 ## Rotation
-Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.
-Copy `./config/logrotate.d/*` to `/etc/logrotate.d/` on your host 
-Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json` 
-Cowrie needs 999:999 on `/var/log/crowie` to be able to create log files. 
+Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.  
+Copy `./config/logrotate.d/*` to `/etc/logrotate.d/` on your host  
+Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`  
+Cowrie needs 999:999 on `/var/log/crowie` to be able to create log files.
 
 # Backups
 Backups are accomplished through a seperate duplicati docker instance
