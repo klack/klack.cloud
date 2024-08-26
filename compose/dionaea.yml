@@ -6,12 +6,21 @@ services:
     volumes:
       - ../config/dionaea/log_incident.yaml:/opt/dionaea/etc/dionaea/ihandlers-enabled/log_incident.yaml #Needs to have 777 perms
       - ../config/dionaea/fail2ban.yaml:/opt/dionaea/etc/dionaea/ihandlers-enabled/fail2ban.yaml #Needs to have 777 perms
+      - ../config/dionaea/smb.yaml:/opt/dionaea/etc/dionaea/ihandlers-enabled/smb.yaml #Needs to have 777 perms
       - ../config/dionaea/dionaea.cfg:/opt/dionaea/etc/dionaea/dionaea.cfg #Needs to have 777 perms
       - /var/log/dionaea:/opt/dionaea/var/log/dionaea
-    ports:
-      - 80:80
-      # - 445:445
     networks:
-      klack:
+      honey:
+        ipv4_address: ${HONEYPOT_IPV4}
     stop_grace_period: 5s
     restart: unless-stopped
+
+networks:
+  honey:
+    driver: macvlan
+    driver_opts:
+      parent: eno1  # Replace 'eno1' with your actual network interface name
+    ipam:
+      config:
+        - subnet: ${HONEYPOT_SUBNET}  # Replace with your network's subnet
+          gateway: ${HONEYPOT_GATEWAY}     # Replace with your network's gateway
