@@ -61,7 +61,7 @@ services:
     volumes:
       - "qbtw:/config"
       - "../config/wireguard/wg0.conf:/config/wireguard/wg0.conf"
-      - "{$DIR_KLACKTV}:/data"
+      - "${QB_MOUNT}"
     working_dir: "/opt"
     labels:
       - "traefik.enable=true"
