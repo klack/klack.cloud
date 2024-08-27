@@ -5,6 +5,6 @@ config/traefik/certs
 config/traefik/htpasswd
 config/fail2ban/db/fail2ban.sqlite3
 config/wireguard/wg0.conf
-config/sftpgo/homeuser/sftpgo.db
+config/sftpgo/homeuser/
 config/plex/Preferences.xml
 data/*

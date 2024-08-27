@@ -75,6 +75,8 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 - Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file 
 - `docker compose up --profile downloaders` again.  Verify port number is updated in qBittorent to a random one.
 - Use `http://localhost:9117` for that Jackett address when creating a torznab indexer
+- `sudo chown -R 1000:1000 ./config`
+- `sudo chown -R 1000:1000` klack.tv, photos, joplin, and other data folders
 - Use `/data/library/tv/` as a path when adding a series in sonarr
 - Use `/data/library/movies/` as a path when adding a movie on radarr
 - Install node exporter on the host machine to `/usr/local/bin/node_exporter`
