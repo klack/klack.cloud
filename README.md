@@ -63,15 +63,20 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 - Place `ca.crt`,`server.crt`, and `server.key` in `/config/traefik/certs` for `.internal` certificates
 - Create `htpasswd` at `./config/traefik/htpasswd` for Trafik basic auth
 - Place `wg0.conf` at `./config/wireguard/wg0.conf` for Wireguard
-- Run `allup.sh`
+- Run `docker compose up` to start up core apps
+- If there are directory to file mapping errors, there should of been a config file in a place, but docker did not find it so it created a volume folder.  Delete the volume folder.
 - Add Loki connection to Grafana `http://loki:3100`
 - Add prometheus connecto to Grafanan `http://prometheus:9090`
-- Change qBittorrent download path to `/data/downloads`
+- `docker compose up --profile downloaders`
+- Log into qBittorrent with user: `admin` pass: `adminadmin`
+- Change admin password
+- Turn off qBittorrent logging
+- Change qBittorrent download path to `/data/downloads` and incomplete torrrents to `/data/downloads/temp`
+- Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file 
+- `docker compose up --profile downloaders` again.  Verify port number is updated in qBittorent to a random one.
 - Use `http://localhost:9117` for that Jackett address when creating a torznab indexer
 - Use `/data/library/tv/` as a path when adding a series in sonarr
 - Use `/data/library/movies/` as a path when adding a movie on radarr
-- Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file 
-- If there are directory to file mapping errors, there should of been a config file in a place, but docker did not find it so it created a volume folder.  Delete the volume folder.
 - Install node exporter on the host machine to `/usr/local/bin/node_exporter`
   - Create a cronjob so that it is run on reboot
   - setup IPTables to block non-docker containers from it
@@ -89,6 +94,7 @@ Must be setup on the host machine due to permission issues and the requirement t
 Copy `./config/logrotate.d/*` to `/etc/logrotate.d/` on your host  
 Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`  
 Cowrie needs 999:999 on `/var/log/crowie` to be able to create log files.
+
 
 # Backups
 Backups are accomplished through a seperate duplicati docker instance
