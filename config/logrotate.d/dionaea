@@ -8,6 +8,7 @@
   dateext
   dateformat -%Y-%m-%d-%s
   postrotate
-  docker restart $(docker ps | grep klack-cloud-dionaea | awk '{print $1}')
+    sleep 1800
+    docker restart $(docker ps | grep klack-cloud-dionaea | awk '{print $1}')
   endscript
 }

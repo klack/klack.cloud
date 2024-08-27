@@ -1,4 +1,4 @@
-/var/log/traefik/*.log {
+/var/log/duplicati/*.log {
   size 10M
   rotate 5
   missingok
@@ -9,6 +9,6 @@
   dateformat -%Y-%m-%d-%s
   postrotate
     sleep 1800
-    docker kill --signal="USR1" $(docker ps | grep klack-cloud-traefik | awk '{print $1}')
+    docker restart $(docker ps | grep klack-cloud-duplicati | awk '{print $1}')
   endscript
 }
