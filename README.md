@@ -57,6 +57,7 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 - Rename `.env.example` to `.env` and fill in credentials
 - All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
 - `docker network create klack`
+- Edit plex.yml and place file if you need to reuse an existing Plex server id
 - Create `/var/log/sonarr` and `/var/log/radarr` owned by 1000:1000
 - Create a new server key and certificate signed by a self trusted ca.  
 - Place `ca.crt`,`server.crt`, and `server.key` in `/config/traefik/certs` for `.internal` certificates
