@@ -14,8 +14,9 @@ services:
       - plex:/config
       - ${DIR_TRANSCODE}:/transcode
       - ${DIR_KLACKTV}/library:/data
+      # - ../config/plex/Preferences.xml:/config/Library/Application Support/Plex Media Server/Preferences.xml #Uncomment and place file to reuse server id
     ports:
-      # - "32400:32400/tcp"
+      - "32400:32400/tcp"
       - "3005:3005/tcp"
       - "8324:8324/tcp"
       - "32469:32469/tcp"
