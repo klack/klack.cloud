@@ -13,6 +13,7 @@ services:
       - cowrie:/config
       - ${DIR_BACKUPS}:/backups
       - /var/log/duplicati:/var/log/duplicati
+      - ../data/backups:/dest/backups
       - ../data:/source/data:ro
     # ports:
     #   - 8200:8200
