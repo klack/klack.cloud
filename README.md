@@ -49,6 +49,7 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 | Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ |
 | Prometheus | 4443 | prometheus.klack.internal | /   | https://prometheus.klack.internal:4443/ |
 | Node Exporter | 4443 | node-exp.klack.internal | /   | https://node-exp.klack.internal:4443/ |
+| Duplicati | 44443 | duplicati.klack.internal | /   | https://duplicati.klack.internal:4443/ |
 
 # Deployment
 - Update `compose/prometheus.yml` with host IP address
@@ -90,3 +91,6 @@ Cowrie needs 999:999 on `/var/log/crowie` to be able to create log files.
 
 # Backups
 Backups are accomplished through a seperate duplicati docker instance
+
+# Other Notes
+Honeypot's cannot be accessed by localhost due to macvlan network

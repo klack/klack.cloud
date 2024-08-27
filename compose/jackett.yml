@@ -14,7 +14,7 @@ services:
       - RUN_OPTS= # optional
     volumes:
       - jackett:/config
-      - ../data/klack.tv/downloads:/downloads
+      - ${DIR_KLACKTV}/downloads:/downloads
     network_mode: service:qbittorrent-wireguard
     labels:
       - "traefik.enable=true"

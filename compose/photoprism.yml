@@ -51,8 +51,8 @@ services:
       PHOTOPRISM_SITE_AUTHOR: "" # meta site author
     working_dir: "/photoprism" # do not change or remove
     volumes:
-      - "../data/photos:/photoprism/originals" # Original media files (DO NOT REMOVE)
       - "photoprism:/photoprism/storage" # *Writable* storage folder for cache, database, and sidecar files (DO NOT REMOVE)
+      - "${DIR_PHOTOS}:/photoprism/originals" # Original media files (DO NOT REMOVE)
     networks:
       klack:
     labels:

@@ -14,7 +14,7 @@ services:
     volumes:
       - radarr:/config
       - /var/log/radarr:/config/logs
-      - ../data/klack.tv:/data
+      - ${DIR_KLACKTV}:/data
     network_mode: service:qbittorrent-wireguard
     labels:
       - "traefik.enable=true"

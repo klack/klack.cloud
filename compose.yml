@@ -8,6 +8,7 @@ include:
   - ./compose/dionaea.yml
   - ./compose/prometheus.yml
   - ./compose/cowrie.yml
+  - ./compose/duplicati.yml
   - ./compose/whoami.yml
   - ./compose/sftpgo.yml
   - ./compose/photoprism.yml

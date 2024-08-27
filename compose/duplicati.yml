@@ -1,0 +1,29 @@
+volumes:
+  cowrie:
+
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Denver
+      - CLI_ARGS= --log-file=/var/log/duplicati/duplicati.log
+    volumes:
+      - cowrie:/config
+      - ${DIR_BACKUPS}:/backups
+      - /var/log/duplicati:/var/log/duplicati
+      - ../data:/source/data:ro
+    # ports:
+    #   - 8200:8200
+    networks:
+      klack:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.duplicati.rule=Host(`duplicati.${INTERNAL_DOMAIN}`)"
+      - "traefik.http.routers.duplicati.entrypoints=internal"
+      - "traefik.http.routers.duplicati.service=duplicati"
+      - "traefik.http.routers.duplicati.middlewares=traefik-auth@file"      
+      - "traefik.http.services.duplicati.loadBalancer.server.port=8200"
+      - "stack=klack.cloud"      
+    restart: always

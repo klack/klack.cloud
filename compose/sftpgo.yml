@@ -8,7 +8,7 @@ services:
       - ../config/sftpgo/sftpgo.json:/etc/sftpgo/sftpgo.json
       - ${DIR_SFTPGOROOT}:/srv/sftpgo
       - ${DIR_JOPLIN}:/joplin
-      - ${DIR_PHOTOS}../data/photos:/photos
+      - ${DIR_PHOTOS}:/photos
     networks:
       klack:
     labels:
