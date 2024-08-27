@@ -51,9 +51,11 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 | Node Exporter | 4443 | node-exp.klack.internal | /   | https://node-exp.klack.internal:4443/ |
 
 # Deployment
-- `docker network create klack`
+- Update `compose/prometheus.yml` with host IP address
+- Update `config/traefik/dynamic_conf.yml` with host IP aaddress
 - Rename `.env.example` to `.env` and fill in credentials
 - All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
+- `docker network create klack`
 - Create `/var/log/sonarr` and `/var/log/radarr` owned by 1000:1000
 - Create a new server key and certificate signed by a self trusted ca.  
 - Place `ca.crt`,`server.crt`, and `server.key` in `/config/traefik/certs` for `.internal` certificates
@@ -64,8 +66,8 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 - Add prometheus connecto to Grafanan `http://prometheus:9090`
 - Change qBittorrent download path to `/data/downloads`
 - Use `http://localhost:9117` for that Jackett address when creating a torznab indexer
-- Use `/data/library/tv/` as a path for sonarr
-- Use `/data/library/movies/` as a path for radarr
+- Use `/data/library/tv/` as a path when adding a series in sonarr
+- Use `/data/library/movies/` as a path when adding a movie on radarr
 - Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file 
 - If there are directory to file mapping errors, there should of been a config file in a place, but docker did not find it so it created a volume folder.  Delete the volume folder.
 - Install node exporter on the host machine to `/usr/local/bin/node_exporter`

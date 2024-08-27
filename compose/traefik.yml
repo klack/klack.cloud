@@ -4,9 +4,6 @@ volumes:
 services:
   traefik:
     image: traefik
-    command:
-      - "--providers.docker"
-      - "--providers.docker.exposedByDefault=false"
     environment:
       TZ: ${TZ}
     volumes:
