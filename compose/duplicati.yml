@@ -1,5 +1,5 @@
 volumes:
-  cowrie:
+  duplicati:
 
 services:
   duplicati:
@@ -10,10 +10,9 @@ services:
       - TZ=America/Denver
       - CLI_ARGS= --log-file=/var/log/duplicati/duplicati.log
     volumes:
-      - cowrie:/config
-      - ${DIR_BACKUPS}:/backups
+      - duplicati:/config
       - /var/log/duplicati:/var/log/duplicati
-      - ../data/backups:/dest/backups
+      - ${DIR_BACKUPS}:/dest/backups
       - ../data:/source/data:ro
     # ports:
     #   - 8200:8200
