@@ -8,5 +8,5 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`${EXTERNAL_DOMAIN}`) && Path(`/whoami`)"
       - "traefik.http.routers.whoami.middlewares=traefik-auth@file"
-      - "traefik.http.routers.whoami.tls.certResolver=myresolver"
+      - "traefik.http.routers.whoami.tls.certresolver=myresolver"
       - "stack=klack.cloud"
