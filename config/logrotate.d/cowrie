@@ -1,5 +1,4 @@
 /var/log/cowrie/*.json{
-  su 999 999
   size 10M
   rotate 5
   missingok
