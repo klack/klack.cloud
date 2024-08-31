@@ -30,7 +30,7 @@ scrape_configs:
       job: log-dump
       stack: klack.cloud
 
-      __path__: /logs/**/*.{log,txt,json}
+      __path__: /logs/**/*.{log,json,[!0-9]*.txt}
   
 ## docker logs
 

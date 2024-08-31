@@ -16,6 +16,12 @@ services:
       - /var/log/radarr:/config/logs
       - ${DIR_KLACKTV}:/data
     network_mode: service:qbittorrent-wireguard
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7878"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s    
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.rule=Host(`radarr.${INTERNAL_DOMAIN}`)"
