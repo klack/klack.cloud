@@ -1,5 +1,9 @@
-#Addtional folders to expose to duplicati for backup
+# Addtional folders to expose to duplicati for backup
 services:
   duplicati:
     volumes:
-      - /host/path:/source/folder:ro
+      - /home/user:/source/userhome:ro
+
+  plex: # Reuse a saved Preferences.xml file to avoid having to re-register the server with Plex
+    volumes:
+      - ../config/plex/Preferences.xml:/config/Library/Application Support/Plex Media Server/Preferences.xml
