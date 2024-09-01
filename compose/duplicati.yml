@@ -5,15 +5,18 @@ services:
   duplicati:
     image: lscr.io/linuxserver/duplicati
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
       - TZ=America/Denver
       - CLI_ARGS= --log-file=/var/log/duplicati/duplicati.log
     volumes:
       - duplicati:/config
       - /var/log/duplicati:/var/log/duplicati
-      - ${DIR_BACKUPS}:/dest/backups
-      - ../data:/source/data:ro
+      - ${DIR_BACKUPS}:/backups
+      - ${DIR_JOPLIN}:/source/joplin:ro
+      - ${DIR_PHOTOS}:/source/photos:ro
+      - ${DIR_SFTPGOROOT}:/source/sftpgoroot:ro
+      - ${DIR_KLACKTV}:/source/klack.tv:ro\
     # ports:
     #   - 8200:8200
     networks:

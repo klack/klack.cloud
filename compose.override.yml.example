@@ -1,0 +1,5 @@
+#Addtional folders to expose to duplicati for backup
+services:
+  duplicati:
+    volumes:
+      - /host/path:/source/folder:ro

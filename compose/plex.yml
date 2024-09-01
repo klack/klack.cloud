@@ -9,12 +9,12 @@ services:
     environment:
       TZ: ${TZ}
       PLEX_CLAIM: ${PLEX_CLAIM}
+      ADVERTISE_IP: https://${EXTERNAL_DOMAIN}:32400/
     hostname: plex
     volumes:
       - plex:/config
       - ${DIR_TRANSCODE}:/transcode
       - ${DIR_KLACKTV}/library:/data
-      # - ../config/plex/Preferences.xml:/config/Library/Application Support/Plex Media Server/Preferences.xml #Uncomment and place file to reuse server id
     ports:
       # - "32400:32400/tcp"
       - "3005:3005/tcp"
