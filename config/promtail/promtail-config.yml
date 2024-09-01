@@ -29,9 +29,12 @@ scrape_configs:
     labels:
       job: log-dump
       stack: klack.cloud
+      __path__: /logs/**/*.{log,json,txt}
+  pipeline_stages:
+  - drop:
+      expression: '.*\.\d+\.txt$' #Drop radarr and sonarr rotated files
+      source: filename
 
-      __path__: /logs/**/*.{log,json,[!0-9]*.txt}
-  
 ## docker logs
 
 - job_name: flog_scrape
