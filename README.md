@@ -39,7 +39,7 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 | --- | --- | --- | --- | --- |
 | PhotoPrism | 443 | klack.cloud | /photos | https://klack.cloud/photos |
 | WebDav | 443 | klack.cloud | /dav | https://klack.cloud/dav/ |
-| Plex | 32400 | klack.cloud | /   | https://klack.cloud:32401/ |
+| Plex | 32400 | klack.cloud | /   | https://klack.cloud:32400/ |
 | qBittorrent | 4443 | qbittorrent.klack.internal | /   | https://qbittorrent.klack.internal:4443/ |
 | Jackett | 4443 | jackett.klack.internal | /   | https://jackett.klack.internal:4443/ |
 | Sonarr | 4443 | sonarr.klack.internal | /   | https://sonarr.klack.internal:4443/ |
