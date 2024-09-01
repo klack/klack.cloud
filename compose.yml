@@ -9,7 +9,6 @@ include:
   - ./compose/prometheus.yml
   - ./compose/cowrie.yml
   - ./compose/duplicati.yml
-  - ./compose/whoami.yml
   - ./compose/sftpgo.yml
   - ./compose/photoprism.yml
   - ./compose/plex.yml
@@ -18,10 +17,10 @@ include:
   - ./compose/sonarr.yml
   - ./compose/jackett.yml
   - ./compose/unpackerr.yml
+  # - ./compose/whoami.yml # Used to diagnose middleware
 
 networks:
   klack:
-    external: true
 
   honey:
     driver: macvlan
