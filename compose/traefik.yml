@@ -7,13 +7,15 @@ services:
     environment:
       TZ: ${TZ}
     volumes:
-      - /var/log/traefik/:/logs/
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ../config/traefik/dynamic_conf.yml:/config/dynamic_conf.yml
+      - ../config/traefik/entrypoint.sh:/entrypoint.sh
+      - ../config/traefik/dynamic_conf.yml.template:/config/dynamic_conf.yml.template
       - ../config/traefik/traefik.yml:/etc/traefik/traefik.yml
       - ../config/traefik/htpasswd:/htpasswd
       - ../config/traefik/certs/:/etc/traefik/certs/
+      - /var/log/traefik/:/logs/
+      - /var/run/docker.sock:/var/run/docker.sock
       - acme:/acme
+    # entrypoint: ["/entrypoint.sh"]
     ports:
       - "443:443"
       - "32400:32400"
