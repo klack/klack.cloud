@@ -49,7 +49,7 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 | Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ |
 | Prometheus | 4443 | prometheus.klack.internal | /   | https://prometheus.klack.internal:4443/ |
 | Node Exporter | 4443 | node-exp.klack.internal | /   | https://node-exp.klack.internal:4443/ |
-| Duplicati | 44443 | duplicati.klack.internal | /   | https://duplicati.klack.internal:4443/ |
+| Duplicati | 4443 | duplicati.klack.internal | /   | https://duplicati.klack.internal:4443/ |
 
 # Deployment
 - Rename `.env.example` to `.env` and fill in credentials

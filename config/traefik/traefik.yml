@@ -12,6 +12,11 @@ accessLog:
       StartUTC: drop #Fixes incorrect timezone in access log
 
 api: true
+
+metrics:
+  prometheus:
+    entryPoint: internal
+
 entrypoints:
   web:
     address: ":80"

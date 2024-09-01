@@ -47,8 +47,8 @@ services:
     ipc: "private"
     networks:
       klack:
-    ports:
-      - "8081:8080"
+    # ports:
+    #   - "8081:8080"
     privileged: true
     security_opt:
       - "label=disable"
