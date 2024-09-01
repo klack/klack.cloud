@@ -52,8 +52,6 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 | Duplicati | 44443 | duplicati.klack.internal | /   | https://duplicati.klack.internal:4443/ |
 
 # Deployment
-- Update `compose/prometheus.yml` with host IP address
-- Update `config/traefik/dynamic_conf.yml` with host IP aaddress
 - Rename `.env.example` to `.env` and fill in credentials
 - All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
 - `docker network create klack`
