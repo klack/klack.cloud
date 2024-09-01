@@ -48,7 +48,7 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 | SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443/ |
 | Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ |
 | Prometheus | 4443 | prometheus.klack.internal | /   | https://prometheus.klack.internal:4443/ |
-| Node Exporter | 4443 | node-exp.klack.internal | /   | https://node-exp.klack.internal:4443/ |
+| Node Exporter | 9101 | node-exp.klack.internal | /   | https://node-exp.klack.internal:9101/metrics |
 | Duplicati | 4443 | duplicati.klack.internal | /   | https://duplicati.klack.internal:4443/ |
 
 # Deployment

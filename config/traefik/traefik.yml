@@ -41,6 +41,11 @@ entrypoints:
     address: ":4443"
     http:
       tls: true
+  
+  metrics:
+    address: ":9101"
+    http:
+      tls: true
 
 certificatesResolvers:
   myresolver:

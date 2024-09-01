@@ -2,22 +2,22 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-- job_name: node
-  scheme: https
-  static_configs:
-  - targets: ['${NODE_EXPORTER_TARGET}']
-  basic_auth:
-    username: '${NODE_EXPORTER_USER}'
-    password: '${NODE_EXPORTER_PASS}'
-  tls_config:
-    insecure_skip_verify: true
+  - job_name: node
+    scheme: https
+    static_configs:
+      - targets: ["${NODE_EXPORTER_TARGET}"]
+    basic_auth:
+      username: "${NODE_EXPORTER_USER}"
+      password: "${NODE_EXPORTER_PASS}"
+    tls_config:
+      insecure_skip_verify: true
 
-- job_name: traefik
-  scheme: https
-  static_configs:
-  - targets: ['${TRAEFIK_METRICS}']
-  basic_auth:
-    username: '${NODE_EXPORTER_USER}'
-    password: '${NODE_EXPORTER_PASS}'
-  tls_config:
-    insecure_skip_verify: true
+  - job_name: traefik
+    scheme: https
+    static_configs:
+      - targets: ["${TRAEFIK_TARGET}"]
+    basic_auth:
+      username: "${NODE_EXPORTER_USER}"
+      password: "${NODE_EXPORTER_PASS}"
+    tls_config:
+      insecure_skip_verify: true

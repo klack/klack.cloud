@@ -10,8 +10,8 @@ services:
       - ../config/traefik/certs/ca.crt:/etc/prometheus/ca.crt
       - prometheus-storage:/prometheus
     environment:
-      NODE_EXPORTER_TARGET: "node-exp.${INTERNAL_DOMAIN}:4443"
-      TRAEFIK_METRICS: "traefik.${INTERNAL_DOMAIN}:4443"
+      NODE_EXPORTER_TARGET: "node-exp.${INTERNAL_DOMAIN}:9101"
+      TRAEFIK_TARGET: "traefik.${INTERNAL_DOMAIN}:4443"
       NODE_EXPORTER_USER: ${NODE_EXPORTER_USER}
       NODE_EXPORTER_PASS: ${NODE_EXPORTER_PASS}
     entrypoint: ["/entrypoint.sh"]

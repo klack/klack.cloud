@@ -2,13 +2,13 @@
 
 # Read environment variables
 NODE_EXPORTER_TARGET=${NODE_EXPORTER_TARGET}
-TRAEFIK_METRICS=${TRAEFIK_METRICS}
+TRAEFIK_TARGET=${TRAEFIK_TARGET}
 NODE_EXPORTER_USER=${NODE_EXPORTER_USER}
 NODE_EXPORTER_PASS=${NODE_EXPORTER_PASS}
 
 # Substitute environment variables into prometheus.yml using a temporary file
 sed "s|\${NODE_EXPORTER_TARGET}|${NODE_EXPORTER_TARGET}|g; \
-     s|\${TRAEFIK_METRICS}|${TRAEFIK_METRICS}|g; \
+     s|\${TRAEFIK_TARGET}|${TRAEFIK_TARGET}|g; \
      s|\${NODE_EXPORTER_USER}|${NODE_EXPORTER_USER}|g; \
      s|\${NODE_EXPORTER_PASS}|${NODE_EXPORTER_PASS}|g" \
      /etc/prometheus/prometheus.yml.template > /etc/prometheus/prometheus.yml

@@ -11,7 +11,7 @@ http:
       rule: "Host(`node-exp.${INTERNAL_DOMAIN}`)"
       service: node-exporter
       entryPoints:
-        - internal
+        - metrics
       middlewares:
         - traefik-auth
   
