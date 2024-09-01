@@ -78,6 +78,8 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 - `sudo chown -R 1000:1000` klack.tv, photos, joplin, and other data folders
 - Use `/data/library/tv/` as a path when adding a series in sonarr
 - Use `/data/library/movies/` as a path when adding a movie on radarr
+- Login to sftpgo and create virtual folders for `/joplin` and `/photos`
+- Create a new sftpgo user with mappings to these folders
 - Install node exporter on the host machine to `/usr/local/bin/node_exporter`
   - Create a cronjob so that it is run on reboot
   - setup IPTables to block non-docker containers from it
