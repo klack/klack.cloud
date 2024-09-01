@@ -71,13 +71,14 @@ A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 - Change qBittorrent download path to `/data/downloads` and incomplete torrrents to `/data/downloads/temp`
 - Set password in sonarr and radarr and disable authentication for localhost
 - Enable file renaming in sonarr and radarr
+- Setting logging to `Info` on sonarr and radarr
+- Use `/data/library/tv/` as a path when adding a series in sonarr
+- Use `/data/library/movies/` as a path when adding a movie on radarr
 - Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file 
 - `docker compose up --profile downloaders` again.  Verify port number is updated in qBittorent to a random one.
 - Use `http://localhost:9117` for that Jackett address when creating a torznab indexer
 - `sudo chown -R 1000:1000 ./config`
 - `sudo chown -R 1000:1000` klack.tv, photos, joplin, and other data folders
-- Use `/data/library/tv/` as a path when adding a series in sonarr
-- Use `/data/library/movies/` as a path when adding a movie on radarr
 - Login to sftpgo and create virtual folders for `/joplin` and `/photos`
 - Create a new sftpgo user with mappings to these folders
 - Install node exporter on the host machine to `/usr/local/bin/node_exporter`
