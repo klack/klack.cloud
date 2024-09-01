@@ -8,7 +8,7 @@ tls:
 http:
   routers:
     node-exporter:
-      rule: "Host(`node-exp.klack.internal`)"
+      rule: "Host(`node-exp.${INTERNAL_DOMAIN}`)"
       service: node-exporter
       entryPoints:
         - internal
