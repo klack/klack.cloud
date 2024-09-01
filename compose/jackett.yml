@@ -13,6 +13,8 @@ services:
       - AUTO_UPDATE=true # optional
       - RUN_OPTS= # optional
     volumes:
+      - /dev/null:/config/Jackett/log.txt
+      - /dev/null:/config/Jackett/updater.txt
       - jackett:/config
       - ${DIR_KLACKTV}/downloads:/downloads
     network_mode: service:qbittorrent-wireguard
