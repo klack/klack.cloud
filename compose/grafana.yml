@@ -7,6 +7,8 @@ services:
     command: -config.file=/etc/loki/loki-config.yml
     volumes:
       - ../config/loki:/etc/loki
+    environment:
+      TZ: ${TZ}
     networks:
       - klack
     labels:
@@ -28,6 +30,8 @@ services:
       - /var/log/dionaea:/logs/dionaea
       - /var/log/cowrie:/logs/cowrie
       - /var/log/duplicati:/logs/duplicati
+    environment:
+      TZ: ${TZ}
     networks:
       - klack
     labels:
@@ -45,6 +49,7 @@ services:
     volumes:
       - grafana-storage:/var/lib/grafana
     environment:
+      TZ: ${TZ}
       GF_SMTP_ENABLED: true
       GF_SMTP_HOST: ${GF_SMTP_HOST}
       GF_SMTP_FROM_ADDRESS: ${GF_SMTP_FROM_ADDRESS}

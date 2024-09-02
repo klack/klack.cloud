@@ -9,6 +9,8 @@ services:
       - ${DIR_SFTPGOROOT}:/srv/sftpgo
       - ${DIR_JOPLIN}:/joplin
       - ${DIR_PHOTOS}:/photos
+    environment:
+      TZ: ${TZ}
     networks:
       klack:
     labels:

@@ -5,6 +5,7 @@ services:
   duplicati:
     image: lscr.io/linuxserver/duplicati
     environment:
+      - TZ=${TZ}
       - PUID=0
       - PGID=0
       - TZ=America/Denver

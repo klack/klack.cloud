@@ -5,6 +5,7 @@ services:
   dionaea:
     image: dinotools/dionaea
     environment:
+      - TZ=${TZ}
       - "DIONAEA_FORCE_INIT=1"
     volumes:
       - dionaea:/opt/dionaea

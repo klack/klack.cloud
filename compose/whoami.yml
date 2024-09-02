@@ -2,6 +2,8 @@ services:
   whoami:
     # A container that exposes an API to show its IP address
     image: traefik/whoami
+    environment:
+      TZ: ${TZ}
     networks:
       klack:
     labels:

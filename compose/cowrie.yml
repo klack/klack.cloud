@@ -6,6 +6,7 @@ services:
   cowrie:
     image: cowrie/cowrie
     environment:
+      - TZ=${TZ}
       - "COWRIE_TELNET_ENABLED=yes"
       - "COWRIE_TELNET_LISTEN_ENDPOINTS=tcp:23:interface=0.0.0.0"
       - "COWRIE_SSH_LISTEN_ENDPOINTS=tcp:22:interface=0.0.0.0"

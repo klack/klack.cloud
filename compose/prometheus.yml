@@ -10,6 +10,7 @@ services:
       - ../config/traefik/certs/ca.crt:/etc/prometheus/ca.crt
       - prometheus-storage:/prometheus
     environment:
+      TZ: ${TZ}
       NODE_EXPORTER_TARGET: "node-exp.${INTERNAL_DOMAIN}:9101"
       TRAEFIK_TARGET: "traefik.${INTERNAL_DOMAIN}:4443"
       NODE_EXPORTER_USER: ${NODE_EXPORTER_USER}
