@@ -8,7 +8,7 @@ services:
       - PUID=0
       - PGID=0
       - TZ=America/Denver
-      - CLI_ARGS= --log-file=/var/log/duplicati/duplicati.log
+      - CLI_ARGS= --log-file=/var/log/duplicati/duplicati.log --log-level=Information
     volumes:
       - duplicati:/config
       - /var/log/duplicati:/var/log/duplicati
