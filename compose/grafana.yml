@@ -43,6 +43,13 @@ services:
     user: 1000:1000 # Required
     volumes:
       - grafana-storage:/var/lib/grafana
+    environment:
+      GF_SMTP_ENABLED: true
+      GF_SMTP_HOST: ${GF_SMTP_HOST}
+      GF_SMTP_FROM_ADDRESS: ${GF_SMTP_FROM_ADDRESS}
+      GF_SMTP_USER: ${GF_SMTP_USER}
+      GF_SMTP_PASSWORD: ${GF_SMTP_PASSWORD}
+      GF_SERVER_ROOT_URL: https://grafana.${INTERNAL_DOMAIN}:4443
     networks:
       - klack
     labels:
