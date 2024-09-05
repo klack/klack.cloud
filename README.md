@@ -1,5 +1,5 @@
 # klack.cloud
-A self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.  Secure and monitored.  
+A secure, monitored, self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
 
 ![](./assets/diagram.png)
 
