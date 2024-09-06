@@ -39,15 +39,15 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - PhotoPrism
   - Photo Gallery
 - SFTPGo
-  - Photo sync, Note sync, 
+  - Photo sync, Note sync, Cloud storage
 - Traefik
   - For SSL and Basic Auth
 - Fail2Ban
   - Ban bots and failed login attempts automatically
 - Grafanda, Promtail
-  - Log aggregation, visualization and alerts
+  - Log aggregation, dashboards and alerts
 - Prometheus, Node Exporter
-  - System Stats, HTTP stats
+  - HTTP Stats, System Stats
 - logrotate
   - Rotate logs to preserve hard disk space
 - Crowie, Dionaea
@@ -86,7 +86,6 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 # Deployment
 - Rename `.env.example` to `.env` and fill in credentials
 - All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
-- `docker network create klack`
 - Create `/var/log/sonarr` and `/var/log/radarr` owned by 1000:1000
 - Create a new server key and certificate signed by a self trusted ca.  
 - Place `ca.crt`,`server.crt`, and `server.key` in `/config/traefik/certs` for `.internal` certificates
