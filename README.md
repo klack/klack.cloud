@@ -3,55 +3,81 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Evernote
 
 ![](./assets/diagram.png)
 
+# Goals
+- Reduce your dependence on cloud services
+- Eliminate subscription costs
+- Increase your privacy
+- Limit data collected by free services
+- Limit your exposure to AI, advertisers, and scammers
+- Own and control your data
+- Prevent phone and vendor lock in
+
 # Features
-- Photo hosting to replace iCloud
-- Joplin to replace Evernote
-- Plex to replace all streaming services
-- VPN with killswitch
-- SSL signed by Let's Encrypt
+- Photo hosting to replace iCloud and Google Photos
+- Note syncing to replace Evernote
+- Media server to replace streaming services
+- WebDav to replace Google Drive
+- Download Managers with VPN killswitch
+- SSL certificates signed by Let's Encrypt
 - Automatic IP banning
 - Automatic updates
+- Honeypots 
 - Logging, monitoring, and alerts
 
 # Services
 - Plex
-	- Video Server
+  - Video Server
 - PhotoPrism
-	- Photo Gallery
+  - Photo Gallery
 - SFTPGo
-  	- Webdav is used for PhotoSync from mobile devices and Joplin Sync
-- qBittorrent-wireguard
-	- Combined bitorrent and wireguard image with VPN killswitch
+  - WebDav is used for PhotoSync from mobile devices and Joplin Sync
 - Traefik
-    - For acme SSL and Basic Auth
+  - For SSL and Basic Auth
 - Fail2Ban
-    - Ban by IP
+  - Ban bots and failed login attempts automatically
+- Grafanda, Promtail
+  - Log aggregation, visualization and alerts
+- Prometheus, Node Exporter
+  - System Stats, HTTP stats
+- logrotate
+  - Rotate logs to preserve hard disk space
+- Crowie, Dionaea
+  - Honeypots for SSH, HTTP, SMB and more
+- Duplicati
+  - Incremental Backups
 - Watchtower
-    - To auto update docker images
-- Grafanda
-	- Log aggrigation, visualization and alerts
-- File search
-	- Sonarr for TV
-	- Radarr for Movies
-	- Jackett for searching torrent websites
-	- Unpackerr to handle compressed files
+  - To auto update docker images
+- qBittorrent-wireguard
+  - Combined bittorrent and wireguard image with VPN killswitch
+- Download Managers
+  - Sonarr for TV
+  - Radarr for Movies
+  - Jackett for searching
+  - Unpackerr to handle compressed files
 
+
+# Pre-requisites
+- A [registered domain name](https://www.namecheap.com/) forwarded to your IP
+- A paid VPN subscription
+- Port 443 must be allowed by your ISP
+  
 # Endpoints
 | Service | Port | Domain | Path | Link |
 | --- | --- | --- | --- | --- |
+| Plex | 32400 | example.com | /   | https://example.com:32400/ |
 | PhotoPrism | 443 | example.com | /photos | https://example.com/photos |
 | WebDav | 443 | example.com | /dav | https://example.com/dav/ |
-| Plex | 32400 | example.com | /   | https://example.com:32400/ |
-| qBittorrent | 4443 | qbittorrent.klack.internal | /   | https://qbittorrent.klack.internal:4443/ |
-| Jackett | 4443 | jackett.klack.internal | /   | https://jackett.klack.internal:4443/ |
-| Sonarr | 4443 | sonarr.klack.internal | /   | https://sonarr.klack.internal:4443/ |
-| Ronarr | 4443 | radarr.klack.internal | /   | https://radarr.klack.internal:4443/ |
-| traefik UI | 4443 | traefik.klack.internal | /   | https://traefik.klack.internal:4443/ |
 | SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443/ |
+| Traefik UI | 4443 | traefik.klack.internal | /   | https://traefik.klack.internal:4443/ |
 | Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ |
 | Prometheus | 4443 | prometheus.klack.internal | /   | https://prometheus.klack.internal:4443/ |
 | Node Exporter | 9101 | node-exp.klack.internal | /   | https://node-exp.klack.internal:9101/metrics |
 | Duplicati | 4443 | duplicati.klack.internal | /   | https://duplicati.klack.internal:4443/ |
+| qBittorrent | 4443 | qbittorrent.klack.internal | /   | https://qbittorrent.klack.internal:4443/ |
+| Jackett | 4443 | jackett.klack.internal | /   | https://jackett.klack.internal:4443/ |
+| Sonarr | 4443 | sonarr.klack.internal | /   | https://sonarr.klack.internal:4443/ |
+| Radarr | 4443 | radarr.klack.internal | /   | https://radarr.klack.internal:4443/ |
+
 
 # Deployment
 - Rename `.env.example` to `.env` and fill in credentials
@@ -65,12 +91,12 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Evernote
 - Run `docker compose up` to start up core apps
 - If there are directory to file mapping errors, there should of been a config file in a place, but docker did not find it so it created a volume folder.  Delete the volume folder.
 - Add Loki connection to Grafana `http://loki:3100`
-- Add prometheus connecto to Grafanan `http://prometheus:9090`
+- Add prometheus connect to Grafana `http://prometheus:9090`
 - `docker compose up --profile downloaders`
 - Log into qBittorrent with user: `admin` pass: `adminadmin`
 - Change admin password
 - Turn off qBittorrent logging
-- Change qBittorrent download path to `/data/downloads` and incomplete torrrents to `/data/downloads/temp`
+- Change qBittorrent download path to `/data/downloads` and incomplete torrents to `/data/downloads/temp`
 - Set password in sonarr and radarr and disable authentication for localhost
 - Enable file renaming in sonarr and radarr
 - Setting logging to `Info` on sonarr and radarr
@@ -103,7 +129,7 @@ Cowrie needs 999:999 on `/var/log/crowie` to be able to create log files.
 Sonarr and Radarr have their own log rotation
 
 # Backups
-Backups are accomplished through a seperate duplicati docker instance
+Backups are accomplished through a separate duplicati docker instance
 
 # Other Notes
 Honeypot's cannot be accessed by localhost due to macvlan network
