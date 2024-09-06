@@ -2,7 +2,7 @@
 A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox, Evernote, Netflix and more.
 
 ![](./assets/diagram.png)
-### Goals
+## Goals
 - Reduce your dependence on cloud services
 - Eliminate subscription costs
 - Increase your privacy
@@ -10,12 +10,12 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Limit your exposure to AI, advertisers, and scammers
 - Own and control your data
 - Prevent phone and vendor lock in
-### Dashboards
+## Dashboards
 ![](./assets/dashboard.png)
 ![](./assets/dashboard2.png)
 ![](./assets/dashboard3.png)
 
-### Features
+## Features
 - Photo hosting to replace iCloud and Google Photos
 - Note syncing to replace Evernote
 - Media server to replace streaming services
@@ -28,11 +28,11 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Logging, monitoring, and alerts
 
 
-# Pre-requisites
+## Pre-requisites
 - A [registered domain name](https://www.namecheap.com/) forwarded to your IP
 - A paid VPN subscription
 - Port 443 must be allowed by your ISP
-- 
+
 # Services
 - Plex
   - Video Server
@@ -123,7 +123,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Setup Joplin sync
 - Setup backups in duplicati
 
-# Metrics
+# Host Machine
 Node exporter is run on the host machine and read by the prometheus docker instance.  IPTable rules should be created so that only this docker container can talk to node exporter
 
 ## Log Rotation
