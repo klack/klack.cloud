@@ -1,5 +1,5 @@
 # klack.cloud
-A secure, monitored, self-hosted replacement for iCloud, Google Photos, Evernote, Netflix and more.
+A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox, Evernote, Netflix and more.
 
 ![](./assets/diagram.png)
 
@@ -16,7 +16,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Evernote
 - Photo hosting to replace iCloud and Google Photos
 - Note syncing to replace Evernote
 - Media server to replace streaming services
-- WebDav to replace Google Drive
+- WebDav to replace Dropbox
 - Download Managers with VPN killswitch
 - SSL certificates signed by Let's Encrypt
 - Automatic IP banning
@@ -30,7 +30,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Evernote
 - PhotoPrism
   - Photo Gallery
 - SFTPGo
-  - WebDav is used for PhotoSync from mobile devices and Joplin Sync
+  - Photo sync, Note sync, 
 - Traefik
   - For SSL and Basic Auth
 - Fail2Ban
@@ -61,23 +61,25 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Evernote
 - A paid VPN subscription
 - Port 443 must be allowed by your ISP
   
-# Endpoints
-| Service | Port | Domain | Path | Link |
-| --- | --- | --- | --- | --- |
-| Plex | 32400 | example.com | /   | https://example.com:32400/ |
-| PhotoPrism | 443 | example.com | /photos | https://example.com/photos |
-| WebDav | 443 | example.com | /dav | https://example.com/dav/ |
-| SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443/ |
-| Traefik UI | 4443 | traefik.klack.internal | /   | https://traefik.klack.internal:4443/ |
-| Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ |
-| Prometheus | 4443 | prometheus.klack.internal | /   | https://prometheus.klack.internal:4443/ |
-| Node Exporter | 9101 | node-exp.klack.internal | /   | https://node-exp.klack.internal:9101/metrics |
-| Duplicati | 4443 | duplicati.klack.internal | /   | https://duplicati.klack.internal:4443/ |
-| qBittorrent | 4443 | qbittorrent.klack.internal | /   | https://qbittorrent.klack.internal:4443/ |
-| Jackett | 4443 | jackett.klack.internal | /   | https://jackett.klack.internal:4443/ |
-| Sonarr | 4443 | sonarr.klack.internal | /   | https://sonarr.klack.internal:4443/ |
-| Radarr | 4443 | radarr.klack.internal | /   | https://radarr.klack.internal:4443/ |
-
+# Services
+| Service | Port | Domain | Hosted Path | URL | Service URL | Auth Provider | Log Rotation
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Plex | 32400 | example.com | /   | https://example.com:32400/ | | App | Self
+| PhotoPrism | 443 | example.com | /photos | https://example.com/photos | |App | Docker
+| WebDav | 443 | example.com | /dav | https://example.com/dav/ | | Traefik | Docker
+| SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443/ | | Traefik | Docker
+| Traefik UI | 4443 | traefik.klack.internal | /   | https://traefik.klack.internal:4443/ | | Traefik | logrotate
+| Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ | | App | Docker
+| Prometheus | 4443 | prometheus.klack.internal | /   | https://prometheus.klack.internal:4443/ | http://prometheus:9090 | Traefk | Docker
+| Loki | | | | | http://loki:3100 | | Docker
+| Node Exporter | 9101 | node-exp.klack.internal | /   | https://node-exp.klack.internal:9101/metrics | | IPTABLES | stdout
+| Duplicati | 4443 | duplicati.klack.internal | /   | https://duplicati.klack.internal:4443/ | | Traefik | logrotate
+| qBittorrent | 4443 | qbittorrent.klack.internal | /   | https://qbittorrent.klack.internal:4443/ | | App | logs disabled
+| Jackett | 4443 | jackett.klack.internal | /   | https://jackett.klack.internal:4443/ | http://localhost:9117 | Traefik | logs disabled
+| Sonarr | 4443 | sonarr.klack.internal | /   | https://sonarr.klack.internal:4443/ | | App | Self
+| Radarr | 4443 | radarr.klack.internal | /   | https://radarr.klack.internal:4443/ | | App | Self
+| Cowrie | 22,23 | | | | | | logrotate
+| Dionaea | ~ | | | | | | logrotate
 
 # Deployment
 - Rename `.env.example` to `.env` and fill in credentials
@@ -91,7 +93,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Evernote
 - Run `docker compose up` to start up core apps
 - If there are directory to file mapping errors, there should of been a config file in a place, but docker did not find it so it created a volume folder.  Delete the volume folder.
 - Add Loki connection to Grafana `http://loki:3100`
-- Add prometheus connect to Grafana `http://prometheus:9090`
+- Add prometheus connection to Grafana `http://prometheus:9090`
 - `docker compose up --profile downloaders`
 - Log into qBittorrent with user: `admin` pass: `adminadmin`
 - Change admin password
@@ -114,6 +116,9 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Evernote
   - setup IPTables to block non-docker containers from it
     - `sudo iptables -A INPUT -p tcp -s 172.17.0.0/16 --dport 9100 -j ACCEPT`
     - `sudo iptables -A INPUT -p tcp --dport 9100 -j DROP`
+- Map a local folder on your OS to webdav
+- Setup photo syncing from your phone
+- Setup Joplin sync
 
 # Metrics
 Node exporter is run on the host machine and read by the prometheus docker instance.  IPTable rules should be created so that only this docker container can talk to node exporter
