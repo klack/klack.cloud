@@ -2,8 +2,7 @@
 A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox, Evernote, Netflix and more.
 
 ![](./assets/diagram.png)
-
-# Goals
+### Goals
 - Reduce your dependence on cloud services
 - Eliminate subscription costs
 - Increase your privacy
@@ -11,8 +10,12 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Limit your exposure to AI, advertisers, and scammers
 - Own and control your data
 - Prevent phone and vendor lock in
+### Dashboards
+![](./assets/dashboard.png)
+![](./assets/dashboard2.png)
+![](./assets/dashboard3.png)
 
-# Features
+### Features
 - Photo hosting to replace iCloud and Google Photos
 - Note syncing to replace Evernote
 - Media server to replace streaming services
@@ -24,6 +27,12 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Honeypots 
 - Logging, monitoring, and alerts
 
+
+# Pre-requisites
+- A [registered domain name](https://www.namecheap.com/) forwarded to your IP
+- A paid VPN subscription
+- Port 443 must be allowed by your ISP
+- 
 # Services
 - Plex
   - Video Server
@@ -55,13 +64,6 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
   - Jackett for searching
   - Unpackerr to handle compressed files
 
-
-# Pre-requisites
-- A [registered domain name](https://www.namecheap.com/) forwarded to your IP
-- A paid VPN subscription
-- Port 443 must be allowed by your ISP
-  
-# Services
 | Service | Port | Domain | Hosted Path | URL | Service URL | Auth Provider | Log Rotation
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Plex | 32400 | example.com | /   | https://example.com:32400/ | | App | Self
@@ -119,22 +121,16 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Map a local folder on your OS to webdav
 - Setup photo syncing from your phone
 - Setup Joplin sync
+- Setup backups in duplicati
 
 # Metrics
 Node exporter is run on the host machine and read by the prometheus docker instance.  IPTable rules should be created so that only this docker container can talk to node exporter
 
-# Logs
-Promtail cannot get logs from containers using another container's network (Jackett, Sonnarr, Radarr), so they are volume linked out of each container to the host's `/var/log/*` and then back into promtail.
-
-## Rotation
+## Log Rotation
 Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.  
 Copy `./config/logrotate.d/*` to `/etc/logrotate.d/` on your host  
 Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`  
 Cowrie needs 999:999 on `/var/log/crowie` to be able to create log files.
-Sonarr and Radarr have their own log rotation
-
-# Backups
-Backups are accomplished through a separate duplicati docker instance
 
 # Other Notes
 Honeypot's cannot be accessed by localhost due to macvlan network
