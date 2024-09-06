@@ -11,7 +11,6 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Own and control your data
 - Prevent phone and vendor lock in
 ## Dashboards
-![](./assets/dashboard.png)
 ![](./assets/dashboard2.png)
 ![](./assets/dashboard3.png)
 
