@@ -13,6 +13,7 @@ services:
     hostname: plex
     volumes:
       - plex:/config
+      - /var/log/plex:/config/Library/Application Support/Plex Media Server/Logs
       - ${DIR_TRANSCODE}:/transcode
       - ${DIR_KLACKTV}/library:/data
     ports:
