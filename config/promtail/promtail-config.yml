@@ -31,9 +31,12 @@ scrape_configs:
       stack: klack.cloud
       __path__: /logs/**/*.{log,json,txt}
   pipeline_stages:
-  - drop:
-      expression: '.*\.\d+\.txt$' #Drop radarr and sonarr rotated files
-      source: filename
+    - replace:
+        expression: '(X-Plex-Token(=|%3D)[a-zA-Z0-9\-]+)'
+        replace: 'X-Plex-Token=REDACTED_BY_DRIZ'
+    - drop:
+        expression: '.*\.\d+\.(txt|log)$' #Drop radarr, sonarr, and plex rotated files
+        source: filename   
 
 ## docker logs
 
