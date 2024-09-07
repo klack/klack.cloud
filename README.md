@@ -127,7 +127,9 @@ Node exporter is run on the host machine and read by the prometheus docker insta
 ## Log Rotation
 Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.  
 Copy `./config/logrotate.d/*` to `/etc/logrotate.d/` on your host  
-Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`  
+Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`
+`mkdir -p /var/log/plex/PMS Plugin Logs`
+`chown -R 1000:1000 /var/log/plex/`
 Cowrie needs 999:999 on `/var/log/crowie` to be able to create log files.
 
 # Other Notes
