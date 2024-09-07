@@ -30,6 +30,7 @@ services:
       - /var/log/dionaea:/logs/dionaea
       - /var/log/cowrie:/logs/cowrie
       - /var/log/duplicati:/logs/duplicati
+      - /var/log/plex:/logs/plex
     environment:
       TZ: ${TZ}
     networks:
