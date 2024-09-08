@@ -33,7 +33,7 @@ scrape_configs:
   pipeline_stages:
     - replace:
         expression: '(X-Plex-Token(=|%3D)[a-zA-Z0-9\-]+)'
-        replace: 'X-Plex-Token=REDACTED_BY_DRIZ'
+        replace: 'X-Plex-Token*******'
     - drop:
         expression: '.*\.\d+\.(txt|log)$' #Drop radarr, sonarr, and plex rotated files
         source: filename   
