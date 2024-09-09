@@ -26,10 +26,9 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Honeypots 
 - Logging, monitoring, and alerts
 
-
 ## Pre-requisites
-- A [registered domain name](https://www.namecheap.com/) forwarded to your IP
-- A paid VPN subscription
+- A [registered domain](https://www.namecheap.com/) name forwarded to your IP
+- A [paid VPN subscription](https://protonvpn.com/) for "Download Managers"
 - Port 443 must be allowed by your ISP
 
 # Services
@@ -65,6 +64,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 
 | Service | Port | Domain | Hosted Path | URL | Service URL | Auth Provider | Log Rotation
 | --- | --- | --- | --- | --- | --- | --- | --- |
+|
 | Plex | 32400 | example.com | /   | https://example.com:32400/ | | App | Self
 | PhotoPrism | 443 | example.com | /photos | https://example.com/photos | |App | Docker
 | WebDav | 443 | example.com | /dav | https://example.com/dav/ | | Traefik | Docker
@@ -83,9 +83,38 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 | Dionaea | ~ | | | | | | logrotate
 
 # Deployment
+## Pre-setup
+- Configure your router to [update your external domain](https://www.namecheap.com/support/knowledgebase/subcategory/11/dynamic-dns/) via Dynamic DNS.
+- Configure your router to forward port 443 and 32400 to your machine.
+- Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/).
+- Make sure your ISP does not block port 443.
+
+## Setup
+```bash
+git clone https://github.com/klack/klack.cloud.git
+sudo mkdir -vp \
+  /var/log/traefik \
+  /var/log/duplicati \
+  /var/log/dionaea \
+  /var/log/cowrie \
+  "/var/log/plex/PMS Plugin Logs" \
+  /var/log/radarr \
+  /var/log/sonarr
+sudo chown -vR \
+  1000:1000 \
+  /var/log/traefik \
+  /var/log/duplicati \
+  /var/log/dionaea \
+  /var/log/plex \
+  /var/log/radarr \
+  /var/log/sonarr
+sudo chown -vR 999:999 /var/log/cowrie
+sudo cp ./config/logrotate.d/* /etc/logrotate.d
+sudo cp -v ./config/docker/daemon.json /etc/docker/daemon.json
+```
+- Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`
 - Rename `.env.example` to `.env` and fill in credentials
 - All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
-- Create `/var/log/sonarr` and `/var/log/radarr` owned by 1000:1000
 - Create a new server key and certificate signed by a self trusted ca.  
 - Place `ca.crt`,`server.crt`, and `server.key` in `/config/traefik/certs` for `.internal` certificates
 - Create `htpasswd` at `./config/traefik/htpasswd` for Trafik basic auth
@@ -126,11 +155,7 @@ Node exporter is run on the host machine and read by the prometheus docker insta
 
 ## Log Rotation
 Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.  
-Copy `./config/logrotate.d/*` to `/etc/logrotate.d/` on your host  
-Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`
-`mkdir -p /var/log/plex/PMS Plugin Logs`
-`chown -R 1000:1000 /var/log/plex/`
-Cowrie needs 999:999 on `/var/log/crowie` to be able to create log files.
+
 
 # Other Notes
 Honeypot's cannot be accessed by localhost due to macvlan network
