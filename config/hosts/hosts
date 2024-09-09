@@ -1,0 +1,11 @@
+# klack.cloud
+127.0.0.1 sftpgo.klack.internal
+127.0.0.1 traefik.klack.internal
+127.0.0.1 grafana.klack.internal
+127.0.0.1 prometheus.klack.internal
+127.0.0.1 node-exp.klack.internal
+127.0.0.1 duplicati.klack.internal
+127.0.0.1 qbittorrent.klack.internal
+127.0.0.1 jackett.klack.internal
+127.0.0.1 radarr.klack.internal
+127.0.0.1 sonarr.klack.internal
