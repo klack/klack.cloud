@@ -92,35 +92,15 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 ## Setup
 ```bash
 git clone https://github.com/klack/klack.cloud.git
-sudo mkdir -vp \
-  /var/log/traefik \
-  /var/log/duplicati \
-  /var/log/dionaea \
-  /var/log/cowrie \
-  "/var/log/plex/PMS Plugin Logs" \
-  /var/log/radarr \
-  /var/log/sonarr
-sudo chown -vR \
-  1000:1000 \
-  /var/log/traefik \
-  /var/log/duplicati \
-  /var/log/dionaea \
-  /var/log/plex \
-  /var/log/radarr \
-  /var/log/sonarr
-sudo chown -vR 999:999 /var/log/cowrie
-sudo cp ./config/logrotate.d/* /etc/logrotate.d
-sudo cp -v ./config/docker/daemon.json /etc/docker/daemon.json
+cd klack.cloud
+./setup.sh
 ```
-- Copy `./config/docker/daemon.json` to `/etc/docker/daemon.json`
-- Rename `.env.example` to `.env` and fill in credentials
-- All `.internal` addresses need modifications to your hosts file or router dns pointed to the correct IP.
-- Create a new server key and certificate signed by a self trusted ca.  
-- Place `ca.crt`,`server.crt`, and `server.key` in `/config/traefik/certs` for `.internal` certificates
-- Create `htpasswd` at `./config/traefik/htpasswd` for Trafik basic auth
-- Place `wg0.conf` at `./config/wireguard/wg0.conf` for Wireguard
+- Rename your Wireguard conf file to `wg0.conf` and place it at `./config/wireguard/wg0.conf`
+- `cp .env.example .env`
+- Edit your .env file
+  - In the first section, re-enter your username and password
+- [Generate a plex claim token](https:/plex.tv/claim)
 - Run `docker compose up` to start up core apps
-- If there are directory to file mapping errors, there should of been a config file in a place, but docker did not find it so it created a volume folder.  Delete the volume folder.
 - Add Loki connection to Grafana `http://loki:3100`
 - Add prometheus connection to Grafana `http://prometheus:9090`
 - `docker compose up --profile downloaders`
