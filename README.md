@@ -96,13 +96,14 @@ cd klack.cloud
 ./setup.sh
 ```
 - Rename your Wireguard conf file to `wg0.conf` and place it at `./config/wireguard/wg0.conf`
-- `cp .env.example .env`
-- Edit your .env file
-  - In the first section, re-enter your username and password
 - [Generate a plex claim token](https:/plex.tv/claim)
+- `nano ./.env`
 - Run `docker compose up` to start up core apps
+- Log into Grafana with `admin` and `admin` for the initial password
 - Add Loki connection to Grafana `http://loki:3100`
 - Add prometheus connection to Grafana `http://prometheus:9090`
+- Login to sftpgo and create virtual folders for `/joplin` and `/photos`
+- Create a new sftpgo user with mappings to these folders
 - `docker compose up --profile downloaders`
 - Log into qBittorrent with user: `admin` pass: `adminadmin`
 - Change admin password
@@ -116,10 +117,6 @@ cd klack.cloud
 - Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file 
 - `docker compose up --profile downloaders` again.  Verify port number is updated in qBittorent to a random one.
 - Use `http://localhost:9117` for that Jackett address when creating a torznab indexer
-- `sudo chown -R 1000:1000 ./config`
-- `sudo chown -R 1000:1000` klack.tv, photos, joplin, and other data folders
-- Login to sftpgo and create virtual folders for `/joplin` and `/photos`
-- Create a new sftpgo user with mappings to these folders
 - Install node exporter on the host machine to `/usr/local/bin/node_exporter`
   - Create a cronjob so that it is run on reboot
   - setup IPTables to block non-docker containers from it

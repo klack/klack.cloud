@@ -1,5 +1,5 @@
 #!/bin/bash -x
-
+cp ./.env.example ./.env
 sudo mkdir -vp \
   /var/log/traefik \
   /var/log/duplicati \
