@@ -1,5 +1,6 @@
 #!/bin/bash
 ./down.sh
+sudo killall node_exporter
 
 #Clean option
 if [[ "$1" == "--clean" ]]; then
@@ -12,7 +13,6 @@ if [[ "$1" == "--clean" ]]; then
     /var/log/radarr \
     /var/log/sonarr \
     /var/log/cowrie
-  sudo killall node_exporter
   sudo rm /usr/local/bin/node_exporter
 fi
 
@@ -94,8 +94,11 @@ sed -i "s|^HONEYPOT_GATEWAY=.*|HONEYPOT_GATEWAY=$GATEWAY|" .env
 sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$DEFAULT_INTERFACE|" .env
 sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" .env
 sed -i "s/\${NETWORK}/${NETWORK}/g" .env
-
 echo ".env file generated"
+
+#Update dashboard with network interface
+cp ./config/grafana/overview-dashboard.json.template ./config/grafana/overview-dashboard.json
+sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/overview-dashboard.json
 
 #Generate htpassword
 docker run --rm httpd:latest htpasswd \
