@@ -1,7 +1,3 @@
-tls:
-  stores:
-    default:
-
 http:
   routers:
     node-exporter:
