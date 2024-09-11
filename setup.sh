@@ -1,12 +1,21 @@
 #!/bin/bash
 ./down.sh
 
+#Clean option
 if [[ "$1" == "--clean" ]]; then
   echo "Deleting docker volumes"
   docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
+  sudo rm -rf /var/log/traefik \
+    /var/log/duplicati \
+    /var/log/dionaea \
+    /var/log/plex \
+    /var/log/radarr \
+    /var/log/sonarr \
+    /var/log/cowrie
+  sudo rm /usr/local/bin/node_exporter
 fi
 
-cp ./.env.template ./.env
+./scripts/install_node_exp.sh
 
 #Setup logs folders and perms
 sudo mkdir -vp \
@@ -31,14 +40,21 @@ sudo cp ./config/logrotate.d/* /etc/logrotate.d
 #Copy docker daemon
 if [ ! -f /etc/docker/daemon.json ]; then
     sudo cp -v ./config/docker/daemon.json /etc/docker/daemon.json
+    echo "Docker daemon.json created"
+else
+    echo "Docker daemon.json already exists"
 fi
 
 #Edit hosts file
 if ! grep -q ".klack.internal" /etc/hosts; then
     sudo sh -c "cat ./config/hosts/hosts >> /etc/hosts"
+    echo "Hosts file modified"
+else 
+    echo "Hosts file already modified."
 fi
 
 #Prompt for info
+cp ./.env.template ./.env
 DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
 DEFUALT_GATEWAY=$(ip route | grep default | awk '{print $3}')
 DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
@@ -67,6 +83,7 @@ MARIADB_ROOT_PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#%^&*()-_=+' | head -c
 sed -i "s|^TZ=.*|TZ=$TIMEZONE|" .env
 sed -i "s|^EXTERNAL_DOMAIN=.*|EXTERNAL_DOMAIN=$EXTERNAL_DOMAIN|" .env
 sed -i "s|^PLEX_CLAIM=.*|PLEX_CLAIM=$PLEX_CLAIM|" .env
+sed -i "s|^BASIC_AUTH_PASS=.*|BASIC_AUTH_PASS=\"$ESCAPED_PASSWORD\"|" .env
 sed -i "s|^NODE_EXPORTER_PASS=.*|NODE_EXPORTER_PASS=\"$ESCAPED_PASSWORD\"|" .env
 sed -i "s|^PHOTOPRISM_ADMIN_PASSWORD=.*|PHOTOPRISM_ADMIN_PASSWORD=\"$ESCAPED_PASSWORD\"|" .env
 sed -i "s|^MARIADB_PASSWORD=.*|MARIADB_PASSWORD=\"$MARIADB_PASSWORD\"|" .env
@@ -77,9 +94,12 @@ sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$DEFAULT_INTERFACE|" .env
 sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" .env
 sed -i "s/\${NETWORK}/${NETWORK}/g" .env
 
+echo ".env file generated"
+
 #Generate htpassword
 docker run --rm httpd:latest htpasswd \
   -Bbn admin "$PASSWORD" > \
-  ./config/traefik/htpasswd
+  ./config/traefik/htpasswd && echo "htpassword generated"
 
-echo ".env generated"
+sudo nohup /usr/local/bin/node_exporter > /dev/null 2>&1 & 
+echo "node_exporter started"
