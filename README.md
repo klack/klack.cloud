@@ -87,6 +87,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Configure your router to [update your external domain](https://www.namecheap.com/support/knowledgebase/subcategory/11/dynamic-dns/) via Dynamic DNS.
 - Configure your router to forward port 443 and 32400 to your machine.
 - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/).
+- Place it at `./config/wireguard/wg0.conf`
 - Make sure your ISP does not block port 443.
 
 ## Setup
@@ -95,15 +96,34 @@ git clone https://github.com/klack/klack.cloud.git
 cd klack.cloud
 ./setup.sh
 ```
-- Rename your Wireguard conf file to `wg0.conf` and place it at `./config/wireguard/wg0.conf`
-- [Generate a plex claim token](https:/plex.tv/claim)
-- `nano ./.env`
-- Run `docker compose up` to start up core apps
-- Log into Grafana with `admin` and `admin` for the initial password
-- Add Loki connection to Grafana `http://loki:3100`
-- Add prometheus connection to Grafana `http://prometheus:9090`
+### Dashboard setup
+#### System Resource Monitor
+- [Add prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana.  
+  Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom. Close the page.
+- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Node Exporter.  
+  Paste `1860` for dashboard ID.  
+  Click "Load" to the right.  
+  At the bottom under "Prometheus" select the "Prometheus" data source.  
+  Click "Import"  
+- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Traefik.  
+  Paste `4475` for dashboard ID.  
+  Click "Load" to the right.  
+  At the bottom under "Prometheus" select the "Prometheus" data source.  
+  Click "Import"
+
+#### Log File aggregation
+- [Add a Loki connection](https://grafana.klack.internal:4443/connections/datasources/loki) to Grafana.  
+  Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  Close the page.
+
+
+### WebDav setup
 - Login to sftpgo and create virtual folders for `/joplin` and `/photos`
 - Create a new sftpgo user with mappings to these folders
+- Map a local folder on your OS to webdav
+- Setup photo syncing from your phone
+- Setup Joplin sync
+
+### Download Managers setup
 - `docker compose up --profile downloaders`
 - Log into qBittorrent with user: `admin` pass: `adminadmin`
 - Change admin password
@@ -117,14 +137,13 @@ cd klack.cloud
 - Set `QB_WEBUI_USER, QB_WEBUI_PASS, UN_SONARR_0_API_KEY, UN_RADARR_0_API_KEY` in `.env`file 
 - `docker compose up --profile downloaders` again.  Verify port number is updated in qBittorent to a random one.
 - Use `http://localhost:9117` for that Jackett address when creating a torznab indexer
-- Install node exporter on the host machine to `/usr/local/bin/node_exporter`
-  - Create a cronjob so that it is run on reboot
-  - setup IPTables to block non-docker containers from it
+
+### Security
+- setup IPTables to block non-docker containers from node exporter?
     - `sudo iptables -A INPUT -p tcp -s 172.17.0.0/16 --dport 9100 -j ACCEPT`
     - `sudo iptables -A INPUT -p tcp --dport 9100 -j DROP`
-- Map a local folder on your OS to webdav
-- Setup photo syncing from your phone
-- Setup Joplin sync
+  
+
 - Setup backups in duplicati
 
 # Host Machine
