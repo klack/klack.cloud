@@ -11,6 +11,8 @@ services:
       - ${DIR_PHOTOS}:/photos
     environment:
       TZ: ${TZ}
+      SFTPGO_DEFAULT_ADMIN_USERNAME: admin 
+      SFTPGO_DEFAULT_ADMIN_PASSWORD: ${BASIC_AUTH_PASS}
     networks:
       klack:
     labels:
