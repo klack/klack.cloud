@@ -19,7 +19,7 @@ def generate_password_pbkdf2(password):
     pbkdf2_hash_base64 = base64.b64encode(pbkdf2_hash).decode('utf-8')
 
     # Format as @ByteArray(salt:hash)
-    password_pbkdf2 = f"@ByteArray({salt_base64}:{pbkdf2_hash_base64})"
+    password_pbkdf2 = f"{salt_base64}:{pbkdf2_hash_base64}"
     
     return password_pbkdf2
 

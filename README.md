@@ -118,10 +118,6 @@ cd klack.cloud
   - Click "Check synchronisation configuration"
   - Click "OK"
 ### Download Managers setup
-- Log into qBittorrent with user: `admin` pass: `adminadmin`
-- Change admin password
-- Turn off qBittorrent logging
-- Change qBittorrent download path to `/data/downloads` and incomplete torrents to `/data/downloads/temp`
 - Set password in sonarr and radarr and disable authentication for localhost
 - Enable file renaming in sonarr and radarr
 - Setting logging to `Info` on sonarr and radarr

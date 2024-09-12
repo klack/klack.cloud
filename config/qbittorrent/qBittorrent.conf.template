@@ -37,7 +37,7 @@ General\UseRandomPort=false
 MailNotification\req_auth=true
 WebUI\AuthSubnetWhitelist=@Invalid()
 WebUI\HostHeaderValidation=false
-WebUI\Password_PBKDF2="${PASSWORD_PBKDF2}"
+WebUI\Password_PBKDF2="@ByteArray(${PASSWORD_PBKDF2})"
 WebUI\Port=8080
 WebUI\Username=admin
 
