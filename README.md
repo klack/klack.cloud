@@ -62,25 +62,25 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
   - Jackett for searching
   - Unpackerr to handle compressed files
 
-| Service | Port | Domain | Hosted Path | URL | Service URL | Auth Provider | Log Rotation
-| --- | --- | --- | --- | --- | --- | --- | --- |
-|
-| Plex | 32400 | example.com | /   | https://example.com:32400/ | | App | Self
-| PhotoPrism | 443 | example.com | /photos | https://example.com/photos | |App | Docker
-| WebDav | 443 | example.com | /dav | https://example.com/dav/ | | Traefik | Docker
-| SFTPGo UI | 4443 | sftpgo.klack.internal | /   | https://sftpgo.klack.internal:4443/ | | Traefik | Docker
-| Traefik UI | 4443 | traefik.klack.internal | /   | https://traefik.klack.internal:4443/ | | Traefik | logrotate
-| Grafana | 4443 | grafana.klack.internal | /   | https://grafana.klack.internal:4443/ | | App | Docker
-| Prometheus | 4443 | prometheus.klack.internal | /   | https://prometheus.klack.internal:4443/ | http://prometheus:9090 | Traefk | Docker
-| Loki | | | | | http://loki:3100 | | Docker
-| Node Exporter | 9101 | node-exp.klack.internal | /   | https://node-exp.klack.internal:9101/metrics | | IPTABLES | stdout
-| Duplicati | 4443 | duplicati.klack.internal | /   | https://duplicati.klack.internal:4443/ | | Traefik | logrotate
-| qBittorrent | 4443 | qbittorrent.klack.internal | /   | https://qbittorrent.klack.internal:4443/ | | App | logs disabled
-| Jackett | 4443 | jackett.klack.internal | /   | https://jackett.klack.internal:4443/ | http://localhost:9117 | Traefik | logs disabled
-| Sonarr | 4443 | sonarr.klack.internal | /   | https://sonarr.klack.internal:4443/ | | App | Self
-| Radarr | 4443 | radarr.klack.internal | /   | https://radarr.klack.internal:4443/ | | App | Self
-| Cowrie | 22,23 | | | | | | logrotate
-| Dionaea | ~ | | | | | | logrotate
+| Service       | Port  | Domain                     | Hosted Path | URL                                          | Service URL            | Auth Provider | Log Rotation  |
+| ------------- | ----- | -------------------------- | ----------- | -------------------------------------------- | ---------------------- | ------------- | ------------- |
+|               |
+| Plex          | 32400 | your-domain.com            | /           | https://your-domain.com:32400/               |                        | App           | Self          |
+| PhotoPrism    | 443   | your-domain.com            | /photos     | https://your-domain.com/photos               |                        | App           | Docker        |
+| WebDav        | 443   | your-domain.com            | /dav        | https://your-domain.com/dav/                 |                        | Traefik       | Docker        |
+| SFTPGo UI     | 4443  | sftpgo.klack.internal      | /           | https://sftpgo.klack.internal:4443/          |                        | Traefik       | Docker        |
+| Traefik UI    | 4443  | traefik.klack.internal     | /           | https://traefik.klack.internal:4443/         |                        | Traefik       | logrotate     |
+| Grafana       | 4443  | grafana.klack.internal     | /           | https://grafana.klack.internal:4443/         |                        | App           | Docker        |
+| Prometheus    | 4443  | prometheus.klack.internal  | /           | https://prometheus.klack.internal:4443/      | http://prometheus:9090 | Traefk        | Docker        |
+| Loki          |       |                            |             |                                              | http://loki:3100       |               | Docker        |
+| Node Exporter | 9101  | node-exp.klack.internal    | /           | https://node-exp.klack.internal:9101/metrics |                        | IPTABLES      | stdout        |
+| Duplicati     | 4443  | duplicati.klack.internal   | /           | https://duplicati.klack.internal:4443/       |                        | Traefik       | logrotate     |
+| qBittorrent   | 4443  | qbittorrent.klack.internal | /           | https://qbittorrent.klack.internal:4443/     |                        | App           | logs disabled |
+| Jackett       | 4443  | jackett.klack.internal     | /           | https://jackett.klack.internal:4443/         | http://localhost:9117  | Traefik       | logs disabled |
+| Sonarr        | 4443  | sonarr.klack.internal      | /           | https://sonarr.klack.internal:4443/          |                        | App           | Self          |
+| Radarr        | 4443  | radarr.klack.internal      | /           | https://radarr.klack.internal:4443/          |                        | App           | Self          |
+| Cowrie        | 22,23 |                            |             |                                              |                        |               | logrotate     |
+| Dionaea       | ~     |                            |             |                                              |                        |               | logrotate     |
 
 # Deployment
 ## Pre-requisites  
@@ -123,17 +123,49 @@ cd klack.cloud
 - Save a bookmark to [your Dashboards page](https://grafana.klack.internal:4443/dashboards).
 - TODO Create Alerts
 
-### Cloud Setup
+### Cloud Drive
 - Login to the [SFTPGo WebAdmin](https://sftpgo.klack.internal:4443/web/admin/)
-- Visit the [Server Manager - Maintenance](https://sftpgo.klack.internal:4443/web/admin/maintenance) page
+- Visit the Server Manager > [Maintenance](https://sftpgo.klack.internal:4443/web/admin/maintenance) page
 - Click "Browse" and choose `./config/sftpgo/settings.json`
 - Click "Restore"
 - Login to the [SFTPGo WebClient](https://sftpgo.klack.internal:4443/web/client/login) with username `cloud` and password `cloud`
 - [Set your cloud password](https://sftpgo.klack.internal:4443/web/client/changepwd)
-- Map a local folder on your OS to webdav
-- Setup photo syncing from your phone
-- Setup Joplin sync
-
+- Map a local folder on your PC
+  - Windows 10  
+    - Click on the Start icon/Windows icon  
+    - Go into This PC  
+    - In the toolbar choose the option Computer  
+    - Click on Map Network drive  
+    - Type `https://your-domain.com/dav` into the text box Folder  
+  - Mac
+    - Open the Finder on your computer
+    - Click on the Go menu and select Connect to Server
+    - In the new window enter `https://your-domain.com/dav` and click on Connect
+  - Linux (Gnome Desktop)
+    - Open Nautilus file manager
+    - Choose Other Locations from the menu on the left
+    - Type in `https://your-domain.com/dav` into Connect to Server field
+#### Photo Sync
+- Setup [photo syncing](https://www.photosync-app.com/home) for your phone  
+    - Open the app and navigate to Settings > Configure > WebDAV > Add New Configuration...  
+      - Server: `your-domain.com`  
+      - Port: `443`  
+      - Login: `cloud`
+      - Password: Your cloud password
+      - Directory: `/dav/photos`
+      - Use SSL: On
+    - Tap "Done"
+    - You can now use the red sync button with WebDAV
+#### Notebook Sync
+- Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
+  - Open the app
+  - Navigate to Options > Synchronisation
+  - Set "Synchronisation target" to "WebDAV"
+  - Enter `https://your-domain/dav/joplin` for the "WebDAV URL"
+  - Enter `cloud` for "WebDAV username"
+  - Enter your cloud password for "WebDAV password"
+  - Click "Check synchronisation configuration"
+  - Click "OK"
 ### Download Managers setup
 - `docker compose up --profile downloaders`
 - Log into qBittorrent with user: `admin` pass: `adminadmin`
@@ -153,8 +185,6 @@ cd klack.cloud
 - setup IPTables to block non-docker containers from node exporter?
     - `sudo iptables -A INPUT -p tcp -s 172.17.0.0/16 --dport 9100 -j ACCEPT`
     - `sudo iptables -A INPUT -p tcp --dport 9100 -j DROP`
-  
-
 - Setup backups in duplicati
 
 # Host Machine
