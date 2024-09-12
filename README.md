@@ -26,12 +26,11 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Honeypots 
 - Logging, monitoring, and alerts
 
+# Deployment
 ## Pre-requisites
 - [ ] A [registered domain](https://www.namecheap.com/) name forwarded to your IP
 - [ ] A [paid VPN subscription](https://protonvpn.com/) for "Download Managers"
 - [ ] Port 443 must be allowed by your ISP
-
-# Deployment
 - Configure your router to [update your external domain](https://www.namecheap.com/support/knowledgebase/subcategory/11/dynamic-dns/) via Dynamic DNS.
 - Configure your router to forward port 443 and 32400 to your machine.
 - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/).
@@ -75,23 +74,30 @@ cd klack.cloud
 - Click "Restore"
 - Login to the [SFTPGo WebClient](https://sftpgo.klack.internal:4443/web/client/login) with username `cloud` and password `cloud`
 - [Set your cloud password](https://sftpgo.klack.internal:4443/web/client/changepwd)
-- Map a local folder on your PC
-  - Windows 10  
-    - Click on the Start icon/Windows icon  
-    - Go into This PC  
-    - In the toolbar choose the option Computer  
-    - Click on Map Network drive  
-    - Type `https://your-domain.com/dav` into the text box Folder  
-  - Mac
-    - Open the Finder on your computer
-    - Click on the Go menu and select Connect to Server
-    - In the new window enter `https://your-domain.com/dav` and click on Connect
-  - Linux (Gnome Desktop)
-    - Open Nautilus file manager
-    - Choose Other Locations from the menu on the left
-    - Type in `https://your-domain.com/dav` into Connect to Server field
+- Enable the cloud drive on your devices
+  - WebDAV URL: `https://your-domain.com/dav`
+    - Mac
+      - Open the Finder on your computer
+      - Click on the "Go" menu and select "Connect to Server"
+      - In the new window enter the WebDAV URL and click on "Connect"
+    - Linux (Gnome Desktop)
+      - Open Nautilus file manager
+      - Choose "Other Locations" from the menu on the left
+      - Type the WebDAV URL into "Connect to Server" field
+    - Windows
+      - Click on the Start icon/Windows icon  
+      - Go into "This PC"
+      - In the toolbar choose the option "Computer"
+      - Click on "Map Network drive"
+      - Type the WebDAV URL into the text box Folder
+    - iPhone
+      - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
+      - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the WebDAV URL
+    - Android
+      - Download [Astro File Manager](https://www.astrofilemanagerapp.com/)
+      - Setup WebDAV using the WebDAV URL
 ### Photo Sync
-- Setup [photo syncing](https://www.photosync-app.com/home) for your phone  
+- Setup [PhotoSync](https://www.photosync-app.com/home) for your phone  
     - Open the app and navigate to Settings > Configure > WebDAV > Add New Configuration...  
       - Server: `your-domain.com`  
       - Port: `443`  
@@ -100,7 +106,7 @@ cd klack.cloud
       - Directory: `/dav/photos`
       - Use SSL: On
     - Tap "Done"
-    - You can now use the red sync button with WebDAV
+    - You can now use the red sync button and choose WebDAV
 ### Notebook Sync
 - Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Open the app
