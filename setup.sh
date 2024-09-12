@@ -1,4 +1,20 @@
 #!/bin/bash
+DATA_DIRS=" ./data/backups \
+            ./data/joplin \
+            ./data/klack.tv \
+            ./data/photos \
+            ./data/sftpgoroot/data/cloud \
+            ./data/transcode"
+
+LOG_DIRS="  /var/log/traefik \
+            /var/log/duplicati \
+            /var/log/dionaea \
+            /var/log/plex \
+            /var/log/radarr \
+            /var/log/sonarr \
+            /var/log/cowrie \
+            '/var/log/plex/PMS Plugin Logs'"
+
 ./down.sh
 sudo killall node_exporter
 
@@ -6,35 +22,17 @@ sudo killall node_exporter
 if [[ "$1" == "--clean" ]]; then
   echo "Deleting docker volumes"
   docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
-  sudo rm -rf /var/log/traefik \
-    /var/log/duplicati \
-    /var/log/dionaea \
-    /var/log/plex \
-    /var/log/radarr \
-    /var/log/sonarr \
-    /var/log/cowrie
+  sudo rm -rf $LOG_DIRS
+  sudo rm -rf $DATA_DIRS
   sudo rm /usr/local/bin/node_exporter
 fi
 
+#Install node_exporter
 ./scripts/install_node_exp.sh
 
-#Setup logs folders and perms
-sudo mkdir -vp \
-  /var/log/traefik \
-  /var/log/duplicati \
-  /var/log/dionaea \
-  /var/log/cowrie \
-  "/var/log/plex/PMS Plugin Logs" \
-  /var/log/radarr \
-  /var/log/sonarr
-sudo chown -vR \
-  1000:1000 \
-  /var/log/traefik \
-  /var/log/duplicati \
-  /var/log/dionaea \
-  /var/log/plex \
-  /var/log/radarr \
-  /var/log/sonarr
+#Setup data folders and perms
+sudo mkdir -vp $LOG_DIRS $DATA_DIRS
+sudo chown -vR 1000:1000 $LOG_DIRS $DATA_DIRS
 sudo chown -vR 999:999 /var/log/cowrie
 sudo cp ./config/logrotate.d/* /etc/logrotate.d
 
