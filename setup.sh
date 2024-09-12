@@ -1,10 +1,31 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # Check if the script is run by root (or sudo)
 if [ "$EUID" -ne 0 ]; then
   echo "This script must be run as root. Please use sudo."
   exit 1
 fi
+
+#Setup folders and perms
+DATA_DIRS=(
+  "./data/backups"
+  "./data/joplin"
+  "./data/klack.tv"
+  "./data/photos"
+  "./data/sftpgoroot/data/cloud"
+  "./data/transcode"
+)
+
+LOG_DIRS=(
+  "/var/log/traefik"
+  "/var/log/duplicati"
+  "/var/log/dionaea"
+  "/var/log/plex"
+  "/var/log/radarr"
+  "/var/log/sonarr"
+  "/var/log/cowrie"
+  "/var/log/plex/PMS Plugin Logs"
+)
 
 #Shut down everything
 ./down.sh
@@ -14,33 +35,16 @@ killall node_exporter
 if [[ "$1" == "--clean" ]]; then
   echo "Deleting docker volumes"
   docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
-  rm -rf $LOG_DIRS
-  rm -rf $DATA_DIRS
+  rm -rf "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
   rm /usr/local/bin/node_exporter
 fi
 
 #Install node_exporter
 ./scripts/install_node_exp.sh
 
-#Setup folders and perms
-DATA_DIRS=" ./data/backups \
-            ./data/joplin \
-            ./data/klack.tv \
-            ./data/photos \
-            ./data/sftpgoroot/data/cloud \
-            ./data/transcode"
-
-LOG_DIRS="  /var/log/traefik \
-            /var/log/duplicati \
-            /var/log/dionaea \
-            /var/log/plex \
-            /var/log/radarr \
-            /var/log/sonarr \
-            /var/log/cowrie \
-            '/var/log/plex/PMS Plugin Logs'"
-
-mkdir -vp $LOG_DIRS $DATA_DIRS
-chown -vR 1000:1000 $LOG_DIRS $DATA_DIRS
+#Setup directories
+mkdir -vp "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
+chown -vR 1000:1000 "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
 chown -vR 999:999 /var/log/cowrie
 cp ./config/logrotate.d/* /etc/logrotate.d
 
@@ -61,7 +65,6 @@ else
 fi
 
 #Prompt for info
-cp ./.env.template ./.env
 DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
 DEFUALT_GATEWAY=$(ip route | grep default | awk '{print $3}')
 DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
@@ -87,6 +90,7 @@ MARIADB_PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#%^&*()-_=+' | head -c 16)
 MARIADB_ROOT_PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#%^&*()-_=+' | head -c 16)
 
 #Update .env file
+cp ./.env.template ./.env
 sed -i "s|^TZ=.*|TZ=$TIMEZONE|" .env
 sed -i "s|^EXTERNAL_DOMAIN=.*|EXTERNAL_DOMAIN=$EXTERNAL_DOMAIN|" .env
 sed -i "s|^PLEX_CLAIM=.*|PLEX_CLAIM=$PLEX_CLAIM|" .env
@@ -106,6 +110,11 @@ echo ".env file generated"
 cp ./config/grafana/overview-dashboard.json.template ./config/grafana/overview-dashboard.json
 sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/overview-dashboard.json
 
+#Update qBittorrent password
+cp ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf
+PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim python generate_pkbdf2.py $PASSWORD)"
+sed -i "s#\${PASSWORD_PBKDF2}#${PASSWORD_PBKDF2}#g" ./config/qbittorrent/qBittorrent.conf
+
 #Generate htpassword
 docker run --rm httpd:latest htpasswd \
   -Bbn admin "$PASSWORD" > \
@@ -114,3 +123,4 @@ docker run --rm httpd:latest htpasswd \
 nohup /usr/local/bin/node_exporter > /dev/null 2>&1 & 
 echo "node_exporter started"
 echo "First-time Setup complete"
+echo "Type ./up.sh to launch"

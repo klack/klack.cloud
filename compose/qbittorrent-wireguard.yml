@@ -61,6 +61,7 @@ services:
     volumes:
       - "qbtw:/config"
       - "../config/wireguard/wg0.conf:/config/wireguard/wg0.conf"
+      - "../config/qbittorrent/qBittorrent.conf:/config/qBittorrent/config/qBittorrent.conf"
       - "${QB_MOUNT}"
     working_dir: "/opt"
     labels:

@@ -118,7 +118,6 @@ cd klack.cloud
   - Click "Check synchronisation configuration"
   - Click "OK"
 ### Download Managers setup
-- `docker compose up --profile downloaders`
 - Log into qBittorrent with user: `admin` pass: `adminadmin`
 - Change admin password
 - Turn off qBittorrent logging
