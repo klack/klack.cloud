@@ -83,7 +83,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 | Dionaea | ~ | | | | | | logrotate
 
 # Deployment
-## Pre-setup
+## Pre-requisites  
 - Configure your router to [update your external domain](https://www.namecheap.com/support/knowledgebase/subcategory/11/dynamic-dns/) via Dynamic DNS.
 - Configure your router to forward port 443 and 32400 to your machine.
 - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/).
@@ -98,27 +98,38 @@ cd klack.cloud
 ```
 ### Dashboard setup
 #### System Resource Monitor
-- [Add prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana.  
-  Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom. Close the page.
-- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Node Exporter.  
-  Paste `1860` for dashboard ID.  
-  Click "Load" to the right.  
-  At the bottom under "Prometheus" select the "Prometheus" data source.  
+- [Add a prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana  
+  Click "Add new data source" at the upper right  
+  Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom  
+  Close the page
+- [Add a Loki connection](https://grafana.klack.internal:4443/connections/datasources/loki) to Grafana  
+  Click "Add new data source" at the upper right  
+  Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  
+  Close the page.  
+- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Node Exporter  
+  Paste `1860` for dashboard ID  
+  Click "Load" to the right  
+  At the bottom under "Prometheus" select the "Prometheus" data source  
   Click "Import"  
-- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Traefik.  
-  Paste `4475` for dashboard ID.  
-  Click "Load" to the right.  
-  At the bottom under "Prometheus" select the "Prometheus" data source.  
+- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Traefik  
+  Paste `4475` for dashboard ID  
+  Click "Load" to the right  
+  At the bottom under "Prometheus" select the "Prometheus" data source  
   Click "Import"
+- [Import the Overview dashboard](https://grafana.klack.internal:4443/dashboard/import)  
+  Click "Upload dashboard JSON file"  
+  Choose the `./config/grafana/overview-dashboard.json` file  
+  Click "Import"  
+- Save a bookmark to [your Dashboards page](https://grafana.klack.internal:4443/dashboards).
+- TODO Create Alerts
 
-#### Log File aggregation
-- [Add a Loki connection](https://grafana.klack.internal:4443/connections/datasources/loki) to Grafana.  
-  Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  Close the page.
-
-
-### WebDav setup
-- Login to sftpgo and create virtual folders for `/joplin` and `/photos`
-- Create a new sftpgo user with mappings to these folders
+### Cloud Setup
+- Login to the [SFTPGo WebAdmin](https://sftpgo.klack.internal:4443/web/admin/)
+- Visit the [Server Manager - Maintenance](https://sftpgo.klack.internal:4443/web/admin/maintenance) page
+- Click "Browse" and choose `./config/sftpgo/settings.json`
+- Click "Restore"
+- Login to the [SFTPGo WebClient](https://sftpgo.klack.internal:4443/web/client/login) with username `cloud` and password `cloud`
+- [Set your cloud password](https://sftpgo.klack.internal:4443/web/client/changepwd)
 - Map a local folder on your OS to webdav
 - Setup photo syncing from your phone
 - Setup Joplin sync

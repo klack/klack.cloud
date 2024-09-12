@@ -1,4 +1,28 @@
 #!/bin/bash
+
+# Check if the script is run by root (or sudo)
+if [ "$EUID" -ne 0 ]; then
+  echo "This script must be run as root. Please use sudo."
+  exit 1
+fi
+
+#Shut down everything
+./down.sh
+killall node_exporter
+
+#Clean option
+if [[ "$1" == "--clean" ]]; then
+  echo "Deleting docker volumes"
+  docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
+  rm -rf $LOG_DIRS
+  rm -rf $DATA_DIRS
+  rm /usr/local/bin/node_exporter
+fi
+
+#Install node_exporter
+./scripts/install_node_exp.sh
+
+#Setup folders and perms
 DATA_DIRS=" ./data/backups \
             ./data/joplin \
             ./data/klack.tv \
@@ -15,30 +39,14 @@ LOG_DIRS="  /var/log/traefik \
             /var/log/cowrie \
             '/var/log/plex/PMS Plugin Logs'"
 
-./down.sh
-sudo killall node_exporter
-
-#Clean option
-if [[ "$1" == "--clean" ]]; then
-  echo "Deleting docker volumes"
-  docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
-  sudo rm -rf $LOG_DIRS
-  sudo rm -rf $DATA_DIRS
-  sudo rm /usr/local/bin/node_exporter
-fi
-
-#Install node_exporter
-./scripts/install_node_exp.sh
-
-#Setup data folders and perms
-sudo mkdir -vp $LOG_DIRS $DATA_DIRS
-sudo chown -vR 1000:1000 $LOG_DIRS $DATA_DIRS
-sudo chown -vR 999:999 /var/log/cowrie
-sudo cp ./config/logrotate.d/* /etc/logrotate.d
+mkdir -vp $LOG_DIRS $DATA_DIRS
+chown -vR 1000:1000 $LOG_DIRS $DATA_DIRS
+chown -vR 999:999 /var/log/cowrie
+cp ./config/logrotate.d/* /etc/logrotate.d
 
 #Copy docker daemon
 if [ ! -f /etc/docker/daemon.json ]; then
-    sudo cp -v ./config/docker/daemon.json /etc/docker/daemon.json
+    cp -v ./config/docker/daemon.json /etc/docker/daemon.json
     echo "Docker daemon.json created"
 else
     echo "Docker daemon.json already exists"
@@ -46,7 +54,7 @@ fi
 
 #Edit hosts file
 if ! grep -q ".klack.internal" /etc/hosts; then
-    sudo sh -c "cat ./config/hosts/hosts >> /etc/hosts"
+    sh -c "cat ./config/hosts/hosts >> /etc/hosts"
     echo "Hosts file modified"
 else 
     echo "Hosts file already modified."
@@ -65,7 +73,7 @@ read -s -p "Enter password again: " PASSWORD_CONFIRM
 echo
 if [ "$PASSWORD" != "$PASSWORD_CONFIRM" ]; then
     echo "Passwords do not match. Exiting."
-    exit 1  # Exit the script with a non-zero status
+    exit 1
 fi
 read -p "Visit https://plex.tv/claim and paste claim token: " PLEX_CLAIM
 read -p "Press enter for default network interface [$DEFAULT_INTERFACE]: " HOST_IP
@@ -103,5 +111,6 @@ docker run --rm httpd:latest htpasswd \
   -Bbn admin "$PASSWORD" > \
   ./config/traefik/htpasswd && echo "htpassword generated"
 
-sudo nohup /usr/local/bin/node_exporter > /dev/null 2>&1 & 
+nohup /usr/local/bin/node_exporter > /dev/null 2>&1 & 
 echo "node_exporter started"
+echo "First-time Setup complete"
