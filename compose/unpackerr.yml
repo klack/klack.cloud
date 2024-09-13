@@ -22,10 +22,10 @@ services:
       - UN_ACTIVITY=false
       # Sonarr Config
       - UN_SONARR_0_URL=http://127.0.0.1:8989
-      - UN_SONARR_0_API_KEY=${UN_SONARR_0_API_KEY}
+      - UN_SONARR_0_API_KEY=${SONARR_API_KEY}
       # Radarr Config
       - UN_RADARR_0_URL=http://12.0.0.1:7878
-      - UN_RADARR_0_API_KEY=${UN_RADARR_0_API_KEY}
+      - UN_RADARR_0_API_KEY=${RADARR_API_KEY}
     volumes:
       - ${DIR_KLACKTV}:/data
     network_mode: service:qbittorrent-wireguard

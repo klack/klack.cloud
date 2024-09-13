@@ -86,8 +86,8 @@ HOST_IP=${HOST_IP:-"$DEFAULT_HOST_IP"}
 GATEWAY=${GATEWAY:-"$DEFUALT_GATEWAY"}
 NETWORK=$(echo "$GATEWAY" | cut -d '.' -f 1-3)
 ESCAPED_PASSWORD=$(printf '%s\n' "$PASSWORD" | sed 's/\([\"$]\)/\\\1/g')
-MARIADB_PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#%^&*()-_=+' | head -c 16)
-MARIADB_ROOT_PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#%^&*()-_=+' | head -c 16)
+MARIADB_PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#%' | head -c 16)
+MARIADB_ROOT_PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#%' | head -c 16)
 SONARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
 RADARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
 

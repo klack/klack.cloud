@@ -13,8 +13,8 @@ services:
       TZ: ${TZ}
       NODE_EXPORTER_TARGET: "node-exp.${INTERNAL_DOMAIN}:9101"
       TRAEFIK_TARGET: "${HOST_IP}:4443"
-      NODE_EXPORTER_USER: ${NODE_EXPORTER_USER}
-      NODE_EXPORTER_PASS: ${NODE_EXPORTER_PASS}
+      NODE_EXPORTER_USER: ${BASIC_AUTH_USER}
+      NODE_EXPORTER_PASS: ${BASIC_AUTH_PASS}
     entrypoint: ["/entrypoint.sh"]
     # ports:
     #   - "9090:9090"

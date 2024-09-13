@@ -40,8 +40,8 @@ services:
       - "LAN_NETWORK=192.168.1.0/16"
       - "QBT_LEGAL_NOTICE=confirm"
       - "WEBUI_URL=http://localhost:8080" #qBittorrent Web info for updating proton vpn port forwarding
-      - "WEBUI_USER=${QB_WEBUI_USER}"
-      - "WEBUI_PASS=${QB_WEBUI_PASS}"
+      - "WEBUI_USER=${BASIC_AUTH_USER}"
+      - "WEBUI_PASS=${BASIC_AUTH_PASS}"
       - "ENABLEPROTONVPNPORTFWD=1"
       - "TZ=${TZ}"
     ipc: "private"
