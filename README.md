@@ -31,10 +31,10 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - [ ] A domain configured with Dynamic DNS, such as one from [No-IP](noip.com)
 - [ ] A [paid VPN subscription](https://protonvpn.com/) for "Download Managers"
 - [ ] Port 443 must be allowed by your ISP
-- Configure your router to forward port 443 and 32400 to your machine.
-- Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/).
+- Configure your router to forward port 443 and 32400 to your machine
+- Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
 - Place it at `./config/wireguard/wg0.conf`
-- Make sure your ISP does not block port 443.
+- Make sure your ISP does not block port 443
 
 ## Setup
 ```bash
