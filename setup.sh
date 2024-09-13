@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # Check if the script is run by root (or sudo)
 if [ "$EUID" -ne 0 ]; then
@@ -88,6 +88,8 @@ NETWORK=$(echo "$GATEWAY" | cut -d '.' -f 1-3)
 ESCAPED_PASSWORD=$(printf '%s\n' "$PASSWORD" | sed 's/\([\"$]\)/\\\1/g')
 MARIADB_PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#%^&*()-_=+' | head -c 16)
 MARIADB_ROOT_PASSWORD=$(< /dev/urandom tr -dc 'A-Za-z0-9!@#%^&*()-_=+' | head -c 16)
+SONARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
+RADARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
 
 #Update .env file
 cp ./.env.template ./.env
@@ -102,6 +104,9 @@ sed -i "s|^MARIADB_PASSWORD=.*|MARIADB_PASSWORD=\"$MARIADB_PASSWORD\"|" .env
 sed -i "s|^HOST_IP=.*|HOST_IP=$HOST_IP|" .env
 sed -i "s|^HONEYPOT_GATEWAY=.*|HONEYPOT_GATEWAY=$GATEWAY|" .env
 sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$DEFAULT_INTERFACE|" .env
+sed -i "s|^HOST_IP=.*|HOST_IP=$HOST_IP|" .env
+sed -i "s|^SONARR_API_KEY=.*|SONARR_API_KEY=\"$SONARR_API_KEY\"|" .env
+sed -i "s|^RADARR_API_KEY=.*|RADARR_API_KEY=\"$RADARR_API_KEY\"|" .env
 sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" .env
 sed -i "s/\${NETWORK}/${NETWORK}/g" .env
 echo ".env file generated"
@@ -110,10 +115,16 @@ echo ".env file generated"
 cp ./config/grafana/overview-dashboard.json.template ./config/grafana/overview-dashboard.json
 sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/overview-dashboard.json
 
-#Update qBittorrent password
+#Set qBittorrent password
 cp ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf
 PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim python generate_pkbdf2.py $PASSWORD)"
 sed -i "s#\${PASSWORD_PBKDF2}#${PASSWORD_PBKDF2}#g" ./config/qbittorrent/qBittorrent.conf
+
+#Set Servarr api keys
+cp ./config/radarr/config.xml.template ./config/radarr/config.xml
+sed -i "s/\${API_KEY}/${RADARR_API_KEY}/g" ./config/radarr/config.xml
+cp ./config/sonarr/config.xml.template ./config/sonarr/config.xml
+sed -i "s/\${API_KEY}/${SONARR_API_KEY}/g" ./config/sonarr/config.xml
 
 #Generate htpassword
 docker run --rm httpd:latest htpasswd \

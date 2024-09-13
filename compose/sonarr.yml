@@ -13,20 +13,16 @@ services:
       - TZ=${TZ}
     volumes:
       - sonarr:/config
+      - ../config/radarr/config.xml:/config/config.xml      
       - /var/log/sonarr:/config/logs
       - ${DIR_KLACKTV}:/data
     network_mode: service:qbittorrent-wireguard
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:8989"]
-    #   interval: 1m30s
-    #   timeout: 10s
-    #   retries: 3
-    #   start_period: 40s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.rule=Host(`sonarr.${INTERNAL_DOMAIN}`)"
       - "traefik.http.routers.sonarr.entrypoints=internal"
       - "traefik.http.routers.sonarr.service=sonarr"
+      - "traefik.http.routers.sonarr.middlewares=traefik-auth@file"
       - "traefik.http.services.sonarr.loadBalancer.server.port=8989"
       - "stack=klack.cloud"
     restart: unless-stopped
