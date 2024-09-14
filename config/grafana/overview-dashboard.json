@@ -1433,8 +1433,8 @@
       {
         "current": {
           "selected": false,
-          "text": "${NETWORK_INTERFACE}",
-          "value": "${NETWORK_INTERFACE}"
+          "text": "eno1",
+          "value": "eno1"
         },
         "hide": 0,
         "includeAll": false,
@@ -1443,11 +1443,11 @@
         "options": [
           {
             "selected": true,
-            "text": "${NETWORK_INTERFACE}",
-            "value": "${NETWORK_INTERFACE}"
+            "text": "eno1",
+            "value": "eno1"
           }
         ],
-        "query": "${NETWORK_INTERFACE}",
+        "query": "eno1",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"

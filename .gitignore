@@ -9,7 +9,6 @@ config/fail2ban/db/fail2ban.sqlite3
 config/wireguard/wg0.conf
 config/sftpgo/homeuser/
 config/plex/Preferences.xml
-config/grafana/overview-dashboard.json
 config/qbittorrent/qBittorrent.conf
 config/radarr/config.xml
 config/sonarr/config.xml
