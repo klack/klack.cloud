@@ -31,10 +31,10 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - [ ] A domain configured with Dynamic DNS, such as one from [No-IP](noip.com)
 - [ ] A [paid VPN subscription](https://protonvpn.com/) for "Download Managers"
 - [ ] Port 443 must be allowed by your ISP
-- Configure your router to forward port 443 and 32400 to your machine
-- Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
-- Place it at `./config/wireguard/wg0.conf`
-- Make sure your ISP does not block port 443
+- [ ] Configure your router to forward port 443 and 32400 to your machine
+- [ ] Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
+- [ ] Place it at `./config/wireguard/wg0.conf`
+- [ ] Make sure your ISP does not block port 443
 
 ## Setup
 ```bash
@@ -42,12 +42,13 @@ git clone https://github.com/klack/klack.cloud.git
 cd klack.cloud
 sudo ./setup.sh
 ```
+
+### Notes
+- Since you are using a self-signed cert, you will need to accept a security exception in your browser for each internal services.
+- If you are running your server on a separate machine, you must edit your hosts file on your local machine to access internal services.
+
 ### Dashboard setup
-- Accept security cert
-- Login to Grafana
-- Use the user: admin and your generated password
-- TODO Issues with node exp when running from remote IP?
-- TODO hosts file on remote computer for internal address
+- Login to [Grafana](https://grafana.klack.internal:4443/) with the Username: `admin` and your created password.
 - [Add a prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana  
   Click "Add new data source" at the upper right  
   Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom  
@@ -56,26 +57,18 @@ sudo ./setup.sh
   Click "Add new data source" at the upper right  
   Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  
   Close the page.  
-- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Node Exporter  
-  Paste `1860` for dashboard ID  
-  Click "Load" to the right  
-  At the bottom under "Prometheus" select the "Prometheus" data source  
-  Click "Import"  
-- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Traefik  
-  Paste `4475` for dashboard ID  
-  Click "Load" to the right  
-  At the bottom under "Prometheus" select the "Prometheus" data source  
-  Click "Import"
 - [Import the Overview dashboard](https://grafana.klack.internal:4443/dashboard/import)  
+  Download a copy of [overview-dashboard.json](https://raw.githubusercontent.com/klack/klack.cloud/main/config/grafana/overview-dashboard.json)  
   Click "Upload dashboard JSON file"  
   Choose the `./config/grafana/overview-dashboard.json` file  
-  Click "Import"  
+  Click "Import"
+  Click "Dashboard settings > Variables > network_interface".  Goto the "Custom options" section.  Replace the value with your network interface name (found in .env)
 - Save a bookmark to [your Dashboards page](https://grafana.klack.internal:4443/dashboards).
 ### Cloud Drive
-- TODO Provide sftpgo.json download link
+- Download a copy of [settings.json](https://github.com/klack/klack.cloud/blob/main/config/sftpgo/settings.json) 
 - Login to the [SFTPGo WebAdmin](https://sftpgo.klack.internal:4443/web/admin/)
-- Visit the Server Manager > [Maintenance](https://sftpgo.klack.internal:4443/web/admin/maintenance) page
-- Click "Browse" and choose `./config/sftpgo/settings.json`
+- Visit the [Server Manager > Maintenance](https://sftpgo.klack.internal:4443/web/admin/maintenance) page
+- Click "Browse" and choose `settings.json`
 - Click "Restore"
 - Login to the [SFTPGo WebClient](https://sftpgo.klack.internal:4443/web/client/login) with username `cloud` and password `cloud`
 - Click on the user icon in the upper right corner and "Change password"
@@ -98,11 +91,9 @@ sudo ./setup.sh
     - iPhone
       - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
       - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the WebDAV URL
-    - Android
-      - Download [Astro File Manager](https://www.astrofilemanagerapp.com/)
-      - Setup WebDAV using the WebDAV URL
 ### Photo Sync
-- Setup [PhotoSync](https://www.photosync-app.com/home) for your phone  
+- Setup [PhotoSync](https://www.photosync-app.com/home) for your phone
+    - **Note this is a paid app** Looking for a better solution
     - Open the app and navigate to Settings > Configure > WebDAV > Add New Configuration...  
       - Server: `your-domain.com`  
       - Port: `443`  
@@ -122,16 +113,26 @@ sudo ./setup.sh
   - Enter your cloud password for "WebDAV password"
   - Click "Check synchronization configuration"
   - Click "OK"
-### Download Managers setup
+### Download Managers notes
 - Enable file renaming in sonarr and radarr
-- Setting logging to `Info` on sonarr and radarr
+- Set logging to `Info` on sonarr and radarr
 - Use `/data/library/tv/` as a path when adding a series in sonarr
 - Use `/data/library/movies/` as a path when adding a movie on radarr
-- Use `http://localhost:9117` for that Jackett address when creating a torznab indexer
-### TODO
-- Create Alerts
-- Setup Backups
-- Santize domain entry
+- Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
+# TODO
+### Add other Dashboards:
+- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Node Exporter  
+  Paste `1860` for dashboard ID  
+  Click "Load" to the right  
+  At the bottom under "Prometheus" select the "Prometheus" data source  
+  Click "Import"  
+- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Traefik  
+  Paste `4475` for dashboard ID  
+  Click "Load" to the right  
+  At the bottom under "Prometheus" select the "Prometheus" data source  
+  Click "Import"
+### Create Alerts
+### Setup Backups
 
 # Service Directory
 | Service       | Port  | Domain                     | Hosted Path | URL                                          | Service URL            | Auth Provider | Log Rotation  |

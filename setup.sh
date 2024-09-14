@@ -38,6 +38,7 @@ if [[ "$1" == "--clean" ]]; then
   rm -rf "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
   rm /usr/local/bin/node_exporter
   rm ./config/sftpgo/homeuser/sftpgo.db
+  exit
 fi
 
 #Install node_exporter
@@ -71,7 +72,7 @@ DEFUALT_GATEWAY=$(ip route | grep default | awk '{print $3}')
 DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
 TIMEZONE=$(timedatectl | grep "Time zone" | awk '{print $3}')
 read -p "Enter external domain: " EXTERNAL_DOMAIN
-read -s -p "Enter password: " PASSWORD
+read -s -p "Create a password: " PASSWORD
 echo
 read -s -p "Enter password again: " PASSWORD_CONFIRM
 echo
@@ -111,10 +112,6 @@ sed -i "s|^RADARR_API_KEY=.*|RADARR_API_KEY=\"$RADARR_API_KEY\"|" .env
 sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" .env
 sed -i "s/\${NETWORK}/${NETWORK}/g" .env
 echo ".env file generated"
-
-#Update dashboard with network interface
-cp ./config/grafana/overview-dashboard.json.template ./config/grafana/overview-dashboard.json
-sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/overview-dashboard.json
 
 #Set qBittorrent password
 cp ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf
