@@ -23,7 +23,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - SSL certificates signed by Let's Encrypt
 - Automatic IP banning
 - Automatic updates
-- Honeypots 
+- Honeypots admin
 - Logging, monitoring, and alerts
 
 # Deployment
@@ -40,9 +40,14 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 ```bash
 git clone https://github.com/klack/klack.cloud.git
 cd klack.cloud
-./setup.sh
+sudo ./setup.sh
 ```
 ### Dashboard setup
+- Accept security cert
+- Login to Grafana
+- Use the user: admin and your generated password
+- TODO Issues with node exp when running from remote IP?
+- TODO hosts file on remote computer for internal address
 - [Add a prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana  
   Click "Add new data source" at the upper right  
   Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom  
@@ -67,12 +72,13 @@ cd klack.cloud
   Click "Import"  
 - Save a bookmark to [your Dashboards page](https://grafana.klack.internal:4443/dashboards).
 ### Cloud Drive
+- TODO Provide sftpgo.json download link
 - Login to the [SFTPGo WebAdmin](https://sftpgo.klack.internal:4443/web/admin/)
 - Visit the Server Manager > [Maintenance](https://sftpgo.klack.internal:4443/web/admin/maintenance) page
 - Click "Browse" and choose `./config/sftpgo/settings.json`
 - Click "Restore"
 - Login to the [SFTPGo WebClient](https://sftpgo.klack.internal:4443/web/client/login) with username `cloud` and password `cloud`
-- [Set your cloud password](https://sftpgo.klack.internal:4443/web/client/changepwd)
+- Click on the user icon in the upper right corner and "Change password"
 - Enable the cloud drive on your devices
   - WebDAV URL: `https://your-domain.com/dav`
     - Mac
@@ -88,7 +94,7 @@ cd klack.cloud
       - Go into "This PC"
       - In the toolbar choose the option "Computer"
       - Click on "Map Network drive"
-      - Type the WebDAV URL into the text box Folder
+      - Click 
     - iPhone
       - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
       - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the WebDAV URL
@@ -125,6 +131,7 @@ cd klack.cloud
 ### TODO
 - Create Alerts
 - Setup Backups
+- Santize domain entry
 
 # Service Directory
 | Service       | Port  | Domain                     | Hosted Path | URL                                          | Service URL            | Auth Provider | Log Rotation  |
