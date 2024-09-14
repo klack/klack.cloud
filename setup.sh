@@ -37,6 +37,7 @@ if [[ "$1" == "--clean" ]]; then
   docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
   rm -rf "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
   rm /usr/local/bin/node_exporter
+  rm ./config/sftpgo/homeuser/sftpgo.db
 fi
 
 #Install node_exporter

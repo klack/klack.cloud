@@ -13,7 +13,7 @@ services:
       - TZ=${TZ}
     volumes:
       - sonarr:/config
-      - ../config/radarr/config.xml:/config/config.xml      
+      - ../config/sonarr/config.xml:/config/config.xml      
       - /var/log/sonarr:/config/logs
       - ${DIR_KLACKTV}:/data
     network_mode: service:qbittorrent-wireguard
