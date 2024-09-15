@@ -49,7 +49,6 @@ sudo ./setup.sh
 
 ### Log Viewer
 - Login to [Grafana](https://grafana.klack.internal:4443/) with the Username: `admin` and your created password.
-
 - [Add a Loki connection](https://grafana.klack.internal:4443/connections/datasources/loki) to Grafana  
   Click "Add new data source" at the upper right  
   Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  
