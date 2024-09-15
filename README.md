@@ -211,12 +211,12 @@ IPTable rules should be created so that only this docker container can talk to n
   - `sudo iptables -A INPUT -p tcp --dport 9100 -j DROP`
 
 ### Log Rotation
-Must be setup on the host machine due to permission issues and the requirement to send SIGHUP signals.  
+Is setup on the host machine due to permission issues and the requirement to send SIGHUP signals  
 
 # Other Notes
 Honeypot's cannot be accessed by localhost due to macvlan network
 
 # Uninstall
 Run `./setup.sh --clean`  
-Remove entries from /etc/crontab on your host machine  
-Remove entries from /etc/hosts on your server and from your host machine  
+Remove entry for `node_exporter` from `/etc/crontab` on your host machine  
+Remove entries from `/etc/hosts` on your server and your local machine  
