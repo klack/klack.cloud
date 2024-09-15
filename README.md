@@ -36,8 +36,8 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - [ ] Place it at `./config/wireguard/wg0.conf`
 
 ### Notes
-- Since you are using a self-signed cert, you will need to accept a security exception in your browser for each internal service.
-- If you are running your server on a separate machine, you must edit your hosts file on your local machine to access internal services.
+- Since you are using a self-signed cert, you will need to accept a security exception in your browser for each service.
+- If you are running your server on a separate machine, you must edit your hosts file on your local machine to point all klack.internal domains to your server (see service directory below).
 
 ## Setup
 ```bash
