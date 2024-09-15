@@ -55,7 +55,7 @@ sudo ./setup.sh
 - Click on the menu button on the left  
   Choose Explore  
   Where it says "Select label", choose "stack"  
-  Where it says "Select value", choose "klack.cloud"
+  Where it says "Select value", choose "klack.cloud"  
   Click "Run query"  
   Click on the "Live" button near the top right  
 - Scroll to the bottom to view logs

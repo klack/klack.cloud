@@ -1,0 +1,194 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: 1m
+      folder: WARNING
+      interval: 1m
+      rules:
+        - uid: cdwmypq2m00e8b
+          title: RAM Used
+          condition: D
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 21600
+                to: 0
+              datasourceUid: ddw4kf5ococ8wc
+              model:
+                datasource:
+                    type: prometheus
+                    uid: ddw4kf5ococ8wc
+                editorMode: code
+                exemplar: false
+                expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100
+                format: time_series
+                instant: true
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                step: 240
+            - refId: D
+              relativeTimeRange:
+                from: 21600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 90
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - D
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: D
+                type: threshold
+          dashboardUid: rYdddlPWk
+          panelId: 16
+          noDataState: NoData
+          execErrState: Error
+          for: 5m
+          annotations:
+            __dashboardUid__: rYdddlPWk
+            __panelId__: "16"
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: grafana-default-email
+        - uid: fdwmz3am42txcb
+          title: CPU Busy
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 21600
+                to: 0
+              datasourceUid: ddw4kf5ococ8wc
+              model:
+                datasource:
+                    type: prometheus
+                    uid: ddw4kf5ococ8wc
+                editorMode: code
+                exemplar: false
+                expr: 100 * (1 - avg(rate(node_cpu_seconds_total{mode="idle", instance="node-exp.klack.internal:9101"}[5m])))
+                instant: true
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: ""
+                maxDataPoints: 43200
+                range: false
+                refId: A
+                step: 240
+            - refId: C
+              relativeTimeRange:
+                from: 21600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 95
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: rYdddlPWk
+          panelId: 20
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          annotations:
+            __dashboardUid__: rYdddlPWk
+            __panelId__: "20"
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: grafana-default-email
+        - uid: cdwna6zfw4l4wd
+          title: Backup Failure
+          condition: C
+          data:
+            - refId: A
+              queryType: instant
+              relativeTimeRange:
+                from: 10800
+                to: 0
+              datasourceUid: fdw4k6iv40fswd
+              model:
+                editorMode: code
+                expr: sum(count_over_time({filename="/logs/duplicati/duplicati.log"} |= `[Error-`[$__auto]))
+                intervalMs: 1000
+                maxDataPoints: 43200
+                queryType: instant
+                refId: A
+            - refId: C
+              relativeTimeRange:
+                from: 10800
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: edwndd5zqtzpcb
+          panelId: 1
+          noDataState: OK
+          execErrState: Error
+          for: 0s
+          annotations:
+            __dashboardUid__: edwndd5zqtzpcb
+            __panelId__: "1"
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: grafana-default-email

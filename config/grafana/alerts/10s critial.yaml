@@ -1,0 +1,68 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: 10s
+      folder: CRITICAL
+      interval: 10s
+      rules:
+        - uid: cdwmx36mxz5kwc
+          title: High CPU Temp
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: ddw4kf5ococ8wc
+              model:
+                datasource:
+                    type: prometheus
+                    uid: ddw4kf5ococ8wc
+                editorMode: code
+                expr: node_hwmon_temp_celsius
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+            - refId: C
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 91
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: rYdddlPWk
+          panelId: 158
+          noDataState: Alerting
+          execErrState: Error
+          for: 0s
+          annotations:
+            __dashboardUid__: rYdddlPWk
+            __panelId__: "158"
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: grafana-default-email

@@ -3,6 +3,7 @@
 !.keepme
 *.drawio.bkp
 compose.override.yml
+data/*
 config/traefik/certs
 config/traefik/htpasswd
 config/fail2ban/db/fail2ban.sqlite3
@@ -12,4 +13,4 @@ config/plex/Preferences.xml
 config/qbittorrent/qBittorrent.conf
 config/radarr/config.xml
 config/sonarr/config.xml
-data/*
+config/promtail/positions.yaml
