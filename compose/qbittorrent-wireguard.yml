@@ -43,6 +43,7 @@ services:
       - "WEBUI_USER=${BASIC_AUTH_USER}"
       - "WEBUI_PASS=${BASIC_AUTH_PASS}"
       - "ENABLEPROTONVPNPORTFWD=1"
+      - "NAME_SERVERS=1.1.1.1,1.0.0.1"
       - "TZ=${TZ}"
     ipc: "private"
     networks:
