@@ -115,34 +115,6 @@ sudo ./setup.sh
 - Use `/data/library/tv/` as a path when adding a series in sonarr
 - Use `/data/library/movies/` as a path when adding a movie on radarr
 - Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
-# TODO
-### Add Dashboards:
-- [Add a prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana  
-  Click "Add new data source" at the upper right  
-  Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom  
-  Close the page
-- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Node Exporter  
-  Paste `1860` for dashboard ID  
-  Click "Load" to the right  
-  At the bottom under "Prometheus" select the "Prometheus" data source  
-  Click "Import"  
-- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Traefik  
-  Paste `4475` for dashboard ID  
-  Click "Load" to the right  
-  At the bottom under "Prometheus" select the "Prometheus" data source  
-  Click "Import"
-- [Import the Overview dashboard](https://grafana.klack.internal:4443/dashboard/import)  
-  Download a copy of [overview-dashboard.json](https://raw.githubusercontent.com/klack/klack.cloud/main/config/grafana/overview-dashboard.json)  
-  Click "Upload dashboard JSON file"  
-  Choose the `./config/grafana/overview-dashboard.json` file  
-  Click "Import"
-  Click "Dashboard settings > Variables > network_interface".  Goto the "Custom options" section.  Replace the value with your network interface name (found in .env)  
-### Other
-- Turn off Plex debug logging
-  Click the wrench icon in the upper right > Server Settings > General > Uncheck "Enable Plex Media Server debug logging"
-
-### Create Alerts
-### Setup Backups
 
 # Service Directory
 | Service       | Port  | Domain                     | Hosted Path | URL                                          | Service URL            | Auth Provider | Log Rotation  |
@@ -194,7 +166,37 @@ sudo ./setup.sh
   - Radarr for Movies
   - Jackett for searching
   - Unpackerr to handle compressed files
-  
+
+## Post Installation
+### Add Dashboards:
+- [Add a prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana  
+  Click "Add new data source" at the upper right  
+  Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom  
+  Close the page
+- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Node Exporter  
+  Paste `1860` for dashboard ID  
+  Click "Load" to the right  
+  At the bottom under "Prometheus" select the "Prometheus" data source  
+  Click "Import"  
+- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Traefik  
+  Paste `4475` for dashboard ID  
+  Click "Load" to the right  
+  At the bottom under "Prometheus" select the "Prometheus" data source  
+  Click "Import"
+- [Import the Overview dashboard](https://grafana.klack.internal:4443/dashboard/import)  
+  Download a copy of [overview-dashboard.json](https://raw.githubusercontent.com/klack/klack.cloud/main/config/grafana/overview-dashboard.json)  
+  Click "Upload dashboard JSON file"  
+  Choose the `./config/grafana/overview-dashboard.json` file  
+  Click "Import"
+  Click "Dashboard settings > Variables > network_interface".  Goto the "Custom options" section.  Replace the value with your network interface name (found in .env)  
+### Other
+- Turn off Plex debug logging  
+  Click the wrench icon in the upper right  
+  Server Settings > General  
+  Uncheck "Enable Plex Media Server debug logging"
+### Create Alerts
+### Setup Backups
+
 # Host Machine
 ### Stats
 Node exporter is run on the host machine and read by the prometheus docker instance.  
@@ -207,3 +209,4 @@ Must be setup on the host machine due to permission issues and the requirement t
 
 # Other Notes
 Honeypot's cannot be accessed by localhost due to macvlan network
+
