@@ -36,16 +36,16 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - [ ] Place it at `./config/wireguard/wg0.conf`
 - [ ] Make sure your ISP does not block port 443
 
+### Notes
+- Since you are using a self-signed cert, you will need to accept a security exception in your browser for each internal service.
+- If you are running your server on a separate machine, you must edit your hosts file on your local machine to access internal services.
+
 ## Setup
 ```bash
 git clone https://github.com/klack/klack.cloud.git
 cd klack.cloud
 sudo ./setup.sh
 ```
-
-### Notes
-- Since you are using a self-signed cert, you will need to accept a security exception in your browser for each internal service.
-- If you are running your server on a separate machine, you must edit your hosts file on your local machine to access internal services.
 
 ### Log Viewer
 - Login to [Grafana](https://grafana.klack.internal:4443/) with the Username: `admin` and your created password.
