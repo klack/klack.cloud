@@ -33,11 +33,14 @@ killall node_exporter
 
 #Clean option
 if [[ "$1" == "--clean" ]]; then
+  read -p "WARNING: Destructive! Ctrl-C Now"
   echo "Deleting docker volumes"
   docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
-  rm -rf "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
-  rm /usr/local/bin/node_exporter
-  rm ./config/sftpgo/homeuser/sftpgo.db
+  echo "Removing Data and Log Directories"
+  rm -rfv "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
+  rm -v ./config/sftpgo/homeuser/sftpgo.db
+  echo "Removing node_exporter"
+  rm -v /usr/local/bin/node_exporter
   exit
 fi
 
