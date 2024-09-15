@@ -5,7 +5,7 @@ HOST_IP=${HOST_IP}
 # Substitute environment variables into dynamic_conf.yml using a temporary file
 sed "s|\${HOST_IP}|${HOST_IP}|g; \
      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
-     /config/dynamic_conf.yml.template > /config/dynamic_conf.yml
+     /config/dynamic/dynamic_conf.yml.template > /config/dynamic/dynamic_conf.yml
 
 set -e
 

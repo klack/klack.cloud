@@ -10,7 +10,7 @@ services:
       INTERNAL_DOMAIN: ${INTERNAL_DOMAIN}
     volumes:
       - ../config/traefik/entrypoint.sh:/entrypoint.sh
-      - ../config/traefik/dynamic_conf.yml.template:/config/dynamic_conf.yml.template
+      - ../config/traefik/dynamic:/config/dynamic
       - ../config/traefik/traefik.yml:/etc/traefik/traefik.yml
       - ../config/traefik/htpasswd:/htpasswd
       - ../config/traefik/certs/:/etc/traefik/certs/

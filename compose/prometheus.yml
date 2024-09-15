@@ -7,7 +7,6 @@ services:
     volumes:
       - ../config/prometheus/entrypoint.sh:/entrypoint.sh # Add the entrypoint script
       - ../config/prometheus/prometheus.yml.template:/etc/prometheus/prometheus.yml.template
-      - ../config/traefik/certs/ca.crt:/etc/prometheus/ca.crt
       - prometheus-storage:/prometheus
     environment:
       TZ: ${TZ}

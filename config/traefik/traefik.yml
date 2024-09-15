@@ -1,6 +1,6 @@
 providers:
   file:
-    fileName: /config/dynamic_conf.yml
+    directory: /config/dynamic/
   docker:
     exposedByDefault: false
 

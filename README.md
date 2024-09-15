@@ -28,8 +28,8 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 
 # Deployment
 ## Pre-requisites
-- [ ] A domain configured with Dynamic DNS, such as one from [No-IP](noip.com)
-- [ ] A [paid VPN subscription](https://protonvpn.com/) for "Download Managers"
+- [ ] A domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
+- [ ] A [paid VPN subscription](https://protonvpn.com/) if you wish to use "Download Managers"
 - [ ] Port 443 must be allowed by your ISP
 - [ ] Configure your router to forward port 443 and 32400 to your machine
 - [ ] Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
@@ -53,6 +53,12 @@ sudo ./setup.sh
 - [Add a Loki connection](https://grafana.klack.internal:4443/connections/datasources/loki) to Grafana  
   Click "Add new data source" at the upper right  
   Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  
+  Click on the menu button on the right
+  Choose Explore
+  Where it says "Select label", choose "stack"
+  Where it says "Select value", choose "klack.cloud"
+  Click on the "Live" button near the top right
+  Scroll to the bottom to view logs
 
 ### Cloud Drive
 - Download a copy of [settings.json](https://github.com/klack/klack.cloud/blob/main/config/sftpgo/settings.json) 
@@ -130,7 +136,11 @@ sudo ./setup.sh
   Click "Upload dashboard JSON file"  
   Choose the `./config/grafana/overview-dashboard.json` file  
   Click "Import"
-  Click "Dashboard settings > Variables > network_interface".  Goto the "Custom options" section.  Replace the value with your network interface name (found in .env)  
+  Click "Dashboard se5ttings > Variables > network_interface".  Goto the "Custom options" section.  Replace the value with your network interface name (found in .env)  
+### Plex
+- Turn of debug logging
+  Settings > General > Uncheck "Enable Plex Media Server debug logging"
+
 ### Create Alerts
 ### Setup Backups
 

@@ -1,0 +1,20 @@
+http:
+  routers:
+    node-exporter:
+      rule: "Host(`node-exp.klack.internal`)"
+      service: node-exporter
+      entryPoints:
+        - metrics
+      middlewares:
+        - traefik-auth
+  
+  middlewares:
+    traefik-auth:
+      basicAuth:
+        usersFile: "/htpasswd"
+  
+  services:
+    node-exporter:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.20.7:9100"
