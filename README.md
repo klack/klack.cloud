@@ -48,16 +48,16 @@ sudo ./setup.sh
 ```
 
 ### Log Viewer
-- Login to [Grafana](https://grafana.klack.internal:4443/) with the Username: `admin` and your created password.
+- Login to [Grafana](https://grafana.klack.internal:4443/) with the Username: `admin` and your created password.  
 - [Add a Loki connection](https://grafana.klack.internal:4443/connections/datasources/loki) to Grafana  
   Click "Add new data source" at the upper right  
   Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  
-  Click on the menu button on the right  
+- Click on the menu button on the right  
   Choose Explore  
   Where it says "Select label", choose "stack"  
   Where it says "Select value", choose "klack.cloud"  
   Click on the "Live" button near the top right  
-  Scroll to the bottom to view logs
+- Scroll to the bottom to view logs
 
 ### Cloud Drive
 - Download a copy of [settings.json](https://github.com/klack/klack.cloud/blob/main/config/sftpgo/settings.json) 
