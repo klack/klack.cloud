@@ -32,8 +32,8 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - [ ] Port 443 must be allowed by your ISP
 - [ ] Configure your router to forward port 443 and 32400 to your machine
 - [ ] A [paid VPN subscription](https://protonvpn.com/) if you wish to use "Download Managers"
-- [ ] Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
-- [ ] Place it at `./config/wireguard/wg0.conf`
+  - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
+  - Place it at `./config/wireguard/wg0.conf`
 
 ### Notes
 - Since you are using a self-signed cert, you will need to accept a security exception in your browser for each service.
