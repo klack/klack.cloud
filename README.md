@@ -44,26 +44,16 @@ sudo ./setup.sh
 ```
 
 ### Notes
-- Since you are using a self-signed cert, you will need to accept a security exception in your browser for each internal services.
+- Since you are using a self-signed cert, you will need to accept a security exception in your browser for each internal service.
 - If you are running your server on a separate machine, you must edit your hosts file on your local machine to access internal services.
 
-### Dashboard setup
+### Log Viewer
 - Login to [Grafana](https://grafana.klack.internal:4443/) with the Username: `admin` and your created password.
-- [Add a prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana  
-  Click "Add new data source" at the upper right  
-  Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom  
-  Close the page
+
 - [Add a Loki connection](https://grafana.klack.internal:4443/connections/datasources/loki) to Grafana  
   Click "Add new data source" at the upper right  
   Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  
-  Close the page.  
-- [Import the Overview dashboard](https://grafana.klack.internal:4443/dashboard/import)  
-  Download a copy of [overview-dashboard.json](https://raw.githubusercontent.com/klack/klack.cloud/main/config/grafana/overview-dashboard.json)  
-  Click "Upload dashboard JSON file"  
-  Choose the `./config/grafana/overview-dashboard.json` file  
-  Click "Import"
-  Click "Dashboard settings > Variables > network_interface".  Goto the "Custom options" section.  Replace the value with your network interface name (found in .env)
-- Save a bookmark to [your Dashboards page](https://grafana.klack.internal:4443/dashboards).
+
 ### Cloud Drive
 - Download a copy of [settings.json](https://github.com/klack/klack.cloud/blob/main/config/sftpgo/settings.json) 
 - Login to the [SFTPGo WebAdmin](https://sftpgo.klack.internal:4443/web/admin/)
@@ -74,6 +64,12 @@ sudo ./setup.sh
 - Click on the user icon in the upper right corner and "Change password"
 - Enable the cloud drive on your devices
   - WebDAV URL: `https://your-domain.com/dav`
+    - Windows
+      - Click on the Start icon/Windows icon  
+      - Go into "This PC"
+      - In the toolbar choose the option "Computer"
+      - Click on "Map Network drive"
+      - Click 
     - Mac
       - Open the Finder on your computer
       - Click on the "Go" menu and select "Connect to Server"
@@ -82,12 +78,6 @@ sudo ./setup.sh
       - Open Nautilus file manager
       - Choose "Other Locations" from the menu on the left
       - Type the WebDAV URL into "Connect to Server" field
-    - Windows
-      - Click on the Start icon/Windows icon  
-      - Go into "This PC"
-      - In the toolbar choose the option "Computer"
-      - Click on "Map Network drive"
-      - Click 
     - iPhone
       - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
       - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the WebDAV URL
@@ -120,7 +110,11 @@ sudo ./setup.sh
 - Use `/data/library/movies/` as a path when adding a movie on radarr
 - Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
 # TODO
-### Add other Dashboards:
+### Add Dashboards:
+- [Add a prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana  
+  Click "Add new data source" at the upper right  
+  Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom  
+  Close the page
 - [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Node Exporter  
   Paste `1860` for dashboard ID  
   Click "Load" to the right  
@@ -131,6 +125,12 @@ sudo ./setup.sh
   Click "Load" to the right  
   At the bottom under "Prometheus" select the "Prometheus" data source  
   Click "Import"
+- [Import the Overview dashboard](https://grafana.klack.internal:4443/dashboard/import)  
+  Download a copy of [overview-dashboard.json](https://raw.githubusercontent.com/klack/klack.cloud/main/config/grafana/overview-dashboard.json)  
+  Click "Upload dashboard JSON file"  
+  Choose the `./config/grafana/overview-dashboard.json` file  
+  Click "Import"
+  Click "Dashboard settings > Variables > network_interface".  Goto the "Custom options" section.  Replace the value with your network interface name (found in .env)  
 ### Create Alerts
 ### Setup Backups
 
