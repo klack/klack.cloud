@@ -44,6 +44,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 git clone https://github.com/klack/klack.cloud.git
 cd klack.cloud
 sudo ./setup.sh
+./up.sh
 ```
 
 ### Log Viewer
@@ -51,11 +52,11 @@ sudo ./setup.sh
 - [Add a Loki connection](https://grafana.klack.internal:4443/connections/datasources/loki) to Grafana  
   Click "Add new data source" at the upper right  
   Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  
-  Click on the menu button on the right
-  Choose Explore
-  Where it says "Select label", choose "stack"
-  Where it says "Select value", choose "klack.cloud"
-  Click on the "Live" button near the top right
+  Click on the menu button on the right  
+  Choose Explore  
+  Where it says "Select label", choose "stack"  
+  Where it says "Select value", choose "klack.cloud"  
+  Click on the "Live" button near the top right  
   Scroll to the bottom to view logs
 
 ### Cloud Drive
