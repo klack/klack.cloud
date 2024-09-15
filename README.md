@@ -55,7 +55,8 @@ sudo ./setup.sh
 - Click on the menu button on the left  
   Choose Explore  
   Where it says "Select label", choose "stack"  
-  Where it says "Select value", choose "klack.cloud"  
+  Where it says "Select value", choose "klack.cloud"
+  Click "Run query"  
   Click on the "Live" button near the top right  
 - Scroll to the bottom to view logs
 
@@ -191,6 +192,9 @@ sudo ./setup.sh
   Click "Dashboard settings > Variables > network_interface".  
   Goto the "Custom options" section.  
   Replace the value with your network interface name (found in .env)  
+  Click "Apply"  
+  Click "Save dashboard" in the upper right  
+  Click "Save"  
 ### Other
 - Turn off Plex debug logging  
   Click the wrench icon in the upper right  
