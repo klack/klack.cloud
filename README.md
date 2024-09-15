@@ -37,7 +37,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 
 ### Notes
 - Since you are using a self-signed cert, you will need to accept a security exception in your browser for each service.
-- If you are running your server on a separate machine, you must edit your hosts file on your local machine to point all klack.internal domains to your server (see service directory below).
+- If you are running your server on a separate machine, you must edit the hosts file on your local machine to point all `klack.internal` domains to your server.  Copy the contents of `./config/hosts/hosts` to your machine and replace `127.0.0.1` with your server IP.
 
 ## Setup
 ```bash
