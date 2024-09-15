@@ -14,3 +14,4 @@ config/qbittorrent/qBittorrent.conf
 config/radarr/config.xml
 config/sonarr/config.xml
 config/promtail/positions.yaml
+config/traefik/dynamic/dynamic_conf.yml
