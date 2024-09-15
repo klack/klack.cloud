@@ -136,10 +136,10 @@ sudo ./setup.sh
   Click "Upload dashboard JSON file"  
   Choose the `./config/grafana/overview-dashboard.json` file  
   Click "Import"
-  Click "Dashboard se5ttings > Variables > network_interface".  Goto the "Custom options" section.  Replace the value with your network interface name (found in .env)  
-### Plex
-- Turn of debug logging
-  Settings > General > Uncheck "Enable Plex Media Server debug logging"
+  Click "Dashboard settings > Variables > network_interface".  Goto the "Custom options" section.  Replace the value with your network interface name (found in .env)  
+### Other
+- Turn off Plex debug logging
+  Click the wrench icon in the upper right > Server Settings > General > Uncheck "Enable Plex Media Server debug logging"
 
 ### Create Alerts
 ### Setup Backups
