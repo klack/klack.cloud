@@ -97,7 +97,7 @@ SONARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
 RADARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
 
 #Update .env file
-cp ./.env.template ./.env
+cp -p ./.env.template ./.env
 sed -i "s|^TZ=.*|TZ=$TIMEZONE|" .env
 sed -i "s|^EXTERNAL_DOMAIN=.*|EXTERNAL_DOMAIN=$EXTERNAL_DOMAIN|" .env
 sed -i "s|^PLEX_CLAIM=.*|PLEX_CLAIM=$PLEX_CLAIM|" .env
@@ -117,12 +117,12 @@ sed -i "s/\${NETWORK}/${NETWORK}/g" .env
 echo ".env file generated"
 
 #Set qBittorrent password
-cp ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf
-PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim python generate_pkbdf2.py $PASSWORD)"
+cp -p ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf
+PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim python generate_pkbdf2.py "$PASSWORD")"
 sed -i "s#\${PASSWORD_PBKDF2}#${PASSWORD_PBKDF2}#g" ./config/qbittorrent/qBittorrent.conf
 
 #Set Servarr api keys
-cp ./config/radarr/config.xml.template ./config/radarr/config.xml
+cp -p ./config/radarr/config.xml.template ./config/radarr/config.xml
 sed -i "s/\${API_KEY}/${RADARR_API_KEY}/g" ./config/radarr/config.xml
 cp ./config/sonarr/config.xml.template ./config/sonarr/config.xml
 sed -i "s/\${API_KEY}/${SONARR_API_KEY}/g" ./config/sonarr/config.xml
