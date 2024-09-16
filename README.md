@@ -214,7 +214,8 @@ IPTable rules should be created so that only this docker container can talk to n
 Is setup on the host machine due to permission issues and the requirement to send SIGHUP signals  
 
 # Other Notes
-Honeypot's cannot be accessed by localhost due to macvlan network
+- Honeypot's cannot be accessed by localhost due to macvlan network  
+- To use your own ca-signed certificates rename `config/traefik/dynamic/certs.yml.example` to `config/traefik/dynamic/certs.yml` and place `ca.crt`,`server.crt`, and `server.key` in `config/traefik/certs`
 
 # Uninstall
 Run `./setup.sh --clean`  
