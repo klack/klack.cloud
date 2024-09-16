@@ -29,6 +29,7 @@ logpath = %(default_logpath)s
 #Crawling known directories
 [traefik-botsearch]
 maxretry = 1
+bantime = 24h
 enabled = true
 chain = DOCKER-USER
 port = http,https
