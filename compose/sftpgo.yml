@@ -7,8 +7,6 @@ services:
       - ../config/sftpgo/homeuser:/var/lib/sftpgo
       - ../config/sftpgo/sftpgo.json:/etc/sftpgo/sftpgo.json
       - ${DIR_SFTPGOROOT}:/srv/sftpgo
-      - ${DIR_JOPLIN}:/joplin
-      - ${DIR_PHOTOS}:/photos
     environment:
       TZ: ${TZ}
       SFTPGO_DEFAULT_ADMIN_USERNAME: admin 

@@ -1,0 +1,17 @@
+{
+    "username": "${CLOUD_USER}",
+    "status": 1,
+    "password": "${CLOUD_PASS}",
+    "home_dir": "/home/sftpgo/${CLOUD_USER}",
+    "permissions": {
+      "/": ["list", "download", "upload", "delete"]
+    },
+    "quota_size": 0,
+    "quota_files": 0,
+    "filesystem": {
+      "provider": 0,
+      "params": {
+        "base_dir": "/home/sftpgo/${CLOUD_USER}"
+      }
+    }
+  }
