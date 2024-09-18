@@ -41,7 +41,7 @@ if [[ "$1" == "--clean" ]]; then
   rm -v ./config/sftpgo/homeuser/sftpgo.db
   echo "Removing node_exporter"
   rm -v /usr/local/bin/node_exporter
-  exit
+  exit 2
 fi
 
 #Install node_exporter
