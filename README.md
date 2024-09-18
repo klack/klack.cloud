@@ -75,15 +75,15 @@ sudo ./setup.sh
       - Go into "This PC"
       - In the toolbar choose the option "Computer"
       - Click on "Map Network drive"
-      - Click 
+      - Fill in the *WebDAV URL*
     - Mac
       - Open the Finder on your computer
       - Click on the "Go" menu and select "Connect to Server"
-      - In the new window enter the WebDAV URL and click on "Connect"
+      - In the new window enter the *WebDAV URL* and click on "Connect"
     - Linux (Gnome Desktop)
       - Open Nautilus file manager
       - Choose "Other Locations" from the menu on the left
-      - Type the WebDAV URL into "Connect to Server" field
+      - Type the *WebDAV URL* into "Connect to Server" field
     - iPhone
       - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
       - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the WebDAV URL
@@ -115,6 +115,7 @@ sudo ./setup.sh
 - Use `/data/library/tv/` as a path when adding a series in sonarr
 - Use `/data/library/movies/` as a path when adding a movie on radarr
 - Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
+- In qBittorrent set "Bypass authentication for clients on localhost"
 
 # Service Directory
 | Service       | Port  | Domain                     | Hosted Path | URL                                          | Service URL            | Auth Provider | Log Rotation  |

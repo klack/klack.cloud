@@ -40,8 +40,6 @@ services:
       - "LAN_NETWORK=192.168.1.0/16"
       - "QBT_LEGAL_NOTICE=confirm"
       - "WEBUI_URL=http://localhost:8080" #qBittorrent Web info for updating proton vpn port forwarding
-      # - "WEBUI_USER=${BASIC_AUTH_USER}"
-      # - "WEBUI_PASS=${BASIC_AUTH_PASS}"
       - "ENABLEPROTONVPNPORTFWD=1"
       - "NAME_SERVERS=1.1.1.1,1.0.0.1"
       - "TZ=${TZ}"
@@ -62,7 +60,7 @@ services:
     volumes:
       - "qbtw:/config"
       - "../config/wireguard/wg0.conf:/config/wireguard/wg0.conf"
-      # - "../config/qbittorrent/qBittorrent.conf:/config/qBittorrent/config/qBittorrent.conf"
+      - "../config/qbittorrent/qBittorrent.conf:/config/qBittorrent/config/qBittorrent.conf"
       - "${QB_MOUNT}"
     working_dir: "/opt"
     labels:
