@@ -55,7 +55,7 @@ cp ./config/logrotate.d/* /etc/logrotate.d
 
 #Copy docker daemon
 if [ ! -f /etc/docker/daemon.json ]; then
-    cp -v ../config/docker/daemon.json /etc/docker/daemon.json
+    cp -v ./config/docker/daemon.json /etc/docker/daemon.json
     echo "Docker daemon.json created"
 else
     echo "Docker daemon.json already exists"
@@ -63,19 +63,15 @@ fi
 
 #Edit hosts file
 if ! grep -q ".klack.internal" /etc/hosts; then
-    sh -c "cat ../config/hosts/hosts >> /etc/hosts"
+    sh -c "cat ./config/hosts/hosts >> /etc/hosts"
     echo "Hosts file modified"
 else 
     echo "Hosts file already modified."
 fi
 
 #Prompt for info
-DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
-DEFUALT_GATEWAY=$(ip route | grep default | awk '{print $3}')
-DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
-TIMEZONE=$(timedatectl | grep "Time zone" | awk '{print $3}')
 read -p "Enter external domain: " EXTERNAL_DOMAIN
-read -s -p "Create a password: " PASSWORD
+read -s -p "Create an admin password: " PASSWORD
 echo
 read -s -p "Enter password again: " PASSWORD_CONFIRM
 echo
@@ -83,10 +79,22 @@ if [ "$PASSWORD" != "$PASSWORD_CONFIRM" ]; then
     echo "Passwords do not match. Exiting."
     exit 1
 fi
+read -s -p "Create a cloud password: " CLOUD_PASSWORD
+echo
+read -s -p "Enter password again: " CLOUD_PASSWORD_CONFIRM
+echo
+if [ "$CLOUD_PASSWORD" != "$CLOUD_PASSWORD_CONFIRM" ]; then
+    echo "Passwords do not match. Exiting."
+    exit 1
+fi
 read -p "Visit https://plex.tv/claim and paste claim token: " PLEX_CLAIM
 read -p "Press enter for default network interface [$DEFAULT_INTERFACE]: " HOST_IP
 read -p "Press enter for default host IP [$DEFAULT_HOST_IP]: " HOST_IP
 read -p "Press enter for default gateway [$DEFUALT_GATEWAY]: " GATEWAY
+DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
+DEFUALT_GATEWAY=$(ip route | grep default | awk '{print $3}')
+DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
+TIMEZONE=$(timedatectl | grep "Time zone" | awk '{print $3}')
 HOST_IP=${HOST_IP:-"$DEFAULT_HOST_IP"}
 GATEWAY=${GATEWAY:-"$DEFUALT_GATEWAY"}
 NETWORK=$(echo "$GATEWAY" | cut -d '.' -f 1-3)
@@ -97,7 +105,7 @@ SONARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
 RADARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
 
 #Update .env file
-cp -p ./.env.template ../.env
+cp -p ./.env.template ./.env
 sed -i "s|^TZ=.*|TZ=$TIMEZONE|" .env
 sed -i "s|^EXTERNAL_DOMAIN=.*|EXTERNAL_DOMAIN=$EXTERNAL_DOMAIN|" .env
 sed -i "s|^PLEX_CLAIM=.*|PLEX_CLAIM=$PLEX_CLAIM|" .env
