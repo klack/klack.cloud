@@ -61,14 +61,6 @@ sudo ./setup.sh
 - Scroll to the bottom to view logs
 
 ### Cloud Drive
-- Download a copy of [settings.json](https://github.com/klack/klack.cloud/blob/main/config/sftpgo/settings.json) 
-- Login to the [SFTPGo WebAdmin](https://sftpgo.klack.internal:4443/web/admin/)
-- Visit the [Server Manager > Maintenance](https://sftpgo.klack.internal:4443/web/admin/maintenance) page
-- Click "Browse" and choose `settings.json`
-- Click "Restore"
-- Login to the [SFTPGo WebClient](https://sftpgo.klack.internal:4443/web/client/login) with username `cloud` and password `cloud`
-- Click on the user icon in the upper right corner and "Change password"
-- Enable the cloud drive on your devices
   - WebDAV URL: `https://your-domain.com/dav`
     - Windows
       - Click on the Start icon/Windows icon  
@@ -86,7 +78,7 @@ sudo ./setup.sh
       - Type the *WebDAV URL* into "Connect to Server" field
     - iPhone
       - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
-      - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the WebDAV URL
+      - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
 ### Photo Sync
 - Setup [PhotoSync](https://www.photosync-app.com/home) for your phone
     - **Note this is a paid app** Looking for a better solution
