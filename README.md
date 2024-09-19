@@ -73,26 +73,28 @@ cd klack.cloud
   Click "Overview"
 
 ## Cloud Drive
-  - User: `cloud`
-  - Password: Your *cloud* password
-  - WebDAV URL: `https://your-domain.com/dav`
-    - Windows
-      - Click on the Start icon/Windows icon  
-      - Go into "This PC"
-      - In the toolbar choose the option "Computer"
-      - Click on "Map Network drive"
-      - Fill in the *WebDAV URL*
-    - Mac
-      - Open the Finder on your computer
-      - Click on the "Go" menu and select "Connect to Server"
-      - In the new window enter the *WebDAV URL* and click on "Connect"
-    - Linux (Gnome Desktop)
-      - Open Nautilus file manager
-      - Choose "Other Locations" from the menu on the left
-      - Type the *WebDAV URL* into "Connect to Server" field
-    - iPhone
-      - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
-      - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
+  - Use the following settings
+    - User: `cloud`
+    - Password: Your *cloud* password
+    - WebDAV URL: `https://your-domain.com/dav`  
+  - Windows
+    - Click on the Start icon/Windows icon  
+    - Go into "This PC"
+    - In the toolbar choose the option "Computer"
+    - Click on "Map Network drive"
+    - Fill in the *WebDAV URL*
+  - Mac
+    - Open the Finder on your computer
+    - Click on the "Go" menu and select "Connect to Server"
+    - In the new window enter the *WebDAV URL* and click on "Connect"
+  - Linux (Gnome Desktop)
+    - Open Nautilus file manager
+    - Choose "Other Locations" from the menu on the left
+    - Type the *WebDAV URL* into "Connect to Server" field
+  - iPhone
+    - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
+    - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
+
 
 ## Photo Sync
 - Setup [PhotoSync](https://www.photosync-app.com/home) for your phone
