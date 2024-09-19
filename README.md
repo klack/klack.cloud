@@ -11,8 +11,11 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Own and control your data
 - Prevent phone and vendor lock in
 # Dashboards
+### Overview
 ![](./assets/dashboard.png)
+### System
 ![](./assets/dashboard2.png)
+### Services
 ![](./assets/dashboard3.png)
 
 # Features
@@ -108,6 +111,7 @@ cd klack.cloud
       - Use SSL: On
     - Tap "Done"
     - You can now use the red sync button and choose WebDAV
+- View your photos from any device at https://your-domain.com/photos 
 
 ## Notebook Sync
 - Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
@@ -120,8 +124,11 @@ cd klack.cloud
   - Click "Check synchronization configuration"
   - Click "OK"
 
-## Setup Backups
-TODO
+## Backups
+Todo
+
+## Alerts
+Todo
 
 # Post Installation
 - Turn off Plex debug logging  
@@ -130,8 +137,6 @@ TODO
   Uncheck "Enable Plex Media Server debug logging"
 
 ### Download Managers
-- Enable file renaming in sonarr and radarr
-- Set logging to `Info` on sonarr and radarr
 - Use `/data/library/tv/` as a path when adding a series in sonarr
 - Use `/data/library/movies/` as a path when adding a movie on radarr
 - Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
