@@ -73,6 +73,8 @@ cd klack.cloud
   Click "Overview"
 
 ## Cloud Drive
+  - User: `cloud`
+  - Password: Your *cloud* password
   - WebDAV URL: `https://your-domain.com/dav`
     - Windows
       - Click on the Start icon/Windows icon  
@@ -117,7 +119,23 @@ cd klack.cloud
   - Click "OK"
 
 ## Setup Backups
-  
+TODO
+
+# Post Installation
+- Turn off Plex debug logging  
+  Click the wrench icon in the upper right  
+  Server Settings > General  
+  Uncheck "Enable Plex Media Server debug logging"
+
+### Download Managers
+- Enable file renaming in sonarr and radarr
+- Set logging to `Info` on sonarr and radarr
+- Use `/data/library/tv/` as a path when adding a series in sonarr
+- Use `/data/library/movies/` as a path when adding a movie on radarr
+- Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
+- In qBittorrent set "Bypass authentication for clients on localhost"
+
+
 # Service Directory
 | Service       | Port  | Domain                     | Hosted Path | URL                                          | Service URL            | Auth Provider | Log Rotation  |
 | ------------- | ----- | -------------------------- | ----------- | -------------------------------------------- | ---------------------- | ------------- | ------------- |
@@ -139,22 +157,7 @@ cd klack.cloud
 | Cowrie        | 22,23 |                            |             |                                              |                        |               | logrotate     |
 | Dionaea       | ~     |                            |             |                                              |                        |               | logrotate     |
 
-
-# Post Installation
-- Turn off Plex debug logging  
-  Click the wrench icon in the upper right  
-  Server Settings > General  
-  Uncheck "Enable Plex Media Server debug logging"
-### Download Managers
-- Enable file renaming in sonarr and radarr
-- Set logging to `Info` on sonarr and radarr
-- Use `/data/library/tv/` as a path when adding a series in sonarr
-- Use `/data/library/movies/` as a path when adding a movie on radarr
-- Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
-- In qBittorrent set "Bypass authentication for clients on localhost"
-
-
-# Host Machine
+# Notes
 ### Stats
 Node exporter is run on the host machine and read by the prometheus docker instance.  
 IPTable rules should be created so that only this docker container can talk to node exporter
@@ -164,9 +167,11 @@ IPTable rules should be created so that only this docker container can talk to n
 ### Log Rotation
 Is setup on the host machine due to permission issues and the requirement to send SIGHUP signals  
 
-# Other Notes
-- Honeypot's cannot be accessed by localhost due to macvlan network  
-- To use your own ca-signed certificates rename `config/traefik/dynamic/certs.yml.example` to `config/traefik/dynamic/certs.yml` and place `ca.crt`,`server.crt`, and `server.key` in `config/traefik/certs`
+### Honeypots
+Honeypot's cannot be accessed by localhost due to macvlan network
+
+### Custom CA Cert
+To use your own ca-signed certificates rename `config/traefik/dynamic/certs.yml.example` to `config/traefik/dynamic/certs.yml` and place `ca.crt`,`server.crt`, and `server.key` in `config/traefik/certs`
 
 # Uninstall
 Run `./setup.sh --clean`  
