@@ -1,0 +1,43 @@
+apiVersion: 1
+
+datasources:
+  - name: loki
+    id: 1
+    uid: "fdw4k6iv40fswd"
+    orgId: 1
+    type: loki
+    typeLogoUrl: public/app/plugins/datasource/loki/img/loki_icon.svg
+    access: proxy
+    url: http://loki:3100
+    user: ""
+    database: ""
+    basicAuth: false
+    basicAuthUser: ""
+    withCredentials: false
+    isDefault: true
+    jsonData: {}
+    secureJsonFields: {}
+    version: 2
+    readOnly: false
+    apiVersion: ""
+  - name: prometheus
+    id: 2
+    uid: "ddw4kf5ococ8wc"
+    orgId: 1
+    type: prometheus
+    typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+    access: proxy
+    url: http://prometheus:9090
+    user: ""
+    database: ""
+    basicAuth: false
+    basicAuthUser: ""
+    withCredentials: false
+    isDefault: false
+    jsonData:
+      httpMethod: POST
+    secureJsonFields: {}
+    version: 2
+    readOnly: false
+    apiVersion: ""
+

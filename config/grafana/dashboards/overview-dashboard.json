@@ -1,5 +1,5 @@
 {
-  "annotations": {
+  "eno1s": {
     "list": [
       {
         "builtIn": 1,
@@ -10,7 +10,7 @@
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
+        "name": "eno1s & Alerts",
         "type": "dashboard"
       }
     ]
@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 8,
   "links": [],
   "panels": [
     {
@@ -1369,7 +1368,7 @@
         "current": {
           "selected": false,
           "text": "prometheus",
-          "value": "fdxmbj1s00cn4b"
+          "value": "ddw4kf5ococ8wc"
         },
         "hide": 0,
         "includeAll": false,
@@ -1379,6 +1378,23 @@
         "options": [],
         "query": "prometheus",
         "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "loki",
+          "value": "fdw4k6iv40fswd"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "loki_datasource",
+        "options": [],
+        "query": "loki",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -1451,23 +1467,6 @@
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "loki",
-          "value": "adxmbjpw6pv5se"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "multi": false,
-        "name": "loki_datasource",
-        "options": [],
-        "query": "loki",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "type": "datasource"
       }
     ]
   },
@@ -1479,6 +1478,6 @@
   "timezone": "browser",
   "title": "Overview",
   "uid": "edwqapvydmmf4b",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }

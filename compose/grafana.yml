@@ -49,6 +49,8 @@ services:
     user: 1000:1000 # Required
     volumes:
       - grafana-storage:/var/lib/grafana
+      - ../config/grafana/provisioning:/etc/grafana/provisioning
+      - ../config/grafana/dashboards:/var/lib/grafana/dashboards
     environment:
       TZ: ${TZ}
       GF_SECURITY_ADMIN_PASSWORD: ${BASIC_AUTH_PASS}      

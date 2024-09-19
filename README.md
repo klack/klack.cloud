@@ -49,9 +49,6 @@ sudo ./setup.sh
 
 ### Log Viewer
 - Login to [Grafana](https://grafana.klack.internal:4443/) with the Username: `admin` and your created password.  
-- [Add a Loki connection](https://grafana.klack.internal:4443/connections/datasources/loki) to Grafana  
-  Click "Add new data source" at the upper right  
-  Fill in `http://loki:3100` for URL and then click "Save & test" at the bottom.  
 - Click on the menu button on the left  
   Choose Explore  
   Where it says "Select label", choose "stack"  
@@ -161,34 +158,6 @@ sudo ./setup.sh
   - Unpackerr to handle compressed files
 
 ## Post Installation
-### Add Dashboards
-- [Add a prometheus connection](https://grafana.klack.internal:4443/connections/datasources/prometheus) to Grafana  
-  Click "Add new data source" at the upper right  
-  Fill in  `http://prometheus:9090` for URL and then click "Save & test" at the bottom  
-  Close the page
-- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Node Exporter  
-  Paste `1860` for dashboard ID  
-  Click "Load" to the right  
-  At the bottom under "Prometheus" select the "Prometheus" data source  
-  Click "Import"  
-- [Import the dashboard](https://grafana.klack.internal:4443/dashboard/import) for Traefik  
-  Paste `4475` for dashboard ID  
-  Click "Load" to the right  
-  At the bottom under "Prometheus" select the "Prometheus" data source  
-  Click "Import"
- 
--  Download a copy of [overview-dashboard.json](https://raw.githubusercontent.com/klack/klack.cloud/main/config/grafana/overview-dashboard.json)  
-  [Import the Overview dashboard](https://grafana.klack.internal:4443/dashboard/import)  
-  Click "Upload dashboard JSON file"  
-  Choose the `./config/grafana/overview-dashboard.json` file  
-  Click "Import"  
-  Click "Dashboard settings > Variables > network_interface".  
-  Goto the "Custom options" section.  
-  Replace the value with your network interface name (found in .env)  
-  Click "Apply"  
-  Click "Save dashboard" in the upper right  
-  Click "Save"  
-### Other
 - Turn off Plex debug logging  
   Click the wrench icon in the upper right  
   Server Settings > General  
