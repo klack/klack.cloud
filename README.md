@@ -2,7 +2,7 @@
 A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox, Evernote, Netflix and more.
 
 ![](./assets/diagram.png)
-## Goals
+# Goals
 - Reduce your dependence on cloud services
 - Eliminate subscription costs
 - Increase your privacy
@@ -10,24 +10,44 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Limit your exposure to AI, advertisers, and scammers
 - Own and control your data
 - Prevent phone and vendor lock in
-## Dashboards
+# Dashboards
+![](./assets/dashboard.png)
 ![](./assets/dashboard2.png)
 ![](./assets/dashboard3.png)
 
-## Features
-- Photo hosting to replace iCloud and Google Photos
-- Note syncing to replace Evernote
-- Media server to replace streaming services
-- WebDav to replace Dropbox
-- Download Managers with VPN killswitch
-- SSL certificates signed by Let's Encrypt
-- Automatic IP banning
-- Automatic updates
-- Honeypots admin
-- Logging, monitoring, and alerts
+# Features
+- 📺 Video Server
+  - Plex
+- 📷 Photo Gallery
+  - PhotoPrism
+- 🔄 Photo sync, Note sync, Cloud storage
+  - SFTPGo
+- 🔐 SSL and Basic Auth
+  - Traefik
+- ⛔ Ban bots and failed login attempts automatically
+  - Fail2Ban
+- 🚨 📊 📃 Log aggregation, dashboards and alerts
+  - Grafana, Promtail, loki
+- 📈 HTTP Stats, System Stats
+  - Prometheus, Node Exporter
+- ♻️ Rotate logs to preserve hard disk space
+  - logrotate
+- 🍯 Honeypots for SSH, HTTP, SMB and more
+  - Cowrie, Dionaea
+- 💾 Incremental Backups
+  - Duplicati
+- ⚙️ Auto update docker images
+  - Watchtower
+- 🌀 bittorrent and with VPN killswitch
+  - qBittorrent-wireguard
+- 📥 Download Managers
+  - Sonarr for TV
+  - Radarr for Movies
+  - Jackett for searching
+  - Unpackerr to handle compressed files
 
-# Deployment
-## Pre-requisites
+# Setup
+### Pre-requisites
 - [ ] A domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
 - [ ] Port 443 must be allowed by your ISP
 - [ ] Configure your router to forward port 443 and 32400 to your machine
@@ -39,25 +59,20 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 - Since you are using a self-signed cert, you will need to accept a security exception in your browser for each service.
 - If you are running your server on a separate machine, you must edit the hosts file on your local machine to point all `klack.internal` domains to your server.  Copy the contents of `./config/hosts/hosts` to your machine and replace `127.0.0.1` with your server IP.
 
-## Setup
+### Run the following commands to begin
 ```bash
 git clone https://github.com/klack/klack.cloud.git
 cd klack.cloud
-sudo ./setup.sh
-./up.sh
+./setup.sh
 ```
 
-### Log Viewer
-- Login to [Grafana](https://grafana.klack.internal:4443/) with the Username: `admin` and your created password.  
-- Click on the menu button on the left  
-  Choose Explore  
-  Where it says "Select label", choose "stack"  
-  Where it says "Select value", choose "klack.cloud"  
-  Click "Run query"  
-  Click on the "Live" button near the top right  
-- Scroll to the bottom to view logs
+## Main Dashboard
+- [Login to Grafana](https://grafana.klack.internal:4443/) with the username: `admin` and your *admin* password.  
+  Click on the menu button on the left  
+  Choose "Dashboards"  
+  Click "Overview"
 
-### Cloud Drive
+## Cloud Drive
   - WebDAV URL: `https://your-domain.com/dav`
     - Windows
       - Click on the Start icon/Windows icon  
@@ -76,9 +91,10 @@ sudo ./setup.sh
     - iPhone
       - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
       - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
-### Photo Sync
+
+## Photo Sync
 - Setup [PhotoSync](https://www.photosync-app.com/home) for your phone
-    - **Note this is a paid app** Looking for a better solution
+    - **Note this is a paid app** - Looking for a better solution
     - Open the app and navigate to Settings > Configure > WebDAV > Add New Configuration...  
       - Server: `your-domain.com`  
       - Port: `443`  
@@ -88,7 +104,8 @@ sudo ./setup.sh
       - Use SSL: On
     - Tap "Done"
     - You can now use the red sync button and choose WebDAV
-### Notebook Sync
+
+## Notebook Sync
 - Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Open the app
   - Navigate to Options > synchronization
@@ -98,14 +115,9 @@ sudo ./setup.sh
   - Enter your cloud password for "WebDAV password"
   - Click "Check synchronization configuration"
   - Click "OK"
-### Download Managers notes
-- Enable file renaming in sonarr and radarr
-- Set logging to `Info` on sonarr and radarr
-- Use `/data/library/tv/` as a path when adding a series in sonarr
-- Use `/data/library/movies/` as a path when adding a movie on radarr
-- Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
-- In qBittorrent set "Bypass authentication for clients on localhost"
 
+## Setup Backups
+  
 # Service Directory
 | Service       | Port  | Domain                     | Hosted Path | URL                                          | Service URL            | Auth Provider | Log Rotation  |
 | ------------- | ----- | -------------------------- | ----------- | -------------------------------------------- | ---------------------- | ------------- | ------------- |
@@ -127,43 +139,20 @@ sudo ./setup.sh
 | Cowrie        | 22,23 |                            |             |                                              |                        |               | logrotate     |
 | Dionaea       | ~     |                            |             |                                              |                        |               | logrotate     |
 
-- Plex
-  - Video Server
-- PhotoPrism
-  - Photo Gallery
-- SFTPGo
-  - Photo sync, Note sync, Cloud storage
-- Traefik
-  - For SSL and Basic Auth
-- Fail2Ban
-  - Ban bots and failed login attempts automatically
-- Grafanda, Promtail
-  - Log aggregation, dashboards and alerts
-- Prometheus, Node Exporter
-  - HTTP Stats, System Stats
-- logrotate
-  - Rotate logs to preserve hard disk space
-- Crowie, Dionaea
-  - Honeypots for SSH, HTTP, SMB and more
-- Duplicati
-  - Incremental Backups
-- Watchtower
-  - To auto update docker images
-- qBittorrent-wireguard
-  - Combined bittorrent and wireguard image with VPN killswitch
-- Download Managers
-  - Sonarr for TV
-  - Radarr for Movies
-  - Jackett for searching
-  - Unpackerr to handle compressed files
 
-## Post Installation
+# Post Installation
 - Turn off Plex debug logging  
   Click the wrench icon in the upper right  
   Server Settings > General  
   Uncheck "Enable Plex Media Server debug logging"
-### Create Alerts
-### Setup Backups
+### Download Managers
+- Enable file renaming in sonarr and radarr
+- Set logging to `Info` on sonarr and radarr
+- Use `/data/library/tv/` as a path when adding a series in sonarr
+- Use `/data/library/movies/` as a path when adding a movie on radarr
+- Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
+- In qBittorrent set "Bypass authentication for clients on localhost"
+
 
 # Host Machine
 ### Stats
