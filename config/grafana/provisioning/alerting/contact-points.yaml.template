@@ -1,0 +1,11 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: grafana-default-email
+      receivers:
+        - uid: fdyfhvyrni5mof
+          type: email
+          settings:
+            addresses: ${GF_SMTP_FROM_ADDRESS}
+            singleEmail: false
+          disableResolveMessage: true

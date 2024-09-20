@@ -1,0 +1,11 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: grafana-default-email
+      receivers:
+        - uid: fdyfhvyrni5mof
+          type: email
+          settings:
+            addresses: notify@klack107.ddns.net
+            singleEmail: false
+          disableResolveMessage: true
