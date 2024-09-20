@@ -9,7 +9,8 @@ fi
 #Setup folders and perms
 DATA_DIRS=(
   "./data/backups"
-  "./data/klack.tv"
+  "./data/klack.tv/library/tv"
+  "./data/klack.tv/library/movies"
   "./data/sftpgoroot/data/cloud"
   "./data/transcode"
 )
