@@ -1,8 +1,8 @@
 <h1>${EXTERNAL_DOMAIN}</h1>
 📊 <a href="https://grafana.${INTERNAL_DOMAIN}:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s" target="_new">Overview Dashboard</a><br>
-☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#cloud-drive" target="_new">Setup Cloud Drive</a><br>
 📷 <a href="https://${EXTERNAL_DOMAIN}/photos" target="_new">Photo Gallery</a><br>
 📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_new">Video Server</a><br>
+☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#cloud-drive" target="_new">Setup Cloud Drive</a><br>
 📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#notebook-sync" target="_new">Notebook Sync</a><br>
 💾 <a href="https://duplicati.${INTERNAL_DOMAIN}:4443/" target="_new">Manage Backups</a><br>
 🌀 <a href="https://qbittorrent.${INTERNAL_DOMAIN}:4443/" target="_new">Manage Torrents</a><br>
