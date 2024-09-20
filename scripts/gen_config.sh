@@ -9,9 +9,7 @@ fi
 #Setup folders and perms
 DATA_DIRS=(
   "./data/backups"
-  "./data/joplin"
   "./data/klack.tv"
-  "./data/photos"
   "./data/sftpgoroot/data/cloud"
   "./data/transcode"
 )
@@ -37,7 +35,7 @@ if [[ "$1" == "--clean" ]]; then
   echo "Deleting docker volumes"
   docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
   echo "Removing Data and Log Directories"
-  rm -rfv "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
+  rm -rfv ./data "${LOG_DIRS[@]}"
   rm -v ./config/sftpgo/homeuser/sftpgo.db
   echo "Removing node_exporter"
   rm -v /usr/local/bin/node_exporter
@@ -115,6 +113,13 @@ docker run --rm httpd:latest htpasswd \
   -Bbn admin "$PASSWORD" > \
   ./config/traefik/htpasswd && echo "htpassword generated"
 
+#Copy fresh duplicati db
+cp ./config/duplicati/Duplicati-server.sqlite.new ./config/duplicati/Duplicati-server.sqlite
+
+#Update dashboard with network interface
+cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
+sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
+
 #Honeypot
 DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
 DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
@@ -146,7 +151,3 @@ sed -i "s|^RADARR_API_KEY=.*|RADARR_API_KEY=\"$RADARR_API_KEY\"|" .env
 sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" .env
 sed -i "s/\${NETWORK}/${NETWORK}/g" .env
 echo ".env file generated"
-
-#Update dashboard with network interface
-cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
-sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json

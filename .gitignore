@@ -4,6 +4,7 @@
 *.drawio.bkp
 compose.override.yml
 data/*
+scrap
 config/traefik/certs
 config/traefik/htpasswd
 config/fail2ban/db/fail2ban.sqlite3
@@ -17,4 +18,4 @@ config/promtail/positions.yaml
 config/traefik/dynamic/dynamic_conf.yml
 config/traefik/dynamic/certs.yml
 config/sftpgo/user.json
-scrap
+config/duplicati/Duplicati-server.sqlite

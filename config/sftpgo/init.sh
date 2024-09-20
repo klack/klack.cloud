@@ -4,7 +4,8 @@ docker compose up sftpgo -d
 sleep 5
 PREFIX="./data/sftpgoroot/data/$CLOUD_USER"
 mkdir -vp $PREFIX/Documents $PREFIX/Notes $PREFIX/Photos
-mkdir -vp ./data/sftpgoroot/data/$CLOUD_USER
+PREFIX="./data/backups"
+mkdir -vp $PREFIX/Documents $PREFIX/Notes $PREFIX/Photos
 echo "Getting token"
 SERVER="https://sftpgo.${INTERNAL_DOMAIN}:4443"
 BASE_64=$(echo -n "$BASIC_AUTH_USER:$BASIC_AUTH_PASS" | base64)
