@@ -1,6 +1,6 @@
 source ./.env
-echo "Doing sftpgo first time run"
-docker compose up sftpgo -d
+echo -e "\nDoing sftpgo first time run"
+docker compose up traefik sftpgo -d
 sleep 5
 PREFIX="./data/sftpgoroot/data/$CLOUD_USER"
 mkdir -vp $PREFIX/Documents $PREFIX/Notes $PREFIX/Photos
@@ -20,3 +20,4 @@ curl -X POST "$SERVER/api/v2/users" \
 -H "Authorization: Bearer $TOKEN" \
 -H "Content-Type: application/json" \
 -d @./config/sftpgo/user.json
+docker compose down traefik sftpgo
