@@ -125,6 +125,8 @@ DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
 DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
 DEFUALT_GATEWAY=$(ip route | grep default | awk '{print $3}')
 read -p "Press enter for default network interface [$DEFAULT_INTERFACE]: " HOST_IP
+
+read -p "Press enter for default network interface [$DEFAULT_INTERFACE]: " HOST_IP
 read -p "Press enter for default host IP [$DEFAULT_HOST_IP]: " HOST_IP
 read -p "Press enter for default gateway [$DEFUALT_GATEWAY]: " GATEWAY
 HOST_IP=${HOST_IP:-"$DEFAULT_HOST_IP"}
@@ -137,8 +139,6 @@ sed -i "s|^TZ=.*|TZ=$TIMEZONE|" .env
 sed -i "s|^EXTERNAL_DOMAIN=.*|EXTERNAL_DOMAIN=$EXTERNAL_DOMAIN|" .env
 sed -i "s|^PLEX_CLAIM=.*|PLEX_CLAIM=$PLEX_CLAIM|" .env
 sed -i "s|^BASIC_AUTH_PASS=.*|BASIC_AUTH_PASS=\"$ESCAPED_PASSWORD\"|" .env
-sed -i "s|^NODE_EXPORTER_PASS=.*|NODE_EXPORTER_PASS=\"$ESCAPED_PASSWORD\"|" .env
-sed -i "s|^PHOTOPRISM_ADMIN_PASSWORD=.*|PHOTOPRISM_ADMIN_PASSWORD=\"$ESCAPED_PASSWORD\"|" .env
 sed -i "s|^CLOUD_PASS=.*|CLOUD_PASS=\"$ESCAPED_CLOUD_PASSWORD\"|" .env
 sed -i "s|^MARIADB_ROOT_PASSWORD=.*|MARIADB_ROOT_PASSWORD=\"$MARIADB_ROOT_PASSWORD\"|" .env
 sed -i "s|^MARIADB_PASSWORD=.*|MARIADB_PASSWORD=\"$MARIADB_PASSWORD\"|" .env

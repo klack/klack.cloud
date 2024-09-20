@@ -14,7 +14,7 @@ services:
     environment:
       TZ: ${TZ}
       PHOTOPRISM_ADMIN_USER: "admin" # admin login username
-      PHOTOPRISM_ADMIN_PASSWORD: ${PHOTOPRISM_ADMIN_PASSWORD} # initial admin password (8-72 characters)
+      PHOTOPRISM_ADMIN_PASSWORD: ${BASIC_AUTH_PASS} # initial admin password (8-72 characters)
       PHOTOPRISM_AUTH_MODE: "password" # authentication mode (public, password)
       PHOTOPRISM_SITE_URL: "https://${EXTERNAL_DOMAIN}/photos/" # server URL in the format "http(s)://domain.name(:port)/(path)"
       PHOTOPRISM_DISABLE_TLS: "true" # disables HTTPS/TLS even if the site URL starts with https:// and a certificate is available

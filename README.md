@@ -125,7 +125,7 @@ cd klack.cloud
   - Click "OK"
 
 ## Backups
-Todo
+Documents, Notes and Photos are automatically backed up at 1:00PM.  If there is a backup failure, you will receive an alert.  To manage backups, [open Duplicati](https://duplicati.klack.internal:4443/)
 
 ## Alerts
 Todo
