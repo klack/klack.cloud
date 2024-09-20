@@ -19,3 +19,4 @@ config/traefik/dynamic/dynamic_conf.yml
 config/traefik/dynamic/certs.yml
 config/sftpgo/user.json
 config/duplicati/Duplicati-server.sqlite
+index.html

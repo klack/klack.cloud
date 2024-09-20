@@ -8,8 +8,14 @@ nohup /usr/local/bin/node_exporter > /dev/null 2>&1 &
 #Run first time app scripts
 ./config/sftpgo/init.sh
 
+cp ./index.html.template index.html
+sed -i "s/\${INTERNAL_DOMAIN}/${INTERNAL_DOMAIN}/g" index.html
+sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" index.html
+
+echo -e "\nIndex.html created"
+
 echo -e "\nSetup Complete"
 read -p "Press Enter to Launch"
 ./scripts/up.sh
-URL="https://grafana.$INTERNAL_DOMAIN:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
+URL=./index.html
 nohup xdg-open "$URL" > /dev/null 2>&1 &

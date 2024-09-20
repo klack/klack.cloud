@@ -27,6 +27,7 @@ LOG_DIRS=(
 
 #Shut down everything
 ./scripts/down.sh
+docker volume rm klack-cloud-photoprism-db-1
 killall node_exporter
 
 #Clean option
