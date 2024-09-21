@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ "$(basename "$(dirname "$PWD")")" = "scripts" ]; then
   cd ..
 fi

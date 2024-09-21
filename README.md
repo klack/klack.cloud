@@ -53,6 +53,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 ### Pre-requisites
 - [ ] A domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
 - [ ] Port 443 must be allowed by your ISP
+- [ ] SMTP server settings from your ISP
 - [ ] Configure your router to forward port 443 and 32400 to your machine
 - [ ] A [paid VPN subscription](https://protonvpn.com/) if you wish to use "Download Managers"
   - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
@@ -70,7 +71,7 @@ cd klack.cloud
 ```
 
 ## Main Dashboard
-- [Login to Grafana](https://grafana.klack.internal:4443/) with the username: `admin` and your *admin* password.  
+- [Login to Grafana](https://grafana.klack.internal:4443/) with the username: `admin` and your password.  
   Click on the menu button on the left  
   Choose "Dashboards"  
   Click "Overview"
@@ -78,7 +79,7 @@ cd klack.cloud
 ## Cloud Drive
   - Use the following settings
     - User: `cloud`
-    - Password: Your *cloud* password
+    - Password: Your password
     - WebDAV URL: `https://your-domain.com/dav`  
   - Windows
     - Click on the Start icon/Windows icon  
@@ -94,6 +95,8 @@ cd klack.cloud
     - Open Nautilus file manager
     - Choose "Other Locations" from the menu on the left
     - Type the *WebDAV URL* into "Connect to Server" field
+  - Chromebook
+    - `sudo mount -t davfs https://your-domain.com/dav/ /home/localuser/klackcloud`
   - iPhone
     - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
     - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
@@ -106,29 +109,36 @@ cd klack.cloud
       - Server: `your-domain.com`  
       - Port: `443`  
       - Login: `cloud`
-      - Password: Your cloud password
-      - Directory: `/dav/photos`
+      - Password: Your password
+      - Directory: `/dav/Photos`
       - Use SSL: On
     - Tap "Done"
     - You can now use the red sync button and choose WebDAV
 - View your photos from any device at https://your-domain.com/photos 
 
 ## Notebook Sync
-- Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
+Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Open the app
   - Navigate to Options > synchronization
   - Set "Synchronization target" to "WebDAV"
-  - Enter `https://your-domain/dav/joplin` for the "WebDAV URL"
+  - Enter `https://your-domain/dav/Notes` for the "WebDAV URL"
   - Enter `cloud` for "WebDAV username"
-  - Enter your cloud password for "WebDAV password"
+  - Enter your password for "WebDAV password"
   - Click "Check synchronization configuration"
-  - Click "OK"
-
-## Backups
-Documents, Notes and Photos are automatically backed up at 1:00PM.  If there is a backup failure, you will receive an alert.  To manage backups, [open Duplicati](https://duplicati.klack.internal:4443/)
+  - Upon success click "Show Advanced Settings"
+  - Click "Re-upload local data to sync target"
 
 ## Alerts
-Todo
+You will receive email alerts for the following:
+- High CPU temp (or no temp reported)  
+- Low Disk space  
+- High Ram utilization  
+- High CPU utilization  
+- Backup failures  
+- Honeypot activities  
+
+## Backups
+Documents, Notes and Photos are automatically backed up at 1:00PM.  If there is a backup failure, you will receive an alert.  To manage backups, open [Duplicati](https://duplicati.klack.internal:4443/)
 
 # Post Installation
 - Turn off Plex debug logging  

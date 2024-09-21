@@ -27,6 +27,6 @@ services:
       - UN_RADARR_0_URL=http://12.0.0.1:7878
       - UN_RADARR_0_API_KEY=${RADARR_API_KEY}
     volumes:
-      - ${DIR_KLACKTV}:/data
+      - ${DIR_CLOUD_ROOT}:/data
     network_mode: service:qbittorrent-wireguard
     restart: unless-stopped
