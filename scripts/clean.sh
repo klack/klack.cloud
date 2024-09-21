@@ -9,6 +9,10 @@ source ./.env
 
 read -p "WARNING: Destructive! Ctrl-C Now"
 
+#Shut down everything
+echo "Shutting down services"
+./scripts/down.sh
+
 echo "Deleting docker volumes"
 docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
 
