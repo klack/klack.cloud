@@ -53,7 +53,7 @@ services:
     working_dir: "/photoprism" # do not change or remove
     volumes:
       - "photoprism:/photoprism/storage" # *Writable* storage folder for cache, database, and sidecar files (DO NOT REMOVE)
-      - "${DIR_CLOUD_ROOT}/${CLOUD_USER}/Photos:/photoprism/originals" # Original media files (DO NOT REMOVE)
+      - ".${DIR_CLOUD_ROOT}/${CLOUD_USER}/Photos:/photoprism/originals" # Original media files (DO NOT REMOVE)
     networks:
       klack:
     labels:

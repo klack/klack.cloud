@@ -15,7 +15,7 @@ services:
       - sonarr:/config
       - ../config/sonarr/config.xml:/config/config.xml      
       - /var/log/sonarr:/config/logs
-      - ${DIR_CLOUD_ROOT}:/data
+      - .${DIR_CLOUD_ROOT}:/data
     network_mode: service:qbittorrent-wireguard
     labels:
       - "traefik.enable=true"

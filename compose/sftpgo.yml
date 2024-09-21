@@ -6,7 +6,7 @@ services:
     volumes:
       - ../config/sftpgo/homeuser:/var/lib/sftpgo
       - ../config/sftpgo/sftpgo.json:/etc/sftpgo/sftpgo.json
-      - ${DIR_CLOUD_ROOT}:/srv/sftpgo/data
+      - .${DIR_CLOUD_ROOT}:/srv/sftpgo/data
     environment:
       TZ: ${TZ}
       SFTPGO_DEFAULT_ADMIN_USERNAME: admin 

@@ -4,6 +4,7 @@
 *.drawio.bkp
 compose.override.yml
 data/*
+cloud/*
 scrap
 config/traefik/certs
 config/traefik/htpasswd
