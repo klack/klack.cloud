@@ -4,7 +4,7 @@
     "password": "${CLOUD_PASS}",
     "home_dir": "/srv/sftpgo/data/${CLOUD_USER}",
     "permissions": {
-      "/": ["list", "download", "upload", "delete"]
+      "/": ["*"]
     },
     "quota_size": 0,
     "quota_files": 0,

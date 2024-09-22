@@ -12,7 +12,7 @@ if [[ "$1" == "--clean" ]]; then
 fi
 
 #Generate Config
-./scripts/gen_config.sh
+sudo ./scripts/gen_config.sh
 if [ $? -ne 0 ]; then
   echo ".env generation failed"
   exit 1

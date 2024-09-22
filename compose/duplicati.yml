@@ -14,7 +14,7 @@ services:
       - duplicati:/config
       - ../config/duplicati/Duplicati-server.sqlite:/config/Duplicati-server.sqlite
       - /var/log/duplicati:/var/log/duplicati
-      - .${DIR_DATA_ROOT}/backups:/backups
+      - .${DIR_CLOUD_ROOT}/backups:/backups
       - .${DIR_CLOUD_ROOT}:/source/users
     # ports:
     #   - 8200:8200
