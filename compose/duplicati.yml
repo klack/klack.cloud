@@ -12,9 +12,9 @@ services:
       - CLI_ARGS= --log-file=/var/log/duplicati/duplicati.log --log-level=Information
     volumes:
       - duplicati:/config
-      - ../config/duplicati/Duplicati-server.sqlite:/config/Duplicati-server.sqlite
       - /var/log/duplicati:/var/log/duplicati
-      - .${DIR_CLOUD_ROOT}/backups:/backups
+      - .${DIR_DATA_ROOT}/duplicati/:/config
+      - .${DIR_BACKUPS}:/backups
       - .${DIR_CLOUD_ROOT}:/source/users
     # ports:
     #   - 8200:8200

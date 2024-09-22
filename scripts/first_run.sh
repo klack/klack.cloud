@@ -8,6 +8,7 @@ DATA_DIRS=(
     "$DIR_DATA_ROOT/plex"
     "$DIR_DATA_ROOT/sftpgo"
     "$DIR_DATA_ROOT/transcode"
+    "$DIR_DATA_ROOT/duplicati"
     "$DIR_BACKUPS"
     "$DIR_BACKUPS/Documents"
     "$DIR_BACKUPS/Notes"
@@ -44,6 +45,7 @@ echo -e "\nSetting up node_exporter"
 nohup /usr/local/bin/node_exporter >/dev/null 2>&1 &
 
 #Run first time app scripts
+cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Duplicati-server.sqlite
 ./config/sftpgo/provision.sh
 ./config/plex/provision.sh
 

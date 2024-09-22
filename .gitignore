@@ -1,11 +1,12 @@
+scrap
 .env
 .vscode
 !.keepme
 *.drawio.bkp
 compose.override.yml
-data/*
-cloud/*
-scrap
+data
+cloud
+backups
 config/traefik/certs
 config/traefik/htpasswd
 config/fail2ban/db/fail2ban.sqlite3
