@@ -4,6 +4,7 @@ source ./.env
 
 #Setup directories
 DATA_DIRS=(
+    "$DIR_DATA_ROOT"
     "$DIR_DATA_ROOT/plex"
     "$DIR_DATA_ROOT/sftpgo"
     "$DIR_DATA_ROOT/transcode"
@@ -42,6 +43,7 @@ nohup /usr/local/bin/node_exporter >/dev/null 2>&1 &
 
 #Run first time app scripts
 ./config/sftpgo/provision.sh
+./config/plex/provision.sh
 
 #Download Sample Files
 ./scripts/download_samples.sh
