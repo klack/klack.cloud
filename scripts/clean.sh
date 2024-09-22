@@ -5,17 +5,18 @@ if [ "$(basename "$PWD")" != "klack.cloud" ];then
   exit 1
 fi
 
-source ./.env
-
 read -p "WARNING: Destructive! Ctrl-C Now"
+source ./.env
 
 #Shut down everything
 echo "Shutting down services"
 ./scripts/down.sh
 
+#Remove docker volumes
 echo "Deleting docker volumes"
 docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
 
+#Remove log, cloud, and data directories
 echo "Removing Data and Log Directories"
 LOG_DIRS=(
     "/var/log/traefik"
@@ -27,9 +28,9 @@ LOG_DIRS=(
     "/var/log/cowrie"
     "/var/log/plex/PMS Plugin Logs"
 )
-rm -v ./config/sftpgo/homeuser/sftpgo.db
 rm -rfv ./data ./cloud "${LOG_DIRS[@]}"
 
+$Remove node_exporter
 echo "Removing node_exporter"
 killall node_exporter
 rm -v /usr/local/bin/node_exporter

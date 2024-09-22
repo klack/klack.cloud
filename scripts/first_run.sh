@@ -4,17 +4,19 @@ source ./.env
 
 #Setup directories
 DATA_DIRS=(
-    "./data/transcode"
-    "./data/backups"
-    "./data/backups/Documents"
-    "./data/backups/Notes"
-    "./data/backups/Photos "
-    "./cloud/clouduser/Documents"
-    "./cloud/clouduser/Notes"
-    "./cloud/clouduser/Photos"
-    "./cloud/clouduser/Downloads"
-    "./cloud/clouduser/Library/Movies"
-    "./cloud/clouduser/Library/TV"
+    "$DIR_DATA_ROOT/plex"
+    "$DIR_DATA_ROOT/sftpgo"
+    "$DIR_DATA_ROOT/transcode"
+    "$DIR_DATA_ROOT/backups"
+    "$DIR_DATA_ROOT/backups/Documents"
+    "$DIR_DATA_ROOT/backups/Notes"
+    "$DIR_DATA_ROOT/backups/Photos"
+    "$DIR_CLOUD_ROOT/$CLOUD_USER/Documents"
+    "$DIR_CLOUD_ROOT/$CLOUD_USER/Notes"
+    "$DIR_CLOUD_ROOT/$CLOUD_USER/Photos"
+    "$DIR_CLOUD_ROOT/$CLOUD_USER/Downloads"
+    "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/Movies"
+    "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/TV"
 )
 LOG_DIRS=(
     "/var/log/traefik"

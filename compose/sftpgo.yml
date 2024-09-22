@@ -4,8 +4,8 @@ services:
     profiles:
       - apps
     volumes:
-      - ../config/sftpgo/homeuser:/var/lib/sftpgo
       - ../config/sftpgo/sftpgo.json:/etc/sftpgo/sftpgo.json
+      - .${DIR_DATA_ROOT}/sftpgo:/var/lib/sftpgo
       - .${DIR_CLOUD_ROOT}:/srv/sftpgo/data
     environment:
       TZ: ${TZ}
