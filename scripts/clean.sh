@@ -28,9 +28,9 @@ LOG_DIRS=(
     "/var/log/cowrie"
     "/var/log/plex/PMS Plugin Logs"
 )
-rm -rfv ./data ./cloud "${LOG_DIRS[@]}"
+rm -rfv ./data "${LOG_DIRS[@]}"
 
-$Remove node_exporter
+#Remove node_exporter
 echo "Removing node_exporter"
 killall node_exporter
 rm -v /usr/local/bin/node_exporter

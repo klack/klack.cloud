@@ -12,6 +12,8 @@ DATA_DIRS=(
     "$DIR_DATA_ROOT/backups/Documents"
     "$DIR_DATA_ROOT/backups/Notes"
     "$DIR_DATA_ROOT/backups/Photos"
+    "$DIR_CLOUD_ROOT"
+    "$DIR_CLOUD_ROOT/$CLOUD_USER"
     "$DIR_CLOUD_ROOT/$CLOUD_USER/Documents"
     "$DIR_CLOUD_ROOT/$CLOUD_USER/Notes"
     "$DIR_CLOUD_ROOT/$CLOUD_USER/Photos"
