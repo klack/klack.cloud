@@ -6,8 +6,8 @@ services:
     image: lscr.io/linuxserver/duplicati
     environment:
       - TZ=${TZ}
-      - PUID=0
-      - PGID=0
+      - PUID=1000
+      - PGID=1000
       - TZ=America/Denver
       - CLI_ARGS= --log-file=/var/log/duplicati/duplicati.log --log-level=Information
     volumes:
