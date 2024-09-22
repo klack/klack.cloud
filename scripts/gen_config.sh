@@ -53,7 +53,7 @@ PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim py
 sed -i "s#\${PASSWORD_PBKDF2}#${PASSWORD_PBKDF2}#g" ./config/qbittorrent/qBittorrent.conf
 
 #Set Servarr api keys
-cp -p ./config/radarr/config.xml.template ./config/radarr/c
+cp -p ./config/radarr/config.xml.template ./config/radarr/
 
 #Clean option
 if [[ "$1" == "--clean" ]]; then
