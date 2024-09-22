@@ -20,6 +20,7 @@ config/promtail/positions.yaml
 config/traefik/dynamic/dynamic_conf.yml
 config/traefik/dynamic/certs.yml
 config/sftpgo/user.json
+config/hosts/hosts
 config/duplicati/Duplicati-server.sqlite
 web/hosts
 web/index.html
