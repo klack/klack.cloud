@@ -17,6 +17,7 @@ include:
   - ./compose/sonarr.yml
   - ./compose/jackett.yml
   - ./compose/unpackerr.yml
+  - ./compose/nginx.yml
   # - ./compose/whoami.yml # Used to diagnose middleware
 
 networks:

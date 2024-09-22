@@ -53,7 +53,7 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 ./scripts/download_samples.sh
 
 #Generate home page
-cp ./index.html.template index.html
+cp ./web/index.html.template ./web/index.html
 chown 1000:1000 ./index.html
 sed -i "s/\${INTERNAL_DOMAIN}/${INTERNAL_DOMAIN}/g" index.html
 sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" index.html
