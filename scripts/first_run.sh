@@ -45,11 +45,11 @@ fi
 #Generate hosts file
 sed "s|\${HOST_IP}|${HOST_IP}|g; \
      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
-     ./config/hosts/hosts.template > ./config/hosts/hosts
+     ./config/hosts/hosts.template > ./web/hosts
 
 sed "s|\${HOST_IP}|127.0.0.1|g; \
      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
-     ./config/hosts/hosts.template > ./web/hosts.txt
+     ./config/hosts/hosts.template > ./config/hosts/hosts
 
 if ! grep -q ".klack.internal" /etc/hosts; then
   sh -c "cat ./config/hosts/hosts >> /etc/hosts"
@@ -60,8 +60,8 @@ fi
 
 #Update Grafana dashboard and default contact point
 cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
-sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
-cp ./config/grafana/provisioning/alerting/contact-points.yaml.template ./config/grafana/provisioning/alerting/contact-points.yaml
+sed -i "s/\${NETWORK_INTERFACE}/${NETWORK_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
+cp ./config/grafana/provisioning/alerting/contact-points.yaml.template ./config/grafana/provisi.txtoning/alerting/contact-points.yaml
 sed -i "s/\${GF_SMTP_FROM_ADDRESS}/${GF_SMTP_FROM_ADDRESS}/g" ./config/grafana/provisioning/alerting/contact-points.yaml
 
 #Setup logrotate
@@ -86,10 +86,11 @@ echo -e "\nIndex.html created"
 ./config/sftpgo/provision.sh
 ./config/plex/provision.sh
 
-#Download Sample Files
-./scripts/download_samples.sh
+# #Download Sample Files
+# ./scripts/download_samples.sh
 
 #Setting Permissions
-chown -R 1000:1000 ./
-chown -R 1000:1000 "${LOG_DIRS[@]}"
-chown -R 999:999 /var/log/cowrie
+echo -e "\n Setting Permissions"
+sudo chown -R 1000:1000 *
+sudo chown -R 1000:1000 "${LOG_DIRS[@]}"
+sudo chown -R 999:999 /var/log/cowrie

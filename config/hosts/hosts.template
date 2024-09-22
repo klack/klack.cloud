@@ -9,3 +9,4 @@ ${HOST_IP} qbittorrent.${INTERNAL_DOMAIN}
 ${HOST_IP} jackett.${INTERNAL_DOMAIN}
 ${HOST_IP} radarr.${INTERNAL_DOMAIN}
 ${HOST_IP} sonarr.${INTERNAL_DOMAIN}
+
