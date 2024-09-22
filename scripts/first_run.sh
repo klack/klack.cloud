@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 source ./.env
 
@@ -33,8 +33,36 @@ LOG_DIRS=(
     "/var/log/plex/PMS Plugin Logs"
 )
 mkdir -vp "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
-chown -vR 1000:1000 "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
-chown -vR 999:999 /var/log/cowrie
+
+#Copy docker daemon
+if [ ! -f /etc/docker/daemon.json ]; then
+  cp -v ./config/docker/daemon.json /etc/docker/daemon.json
+  echo "Docker daemon.json created"
+else
+  echo "Docker daemon.json already exists"
+fi
+
+#Generate hosts file
+sed "s|\${HOST_IP}|${HOST_IP}|g; \
+     s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
+     ./config/hosts/hosts.template > ./config/hosts/hosts
+
+sed "s|\${HOST_IP}|127.0.0.1|g; \
+     s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
+     ./config/hosts/hosts.template > ./web/hosts.txt
+
+if ! grep -q ".klack.internal" /etc/hosts; then
+  sh -c "cat ./config/hosts/hosts >> /etc/hosts"
+  echo "Hosts file modified"
+else
+  echo "Hosts file already modified."
+fi
+
+#Update Grafana dashboard and default contact point
+cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
+sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
+cp ./config/grafana/provisioning/alerting/contact-points.yaml.template ./config/grafana/provisioning/alerting/contact-points.yaml
+sed -i "s/\${GF_SMTP_FROM_ADDRESS}/${GF_SMTP_FROM_ADDRESS}/g" ./config/grafana/provisioning/alerting/contact-points.yaml
 
 #Setup logrotate
 cp ./config/logrotate.d/* /etc/logrotate.d
@@ -44,18 +72,24 @@ echo -e "\nSetting up node_exporter"
 ./scripts/install_node_exp.sh
 nohup /usr/local/bin/node_exporter >/dev/null 2>&1 &
 
-#Run first time app scripts
+#Duplicati
 cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Duplicati-server.sqlite
+
+#Generate home page
+cp ./web/index.html.template ./web/index.html
+sed -i "s/\${INTERNAL_DOMAIN}/${INTERNAL_DOMAIN}/g" ./web/index.html
+sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" ./web/index.html
+sed -i "s/\${HOST_IP}/${HOST_IP}/g" ./web/index.html
+echo -e "\nIndex.html created"
+
+#Run first time app scripts
 ./config/sftpgo/provision.sh
 ./config/plex/provision.sh
 
 #Download Sample Files
 ./scripts/download_samples.sh
 
-#Generate home page
-cp ./web/index.html.template ./web/index.html
-chown 1000:1000 ./index.html
-sed -i "s/\${INTERNAL_DOMAIN}/${INTERNAL_DOMAIN}/g" index.html
-sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" index.html
-
-echo -e "\nIndex.html created"
+#Setting Permissions
+chown -R 1000:1000 ./
+chown -R 1000:1000 "${LOG_DIRS[@]}"
+chown -R 999:999 /var/log/cowrie

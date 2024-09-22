@@ -105,26 +105,4 @@ sed -i "s|^HONEYPOT_GATEWAY=.*|HONEYPOT_GATEWAY=$GATEWAY|" .env
 sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$DEFAULT_INTERFACE|" .env
 sed -i "s/\${NETWORK}/${NETWORK}/g" .env
 
-#Copy docker daemon
-if [ ! -f /etc/docker/daemon.json ]; then
-  cp -v ./config/docker/daemon.json /etc/docker/daemon.json
-  echo "Docker daemon.json created"
-else
-  echo "Docker daemon.json already exists"
-fi
-
-#Edit hosts file
-if ! grep -q ".klack.internal" /etc/hosts; then
-  sh -c "cat ./config/hosts/hosts >> /etc/hosts"
-  echo "Hosts file modified"
-else
-  echo "Hosts file already modified."
-fi
-
-#Update Grafana dashboard and default contact point
-cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
-sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
-cp ./config/grafana/provisioning/alerting/contact-points.yaml.template ./config/grafana/provisioning/alerting/contact-points.yaml
-sed -i "s/\${GF_SMTP_FROM_ADDRESS}/${GF_SMTP_FROM_ADDRESS}/g" ./config/grafana/provisioning/alerting/contact-points.yaml
-
 echo -e "\n.env file generated"

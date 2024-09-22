@@ -18,6 +18,8 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+source ./.env
+
 #Shut down everything
 echo "Shutting down services"
 ./scripts/down.sh
@@ -39,4 +41,4 @@ read -p "Press Enter to Launch"
 ./scripts/up.sh
 
 #Show home page
-nohup xdg-open ./index.html >/dev/null 2>&1 &
+nohup xdg-open http://$HOST_IP >/dev/null 2>&1 &
