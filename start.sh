@@ -2,6 +2,7 @@
 
 if [ ! -f "./.env" ]; then
   echo "Run ./setup.sh first"
+  exit 1
 fi
 
 source ./.env

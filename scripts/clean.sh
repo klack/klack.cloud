@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 if [ "$(basename "$PWD")" != "klack.cloud" ];then
   echo "Must be run from base project directory"
