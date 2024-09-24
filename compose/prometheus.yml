@@ -20,8 +20,8 @@ services:
     networks:
       - klack
     extra_hosts:
-      - "node-exp.klack.internal:${HOST_IP}" # Use host IP
-      - "traefik.klack.internal:${HOST_IP}"
+      - "node-exp.${INTERNAL_DOMAIN}:${HOST_IP}" # Use host IP
+      - "traefik.${INTERNAL_DOMAIN}:${HOST_IP}"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.prometheus.rule=Host(`prometheus.${INTERNAL_DOMAIN}`)"

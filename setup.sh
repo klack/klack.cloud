@@ -22,10 +22,9 @@ source ./.env
 
 #Shut down everything
 echo "Shutting down services"
-./scripts/down.sh
+./stop.sh
 sudo killall node_exporter
-docker volume rm klack-cloud-photoprism-db-1 #Remove so maria database can be reprovisioned
-rm -v ./config/sftpgo/homeuser/sftpgo.db #Remove so user can be reprovisioned
+docker volume rm klack-cloud-photoprism-db-1 klack-cloud-sftpgo-1 #Remove so maria database can be reprovisioned
 
 #Run first time scripts
 sudo ./scripts/first_run.sh

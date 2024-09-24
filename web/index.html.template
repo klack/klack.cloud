@@ -62,7 +62,7 @@
   <h1>${INTERNAL_DOMAIN}</h1>
   <div id="links">
     📊 <a href="https://grafana.${INTERNAL_DOMAIN}:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
-      target="_new">Overview Dashboard</a><br>
+      target="_new">Dashboard</a><br>
     📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_new">Video Server</a><br>
     📷 <a href="https://${EXTERNAL_DOMAIN}/photos" target="_new">Photo Gallery</a><br>
     📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#notebook-sync" target="_new">Notebook

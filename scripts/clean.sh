@@ -11,11 +11,12 @@ if [ "$EUID" != 0 ]; then
 fi
 
 read -p "WARNING: Destructive! Ctrl-C Now"
+
 source ./.env
 
 #Shut down everything
 echo "Shutting down services"
-./down.sh
+./stop.sh
 
 #Remove docker volumes
 echo "Deleting docker volumes"
@@ -33,7 +34,8 @@ LOG_DIRS=(
     "/var/log/cowrie"
     "/var/log/plex/PMS Plugin Logs"
 )
-rm -rfv ./data ./backups "${LOG_DIRS[@]}"
+git clean -fdx
+rm -rfv "${LOG_DIRS[@]}"
 
 #Remove node_exporter
 echo "Removing node_exporter"

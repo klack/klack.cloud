@@ -7,8 +7,6 @@ sed "s|\${HOST_IP}|${HOST_IP}|g; \
      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
      /config/dynamic/dynamic_conf.yml.template > /config/dynamic/dynamic_conf.yml
 
-set -e
-
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
     set -- traefik "$@"

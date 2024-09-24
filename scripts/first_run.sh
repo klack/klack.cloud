@@ -11,7 +11,6 @@ source ./.env
 DATA_DIRS=(
     "$DIR_DATA_ROOT"
     "$DIR_DATA_ROOT/plex"
-    "$DIR_DATA_ROOT/sftpgo"
     "$DIR_DATA_ROOT/transcode"
     "$DIR_DATA_ROOT/duplicati"
     "$DIR_BACKUPS"
@@ -85,7 +84,7 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 ./config/plex/provision.sh
 
 # #Download Sample Files
-# ./scripts/download_samples.sh
+./scripts/download_samples.sh
 
 #Setting Permissions
 echo -e "\nSetting Permissions"
