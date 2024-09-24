@@ -5,3 +5,8 @@ services:
       - "80:80"
     volumes:
       - ../web:/usr/share/nginx/html:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=Host(`${INTERNAL_DOMAIN}`)"
+      - "traefik.http.routers.nginx.entrypoints=web"
+      - "stack=klack.cloud"

@@ -10,28 +10,78 @@
     #download_managers {
       display: block;
     }
+
+    #post-setup {
+      display: none;
+    }
   </style>
+  <script>
+    function checkHostReachability(url) {
+      fetch(url, { mode: 'no-cors' })
+        .then(response => {
+          if (response.status === 401 || response.ok || response.type === 'opaque') {
+            console.log("Host found");
+            // Show the desired content
+            document.getElementById("links").style.display = "block";
+            document.getElementById("post-setup").style.display = "none";
+            if (window.location.hostname !== `${INTERNAL_DOMAIN}`) {
+              // Construct the URL for the internal domain, keeping the same path
+              const newURL = `http://${INTERNAL_DOMAIN}`;
+              
+              // Redirect to the new URL
+              window.location.href = newURL;
+            }            
+          } else {
+            console.log("Host not found");
+            document.getElementById("links").style.display = "none";
+            document.getElementById("post-setup").style.display = "block";
+            // Schedule the next check
+            setTimeout(() => checkHostReachability(url), 5000);
+          }
+        })
+        .catch(error => {
+          console.log("Host not found");
+          document.getElementById("links").style.display = "none";
+          document.getElementById("post-setup").style.display = "block";
+          // Schedule the next check
+          setTimeout(() => checkHostReachability(url), 5000);
+        });
+    }
+
+    // Start the initial check
+    checkHostReachability('http://${INTERNAL_DOMAIN}/');
+  </script>
 </head>
 
 <body>
-  <h1>${EXTERNAL_DOMAIN}</h1>
-  📊 <a href="https://grafana.${INTERNAL_DOMAIN}:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
-    target="_new">Overview Dashboard</a><br>
-  📷 <a href="https://${EXTERNAL_DOMAIN}/photos" target="_new">Photo Gallery</a><br>
-  📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_new">Video Server</a><br>
-  ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#cloud-drive" target="_new">Setup Cloud
-    Drive</a><br>
-  📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#notebook-sync" target="_new">Notebook Sync</a><br>
-  💾 <a href="https://duplicati.${INTERNAL_DOMAIN}:4443/" target="_new">Manage Backups</a><br>
-  <div id="download_managers">
-    🌀 <a href="https://qbittorrent.${INTERNAL_DOMAIN}:4443/" target="_new">Manage Torrents</a><br>
-    📥 Download Managers
+  <h1>klack107.ddns.net</h1>
+  <div id="links">
+    📊 <a href="https://grafana.${INTERNAL_DOMAIN}:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
+      target="_new">Overview Dashboard</a><br>
+    📷 <a href="https://${EXTERNAL_DOMAIN}/photos" target="_new">Photo Gallery</a><br>
+    📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_new">Video Server</a><br>
+    ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#cloud-drive" target="_new">Setup Cloud
+      Drive</a><br>
+    📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#notebook-sync" target="_new">Notebook
+      Sync</a><br>
+    💾 <a href="https://duplicati.${INTERNAL_DOMAIN}:4443/" target="_new">Manage Backups</a><br>
+    <div id="download_managers">
+      🌀 <a href="https://qbittorrent.${INTERNAL_DOMAIN}:4443/" target="_new">Manage Torrents</a><br>
+      📥 Download Managers
+      <ul>
+        <li><a href="https://jackett.${INTERNAL_DOMAIN}:4443/" target="_new">Searcher</a></li>
+        <li><a href="https://sonarr.${INTERNAL_DOMAIN}:4443/" target="_new">TV</a></li>
+        <li><a href="https://radarr.${INTERNAL_DOMAIN}:4443/" target="_new">Movies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="post-setup">
+    <h2>Final Steps</h2>
     <ul>
-      <li><a href="https://jackett.${INTERNAL_DOMAIN}:4443/" target="_new">Searcher</a></li>
-      <li><a href="https://sonarr.${INTERNAL_DOMAIN}:4443/" target="_new">TV</a></li>
-      <li><a href="https://radarr.${INTERNAL_DOMAIN}:4443/" target="_new">Movies</a></li>
-    </ul>
-    <a href="http://${HOST_IP}/hosts" target="_new">Hosts File</a><br>
+      <li>Download <a href="http://192.168.20.7/hosts">Hosts File</a></li>
+      <li><a href="https://github.com/klack/klack.cloud/wiki/Editing-your-Hosts-File" target="_new">View Instructions</a></li>
+    </ol>
+    </ol>
   </div>
 </body>
 

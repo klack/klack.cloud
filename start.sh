@@ -34,6 +34,22 @@ fi
 
 echo -e "\nIndex.html created"
 
+SERVER="http://traefik.${INTERNAL_DOMAIN}"
+CHECK_URL="$SERVER/"
+TIMEOUT=60  # Maximum time to wait (in seconds)
+RETRY_INTERVAL=5  # Time between retries
+SECONDS_WAITED=0
+echo "Starting..."
+until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL)" == "200" ]]; do
+    SECONDS_WAITED=$((SECONDS_WAITED + RETRY_INTERVAL))
+    if [ $SECONDS_WAITED -ge $TIMEOUT ]; then
+        echo "Service not reachable start after $SECONDS_WAITED seconds, exiting."
+        exit 1
+    fi
+    echo "Waiting $RETRY_INTERVAL seconds..."
+    sleep $RETRY_INTERVAL
+done
+
 #Show home page
 echo -e "\nklack.cloud launched!"
 echo -e "\nVisit your homepage at http://$HOST_IP"

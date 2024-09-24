@@ -56,7 +56,7 @@ sed "s|\${HOST_IP}|127.0.0.1|g; \
      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
      ./config/hosts/hosts.template > ./config/hosts/hosts
 
-if ! grep -q ".klack.internal" /etc/hosts; then
+if ! grep -q "$INTERNAL_DOMAIN" /etc/hosts; then
   sh -c "cat ./config/hosts/hosts >> /etc/hosts"
   echo "Hosts file modified"
 else
@@ -95,7 +95,7 @@ echo -e "\nIndex.html created"
 # ./scripts/download_samples.sh
 
 #Setting Permissions
-echo -e "\n Setting Permissions"
+echo -e "\nSetting Permissions"
 sudo chown -R 1000:1000 *
 sudo chown -R 1000:1000 "${LOG_DIRS[@]}"
 sudo chown -R 999:999 /var/log/cowrie
