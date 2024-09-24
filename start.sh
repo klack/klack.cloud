@@ -52,4 +52,4 @@ done
 
 #Show home page
 echo -e "\nklack.cloud launched!"
-echo -e "\nVisit your homepage at http://$HOST_IP"
+echo -e "\nFinish setup at http://$HOST_IP"
