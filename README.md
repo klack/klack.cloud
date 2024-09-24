@@ -51,17 +51,16 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
 
 # Setup
 ### Pre-requisites
-- [ ] A domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
+- [ ] A free domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
 - [ ] Port 443 must be allowed by your ISP
+- [ ] Port 443 and 32400 must be forwarded to your machine from your router
 - [ ] SMTP server settings from your ISP
-- [ ] Configure your router to forward port 443 and 32400 to your machine
 - [ ] A [paid VPN subscription](https://protonvpn.com/) if you wish to use "Download Managers"
   - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
   - Place it at `./config/wireguard/wg0.conf`
 
 ### Notes
 - Since you are using a self-signed cert, you will need to accept a security exception in your browser for each service.
-- If you are running your server on a separate machine, you must edit the hosts file on your local machine to point all `klack.internal` domains to your server.  Copy the contents of `./config/hosts/hosts` to your machine and replace `127.0.0.1` with your server IP.
 
 ### Run the following commands to begin
 ```bash
@@ -69,12 +68,6 @@ git clone https://github.com/klack/klack.cloud.git
 cd klack.cloud
 ./setup.sh
 ```
-
-## Main Dashboard
-- [Login to Grafana](https://grafana.klack.internal:4443/) with the username: `admin` and your password.  
-  Click on the menu button on the left  
-  Choose "Dashboards"  
-  Click "Overview"
 
 ## Cloud Drive
   - Use the following settings
@@ -95,12 +88,12 @@ cd klack.cloud
     - Open Nautilus file manager
     - Choose "Other Locations" from the menu on the left
     - Type the *WebDAV URL* into "Connect to Server" field
+    - Change https:// to davs://
   - Chromebook
     - `sudo mount -t davfs https://your-domain.com/dav/ /home/localuser/klackcloud`
   - iPhone
     - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
     - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
-
 
 ## Photo Sync
 - Setup [PhotoSync](https://www.photosync-app.com/home) for your phone
@@ -139,12 +132,6 @@ You will receive email alerts for the following:
 
 ## Backups
 Documents, Notes and Photos are automatically backed up at 1:00PM.  If there is a backup failure, you will receive an alert.  To manage backups, open [Duplicati](https://duplicati.klack.internal:4443/)
-
-# Post Installation
-- Turn off Plex debug logging  
-  Click the wrench icon in the upper right  
-  Server Settings > General  
-  Uncheck "Enable Plex Media Server debug logging"
 
 ### Download Managers
 - Use `/data/library/tv/` as a path when adding a series in sonarr
