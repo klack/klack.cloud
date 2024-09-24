@@ -1,4 +1,9 @@
-#!/bin/bash -x
+#!/bin/bash
+
+if [ "$EUID" != 0 ]; then
+  echo "Must be run as root"
+  exit 1
+fi
 
 source ./.env
 
@@ -61,7 +66,7 @@ fi
 #Update Grafana dashboard and default contact point
 cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
 sed -i "s/\${NETWORK_INTERFACE}/${NETWORK_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
-cp ./config/grafana/provisioning/alerting/contact-points.yaml.template ./config/grafana/provisi.txtoning/alerting/contact-points.yaml
+cp ./config/grafana/provisioning/alerting/contact-points.yaml.template ./config/grafana/provisioning/alerting/contact-points.yaml
 sed -i "s/\${GF_SMTP_FROM_ADDRESS}/${GF_SMTP_FROM_ADDRESS}/g" ./config/grafana/provisioning/alerting/contact-points.yaml
 
 #Setup logrotate
