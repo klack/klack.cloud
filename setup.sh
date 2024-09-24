@@ -38,9 +38,4 @@ echo -e "\nSetup Complete"
 read -p "Press Enter to Launch"
 
 #Start all docker containers
-./scripts/up.sh
-
-#Show home page
-# nohup xdg-open http://$HOST_IP >/dev/null 2>&1 &
-echo -e "\n klack.cloud launched!"
-echo -e "\n Visit your homepage http://$HOST_IP"
+./start.sh

@@ -10,7 +10,7 @@ source ./.env
 
 #Shut down everything
 echo "Shutting down services"
-./scripts/down.sh
+./down.sh
 
 #Remove docker volumes
 echo "Deleting docker volumes"
@@ -28,7 +28,7 @@ LOG_DIRS=(
     "/var/log/cowrie"
     "/var/log/plex/PMS Plugin Logs"
 )
-rm -rfv ./data "${LOG_DIRS[@]}"
+rm -rfv ./data ./backups "${LOG_DIRS[@]}"
 
 #Remove node_exporter
 echo "Removing node_exporter"
