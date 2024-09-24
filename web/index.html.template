@@ -54,7 +54,7 @@
 </head>
 
 <body>
-  <h1>klack107.ddns.net</h1>
+  <h1>${INTERNAL_DOMAIN}</h1>
   <div id="links">
     📊 <a href="https://grafana.${INTERNAL_DOMAIN}:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
       target="_new">Overview Dashboard</a><br>

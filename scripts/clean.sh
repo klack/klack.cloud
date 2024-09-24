@@ -5,6 +5,11 @@ if [ "$(basename "$PWD")" != "klack.cloud" ];then
   exit 1
 fi
 
+if [ "$EUID" != 0 ]; then
+  echo "Must be run as root"
+  exit 1
+fi
+
 read -p "WARNING: Destructive! Ctrl-C Now"
 source ./.env
 

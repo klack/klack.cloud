@@ -80,13 +80,6 @@ nohup /usr/local/bin/node_exporter >/dev/null 2>&1 &
 #Duplicati
 cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Duplicati-server.sqlite
 
-#Generate home page
-cp ./web/index.html.template ./web/index.html
-sed -i "s/\${INTERNAL_DOMAIN}/${INTERNAL_DOMAIN}/g" ./web/index.html
-sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" ./web/index.html
-sed -i "s/\${HOST_IP}/${HOST_IP}/g" ./web/index.html
-echo -e "\nIndex.html created"
-
 #Run first time app scripts
 ./config/sftpgo/provision.sh
 ./config/plex/provision.sh
