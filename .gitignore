@@ -24,3 +24,4 @@ config/hosts/hosts
 config/duplicati/Duplicati-server.sqlite
 web/hosts
 web/index.html
+config/grafana/dashboards/overview-dashboard.json

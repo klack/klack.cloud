@@ -35,6 +35,7 @@ Connection\InterfaceName=wg0
 General\Locale=en
 General\UseRandomPort=false
 MailNotification\req_auth=true
+WebUI\LocalHostAuth=false
 WebUI\AuthSubnetWhitelist=@Invalid()
 WebUI\HostHeaderValidation=false
 WebUI\CSRFProtection=false
