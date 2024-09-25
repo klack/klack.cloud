@@ -1,10 +1,33 @@
-<html>
+<!DOCTYPE html>
 
 <head>
   <meta charset="UTF-8">
   <style>
-    body {
-      font-size: 200%
+    body,
+    html {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #links {
+      font-size: 2em;
+      line-height: 1.2
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    #bottom {
+      margin-top: auto;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #bottom a {
+      color:grey;
     }
 
     #download_managers {
@@ -32,10 +55,10 @@
             if (window.location.hostname !== `${INTERNAL_DOMAIN}`) {
               // Construct the URL for the internal domain, keeping the same path
               const newURL = `http://${INTERNAL_DOMAIN}`;
-              
+
               // Redirect to the new URL
               window.location.href = newURL;
-            }            
+            }
           } else {
             console.log("Host not found");
             document.getElementById("links").style.display = "none";
@@ -60,6 +83,14 @@
 
 <body>
   <h1>${INTERNAL_DOMAIN}</h1>
+  <div id="post-setup">
+    <h2>Final Steps</h2>
+    <ul>
+      <li>Download <a href="http://192.168.20.7/hosts">Hosts File</a></li>
+      <li><a href="https://github.com/klack/klack.cloud/wiki/Editing-your-Hosts-File" target="_new">View
+          Instructions</a></li>
+    </ul>
+  </div>
   <div id="links">
     📊 <a href="https://grafana.${INTERNAL_DOMAIN}:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
       target="_new">Dashboard</a><br>
@@ -80,13 +111,10 @@
       </ul>
     </div>
   </div>
-  <div id="post-setup">
-    <h2>Final Steps</h2>
-    <ul>
-      <li>Download <a href="http://192.168.20.7/hosts">Hosts File</a></li>
-      <li><a href="https://github.com/klack/klack.cloud/wiki/Editing-your-Hosts-File" target="_new">View Instructions</a></li>
-    </ol>
-    </ol>
+  <div id="bottom">
+    <a href="https://traefik.${INTERNAL_DOMAIN}:4443/" target="_new">Traefik</a>
+    <a href="https://sftpgo.${INTERNAL_DOMAIN}:4443/" target="_new">SFTPGo</a>
+    <a href="https://prometheus.${INTERNAL_DOMAIN}:4443" target="_new">Prometheus</a>
   </div>
 </body>
 
