@@ -27,7 +27,7 @@
     }
 
     #bottom a {
-      color:grey;
+      color: grey;
     }
 
     #download_managers {
