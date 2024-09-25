@@ -41,7 +41,7 @@ A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox,
   - Duplicati
 - ⚙️ Auto update docker images
   - Watchtower
-- 🌀 bittorrent and with VPN killswitch
+- 🌀 bittorrent with VPN killswitch
   - qBittorrent-wireguard
 - 📥 Download Managers
   - Sonarr for TV
@@ -72,7 +72,7 @@ cd klack.cloud
 After the script is run you will be given a link to finish setup.
 
 ## Home Page
-Visit http://your-domain.com.internal to visit your home page.
+Visit `http://your-domain.com.internal` to access your home page.
 
 ## Cloud Drive
   - Use the following settings
@@ -139,9 +139,12 @@ You will receive email alerts for the following:
 Documents, Notes and Photos are automatically backed up at 1:00PM.  If there is a backup failure, you will receive an alert.
 
 ### Download Managers
-- Use `/data/library/tv/` as a path when adding a series in sonarr
-- Use `/data/library/movies/` as a path when adding a movie on radarr
-- Use `http://localhost:9117` for the Jackett address when creating a torznab indexer
+- Using download managers to search TV and Movies requires knowledge of how to use Sonarr, Radarr, and Jackett.
+- Use `localhost:8080` when adding a Download Client for qBittorent in Sonarr and Radarr
+- Use `/data/library/tv/` as a path when adding a series in Sonarr
+- Use `/data/library/movies/` as a path when adding a movie on Radarr
+- Use `http://localhost:9117` when referencing the Torznab URL for Jacket 
+- Jackett will show an error "Your instance has external access enabled without using an admin password."  You can ignore this because we have our own basic auth.
 
 # Service Directory
 | Service       | Port     | Domain                               | Hosted Path | URL                                                    | Service URL            | Auth Provider | Log Rotation  |
