@@ -87,34 +87,34 @@
     <h2>Final Steps</h2>
     <ul>
       <li>Download <a href="http://192.168.20.7/hosts">Hosts File</a></li>
-      <li><a href="https://github.com/klack/klack.cloud/wiki/Editing-your-Hosts-File" target="_new">View
+      <li><a href="https://github.com/klack/klack.cloud/wiki/Editing-your-Hosts-File" target="_blank">View
           Instructions</a></li>
     </ul>
   </div>
   <div id="links">
     📊 <a href="https://grafana.${INTERNAL_DOMAIN}:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
-      target="_new">Dashboard</a><br>
-    📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_new">Video Server</a><br>
-    📷 <a href="https://${EXTERNAL_DOMAIN}/photos" target="_new">Photo Gallery</a><br>
-    📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#notebook-sync" target="_new">Notebook
+      target="_blank">Dashboard</a><br>
+    📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_blank">Video Server</a><br>
+    📷 <a href="https://${EXTERNAL_DOMAIN}/photos" target="_blank">Photo Gallery</a><br>
+    📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#notebook-sync" target="_blank">Notebook
       Sync</a><br>
-    ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#cloud-drive" target="_new">Cloud
+    ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#cloud-drive" target="_blank">Cloud
       Drive</a><br>
-    💾 <a href="https://duplicati.${INTERNAL_DOMAIN}:4443/" target="_new">Backups</a><br>
+    💾 <a href="https://duplicati.${INTERNAL_DOMAIN}:4443/" target="_blank">Backups</a><br>
     <div id="download_managers">
       🌀 Download Managers
       <ul>
-        <li><a href="https://qbittorrent.${INTERNAL_DOMAIN}:4443/" target="_new">Torrents</a></li>
-        <li><a href="https://sonarr.${INTERNAL_DOMAIN}:4443/" target="_new">Search TV</a></li>
-        <li><a href="https://radarr.${INTERNAL_DOMAIN}:4443/" target="_new">Search Movies</a></li>
-        <li><a href="https://jackett.${INTERNAL_DOMAIN}:4443/" target="_new">Indexer</a></li>
+        <li><a href="https://qbittorrent.${INTERNAL_DOMAIN}:4443/" target="_blank">Torrents</a></li>
+        <li><a href="https://sonarr.${INTERNAL_DOMAIN}:4443/" target="_blank">Search TV</a></li>
+        <li><a href="https://radarr.${INTERNAL_DOMAIN}:4443/" target="_blank">Search Movies</a></li>
+        <li><a href="https://jackett.${INTERNAL_DOMAIN}:4443/" target="_blank">Indexer</a></li>
       </ul>
     </div>
   </div>
   <div id="bottom">
-    <a href="https://traefik.${INTERNAL_DOMAIN}:4443/" target="_new">Traefik</a>
-    <a href="https://sftpgo.${INTERNAL_DOMAIN}:4443/" target="_new">SFTPGo</a>
-    <a href="https://prometheus.${INTERNAL_DOMAIN}:4443" target="_new">Prometheus</a>
+    <a href="https://traefik.${INTERNAL_DOMAIN}:4443/" target="_blank">Traefik</a>
+    <a href="https://sftpgo.${INTERNAL_DOMAIN}:4443/" target="_blank">SFTPGo</a>
+    <a href="https://prometheus.${INTERNAL_DOMAIN}:4443" target="_blank">Prometheus</a>
   </div>
 </body>
 
