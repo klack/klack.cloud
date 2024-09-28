@@ -22,6 +22,6 @@ config/traefik/dynamic/certs.yml
 config/sftpgo/user.json
 config/hosts/hosts
 config/duplicati/Duplicati-server.sqlite
+config/grafana/dashboards/overview-dashboard.json
 web/hosts
 web/index.html
-config/grafana/dashboards/overview-dashboard.json

@@ -5,12 +5,8 @@
 #
 # The compose file on main may not be compatible with the latest release.
 #
-
-name: immich
-
 services:
   immich-server:
-    container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
     # extends:
     #   file: hwaccel.transcoding.yml
@@ -21,6 +17,13 @@ services:
       - /etc/localtime:/etc/localtime:ro
     # env_file:
       # - .env
+    environment:
+      UPLOAD_LOCATION: ${UPLOAD_LOCATION}
+      DB_DATA_LOCATION: ${DB_DATA_LOCATION}
+      IMMICH_VERSION: ${IMMICH_VERSION}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_DATABASE_NAME: ${DB_DATABASE_NAME}
     ports:
       - 2283:3001
     depends_on:
@@ -31,7 +34,6 @@ services:
       disable: false
 
   immich-machine-learning:
-    container_name: immich_machine_learning
     # For hardware acceleration, add one of -[armnn, cuda, openvino] to the image tag.
     # Example tag: ${IMMICH_VERSION:-release}-cuda
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
@@ -42,19 +44,24 @@ services:
       - model-cache:/cache
     # env_file:
     #   - .env
+    environment:
+      UPLOAD_LOCATION: ${UPLOAD_LOCATION}
+      DB_DATA_LOCATION: ${DB_DATA_LOCATION}
+      IMMICH_VERSION: ${IMMICH_VERSION}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_DATABASE_NAME: ${DB_DATABASE_NAME}    
     restart: always
     healthcheck:
       disable: false
 
   redis:
-    container_name: immich_redis
     image: docker.io/redis:6.2-alpine@sha256:2d1463258f2764328496376f5d965f20c6a67f66ea2b06dc42af351f75248792
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
 
   database:
-    container_name: immich_postgres
     image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
