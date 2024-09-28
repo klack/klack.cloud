@@ -34,7 +34,7 @@ LOG_DIRS=(
     "/var/log/cowrie"
     "/var/log/plex/PMS Plugin Logs"
 )
-git clean -fdx
+git stash
 rm -rfv "${LOG_DIRS[@]}"
 
 #Remove node_exporter
