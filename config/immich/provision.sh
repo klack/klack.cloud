@@ -66,7 +66,7 @@ for FILE in "${FILES[@]}"; do
 done
 
 #Cleanup
-docker compose down immich-server klack-cloud-database-1 klack-cloud-database-1
+docker compose down immich-server redis database
 rm -rf ./tmp
 
 echo "immich first time run complete"

@@ -1,6 +1,11 @@
 #!/bin/bash
 
 #Password Prompting
+read -p "Enter your username: " USERNAME
+if [[ ! "$username" =~ ^[A-Za-z0-9]+$ ]]; then
+    echo "Error: Username can only contain letters A-Z, a-z, and numbers 0-9."
+    exit 1
+fi
 read -p "Enter external domain: " EXTERNAL_DOMAIN
 read -s -p "Create a password: " PASSWORD
 echo
@@ -22,7 +27,9 @@ sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" .env
 #Passwords
 ESCAPED_PASSWORD=$(printf '%s\n' "$PASSWORD" | sed 's/\([\"$]\)/\\\1/g')
 ESCAPED_CLOUD_PASSWORD=$(printf '%s\n' "$CLOUD_PASSWORD" | sed 's/\([\"$]\)/\\\1/g')
+sed -i "s|^BASIC_AUTH_USER=.*|BASIC_AUTH_USER=\"$USERNAME\"|" .env
 sed -i "s|^BASIC_AUTH_PASS=.*|BASIC_AUTH_PASS=\"$ESCAPED_PASSWORD\"|" .env
+sed -i "s|^CLOUD_USER=.*|CLOUD_USER=\"$USERNAME\"|" .env
 sed -i "s|^CLOUD_PASS=.*|CLOUD_PASS=\"$ESCAPED_PASSWORD\"|" .env
 
 #Generate htpassword
