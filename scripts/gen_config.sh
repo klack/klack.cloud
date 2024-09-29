@@ -1,12 +1,8 @@
 #!/bin/bash
 
 #Password Prompting
-read -p "Enter your username: " USERNAME
-if [[ ! "$username" =~ ^[A-Za-z0-9]+$ ]]; then
-    echo "Error: Username can only contain letters A-Z, a-z, and numbers 0-9."
-    exit 1
-fi
-read -p "Enter external domain: " EXTERNAL_DOMAIN
+read -p "Enter your domain name: " EXTERNAL_DOMAIN
+read -p "Create a username: " USERNAME
 read -s -p "Create a password: " PASSWORD
 echo
 read -s -p "Enter password again: " PASSWORD_CONFIRM
