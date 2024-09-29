@@ -37,11 +37,16 @@ entrypoints:
     http:
       tls: true
 
+  immich:
+    address: ":2283"
+    http:
+      tls: true
+
   internal:
     address: ":4443"
     http:
       tls: true
-  
+
   metrics:
     address: ":9101"
     http:

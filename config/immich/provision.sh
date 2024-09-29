@@ -1,9 +1,8 @@
-#!/bin/bash -x
+#!/bin/bash
 echo -e "\nProvisioning immich"
 source ./.env
 
-SERVER=http://localhost:2283
-# SERVER="https://immich.${INTERNAL_DOMAIN}:4443"
+SERVER=http://localhost:2284
 USER=$CLOUD_USER@$EXTERNAL_DOMAIN
 PASSWORD=$CLOUD_PASS
 
@@ -38,15 +37,13 @@ ACCESS_TOKEN=$(curl -s -L $SERVER/api/auth/login \
     --data-raw "{\"email\": \"$USER\", \"password\": \"$PASSWORD\"}" \
     | jq -r '.accessToken')
 
-echo $ACCESS_TOKEN
-
 # Upload sample files
 mkdir ./tmp
 wget -q --show-progress -O ./tmp/starry_night.jpg https://upload.wikimedia.org/wikipedia/commons/c/cd/VanGogh-starry_night.jpg
 wget -q --show-progress -O ./tmp/over_the_rhone.jpg https://upload.wikimedia.org/wikipedia/commons/9/94/Starry_Night_Over_the_Rhone.jpg
 wget -q --show-progress -O ./tmp/vincent_van_gogh.jpg "https://upload.wikimedia.org/wikipedia/commons/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg"
 
-FILES=(./tmp/starry_night.jpg ./tmp/over_the_rhone.jpg ./tmp/vincent_van_gogh.jpg)
+FILES=(./tmp/*)
 # Loop through each file in the list
 for FILE in "${FILES[@]}"; do
   MTIME=$(stat -c %Y "$FILE")
@@ -69,4 +66,7 @@ for FILE in "${FILES[@]}"; do
 done
 
 #Cleanup
+docker compose down immich-server klack-cloud-database-1 klack-cloud-database-1
 rm -rf ./tmp
+
+echo "immich first time run complete"

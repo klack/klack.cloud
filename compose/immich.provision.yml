@@ -2,4 +2,4 @@
 services:
   immich-server:
     ports:
-      - 2283:3001
+      - 2284:3001
