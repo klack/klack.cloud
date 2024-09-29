@@ -1,33 +1,73 @@
 #!/bin/bash -x
+echo -e "\nProvisioning immich"
+source ./.env
 
-USER=admin@klack.cloud
-PASSWORD=asdf
+SERVER=http://localhost:2283
+# SERVER="https://immich.${INTERNAL_DOMAIN}:4443"
+USER=$CLOUD_USER@$EXTERNAL_DOMAIN
+PASSWORD=$CLOUD_PASS
 
-# # Create admin
-# curl 'http://localhost:2283/api/auth/admin-sign-up' -X POST \
-#     -H 'content-type: application/json' \
-#     --data-raw '{"email":"$USER","password":"$PASSWORD","name":"Admin"}'
+#Start up sftpgo
+docker compose run -p 2283:3001 immich -d
+#docker compose up immich-database immich-redis immich-server -d && docker compose logs immich-database immich-redis immich-server -f
 
-ACCESS_TOKEN=$(curl -s -L 'http://localhost:2283/api/auth/login' \
+# Wait for SFTPGo to be marked as healthy
+echo "Waiting for SFTPGo to be healthy..."
+CHECK_URL="$SERVER/web/client/login"
+TIMEOUT=60  # Maximum time to wait (in seconds)
+RETRY_INTERVAL=5  # Time between retries
+SECONDS_WAITED=0
+until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -k)" == "200" ]]; do
+    SECONDS_WAITED=$((SECONDS_WAITED + RETRY_INTERVAL))
+    if [ $SECONDS_WAITED -ge $TIMEOUT ]; then
+        echo "SFTPGo did not return 200 after $SECONDS_WAITED seconds, exiting."
+        exit 1
+    fi
+    echo "Retrying in $RETRY_INTERVAL seconds..."
+    sleep $RETRY_INTERVAL
+done
+
+# Create admin
+curl $SERVER/api/auth/admin-sign-up -X POST \
+    -H 'content-type: application/json' \
+    --data-raw "{\"email\": \"$USER\", \"password\": \"$PASSWORD\", \"name\":\"Cloud\"}"
+
+# Get access token
+ACCESS_TOKEN=$(curl -s -L $SERVER/api/auth/login \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
     --data-raw "{\"email\": \"$USER\", \"password\": \"$PASSWORD\"}" \
     | jq -r '.accessToken')
 
-#{"accessToken":"UNvKU9HDWgIDiLtCHG5oeLPKhuzTR4ep2FwpORbMjmo","userId":"45ea349b-3765-478d-9cc7-9599b9a4f294","userEmail":"admin@klack.cloud","name":"My Name","isAdmin":true,"profileImagePath":"","shouldChangePassword":true}klack@suprim:~/projects/k
-#curl 'http://localhost:2283/api/assets' -X POST -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:130.0) Gecko/20100101 Firefox/130.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br, zstd' -H 'Content-Type: multipart/form-data; boundary=---------------------------3177142945120919491761330671' -H 'Origin: http://localhost:2283' -H 'DNT: 1' -H 'Sec-GPC: 1' -H 'Connection: keep-alive' -H 'Referer: http://localhost:2283/photos' -H 'Cookie: immich_access_token=O15Hw2xaDVMsAg7AUGtyWOwKnS5IXYktzssTSDZMvk; immich_auth_type=password; immich_is_authenticated=true' -H 'Sec-Fetch-Dest: empty' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Site: same-origin' --data-binary $'-----------------------------3177142945120919491761330671\r\nContent-Disposition: form-data; name="deviceAssetId"\r\n\r\nweb-dashboard.png-1726725269295\r\n-----------------------------3177142945120919491761330671\r\nContent-Disposition: form-data; name="deviceId"\r\n\r\nWEB\r\n-----------------------------3177142945120919491761330671\r\nContent-Disposition: form-data; name="fileCreatedAt"\r\n\r\n2024-09-19T05:54:29.295Z\r\n-----------------------------3177142945120919491761330671\r\nContent-Disposition: form-data; name="fileModifiedAt"\r\n\r\n2024-09-19T05:54:29.295Z\r\n-----------------------------3177142945120919491761330671\r\nContent-Disposition: form-data; name="isFavorite"\r\n\r\nfalse\r\n-----------------------------3177142945120919491761330671\r\nContent-Disposition: form-data; name="duration"\r\n\r\n0:00:00.000000\r\n-----------------------------3177142945120919491761330671\r\nContent-Disposition: form-data; name="assetData"; filename="dashboard.png"\r\nContent-Type: application/octet-stream\r\n\r\n-----------------------------3177142945120919491761330671--\r\n'
-FILE='./config/immich/photo.png'
-MTIME=$(stat -c %Y "$FILE")
-DEVICE_ASSET_ID="${FILE}-${MTIME}"
-FILE_CREATED_AT=$(date -d @$MTIME --utc +'%Y-%m-%dT%H:%M:%S.%NZ')
-FILE_MODIFIED_AT=$(date -d @$MTIME --utc +'%Y-%m-%dT%H:%M:%S.%NZ')
+echo $ACCESS_TOKEN
+exit 
+# Upload sample files
+mkdir ./tmp
+wget -q --show-progress -O ./tmp/starry_night.jpg https://upload.wikimedia.org/wikipedia/commons/c/cd/VanGogh-starry_night.jpg
+wget -q --show-progress -O ./tmp/over_the_rhone.jpg https://upload.wikimedia.org/wikipedia/commons/9/94/Starry_Night_Over_the_Rhone.jpg
+wget -q --show-progress -O ./tmp/vincent_van_gogh.jpg "https://upload.wikimedia.org/wikipedia/commons/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg"
 
-curl -X POST "http://127.0.0.1:2283/api/assets" \
-    -H "Accept: application/json" \
-    -H "Authorization: Bearer $ACCESS_TOKEN" \
-    -F "deviceAssetId=$DEVICE_ASSET_ID" \
-    -F "deviceId=python" \
-    -F "fileCreatedAt=$FILE_CREATED_AT" \
-    -F "fileModifiedAt=$FILE_MODIFIED_AT" \
-    -F "isFavorite=false" \
-    -F "assetData=@$FILE"
+FILES=(./tmp/starry_night.jpg ./tmp/over_the_rhone.jpg ./tmp/vincent_van_gogh.jpg)
+# Loop through each file in the list
+for FILE in "${FILES[@]}"; do
+  MTIME=$(stat -c %Y "$FILE")
+  DEVICE_ASSET_ID="${FILE}-${MTIME}"
+  FILE_CREATED_AT=$(date -d @$MTIME --utc +'%Y-%m-%dT%H:%M:%S.%NZ')
+  FILE_MODIFIED_AT=$(date -d @$MTIME --utc +'%Y-%m-%dT%H:%M:%S.%NZ')
+
+  # Perform the upload for each file
+  curl -X POST $SERVER/api/assets \
+      -H "Accept: application/json" \
+      -H "Authorization: Bearer $ACCESS_TOKEN" \
+      -F "deviceAssetId=$DEVICE_ASSET_ID" \
+      -F "deviceId=provision" \
+      -F "fileCreatedAt=$FILE_CREATED_AT" \
+      -F "fileModifiedAt=$FILE_MODIFIED_AT" \
+      -F "isFavorite=false" \
+      -F "assetData=@$FILE"
+
+  echo "Uploaded $FILE"
+done
+
+#Cleanup
+rm -rf ./tmp
