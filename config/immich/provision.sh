@@ -7,20 +7,19 @@ SERVER=http://localhost:2283
 USER=$CLOUD_USER@$EXTERNAL_DOMAIN
 PASSWORD=$CLOUD_PASS
 
-#Start up sftpgo
-docker compose run -p 2283:3001 immich -d
-#docker compose up immich-database immich-redis immich-server -d && docker compose logs immich-database immich-redis immich-server -f
+#Start up immich
+docker compose -f ./compose.yml -f ./compose/immich.provision.yml up immich-server -d
 
-# Wait for SFTPGo to be marked as healthy
-echo "Waiting for SFTPGo to be healthy..."
-CHECK_URL="$SERVER/web/client/login"
+# Wait for immich to be marked as healthy
+echo "Waiting for immich to be healthy..."
+CHECK_URL="$SERVER"
 TIMEOUT=60  # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5  # Time between retries
 SECONDS_WAITED=0
 until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -k)" == "200" ]]; do
     SECONDS_WAITED=$((SECONDS_WAITED + RETRY_INTERVAL))
     if [ $SECONDS_WAITED -ge $TIMEOUT ]; then
-        echo "SFTPGo did not return 200 after $SECONDS_WAITED seconds, exiting."
+        echo "immich did not return 200 after $SECONDS_WAITED seconds, exiting."
         exit 1
     fi
     echo "Retrying in $RETRY_INTERVAL seconds..."
@@ -40,7 +39,7 @@ ACCESS_TOKEN=$(curl -s -L $SERVER/api/auth/login \
     | jq -r '.accessToken')
 
 echo $ACCESS_TOKEN
-exit 
+
 # Upload sample files
 mkdir ./tmp
 wget -q --show-progress -O ./tmp/starry_night.jpg https://upload.wikimedia.org/wikipedia/commons/c/cd/VanGogh-starry_night.jpg
