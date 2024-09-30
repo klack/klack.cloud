@@ -16,9 +16,11 @@ services:
       - RUN_OPTS=
     volumes:
       - jackett:/config
-      - .${DIR_CLOUD_ROOT}/${CLOUD_USER}/Downloads:/downloads
+      - ../config/jackett/ServerConfig.json:/config/Jackett/ServerConfig.json
       - /dev/null:/config/Jackett/log.txt # Suppress log file
       - /dev/null:/config/Jackett/updater.txt # No way to expose this properly outside the container so it can be rotated. (the container is unable to write to the file)
+      - .${DIR_CLOUD_ROOT}/${CLOUD_USER}/Downloads:/downloads
+    
     network_mode: service:qbittorrent-wireguard
     labels:
       - "traefik.enable=true"

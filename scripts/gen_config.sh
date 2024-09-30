@@ -40,14 +40,24 @@ sed -i "s|^MARIADB_ROOT_PASSWORD=.*|MARIADB_ROOT_PASSWORD=\"$MARIADB_ROOT_PASSWO
 sed -i "s|^MARIADB_PASSWORD=.*|MARIADB_PASSWORD=\"$MARIADB_PASSWORD\"|" .env
 
 #Sonarr / Radarr
-SONARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
-RADARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
+SONARR_API_KEY=$(openssl rand -hex 16)
+RADARR_API_KEY=$(openssl rand -hex 16)
+JACKETT_API_KEY=$(openssl rand -hex 16)
+JACKETT_INSTANCE_ID=$(openssl rand -hex 32)
+
 sed -i "s|^SONARR_API_KEY=.*|SONARR_API_KEY=\"$SONARR_API_KEY\"|" .env
 sed -i "s|^RADARR_API_KEY=.*|RADARR_API_KEY=\"$RADARR_API_KEY\"|" .env
+sed -i "s|^JACKETT_API_KEY=.*|RADARR_API_KEY=\"$JACKETT_API_KEY\"|" .env
+
 cp -p ./config/radarr/config.xml.template ./config/radarr/config.xml
 sed -i "s/\${API_KEY}/${RADARR_API_KEY}/g" ./config/radarr/config.xml
+
 cp ./config/sonarr/config.xml.template ./config/sonarr/config.xml
 sed -i "s/\${API_KEY}/${SONARR_API_KEY}/g" ./config/sonarr/config.xml
+
+cp ./config/jackett/ServerConfig.json.template ./config/jackett/ServerConfig.json
+sed -i "s/\${API_KEY}/${JACKETT_API_KEY}/g" ./config/jackett/ServerConfig.json
+sed -i "s/\${INSTANCE_ID}/${JACKETT_INSTANCE_ID}/g" ./config/jackett/ServerConfig.json
 
 #Plex
 echo -e "\nPlex Setup"
