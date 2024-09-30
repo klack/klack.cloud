@@ -41,7 +41,7 @@ WebUI\HostHeaderValidation=false
 WebUI\CSRFProtection=false
 WebUI\Password_PBKDF2="@ByteArray(${PASSWORD_PBKDF2})"
 WebUI\Port=8080
-WebUI\Username=admin
+WebUI\Username=${USERNAME}
 
 [RSS]
 AutoDownloader\DownloadRepacks=true

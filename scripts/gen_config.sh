@@ -58,6 +58,7 @@ sed -i "s|^PLEX_CLAIM=.*|PLEX_CLAIM=$PLEX_CLAIM|" .env
 cp -p ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf
 PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim python generate_pkbdf2.py "$PASSWORD")"
 sed -i "s#\${PASSWORD_PBKDF2}#${PASSWORD_PBKDF2}#g" ./config/qbittorrent/qBittorrent.conf
+sed -i "s#\${USERNAME}#${USERNAME}#g" ./config/qbittorrent/qBittorrent.conf
 
 #Clean option
 if [[ "$1" == "--clean" ]]; then

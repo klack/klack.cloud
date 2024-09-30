@@ -95,6 +95,7 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 ./config/sftpgo/provision.sh
 ./config/plex/provision.sh
 ./config/immich/provision.sh
+./config/radarr/provision.sh
 
 # #Download Sample Files
 ./scripts/download_samples.sh

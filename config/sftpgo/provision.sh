@@ -23,7 +23,6 @@ until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -k)" == "200" ]
     sleep $RETRY_INTERVAL
 done
 
-
 #Create default user
 echo "Getting token"
 SERVER="https://sftpgo.${INTERNAL_DOMAIN}:4443"
