@@ -66,7 +66,8 @@ for FILE in "${FILES[@]}"; do
 done
 
 #Cleanup
-docker compose down immich-server redis database
 rm -rf ./tmp
-
+echo "Waiting for database write..."
+sleep 30
+docker compose down immich-server redis database
 echo "immich first time run complete"
