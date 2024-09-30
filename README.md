@@ -22,7 +22,7 @@
 - 📺 Video Server
   - Plex
 - 📷 Photo Gallery
-  - PhotoPrism
+  - Immich
 - 🔄 Photo sync, Note sync, Cloud storage
   - SFTPGo
 - 🔐 SSL and Basic Auth
@@ -100,19 +100,8 @@ Visit `http://your-domain.com.internal` to access your home page.
     - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
     - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
 
-## Photo Sync
-- Setup [PhotoSync](https://www.photosync-app.com/home) for your phone
-    - **Note this is a paid app** - Looking for a better solution
-    - Open the app and navigate to Settings > Configure > WebDAV > Add New Configuration...  
-      - Server: `your-domain.com`  
-      - Port: `443`  
-      - Login: `cloud`
-      - Password: Your password
-      - Directory: `/dav/Photos`
-      - Use SSL: On
-    - Tap "Done"
-    - You can now use the red sync button and choose WebDAV
-- View your photos from any device at https://your-domain.com/photos 
+## Photo Gallery
+- View your photos from any device at https://your-domain.com:2283/
 
 ## Notebook Sync
 Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
@@ -136,10 +125,13 @@ You will receive email alerts for the following:
 - Honeypot activities  
 
 ## Backups
-Documents, Notes and Photos are automatically backed up at 1:00PM.  If there is a backup failure, you will receive an alert.
+- You should add encryption to your backups in Duplicati by editing the backup job.  
+- Videos are not backed-up by default.  
+- Documents, Notes and Photos are automatically backed up at 1:00PM.  
+- If there is a backup failure, you will receive an email alert.
 
 ### Download Managers
-- Using download managers to search TV and Movies requires knowledge of how to use Sonarr, Radarr, and Jackett.
+- Using download managers to search TV and Movies requires knowledge of Sonarr, Radarr, and Jackett.
 - Use `localhost:8080` when adding a Download Client for qBittorent in Sonarr and Radarr
 - Use `/data/library/tv/` as a path when adding a series in Sonarr
 - Use `/data/library/movies/` as a path when adding a movie on Radarr
@@ -150,7 +142,7 @@ Documents, Notes and Photos are automatically backed up at 1:00PM.  If there is 
 | Service       | Port     | Domain                               | Hosted Path | URL                                                    | Service URL            | Auth Provider | Log Rotation  |
 | ------------- | -------- | ------------------------------------ | ----------- | ------------------------------------------------------ | ---------------------- | ------------- | ------------- |
 | Plex          | 32400    | your-domain.com                      | /           | https://your-domain.com:32400/                         |                        | App           | Self          |
-| PhotoPrism    | 443      | your-domain.com                      | /photos     | https://your-domain.com/photos                         |                        | App           | Docker        |
+| Immich        | 2283     | your-domain.com                      | /           | https://your-domain.com:2283/                          |                        | App           | Docker        |
 | WebDav        | 443      | your-domain.com                      | /dav        | https://your-domain.com/dav/                           |                        | Traefik       | Docker        |
 | SFTPGo UI     | 4443     | sftpgo.your-domain.com.internal      | /           | https://sftpgo.your-domain.com.internal:4443/          |                        | Traefik       | Docker        |
 | Traefik UI    | 4443     | traefik.your-domain.com.internal     | /           | https://traefik.your-domain.com.internal:4443/         |                        | Traefik       | logrotate     |
