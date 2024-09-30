@@ -61,6 +61,16 @@ curl 'https://radarr.'"$INTERNAL_DOMAIN"':4443/api/v3/downloadclient?' \
         "infoLink": "https://wiki.servarr.com/radarr/supported#qbittorrent",
         "tags": []
     }'
+
+curl 'https://radarr.'"$INTERNAL_DOMAIN"':4443/api/v3/rootFolder' \
+    -k \
+    -X POST \
+    -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+    -H 'Content-Type: application/json' \
+    -H 'X-Api-Key: '"$RADARR_API_KEY"'' \
+    -H 'Authorization: Basic '"$BASE_64"'' \
+    --data-raw '{"path":"/data/'"$BASIC_AUTH_USER"'/Library/Movies/"}'
+
 sleep 5
 docker compose down traefik qbittorrent-wireguard radarr
 

@@ -128,10 +128,7 @@ You will receive email alerts for the following:
 
 ## Download Managers
 - Using download managers to search TV and Movies requires knowledge of Sonarr, Radarr, and Jackett.
-- Use `localhost:8080` when adding a qBittorrent Download Client in Sonarr and Radarr
-- Use `/data/library/tv/` as a path when adding a series in Sonarr
-- Use `/data/library/movies/` as a path when adding a movie on Radarr
-- Use `http://localhost:9117` when referencing the Torznab URL for Jacket 
+- Use `http://localhost:9117` when referencing the Torznab URL for Jackett
 - Jackett will show an error "Your instance has external access enabled without using an admin password."  You can ignore this because we have our own basic auth.
 
 # Service Directory
