@@ -126,7 +126,7 @@ You will receive email alerts for the following:
 
 ## Backups
 - You should add encryption to your backups in Duplicati by editing the backup job.  
-- Videos are not backed-up by default.  
+- Videos are not backed up by default.  
 - Documents, Notes and Photos are automatically backed up at 1:00PM.  
 - If there is a backup failure, you will receive an email alert.
 
