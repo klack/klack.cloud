@@ -1,15 +1,15 @@
 #!/bin/bash
 
-echo -e "\nProvisioning radarr"
+echo -e "\nProvisioning sonarr"
 source ./.env
 
 BASE_64=$(echo -n "$BASIC_AUTH_USER:$BASIC_AUTH_PASS" | base64)
 
-docker compose up traefik qbittorrent-wireguard radarr -d
+docker compose up traefik qbittorrent-wireguard sonarr -d
 
-# Wait for radarr to be marked as healthy
-echo "Waiting for radarr to be healthy..."
-SERVER="https://radarr.${INTERNAL_DOMAIN}:4443"
+# Wait for sonarr to be marked as healthy
+echo "Waiting for sonarr to be healthy..."
+SERVER="https://sonarr.${INTERNAL_DOMAIN}:4443"
 CHECK_URL="$SERVER"
 TIMEOUT=60       # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5 # Time between retries
@@ -17,7 +17,7 @@ SECONDS_WAITED=0
 until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -H 'Authorization: Basic '"$BASE_64"'' -k)" == "200" ]]; do
     SECONDS_WAITED=$((SECONDS_WAITED + RETRY_INTERVAL))
     if [ $SECONDS_WAITED -ge $TIMEOUT ]; then
-        echo "radarr did not return 200 after $SECONDS_WAITED seconds, exiting."
+        echo "sonarr did not return 200 after $SECONDS_WAITED seconds, exiting."
         exit 1
     fi
     echo "Retrying in $RETRY_INTERVAL seconds..."
@@ -25,12 +25,12 @@ until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -H 'Authorizati
 done
 
 # Setup qbittorrent as download client
-curl 'https://radarr.'"$INTERNAL_DOMAIN"':4443/api/v3/downloadclient?' \
+curl 'https://sonarr.'"$INTERNAL_DOMAIN"':4443/api/v3/downloadclient?' \
     -k \
     -X POST \
     -H 'Accept: application/json, text/javascript, */*; q=0.01' \
     -H 'Content-Type: application/json' \
-    -H 'X-Api-Key: '"$RADARR_API_KEY"'' \
+    -H 'X-Api-Key: '"$SONARR_API_KEY"'' \
     -H 'Authorization: Basic '"$BASE_64"'' \
     --data-raw '{
         "enable": true,
@@ -46,10 +46,10 @@ curl 'https://radarr.'"$INTERNAL_DOMAIN"':4443/api/v3/downloadclient?' \
             {"name": "urlBase"},
             {"name": "username", "value": "'"$BASIC_AUTH_USER"'" },
             {"name": "password", "value": "'"$BASIC_AUTH_PASS"'" },
-            {"name": "movieCategory", "value": "radarr"},
-            {"name": "movieImportedCategory"},
-            {"name": "recentMoviePriority", "value": 0},
-            {"name": "olderMoviePriority", "value": 0},
+            {"name": "tvCategory", "value": "tv-sonarr"},
+            {"name": "tvImportedCategory"},
+            {"name": "recentTvPriority", "value": 0},
+            {"name": "olderTvPriority", "value": 0},
             {"name": "initialState", "value": 0},
             {"name": "sequentialOrder", "value": false},
             {"name": "firstAndLast", "value": false},
@@ -58,10 +58,11 @@ curl 'https://radarr.'"$INTERNAL_DOMAIN"':4443/api/v3/downloadclient?' \
         "implementationName": "qBittorrent",
         "implementation": "QBittorrent",
         "configContract": "QBittorrentSettings",
-        "infoLink": "https://wiki.servarr.com/radarr/supported#qbittorrent",
+        "infoLink": "https://wiki.servarr.com/sonarr/supported#qbittorrent",
         "tags": []
     }'
-sleep 5
-docker compose down traefik qbittorrent-wireguard radarr
 
-echo "radarr first time run complete"
+sleep 5
+docker compose down traefik qbittorrent-wireguard sonarr
+
+echo "sonarr first time run complete"
