@@ -67,6 +67,6 @@ curl 'https://radarr.'"$INTERNAL_DOMAIN"':4443/api/v3/rootFolder' \
     -H 'Content-Type: application/json' \
     -H 'X-Api-Key: '"$RADARR_API_KEY"'' \
     -H 'Authorization: Basic '"$BASE_64"'' \
-    --data-raw '{"path":"/data/'"$BASIC_AUTH_USER"'/Library/Movies/"}'
+    --data-raw '{"path":"/data/Library/Movies/"}'
 
 echo "radarr first time run complete"

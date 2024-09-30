@@ -11,6 +11,12 @@ PASSWORD=$CLOUD_PASS
 docker compose down immich-server
 docker compose -f ./compose.yml -f ./compose/immich.provision.yml up immich-server -d
 
+#Download sample files
+mkdir ./tmp
+wget -q --show-progress -O ./tmp/starry_night.jpg https://upload.wikimedia.org/wikipedia/commons/c/cd/VanGogh-starry_night.jpg
+wget -q --show-progress -O ./tmp/over_the_rhone.jpg https://upload.wikimedia.org/wikipedia/commons/9/94/Starry_Night_Over_the_Rhone.jpg
+wget -q --show-progress -O ./tmp/vincent_van_gogh.jpg "https://upload.wikimedia.org/wikipedia/commons/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg"
+
 # Wait for immich to be marked as healthy
 echo "Waiting for immich to be healthy..."
 CHECK_URL="$SERVER"
@@ -40,11 +46,6 @@ ACCESS_TOKEN=$(curl -s -L $SERVER/api/auth/login \
     | jq -r '.accessToken')
 
 # Upload sample files
-mkdir ./tmp
-wget -q --show-progress -O ./tmp/starry_night.jpg https://upload.wikimedia.org/wikipedia/commons/c/cd/VanGogh-starry_night.jpg
-wget -q --show-progress -O ./tmp/over_the_rhone.jpg https://upload.wikimedia.org/wikipedia/commons/9/94/Starry_Night_Over_the_Rhone.jpg
-wget -q --show-progress -O ./tmp/vincent_van_gogh.jpg "https://upload.wikimedia.org/wikipedia/commons/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg"
-
 FILES=(./tmp/*)
 # Loop through each file in the list
 for FILE in "${FILES[@]}"; do

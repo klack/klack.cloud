@@ -9,14 +9,14 @@ FileLogger\Path=/config/qBittorrent/data/logs
 
 [BitTorrent]
 Session\BTProtocol=Both
-Session\DefaultSavePath=/data/downloads
+Session\DefaultSavePath=/data/Downloads
 Session\ExcludedFileNames=
 Session\Interface=wg0
 Session\InterfaceAddress=
 Session\InterfaceName=wg0
 Session\Port=
 Session\QueueingSystemEnabled=false
-Session\TempPath=/data/downloads/temp
+Session\TempPath=/data/Downloads/temp
 Session\TempPathEnabled=true
 Session\UseRandomPort=false
 

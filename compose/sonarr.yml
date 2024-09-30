@@ -13,9 +13,9 @@ services:
       - TZ=${TZ}
     volumes:
       - sonarr:/config
-      - ../config/sonarr/config.xml:/config/config.xml      
+      - ../config/sonarr/config.xml:/config/config.xml
       - /var/log/sonarr:/config/logs
-      - .${DIR_CLOUD_ROOT}:/data
+      - .${DIR_CLOUD_ROOT}/${CLOUD_USER}:/data
     network_mode: service:qbittorrent-wireguard
     labels:
       - "traefik.enable=true"
