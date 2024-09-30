@@ -70,7 +70,5 @@ done
 
 #Cleanup
 rm -rf ./tmp
-echo "Waiting for database write..."
-sleep 30
 docker compose down immich-server
 echo "immich first time run complete"
