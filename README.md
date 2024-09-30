@@ -20,34 +20,34 @@
 
 # Features
 - 📺 Video Server
-  - Plex
+  - [Plex](https://www.plex.tv/)
 - 📷 Photo Gallery
-  - Immich
+  - [Immich](https://immich.app/)
 - 🔄 Photo sync, Note sync, Cloud storage
-  - SFTPGo
+  - [SFTPGo](https://sftpgo.com/)
 - 🔐 SSL and Basic Auth
-  - Traefik
+  - [Traefik](https://traefik.io/traefik/)
 - ⛔ Ban bots and failed login attempts automatically
-  - Fail2Ban
+  - [Fail2ban](https://github.com/fail2ban/fail2ban/wiki)
 - 🚨 📊 📃 Log aggregation, dashboards and alerts
-  - Grafana, Promtail, loki
+  - [Grafana](https://grafana.com/), [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/), [loki](https://grafana.com/oss/loki/)
 - 📈 HTTP Stats, System Stats
-  - Prometheus, Node Exporter
+  - [Prometheus](https://prometheus.io/docs/visualization/grafana/), [Node Exporter](https://prometheus.io/docs/guides/node-exporter/)
 - ♻️ Rotate logs to preserve hard disk space
-  - logrotate
+  - [logrotate](https://github.com/logrotate/logrotate)
 - 🍯 Honeypots for SSH, HTTP, SMB and more
-  - Cowrie, Dionaea
+  - [Cowrie](https://cowrie.readthedocs.io/en/latest/index.html), [Dionaea](https://dionaea.readthedocs.io/)
 - 💾 Incremental Backups
-  - Duplicati
+  - [Duplicati](https://duplicati.com/)
 - ⚙️ Auto update docker images
-  - Watchtower
+  - [Watchtower](https://containrrr.dev/watchtower/)
 - 🌀 bittorrent with VPN killswitch
-  - qBittorrent-wireguard
+  - [qBittorrent-wireguard](https://github.com/tenseiken/docker-qbittorrent-wireguard)
 - 📥 Download Managers
-  - Sonarr for TV
-  - Radarr for Movies
-  - Jackett for searching
-  - Unpackerr to handle compressed files
+  - [Sonarr](https://sonarr.tv/) for TV
+  - [Radarr](https://radarr.video/) for Movies
+  - [Jackett](https://github.com/Jackett/Jackett) for searching
+  - [Unpackerr](https://github.com/Unpackerr/unpackerr) to handle compressed files
 
 # Setup
 ### Pre-requisites
@@ -97,7 +97,7 @@ WebDAV URL: `https://your-domain.com/dav`
     - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
 
 ## Photo Gallery
-- View your photos from any device at https://your-domain.com:2283/
+- View your photos from any device at https://your-domain.com:2283
 - For your email address, use `username@your-domain.com`
 
 ## Notebook Sync
