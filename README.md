@@ -75,8 +75,7 @@ After the script is run you will be given a link to finish setup.
 Visit `http://your-domain.com.internal` to access your home page.
 
 ## Cloud Drive
-  - Use the following settings
-    - WebDAV URL: `https://your-domain.com/dav`  
+WebDAV URL: `https://your-domain.com/dav`  
   - Windows
     - Click on the Start icon/Windows icon  
     - Go into "This PC"
@@ -128,7 +127,7 @@ You will receive email alerts for the following:
 - Documents, Notes and Photos are automatically backed up at 1:00PM.  
 - If there is a backup failure, you will receive an email alert.
 
-### Download Managers
+## Download Managers
 - Using download managers to search TV and Movies requires knowledge of Sonarr, Radarr, and Jackett.
 - Use `localhost:8080` when adding a Download Client for qBittorent in Sonarr and Radarr
 - Use `/data/library/tv/` as a path when adding a series in Sonarr

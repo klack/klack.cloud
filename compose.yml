@@ -10,7 +10,6 @@ include:
   - ./compose/cowrie.yml
   - ./compose/duplicati.yml
   - ./compose/sftpgo.yml
-  # - ./compose/photoprism.yml
   - ./compose/plex.yml
   - ./compose/qbittorrent-wireguard.yml
   - ./compose/radarr.yml
