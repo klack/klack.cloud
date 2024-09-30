@@ -54,8 +54,8 @@
 - [ ] Linux with [Docker](https://docs.docker.com/desktop/install/linux/) installed
 - [ ] A free domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
 - [ ] Port 443, 2283, and 32400 must be [forwarded to your machine](https://portforward.com/) from your router
-- [ ] SMTP server settings from your ISP
-- [ ] A [paid VPN subscription](https://protonvpn.com/) if you wish to use "Download Managers"
+- [ ] To recieve critical alerts, you must have SMTP server settings from your ISP
+- [ ] To use "Download Managers", a [paid VPN subscription](https://protonvpn.com/) is required
   - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
   - Place it at `./config/wireguard/wg0.conf`
 
