@@ -70,6 +70,7 @@ else
 fi
 
 #Update Grafana dashboard and default contact point
+echo -e "\nSetting up Grafana"
 cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
 sed -i "s/\${NETWORK_INTERFACE}/${NETWORK_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
 sed -i "s/\${INTERNAL_DOMAIN}/${INTERNAL_DOMAIN}/g" ./config/grafana/dashboards/overview-dashboard.json
@@ -78,6 +79,7 @@ cp ./config/grafana/provisioning/alerting/contact-points.yaml.template ./config/
 sed -i "s/\${GF_SMTP_FROM_ADDRESS}/${GF_SMTP_FROM_ADDRESS}/g" ./config/grafana/provisioning/alerting/contact-points.yaml
 
 #Setup logrotate
+echo -e "\nSetting up logrotate"
 cp ./config/logrotate.d/* /etc/logrotate.d
 
 #Install node_exporter
@@ -86,6 +88,7 @@ echo -e "\nSetting up node_exporter"
 nohup /usr/local/bin/node_exporter >/dev/null 2>&1 &
 
 #Duplicati
+echo -e "\nSetting up Duplicati"
 cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Duplicati-server.sqlite
 
 #Run first time app scripts

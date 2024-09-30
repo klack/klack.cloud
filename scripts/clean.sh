@@ -34,7 +34,7 @@ LOG_DIRS=(
     "/var/log/cowrie"
     "/var/log/plex/PMS Plugin Logs"
 )
-rm -rfv ./data ./bakcups ./home "${LOG_DIRS[@]}"
+rm -rfv ./data ./backups ./home "${LOG_DIRS[@]}"
 
 #Remove node_exporter
 echo "Removing node_exporter"

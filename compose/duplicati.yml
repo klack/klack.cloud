@@ -13,7 +13,7 @@ services:
     volumes:
       - duplicati:/config
       - /var/log/duplicati:/var/log/duplicati
-      - .${DIR_DATA_ROOT}/duplicati/:/config
+      - .${DIR_DATA_ROOT}/duplicati:/config
       - .${DIR_BACKUPS}:/backups
       - .${DIR_CLOUD_ROOT}/${CLOUD_USER}:/source
     # ports:
