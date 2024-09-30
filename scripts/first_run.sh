@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 if [ "$EUID" != 0 ]; then
   echo "Must be run as root"
@@ -9,33 +9,33 @@ source ./.env
 
 #Setup directories
 DATA_DIRS=(
-    "$DIR_DATA_ROOT"
-    "$DIR_DATA_ROOT/plex"
-    "$DIR_DATA_ROOT/transcode"
-    "$DIR_DATA_ROOT/duplicati"
-    "$DIR_DATA_ROOT/immich/postgres"
-    "$DIR_BACKUPS"
-    "$DIR_BACKUPS/Documents"
-    "$DIR_BACKUPS/Notes"
-    "$DIR_BACKUPS/Photos"
-    "$DIR_CLOUD_ROOT"
-    "$DIR_CLOUD_ROOT/$CLOUD_USER"
-    "$DIR_CLOUD_ROOT/$CLOUD_USER/Documents"
-    "$DIR_CLOUD_ROOT/$CLOUD_USER/Notes"
-    "$DIR_CLOUD_ROOT/$CLOUD_USER/Downloads"
-    "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/Movies"
-    "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/TV"
-    "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/Photos"
+  "$DIR_DATA_ROOT"
+  "$DIR_DATA_ROOT/plex"
+  "$DIR_DATA_ROOT/transcode"
+  "$DIR_DATA_ROOT/duplicati"
+  "$DIR_DATA_ROOT/immich/postgres"
+  "$DIR_BACKUPS"
+  "$DIR_BACKUPS/Documents"
+  "$DIR_BACKUPS/Notes"
+  "$DIR_BACKUPS/Photos"
+  "$DIR_CLOUD_ROOT"
+  "$DIR_CLOUD_ROOT/$CLOUD_USER"
+  "$DIR_CLOUD_ROOT/$CLOUD_USER/Documents"
+  "$DIR_CLOUD_ROOT/$CLOUD_USER/Notes"
+  "$DIR_CLOUD_ROOT/$CLOUD_USER/Downloads"
+  "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/Movies"
+  "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/TV"
+  "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/Photos"
 )
 LOG_DIRS=(
-    "/var/log/traefik"
-    "/var/log/duplicati"
-    "/var/log/dionaea"
-    "/var/log/plex"
-    "/var/log/radarr"
-    "/var/log/sonarr"
-    "/var/log/cowrie"
-    "/var/log/plex/PMS Plugin Logs"
+  "/var/log/traefik"
+  "/var/log/duplicati"
+  "/var/log/dionaea"
+  "/var/log/plex"
+  "/var/log/radarr"
+  "/var/log/sonarr"
+  "/var/log/cowrie"
+  "/var/log/plex/PMS Plugin Logs"
 )
 mkdir -vp "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
 
@@ -56,11 +56,11 @@ fi
 #Generate hosts file
 sed "s|\${HOST_IP}|${HOST_IP}|g; \
      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
-     ./config/hosts/hosts.template > ./web/hosts
+  ./config/hosts/hosts.template >./web/hosts
 
 sed "s|\${HOST_IP}|127.0.0.1|g; \
      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
-     ./config/hosts/hosts.template > ./config/hosts/hosts
+  ./config/hosts/hosts.template >./config/hosts/hosts
 
 if ! grep -q "$INTERNAL_DOMAIN" /etc/hosts; then
   sh -c "cat ./config/hosts/hosts >> /etc/hosts"

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo -e "\nProvisioning plex"
 source ./.env
 

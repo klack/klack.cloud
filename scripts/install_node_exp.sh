@@ -1,4 +1,5 @@
 #!/bin/bash
+
 FILE=node_exporter-1.8.2.linux-amd64.tar.gz
 DIR=node_exporter-1.8.2.linux-amd64
 wget -q https://github.com/prometheus/node_exporter/releases/download/v1.8.2/$FILE
