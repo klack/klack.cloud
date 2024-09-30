@@ -153,12 +153,6 @@ You will receive email alerts for the following:
 | Dionaea       | Multiple |                                      |             |                                                        |                        |               | logrotate     |
 
 # Notes
-### Stats
-Node exporter is run on the host machine and read by the prometheus docker instance.  
-IPTable rules should be created so that only this docker container can talk to node exporter
-  - `sudo iptables -A INPUT -p tcp -s 172.17.0.0/16 --dport 9100 -j ACCEPT`
-  - `sudo iptables -A INPUT -p tcp --dport 9100 -j DROP`
-
 ### Log Rotation
 Is setup on the host machine due to permission issues and the requirement to send SIGHUP signals  
 
