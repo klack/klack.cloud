@@ -101,7 +101,7 @@
       target="_blank">Dashboard</a><br>
     <div id="video">📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_blank">Video Server</a><br></div>
     📷 <a href="https://${EXTERNAL_DOMAIN}:2283/" target="_blank">Photo Gallery</a><br>
-    📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#notebook-sync" target="_blank">Notebook
+    📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#sync-your-notebook" target="_blank">Notebook
       Sync</a><br>
     ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#cloud-drive" target="_blank">Cloud
       Drive</a><br>
