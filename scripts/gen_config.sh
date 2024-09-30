@@ -47,7 +47,7 @@ JACKETT_INSTANCE_ID=$(openssl rand -hex 32)
 
 sed -i "s|^SONARR_API_KEY=.*|SONARR_API_KEY=\"$SONARR_API_KEY\"|" .env
 sed -i "s|^RADARR_API_KEY=.*|RADARR_API_KEY=\"$RADARR_API_KEY\"|" .env
-sed -i "s|^JACKETT_API_KEY=.*|RADARR_API_KEY=\"$JACKETT_API_KEY\"|" .env
+sed -i "s|^JACKETT_API_KEY=.*|JACKETT_API_KEY=\"$JACKETT_API_KEY\"|" .env
 
 cp -p ./config/radarr/config.xml.template ./config/radarr/config.xml
 sed -i "s/\${API_KEY}/${RADARR_API_KEY}/g" ./config/radarr/config.xml
