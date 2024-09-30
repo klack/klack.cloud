@@ -99,6 +99,7 @@ WebDAV URL: `https://your-domain.com/dav`
 
 ## View and Sync your Photos
 - View your photos from any device at https://your-domain.com:2283
+- Use the Immich app from the appstore on your phone
 - For your email address, use `username@your-domain.com`
 
 ## Sync your Notes
