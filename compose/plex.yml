@@ -2,7 +2,7 @@ services:
   plex:
     image: plexinc/pms-docker
     profiles:
-      - apps
+      - video
     environment:
       TZ: ${TZ}
       PLEX_CLAIM: ${PLEX_CLAIM}

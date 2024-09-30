@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 if [ "$EUID" == 0 ]; then
   echo "Do not run as root"
@@ -22,14 +22,19 @@ sed -i "s/\${INTERNAL_DOMAIN}/${INTERNAL_DOMAIN}/g" ./web/index.html
 sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" ./web/index.html
 sed -i "s/\${HOST_IP}/${HOST_IP}/g" ./web/index.html
 
-# Check if ./config/wg0.conf exists
+docker compose --profile apps up -d
+# Check if ./config/wg0.conf exists to run download managers
 if [ -f "./config/wireguard/wg0.conf" ]; then
-  # If wg0.conf exists, run docker compose with profile apps and downloaders
-  docker compose --profile apps --profile downloaders up -d
+  docker compose --profile downloaders up -d
 else
-  # If wg0.conf does not exist, run docker compose without the profiles
-  sed -i '/#download_managers {/{N;s/display: block;/display: none;/}' ./web/index.html
-  docker compose --profile apps up -d
+  sed -i '/#download_managers {/{N;s/display: block;/display: none;/}' ./web/index.html # Disable panel on homepage
+fi
+
+# Check if plex claim token was set
+if [ -n "$PLEX_CLAIM" ]; then
+  docker compose up plex -d
+else
+  sed -i '/#video {/{N;s/display: block;/display: none;/}' ./web/index.html # Disable panel on homepage
 fi
 
 echo -e "\nIndex.html created"
