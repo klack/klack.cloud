@@ -164,6 +164,7 @@ Honeypot's cannot be accessed by localhost due to macvlan network
 To use your own ca-signed certificates rename `config/traefik/dynamic/certs.yml.example` to `config/traefik/dynamic/certs.yml` and place `ca.crt`,`server.crt`, and `server.key` in `config/traefik/certs`
 
 # Uninstall
-Run `./setup.sh --clean`  
-Remove entry for `node_exporter` from `/etc/crontab` on your host machine  
-Remove entries from `/etc/hosts` on your server and your local machine  
+- Move the `backup` and `home` folders to a safe location to preserve your data  
+- Run `./setup.sh --clean`  
+- Remove entry for `node_exporter` from `/etc/crontab` on your host machine  
+- Remove entries from `/etc/hosts` on your server and your local machine  
