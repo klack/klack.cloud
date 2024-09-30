@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 echo -e "\nProvisioning immich"
 source ./.env
 

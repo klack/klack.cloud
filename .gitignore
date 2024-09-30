@@ -8,6 +8,7 @@ data
 cloud
 backups
 home
+tmp
 config/traefik/certs
 config/traefik/htpasswd
 config/fail2ban/db/fail2ban.sqlite3
