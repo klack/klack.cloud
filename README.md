@@ -101,7 +101,7 @@ WebDAV URL: `https://your-domain.com/dav`
 - View your photos from any device at https://your-domain.com:2283
 - For your email address, use `username@your-domain.com`
 
-## Sync your Notebook
+## Sync your Notes
 Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Open the app
   - Navigate to Options > synchronization
