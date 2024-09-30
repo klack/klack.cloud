@@ -30,7 +30,7 @@ sed -i "s|^CLOUD_PASS=.*|CLOUD_PASS=\"$ESCAPED_PASSWORD\"|" .env
 
 #Generate htpassword
 docker run --rm httpd:latest htpasswd \
-  -Bbn admin "$PASSWORD" > \
+  -Bbn $USERNAME "$PASSWORD" > \
   ./config/traefik/htpasswd && echo "htpassword generated"
 
 #Photoprism

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 if [ "$EUID" != 0 ]; then
   echo "Must be run as root"
@@ -38,6 +38,12 @@ LOG_DIRS=(
     "/var/log/plex/PMS Plugin Logs"
 )
 mkdir -vp "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
+
+#Setting Permissions
+echo -e "\nSetting Permissions"
+sudo chown -R 1000:1000 *
+sudo chown -R 1000:1000 "${LOG_DIRS[@]}"
+sudo chown -R 999:999 /var/log/cowrie
 
 #Copy docker daemon
 if [ ! -f /etc/docker/daemon.json ]; then
@@ -89,10 +95,3 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 
 # #Download Sample Files
 ./scripts/download_samples.sh
-
-# curl 'http://localhost:2283/api/auth/admin-sign-up' -X POST -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:130.0) Gecko/20100101 Firefox/130.0' -H 'Accept: application/json' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br, zstd' -H 'Referer: http://localhost:2283/auth/register' -H 'content-type: application/json' -H 'Origin: http://localhost:2283' -H 'DNT: 1' -H 'Sec-GPC: 1' -H 'Connection: keep-alive' -H 'Sec-Fetch-Dest: empty' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Site: same-origin' -H 'Priority: u=0' --data-raw '{"email":"admin@klack.cloud","password":"asdf","name":"My Name"}'
-#Setting Permissions
-echo -e "\nSetting Permissions"
-sudo chown -R 1000:1000 *
-sudo chown -R 1000:1000 "${LOG_DIRS[@]}"
-sudo chown -R 999:999 /var/log/cowrie

@@ -7,6 +7,7 @@ compose.override.yml
 data
 cloud
 backups
+home
 config/traefik/certs
 config/traefik/htpasswd
 config/fail2ban/db/fail2ban.sqlite3
