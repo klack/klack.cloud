@@ -4,7 +4,7 @@ echo -e "\nProvisioning sftpgo"
 source ./.env
 
 #Start up sftpgo
-docker compose up traefik sftpgo -d
+# docker compose up traefik sftpgo -d
 
 # Wait for SFTPGo to be marked as healthy
 echo "Waiting for SFTPGo to be healthy..."
@@ -38,6 +38,6 @@ curl -X POST "$SERVER/api/v2/users" \
 -H "Authorization: Bearer $TOKEN" \
 -H "Content-Type: application/json" \
 -d @./config/sftpgo/user.json
-docker compose down traefik sftpgo
+# docker compose down traefik sftpgo
 
 echo "sftpgo first time run complete"

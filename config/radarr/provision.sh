@@ -5,8 +5,6 @@ source ./.env
 
 BASE_64=$(echo -n "$BASIC_AUTH_USER:$BASIC_AUTH_PASS" | base64)
 
-docker compose up traefik qbittorrent-wireguard radarr -d
-
 # Wait for radarr to be marked as healthy
 echo "Waiting for radarr to be healthy..."
 SERVER="https://radarr.${INTERNAL_DOMAIN}:4443"
@@ -70,8 +68,5 @@ curl 'https://radarr.'"$INTERNAL_DOMAIN"':4443/api/v3/rootFolder' \
     -H 'X-Api-Key: '"$RADARR_API_KEY"'' \
     -H 'Authorization: Basic '"$BASE_64"'' \
     --data-raw '{"path":"/data/'"$BASIC_AUTH_USER"'/Library/Movies/"}'
-
-sleep 5
-docker compose down traefik qbittorrent-wireguard radarr
 
 echo "radarr first time run complete"

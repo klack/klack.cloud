@@ -26,6 +26,9 @@ echo "Shutting down services"
 sudo killall node_exporter
 docker volume rm klack-cloud-photoprism-db-1 klack-cloud-sftpgo-1 #Remove so maria database can be reprovisioned
 
+#Start
+./start.sh
+
 #Run first time scripts
 sudo ./scripts/first_run.sh
 if [ $? -ne 0 ]; then
@@ -34,7 +37,6 @@ if [ $? -ne 0 ]; then
 fi
 
 echo -e "\nSetup Complete"
-read -p "Press Enter to Launch"
 
 #Start all docker containers
 ./start.sh

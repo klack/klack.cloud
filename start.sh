@@ -39,7 +39,7 @@ fi
 
 echo -e "\nIndex.html created"
 
-echo "Starting..."
+echo -e "\nStarting..."
 SERVER="http://traefik.${INTERNAL_DOMAIN}"
 CHECK_URL="$SERVER/"
 TIMEOUT=60  # Maximum time to wait (in seconds)

@@ -8,6 +8,7 @@ USER=$CLOUD_USER@$EXTERNAL_DOMAIN
 PASSWORD=$CLOUD_PASS
 
 #Start up immich
+docker compose down immich-server
 docker compose -f ./compose.yml -f ./compose/immich.provision.yml up immich-server -d
 
 # Wait for immich to be marked as healthy
@@ -70,5 +71,5 @@ done
 rm -rf ./tmp
 echo "Waiting for database write..."
 sleep 30
-docker compose down immich-server redis database
+docker compose down immich-server
 echo "immich first time run complete"
