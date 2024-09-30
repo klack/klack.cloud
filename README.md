@@ -51,7 +51,7 @@
 
 # Setup
 ### Pre-requisites
-- [ ] Linux with [Docker](https://docs.docker.com/desktop/install/linux/) installed
+- [ ] Linux with [Docker](https://docs.docker.com/engine/install/) installed
 - [ ] A free domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
 - [ ] Port 443, 2283, and 32400 must be [forwarded to your machine](https://portforward.com/) from your router
 - [ ] To receive critical alerts, you must have SMTP server settings from your ISP
