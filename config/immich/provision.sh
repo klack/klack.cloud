@@ -29,7 +29,7 @@ done
 # Create admin
 curl $SERVER/api/auth/admin-sign-up -X POST \
     -H 'content-type: application/json' \
-    --data-raw "{\"email\": \"$USER\", \"password\": \"$PASSWORD\", \"name\":\"Cloud\"}"
+    --data-raw "{\"email\": \"$USER\", \"password\": \"$PASSWORD\", \"name\":\"$USER\"}"
 
 # Get access token
 ACCESS_TOKEN=$(curl -s -L $SERVER/api/auth/login \
