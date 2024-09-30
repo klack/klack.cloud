@@ -1,6 +1,6 @@
 # klack.cloud
-A secure, monitored, self-hosted replacement for iCloud, Google Photos, Dropbox, Evernote, Netflix and more.
-
+ An example of a self-hosted, microservice based, replacement for iCloud, Google Photos, Evernote, Netflix and more. Secure and monitored. 
+ 
 ![](./assets/diagram.png)
 # Goals
 - Reduce your dependence on cloud services
