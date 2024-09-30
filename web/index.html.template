@@ -103,7 +103,7 @@
     📷 <a href="https://${EXTERNAL_DOMAIN}:2283/" target="_blank">Photo Gallery</a><br>
     📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#sync-your-notebook" target="_blank">Notebook
       Sync</a><br>
-    ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#cloud-drive" target="_blank">Cloud
+    ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#setup-your-cloud-drive" target="_blank">Cloud
       Drive</a><br>
     💾 <a href="https://duplicati.${INTERNAL_DOMAIN}:4443/" target="_blank">Backups</a><br>
     <div id="download_managers">
