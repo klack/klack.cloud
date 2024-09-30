@@ -73,7 +73,7 @@ After the script is run you will be given a link to finish setup.
 ## Home Page
 Visit `http://your-domain.com.internal` to access your home page.
 
-## Cloud Drive
+## Setup your Cloud Drive
 WebDAV URL: `https://your-domain.com/dav`  
   - Windows
     - Click on the Start icon/Windows icon  
@@ -96,11 +96,11 @@ WebDAV URL: `https://your-domain.com/dav`
     - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
     - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
 
-## Photo Gallery
+## View and Sync your Photos
 - View your photos from any device at https://your-domain.com:2283
 - For your email address, use `username@your-domain.com`
 
-## Notebook Sync
+## Sync your Notebook
 Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Open the app
   - Navigate to Options > synchronization
