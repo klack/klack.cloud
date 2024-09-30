@@ -23,7 +23,7 @@
   - [Plex](https://www.plex.tv/)
 - 📷 Photo Gallery
   - [Immich](https://immich.app/)
-- 🔄 Photo sync, Note sync, Cloud storage
+- 🔄 Cloud storage, Note sync
   - [SFTPGo](https://sftpgo.com/)
 - 🔐 SSL and Basic Auth
   - [Traefik](https://traefik.io/traefik/)
