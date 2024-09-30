@@ -95,7 +95,7 @@
     📊 <a href="https://grafana.${INTERNAL_DOMAIN}:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
       target="_blank">Dashboard</a><br>
     📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_blank">Video Server</a><br>
-    📷 <a href="https://${EXTERNAL_DOMAIN}/photos" target="_blank">Photo Gallery</a><br>
+    📷 <a href="https://${EXTERNAL_DOMAIN}:2283/" target="_blank">Photo Gallery</a><br>
     📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#notebook-sync" target="_blank">Notebook
       Sync</a><br>
     ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#cloud-drive" target="_blank">Cloud
