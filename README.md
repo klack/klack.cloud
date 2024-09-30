@@ -76,8 +76,6 @@ Visit `http://your-domain.com.internal` to access your home page.
 
 ## Cloud Drive
   - Use the following settings
-    - User: `cloud`
-    - Password: Your password
     - WebDAV URL: `https://your-domain.com/dav`  
   - Windows
     - Click on the Start icon/Windows icon  
@@ -102,6 +100,7 @@ Visit `http://your-domain.com.internal` to access your home page.
 
 ## Photo Gallery
 - View your photos from any device at https://your-domain.com:2283/
+- For your email address, use `username@your-domain.com`
 
 ## Notebook Sync
 Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
@@ -109,8 +108,7 @@ Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Navigate to Options > synchronization
   - Set "Synchronization target" to "WebDAV"
   - Enter `https://your-domain.com/dav/Notes` for the "WebDAV URL"
-  - Enter `cloud` for "WebDAV username"
-  - Enter your password for "WebDAV password"
+  - Enter your username and password
   - Click "Check synchronization configuration"
   - Upon success click "Show Advanced Settings"
   - Click "Re-upload local data to sync target"
