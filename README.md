@@ -51,7 +51,8 @@
 
 # Setup
 ### Pre-requisites
-- [ ] Linux with [Docker](https://docs.docker.com/engine/install/) installed
+- [ ] Linux with Docker installed: [Ubuntu Instructions](https://docs.docker.com/engine/install/ubuntu/), [Raspberry Pi 64-bit Instructions](https://docs.docker.com/engine/install/debian/)
+  - Don't forget the [post-install steps](https://docs.docker.com/engine/install/linux-postinstall/)!
 - [ ] A free domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
 - [ ] Port 443, 2283, and 32400 must be [forwarded to your machine](https://portforward.com/) from your router
 - [ ] To receive critical alerts, you must have SMTP server settings from your ISP
