@@ -8,7 +8,7 @@ source ./.env
 
 # Wait for SFTPGo to be marked as healthy
 echo "Waiting for SFTPGo to be healthy..."
-SERVER="https://sftpgo.${INTERNAL_DOMAIN}:4443"
+SERVER="https://sftpgo.$INTERNAL_DOMAIN:4443"
 CHECK_URL="$SERVER/web/client/login"
 TIMEOUT=60  # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5  # Time between retries
@@ -25,9 +25,7 @@ done
 
 #Create default user
 echo "Getting token"
-SERVER="https://sftpgo.${INTERNAL_DOMAIN}:4443"
-BASE_64=$(echo -n "$BASIC_AUTH_USER:$BASIC_AUTH_PASS" | base64)
-TOKEN_RESPONSE=$(curl -sS "$SERVER/api/v2/token" -H "Authorization: Basic $BASE_64" -H "Content-Type: application/json" -k)
+TOKEN_RESPONSE=$(curl -sS "$SERVER/api/v2/token" -H "Authorization: Basic $BASIC_AUTH_BASE64" -H "Content-Type: application/json" -k)
 TOKEN=$(echo $TOKEN_RESPONSE | sed -n 's/.*"access_token":"\([^"]*\)".*/\1/p')
 echo "Creating user"
 sed "s|\${CLOUD_USER}|${CLOUD_USER}|g; \
