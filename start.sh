@@ -16,13 +16,16 @@ if [ "$(basename "$(dirname "$PWD")")" = "scripts" ]; then
   cd ..
 fi
 
+#Start
+echo -e "\nStarting"
+docker compose --profile apps up -d
+
 #Generate home page
 cp ./web/index.html.template ./web/index.html
 sed -i "s/\${INTERNAL_DOMAIN}/${INTERNAL_DOMAIN}/g" ./web/index.html
 sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" ./web/index.html
 sed -i "s/\${HOST_IP}/${HOST_IP}/g" ./web/index.html
 
-docker compose --profile apps up -d
 # Check if ./config/wg0.conf exists to run download managers
 if [ -f "./config/wireguard/wg0.conf" ]; then
   docker compose --profile downloaders up -d
@@ -38,22 +41,6 @@ else
 fi
 
 echo -e "\nIndex.html created"
-
-echo -e "\nStarting..."
-SERVER="http://traefik.${INTERNAL_DOMAIN}"
-CHECK_URL="$SERVER/"
-TIMEOUT=60  # Maximum time to wait (in seconds)
-RETRY_INTERVAL=5  # Time between retries
-SECONDS_WAITED=0
-until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL)" == "200" ]]; do
-    SECONDS_WAITED=$((SECONDS_WAITED + RETRY_INTERVAL))
-    if [ $SECONDS_WAITED -ge $TIMEOUT ]; then
-        echo "Service not reachable start after $SECONDS_WAITED seconds, exiting."
-        exit 1
-    fi
-    echo "."
-    sleep $RETRY_INTERVAL
-done
 
 #Show home page
 echo -e "\nklack.cloud launched!"

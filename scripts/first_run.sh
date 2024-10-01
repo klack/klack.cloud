@@ -101,3 +101,5 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 ./config/radarr/provision.sh
 ./config/sonarr/provision.sh
 ./config/immich/provision.sh
+
+echo -e "\nFirst time setup complete"
