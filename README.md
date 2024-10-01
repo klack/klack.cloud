@@ -2,7 +2,7 @@
  An example of a self-hosted, microservice based, replacement for iCloud, Google Photos, Evernote, Netflix and more. Secure and monitored. 
  
 ![](./assets/diagram.png)
-# Goals
+### Goals
 - Reduce your dependence on cloud services
 - Eliminate subscription costs
 - Increase your privacy
@@ -10,13 +10,11 @@
 - Limit your exposure to AI, advertisers, and scammers
 - Own and control your data
 - Prevent phone and vendor lock in
-# Dashboards
-### Overview
+
+### Overview Dashboard
 ![](./assets/dashboard.png)
-### System
+### System Dashboard
 ![](./assets/dashboard2.png)
-### Services
-![](./assets/dashboard3.png)
 
 # Features
 - 📺 Video Server
