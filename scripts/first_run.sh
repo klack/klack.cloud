@@ -97,6 +97,7 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 #Run first time app scripts
 ./config/sftpgo/provision.sh
 ./config/plex/provision.sh
+./config/jackett/provision.sh
 ./config/radarr/provision.sh
 ./config/sonarr/provision.sh
 ./config/immich/provision.sh

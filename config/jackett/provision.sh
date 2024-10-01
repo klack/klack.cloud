@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 echo -e "\nProvisioning Jackett"
 source ./.env

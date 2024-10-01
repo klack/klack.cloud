@@ -29,7 +29,8 @@ curl 'https://sonarr.'"$INTERNAL_DOMAIN"':4443/api/v3/rootFolder' \
     -H 'Content-Type: application/json' \
     -H 'X-Api-Key: '"$SONARR_API_KEY"'' \
     -H "Authorization: Basic $BASIC_AUTH_BASE64" \
-    --data-raw '{"path":"/data/Library/TV/"}'
+    --data-raw '{"path":"/data/Library/TV/"}' \
+    -s -o /dev/null -w '%{http_code}\n'
 
 # Setup qbittorrent as download client
 echo "Adding qBittorrent as a download client"
@@ -68,5 +69,6 @@ curl 'https://sonarr.'"$INTERNAL_DOMAIN"':4443/api/v3/downloadclient?' \
         "configContract": "QBittorrentSettings",
         "infoLink": "https://wiki.servarr.com/sonarr/supported#qbittorrent",
         "tags": []
-    }'
+    }' \
+    -s -o /dev/null -w '%{http_code}\n'
 echo "sonarr first time run complete"
