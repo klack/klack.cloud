@@ -10,8 +10,8 @@ source ./.env
 echo "Waiting for SFTPGo to be healthy..."
 SERVER="https://sftpgo.$INTERNAL_DOMAIN:4443"
 CHECK_URL="$SERVER/web/client/login"
-TIMEOUT=60  # Maximum time to wait (in seconds)
-RETRY_INTERVAL=5  # Time between retries
+TIMEOUT=60       # Maximum time to wait (in seconds)
+RETRY_INTERVAL=5 # Time between retries
 SECONDS_WAITED=0
 until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -k)" == "200" ]]; do
     SECONDS_WAITED=$((SECONDS_WAITED + RETRY_INTERVAL))
@@ -30,12 +30,12 @@ TOKEN=$(echo $TOKEN_RESPONSE | sed -n 's/.*"access_token":"\([^"]*\)".*/\1/p')
 echo "Creating user"
 sed "s|\${CLOUD_USER}|${CLOUD_USER}|g; \
      s|\${CLOUD_PASS}|${CLOUD_PASS}|g" \
-     ./config/sftpgo/user.json.template > ./config/sftpgo/user.json
+    ./config/sftpgo/user.json.template >./config/sftpgo/user.json
 curl -X POST "$SERVER/api/v2/users" \
--k \
--H "Authorization: Bearer $TOKEN" \
--H "Content-Type: application/json" \
--d @./config/sftpgo/user.json
+    -k \
+    -H "Authorization: Bearer $TOKEN" \
+    -H "Content-Type: application/json" \
+    -d @./config/sftpgo/user.json
 # docker compose down traefik sftpgo
 
 echo "sftpgo first time run complete"

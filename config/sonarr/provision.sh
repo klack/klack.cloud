@@ -21,25 +21,35 @@ until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -H "Authorizati
 done
 
 # Setup Library Path
-echo "Setting library path"
-curl 'https://sonarr.'"$INTERNAL_DOMAIN"':4443/api/v3/rootFolder' \
+echo "Setting TV path"
+curl "$SERVER/api/v3/rootFolder" \
     -k \
     -X POST \
     -H 'Accept: application/json, text/javascript, */*; q=0.01' \
     -H 'Content-Type: application/json' \
-    -H 'X-Api-Key: '"$SONARR_API_KEY"'' \
+    -H "X-Api-Key: $SONARR_API_KEY" \
     -H "Authorization: Basic $BASIC_AUTH_BASE64" \
     --data-raw '{"path":"/data/Library/TV/"}' \
+    -s -o /dev/null -w '%{http_code}\n'
+echo "Setting Anime path"
+curl "$SERVER/api/v3/rootFolder" \
+    -k \
+    -X POST \
+    -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+    -H 'Content-Type: application/json' \
+    -H "X-Api-Key: $SONARR_API_KEY" \
+    -H "Authorization: Basic $BASIC_AUTH_BASE64" \
+    --data-raw '{"path":"/data/Library/Anime/"}' \
     -s -o /dev/null -w '%{http_code}\n'
 
 # Setup qbittorrent as download client
 echo "Adding qBittorrent as a download client"
-curl 'https://sonarr.'"$INTERNAL_DOMAIN"':4443/api/v3/downloadclient?' \
+curl "$SERVER/api/v3/downloadclient?" \
     -k \
     -X POST \
     -H 'Accept: application/json, text/javascript, */*; q=0.01' \
     -H 'Content-Type: application/json' \
-    -H 'X-Api-Key: '"$SONARR_API_KEY"'' \
+    -H "X-Api-Key: $SONARR_API_KEY" \
     -H "Authorization: Basic $BASIC_AUTH_BASE64" \
     --data-raw '{
         "enable": true,
@@ -71,4 +81,29 @@ curl 'https://sonarr.'"$INTERNAL_DOMAIN"':4443/api/v3/downloadclient?' \
         "tags": []
     }' \
     -s -o /dev/null -w '%{http_code}\n'
-echo "sonarr first time run complete"
+
+# Add 1337x
+echo "Adding 1337x"
+curl "$SERVER/api/v3/indexer?" \
+    -k \
+    -X POST \
+    -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+    -H 'Content-Type: application/json' \
+    -H "X-Api-Key: $SONARR_API_KEY" \
+    -H "Authorization: Basic $BASIC_AUTH_BASE64" \
+    --data-raw '{"enableRss":true,"enableAutomaticSearch":true,"enableInteractiveSearch":true,"supportsRss":true,"supportsSearch":true,"protocol":"torrent","priority":25,"seasonSearchMaximumSingleEpisodeAge":0,"downloadClientId":0,"name":"1337x","fields":[{"name":"baseUrl","value":"http://localhost:9117/api/v2.0/indexers/1337x/results/torznab/"},{"name":"apiPath","value":"/api"},{"name":"apiKey","value":"'$JACKETT_API_KEY'"},{"name":"categories","value":[5030,5040,5080,100005,100009,100071,100074,100075]},{"name":"animeCategories","value":[]},{"name":"animeStandardFormatSearch","value":false},{"name":"additionalParameters"},{"name":"multiLanguages","value":[]},{"name":"minimumSeeders","value":1},{"name":"seedCriteria.seedRatio"},{"name":"seedCriteria.seedTime"},{"name":"seedCriteria.seasonPackSeedTime"},{"name":"rejectBlocklistedTorrentHashesWhileGrabbing","value":false}],"implementationName":"Torznab","implementation":"Torznab","configContract":"TorznabSettings","infoLink":"https://wiki.servarr.com/sonarr/supported#torznab","tags":[]}' \
+    -s -o /dev/null -w '%{http_code}\n'
+
+# Add Nyaa.si
+echo "Nyaa.si"
+curl "$SERVER/api/v3/indexer?" \
+    -k \
+    -X POST \
+    -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+    -H 'Content-Type: application/json' \
+    -H "X-Api-Key: $SONARR_API_KEY" \
+    -H "Authorization: Basic $BASIC_AUTH_BASE64" \
+    --data-raw '{"enableRss":false,"enableAutomaticSearch":true,"enableInteractiveSearch":true,"supportsRss":true,"supportsSearch":true,"protocol":"torrent","priority":25,"seasonSearchMaximumSingleEpisodeAge":0,"downloadClientId":0,"name":"Nyaa.si","fields":[{"name":"baseUrl","value":"http://localhost:9117/api/v2.0/indexers/nyaasi/results/torznab/"},{"name":"apiPath","value":"/api"},{"name":"apiKey","value":"'$JACKETT_API_KEY'"},{"name":"categories","value":[]},{"name":"animeCategories","value":[5070,125996,125996,127720,127720,131088,131088,140679,140679]},{"name":"animeStandardFormatSearch","value":false},{"name":"additionalParameters"},{"name":"multiLanguages","value":[]},{"name":"minimumSeeders","value":1},{"name":"seedCriteria.seedRatio","value":null},{"name":"seedCriteria.seedTime"},{"name":"seedCriteria.seasonPackSeedTime"},{"name":"rejectBlocklistedTorrentHashesWhileGrabbing","value":false}],"implementationName":"Torznab","implementation":"Torznab","configContract":"TorznabSettings","infoLink":"https://wiki.servarr.com/sonarr/supported#torznab","tags":[]}' \
+    -s -o /dev/null -w '%{http_code}\n'
+
+echo "Sonarr first time run complete"
