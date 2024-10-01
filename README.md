@@ -128,11 +128,6 @@ You will receive email alerts for the following:
 - Documents, Notes and Photos are automatically backed up at 1:00PM.  
 - If there is a backup failure, you will receive an email alert.
 
-## Download Managers
-- Using download managers to search TV and Movies requires knowledge of Sonarr, Radarr, and Jackett.
-- Use `http://localhost:9117` when referencing the Torznab URL for Jackett
-- Jackett will show an error "Your instance has external access enabled without using an admin password."  You can ignore this because we have our own basic auth.
-
 # Service Directory
 | Service       | Port     | Domain                               | Hosted Path | URL                                                    | Service URL            | Auth Provider | Log Rotation  |
 | ------------- | -------- | ------------------------------------ | ----------- | ------------------------------------------------------ | ---------------------- | ------------- | ------------- |
