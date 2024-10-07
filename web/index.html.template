@@ -92,7 +92,7 @@
   <div id="post-setup">
     <h2>Final Steps</h2>
     <ul>
-      <li>Download <a href="http://192.168.20.7/hosts">Hosts File</a></li>
+      <li>Download <a href="http://${HOST_IP}/hosts">Hosts File</a></li>
       <li><a href="https://github.com/klack/klack.cloud/wiki/Editing-your-Hosts-File" target="_blank">View
           Instructions</a></li>
     </ul>
