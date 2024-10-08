@@ -21,6 +21,8 @@ Session\TempPathEnabled=true
 Session\UseRandomPort=false
 Session\GlobalMaxSeedingMinutes=5
 Session\MaxRatioAction=3
+Session\GlobalDLSpeedLimit=8000
+Session\GlobalUPSpeedLimit=2000
 
 [Core]
 AutoDeleteAddedTorrentFile=Never
