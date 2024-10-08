@@ -17,6 +17,9 @@ aarch64)
   ;;
 esac
 
+#.env file generation
+cp -p ./.env.template ./.env
+
 #Disable Downloaders if vpn.conf is not present
 if [ ! -e "./vpn.conf" ]; then
   echo "vpn.conf is not present.  Downloaders will not be setup."
@@ -35,9 +38,6 @@ if [ "$PASSWORD" != "$PASSWORD_CONFIRM" ]; then
   echo "Passwords do not match. Exiting."
   exit 1
 fi
-
-#.env file generation
-cp -p ./.env.template ./.env
 
 #Platform
 sed -i "s|^PLATFORM=.*|PLATFORM=\"$PLATFORM\"|" .env
