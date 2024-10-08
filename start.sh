@@ -22,7 +22,7 @@ echo -e "\nStarting"
 docker compose --profile apps up -d
 
 # Check if plex claim token was set
-if [ "$ENABLE_PLEX" = "1" ]; then
+if [ -n "$PLEX_CLAIM" ]; then
   docker compose up plex -d
 else
   sed -i '/#video {/{N;s/display: block;/display: none;/}' ./web/index.html # Disable panel on homepage
