@@ -18,8 +18,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-source ./.env
-
 #Shut down everything
 echo "Shutting down services"
 ./stop.sh
