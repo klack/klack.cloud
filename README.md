@@ -169,5 +169,4 @@ To use your own ca-signed certificates rename `config/traefik/dynamic/certs.yml.
 # Uninstall
 - Move the `backup` and `home` folders to a safe location to preserve your data  
 - Run `./setup.sh --clean`  
-- Remove entry for `node_exporter` from `/etc/crontab` on your host machine  
-- Remove entries from `/etc/hosts` on your server and your local machine  
+- Remove entries from `/etc/hosts` on your local machine
