@@ -1,7 +1,14 @@
 #!/bin/bash
 
-FILE=node_exporter-1.8.2.linux-amd64.tar.gz
-DIR=node_exporter-1.8.2.linux-amd64
+arch=$(uname -m)
+if [ "$arch" == "x86_64" ]; then
+    FILE=node_exporter-1.8.2.linux-amd64.tar.gz
+    DIR=node_exporter-1.8.2.linux-amd64
+elif [ "$arch" == "aarch64" ]; then
+    FILE=node_exporter-1.8.2.linux-arm64.tar.gz
+    DIR=node_exporter-1.8.2.linux-arm64
+fi
+
 wget -q https://github.com/prometheus/node_exporter/releases/download/v1.8.2/$FILE
 tar xfz $FILE
 sudo cp $DIR/node_exporter /usr/local/bin/node_exporter && echo "node_exporter copied to /usr/local/bin/"
