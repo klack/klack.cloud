@@ -12,6 +12,7 @@ fi
 
 source ./.env
 
+#Get out of the scripts directory
 if [ "$(basename "$(dirname "$PWD")")" = "scripts" ]; then
   cd ..
 fi
@@ -21,14 +22,14 @@ echo -e "\nStarting"
 docker compose --profile apps up -d
 
 # Check if plex claim token was set
-if [ -n "$PLEX_CLAIM" ]; then
+if [ "$ENABLE_PLEX" = "1" ]; then
   docker compose up plex -d
 else
   sed -i '/#video {/{N;s/display: block;/display: none;/}' ./web/index.html # Disable panel on homepage
 fi
 
 # Check if ./vpn.conf exists to run download managers
-if [ -f "./vpn.conf" ]; then
+if [ "$ENABLE_DOWNLOADERS" = "1" ]; then
   docker compose --profile downloaders up -d
 else
   sed -i '/#download_managers {/{N;s/display: block;/display: none;/}' ./web/index.html # Disable panel on homepage

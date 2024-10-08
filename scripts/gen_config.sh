@@ -5,16 +5,16 @@ ARCH=$(uname -m)
 
 # Map architectures to platform strings
 case "$ARCH" in
-  x86_64)
-    PLATFORM="linux/amd64"
-    ;;
-  aarch64)
-    PLATFORM="linux/arm64"
-    ;;
-  *)
-    echo "Unsupported architecture: $ARCH"
-    exit 1
-    ;;
+x86_64)
+  PLATFORM="linux/amd64"
+  ;;
+aarch64)
+  PLATFORM="linux/arm64"
+  ;;
+*)
+  echo "Unsupported architecture: $ARCH"
+  exit 1
+  ;;
 esac
 
 #Password Prompting
@@ -31,6 +31,13 @@ fi
 
 #.env file generation
 cp -p ./.env.template ./.env
+
+#Disable Downloaders if vpn.conf is not present
+if [ ! -e "./vpn.conf" ]; then
+  echo "vpn.conf is not present.  Downloaders will not be setup"
+  ENABLE_DOWNLOADERS=0
+  sed -i "s|^ENABLE_DOWNLOADERS=.*|ENABLE_DOWNLOADERS=\"$ENABLE_DOWNLOADERS\"|" .env
+fi
 
 #Platform
 sed -i "s|^PLATFORM=.*|PLATFORM=\"$PLATFORM\"|" .env
@@ -81,11 +88,6 @@ sed -i "s/\${API_KEY}/${SONARR_API_KEY}/g" ./config/sonarr/config.xml
 cp ./config/jackett/ServerConfig.json.template ./config/jackett/ServerConfig.json
 sed -i "s/\${API_KEY}/${JACKETT_API_KEY}/g" ./config/jackett/ServerConfig.json
 sed -i "s/\${INSTANCE_ID}/${JACKETT_INSTANCE_ID}/g" ./config/jackett/ServerConfig.json
-
-#Plex
-echo -e "\nPlex Setup"
-read -p "Visit https://plex.tv/claim and paste claim token: " PLEX_CLAIM
-sed -i "s|^PLEX_CLAIM=.*|PLEX_CLAIM=$PLEX_CLAIM|" .env
 
 #Set qBittorrent password
 cp -p ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf

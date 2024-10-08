@@ -92,10 +92,4 @@ nohup /usr/local/bin/node_exporter >/dev/null 2>&1 &
 echo -e "\nSetting up Duplicati"
 cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Duplicati-server.sqlite
 
-#Plex
-./config/plex/provision.sh
-
-#Download Sample Files
-./scripts/download_samples.sh
-
 echo -e "\nPre run setup complete"
