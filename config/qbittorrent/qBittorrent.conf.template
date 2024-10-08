@@ -19,6 +19,8 @@ Session\QueueingSystemEnabled=false
 Session\TempPath=/data/Downloads/temp
 Session\TempPathEnabled=true
 Session\UseRandomPort=false
+Session\GlobalMaxSeedingMinutes=5
+Session\MaxRatioAction=3
 
 [Core]
 AutoDeleteAddedTorrentFile=Never
