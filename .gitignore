@@ -3,6 +3,7 @@ scrap
 .vscode
 !.keepme
 *.drawio.bkp
+vpn.conf
 compose.override.yml
 data
 cloud
@@ -12,7 +13,6 @@ tmp
 config/traefik/certs
 config/traefik/htpasswd
 config/fail2ban/db/fail2ban.sqlite3
-config/wireguard/wg0.conf
 config/sftpgo/homeuser/
 config/plex/Preferences.xml
 config/qbittorrent/qBittorrent.conf
