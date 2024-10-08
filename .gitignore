@@ -26,5 +26,5 @@ config/hosts/hosts
 config/duplicati/Duplicati-server.sqlite
 config/grafana/dashboards/overview-dashboard.json
 config/jackett/ServerConfig.json
-web/hosts
+web/hosts.txt
 web/index.html
