@@ -49,16 +49,7 @@ echo "Entries containing 'node_exporter' have been removed from /etc/crontab."
 #######################################
 # Clean hosts file
 #######################################
-if [ -z "$EXTERNAL_DOMAIN" ]; then
-  echo "Error: EXTERNAL_DOMAIN variable is not set."
-  exit 1
-fi
-
-# Escape special characters in EXTERNAL_DOMAIN for use in sed
-EXTERNAL_DOMAIN_ESCAPED=$(printf '%s\n' "$EXTERNAL_DOMAIN" | sed 's/[]\/$*.^[]/\\&/g')
-
-# Backup the original /etc/hosts file
-sudo cp /etc/hosts /etc/hosts.bak
+sudo cp /etc/hosts /etc/hosts.bak # Backup the original /etc/hosts file
 
 if [ -n "$EXTERNAL_DOMAIN" ]; then
   # Escape special characters in EXTERNAL_DOMAIN for use in sed
