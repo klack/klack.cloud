@@ -8,7 +8,7 @@ SERVER="https://jackett.$INTERNAL_DOMAIN:4443"
 # Wait for sonarr to be marked as healthy
 echo "Waiting for Jackett to be healthy..."
 CHECK_URL="$SERVER/UI/Dashboard"
-TIMEOUT=60       # Maximum time to wait (in seconds)
+TIMEOUT=120       # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5 # Time between retries
 SECONDS_WAITED=0
 until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -H "Authorization: Basic $BASIC_AUTH_BASE64" -k)" == "302" ]]; do

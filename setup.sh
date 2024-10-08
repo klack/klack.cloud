@@ -26,6 +26,13 @@ echo "Shutting down services"
 sudo killall node_exporter
 docker volume rm klack-cloud-photoprism-db-1 klack-cloud-sftpgo-1 #Remove so maria database can be reprovisioned
 
+#Run pre-run time scripts
+sudo ./scripts/pre_run.sh
+if [ $? -ne 0 ]; then
+  echo "Pre-run setup failed"
+  exit 1
+fi
+
 #Start
 ./start.sh
 
