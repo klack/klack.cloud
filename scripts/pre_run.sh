@@ -100,8 +100,8 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 
 #Build docker images
 elif [ "$ARCH" == "aarch64" ]; then
-  docker build --platform linux/arm64 -t plexinc/pms-docker ./config/plex/
-  docker build --platform linux/arm64 -t dinotools/dionaea ./config/dionaea/
+  docker build --platform linux/arm64 -t plexinc/pms-docker ./config/plex/git
+  docker build --platform linux/arm64 -t dinotools/dionaea ./config/dionaea/git
 fi
 
 echo -e "\nPre run setup complete"
