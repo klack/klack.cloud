@@ -54,6 +54,9 @@
 - [ ] A free domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
 - [ ] Port 443, 2283, and 32400 must be [forwarded to your machine](https://portforward.com/) from your router
 - [ ] To receive critical alerts, you must have SMTP server settings from your ISP
+- [ ] To use "Download Managers", a [paid VPN subscription](https://protonvpn.com/) is required
+  - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
+
 
 ### Notes
 - Since you are using a self-signed cert, you will need to accept a security exception in your browser for each service.
@@ -62,10 +65,12 @@
 ```bash
 git clone https://github.com/klack/klack.cloud.git
 cd klack.cloud
+nano vpn.conf
 ```
-To use "Download Managers", a [paid VPN subscription](https://protonvpn.com/) is required
-  - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
-  - Place it at `./config/wireguard/wg0.conf`
+
+- Paste the contents of the VPN file you downloaded  
+  Press `Ctrl-x`  
+  Press `y`  
 
 ```
 ./setup.sh
