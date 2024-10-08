@@ -10,7 +10,7 @@ if [ "$EUID" != 0 ]; then
   exit 1
 fi
 
-read -p "WARNING: Destructive! Ctrl-C Now"
+read -p "WARNING: Destructive! Ctrl-C to quit now or press enter to proceed: "
 
 source ./.env
 
@@ -40,5 +40,40 @@ rm -rfv ./data ./backups ./home "${LOG_DIRS[@]}"
 echo "Removing node_exporter"
 killall node_exporter
 rm -v /usr/local/bin/node_exporter
+
+# Clean crontab
+cp /etc/crontab /etc/crontab.bak #Backup original file
+sed -i '/node_exporter/d' /etc/crontab #Remove node_exporter
+echo "Entries containing 'node_exporter' have been removed from /etc/crontab."
+
+#######################################
+# Clean hosts file
+#######################################
+if [ -z "$EXTERNAL_DOMAIN" ]; then
+  echo "Error: EXTERNAL_DOMAIN variable is not set."
+  exit 1
+fi
+
+# Escape special characters in EXTERNAL_DOMAIN for use in sed
+EXTERNAL_DOMAIN_ESCAPED=$(printf '%s\n' "$EXTERNAL_DOMAIN" | sed 's/[]\/$*.^[]/\\&/g')
+
+# Backup the original /etc/hosts file
+sudo cp /etc/hosts /etc/hosts.bak
+
+if [ -n "$EXTERNAL_DOMAIN" ]; then
+  # Escape special characters in EXTERNAL_DOMAIN for use in sed
+  EXTERNAL_DOMAIN_ESCAPED=$(printf '%s\n' "$EXTERNAL_DOMAIN" | sed 's/[]\/$*.^[]/\\&/g')
+
+  # Backup the original /etc/hosts file
+  sudo cp /etc/hosts /etc/hosts.bak
+
+  # Remove entries containing EXTERNAL_DOMAIN
+  sudo sed -i "/$EXTERNAL_DOMAIN_ESCAPED/d" /etc/hosts
+
+  echo "Entries containing '$EXTERNAL_DOMAIN' have been removed from /etc/hosts."
+else
+  echo "EXTERNAL_DOMAIN variable is not set. Skipping hosts removal."
+fi
+#######################################
 
 echo -e "\nCleaning complete"

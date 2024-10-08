@@ -1,4 +1,3 @@
-# klack.cloud
 ${HOST_IP} sftpgo.${INTERNAL_DOMAIN}
 ${HOST_IP} traefik.${INTERNAL_DOMAIN}
 ${HOST_IP} grafana.${INTERNAL_DOMAIN}
