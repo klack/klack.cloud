@@ -70,5 +70,5 @@ done
 
 #Cleanup
 rm -rf ./tmp
-docker compose down immich-server
+
 echo "immich first time run complete"

@@ -56,7 +56,7 @@ fi
 #Generate hosts file
 sed "s|\${HOST_IP}|${HOST_IP}|g; \
      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
-  ./config/hosts/hosts.template >./web/hosts
+  ./config/hosts/hosts.template >./web/hosts.txt
 
 sed "s|\${HOST_IP}|127.0.0.1|g; \
      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
@@ -97,4 +97,4 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 #Download Sample Files
 ./scripts/download_samples.sh
 
-echo -e "\Pre run setup complete"
+echo -e "\nPre run setup complete"
