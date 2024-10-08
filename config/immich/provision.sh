@@ -20,7 +20,7 @@ wget -q --show-progress -O ./tmp/vincent_van_gogh.jpg "https://upload.wikimedia.
 # Wait for immich to be marked as healthy
 echo "Waiting for immich to be healthy..."
 CHECK_URL="$SERVER"
-TIMEOUT=240  # Maximum time to wait (in seconds)
+TIMEOUT=300  # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5  # Time between retries
 SECONDS_WAITED=0
 until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -k)" == "200" ]]; do
