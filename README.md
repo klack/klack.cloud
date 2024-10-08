@@ -63,7 +63,7 @@
 
 ### Run the following commands to begin
 ```bash
-sudo apt install jq
+sudo apt install jq -y
 git clone https://github.com/klack/klack.cloud.git
 cd klack.cloud
 nano vpn.conf
