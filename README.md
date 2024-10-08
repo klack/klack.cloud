@@ -72,6 +72,7 @@ nano vpn.conf
 - Paste the contents of the VPN file you downloaded  
   Press `Ctrl-x`  
   Press `y`  
+  Press `enter`
 
 ```
 ./setup.sh
