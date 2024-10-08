@@ -1,0 +1,6 @@
+[submodule "config/plex/git"]
+	path = config/plex/git
+	url = https://github.com/plexinc/pms-docker.git
+[submodule "config/dionaea/git"]
+	path = config/dionaea/git
+	url = https://github.com/DinoTools/dionaea.git

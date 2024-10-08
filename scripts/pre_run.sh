@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ./.env
+ARCH=$(uname -m)
 
 if [ "$EUID" != 0 ]; then
   echo "Must be run as root"
@@ -96,5 +97,11 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 
 #Download Sample Files
 ./scripts/download_samples.sh
+
+#Build docker images
+elif [ "$ARCH" == "aarch64" ]; then
+  docker build --platform linux/arm64 -t plexinc/pms-docker ./config/plex/
+  docker build --platform linux/arm64 -t dinotools/dionaea ./config/dionaea/
+fi
 
 echo -e "\nPre run setup complete"
