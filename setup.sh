@@ -34,7 +34,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #Start
-./start.sh
+IN_SETUP=1 ./start.sh
 
 #Run first time scripts
 sudo ./scripts/first_run.sh
