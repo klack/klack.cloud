@@ -17,6 +17,13 @@ aarch64)
   ;;
 esac
 
+#Disable Downloaders if vpn.conf is not present
+if [ ! -e "./vpn.conf" ]; then
+  echo "vpn.conf is not present.  Downloaders will not be setup."
+  ENABLE_DOWNLOADERS=0
+  sed -i "s|^ENABLE_DOWNLOADERS=.*|ENABLE_DOWNLOADERS=\"$ENABLE_DOWNLOADERS\"|" .env
+fi
+
 #Password Prompting
 read -p "Enter your domain name: " EXTERNAL_DOMAIN
 read -p "Create a username: " USERNAME
@@ -31,13 +38,6 @@ fi
 
 #.env file generation
 cp -p ./.env.template ./.env
-
-#Disable Downloaders if vpn.conf is not present
-if [ ! -e "./vpn.conf" ]; then
-  echo "vpn.conf is not present.  Downloaders will not be setup"
-  ENABLE_DOWNLOADERS=0
-  sed -i "s|^ENABLE_DOWNLOADERS=.*|ENABLE_DOWNLOADERS=\"$ENABLE_DOWNLOADERS\"|" .env
-fi
 
 #Platform
 sed -i "s|^PLATFORM=.*|PLATFORM=\"$PLATFORM\"|" .env
