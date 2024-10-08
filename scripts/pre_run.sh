@@ -1,7 +1,6 @@
 #!/bin/bash
 
 source ./.env
-ARCH=$(uname -m)
 
 if [ "$EUID" != 0 ]; then
   echo "Must be run as root"
@@ -39,6 +38,7 @@ LOG_DIRS=(
   "/var/log/plex/PMS Plugin Logs"
 )
 mkdir -vp "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
+touch ./config/promtail/positions.yaml
 
 #Setting Permissions
 echo -e "\nSetting Permissions"

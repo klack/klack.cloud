@@ -1,6 +1,7 @@
 services:
   plex:
     image: plexinc/pms-docker
+    platform: "${PLATFORM}"
     profiles:
       - video
     environment:

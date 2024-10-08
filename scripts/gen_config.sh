@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# Get the architecture
+ARCH=$(uname -m)
+
+# Map architectures to platform strings
+case "$ARCH" in
+  x86_64)
+    PLATFORM="linux/amd64"
+    ;;
+  aarch64)
+    PLATFORM="linux/arm64"
+    ;;
+  *)
+    echo "Unsupported architecture: $ARCH"
+    exit 1
+    ;;
+esac
+
 #Password Prompting
 read -p "Enter your domain name: " EXTERNAL_DOMAIN
 read -p "Create a username: " USERNAME
@@ -14,6 +31,10 @@ fi
 
 #.env file generation
 cp -p ./.env.template ./.env
+
+#Platform
+sed -i "s|^PLATFORM=.*|PLATFORM=\"$PLATFORM\"|" .env
+
 TIMEZONE=$(timedatectl | grep "Time zone" | awk '{print $3}')
 sed -i "s|^TZ=.*|TZ=$TIMEZONE|" .env
 
