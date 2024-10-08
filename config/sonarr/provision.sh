@@ -7,7 +7,7 @@ source ./.env
 echo "Waiting for sonarr to be healthy..."
 SERVER="https://sonarr.${INTERNAL_DOMAIN}:4443"
 CHECK_URL="$SERVER"
-TIMEOUT=120       # Maximum time to wait (in seconds)
+TIMEOUT=240       # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5 # Time between retries
 SECONDS_WAITED=0
 until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -H "Authorization: Basic $BASIC_AUTH_BASE64" -k)" == "200" ]]; do
