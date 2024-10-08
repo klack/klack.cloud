@@ -59,7 +59,7 @@ services:
     tty: true
     volumes:
       - "qbtw:/config"
-      - "../config/wireguard/wg0.conf:/config/wireguard/wg0.conf"
+      - "../vpn.conf:/config/wireguard/wg0.conf"
       - "../config/qbittorrent/qBittorrent.conf:/config/qBittorrent/config/qBittorrent.conf"
       - ".${DIR_CLOUD_ROOT}/${CLOUD_USER}:/data"
     working_dir: "/opt"

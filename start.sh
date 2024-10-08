@@ -26,8 +26,8 @@ sed -i "s/\${INTERNAL_DOMAIN}/${INTERNAL_DOMAIN}/g" ./web/index.html
 sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" ./web/index.html
 sed -i "s/\${HOST_IP}/${HOST_IP}/g" ./web/index.html
 
-# Check if ./config/wg0.conf exists to run download managers
-if [ -f "./config/wireguard/wg0.conf" ]; then
+# Check if ./vpn.conf exists to run download managers
+if [ -f "./vpn.conf" ]; then
   docker compose --profile downloaders up -d
 else
   sed -i '/#download_managers {/{N;s/display: block;/display: none;/}' ./web/index.html # Disable panel on homepage
