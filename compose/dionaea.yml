@@ -4,7 +4,6 @@ volumes:
 services:
   dionaea:
     image: dinotools/dionaea
-    platform: "${PLATFORM}"
     environment:
       - TZ=${TZ}
       - "DIONAEA_FORCE_INIT=1"
