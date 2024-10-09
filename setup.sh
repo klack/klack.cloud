@@ -5,41 +5,41 @@ if [ "$EUID" == 0 ]; then
   exit 1
 fi
 
-#Optionally run clean script
+# Optionally run clean script
 if [[ "$1" == "--clean" ]]; then
   sudo ./scripts/clean.sh
   exit 0
 fi
 
-#Generate Config
+# Generate Config
 sudo ./scripts/gen_config.sh
 if [ $? -ne 0 ]; then
   echo ".env generation failed"
   exit 1
 fi
 
-#Shut down everything
+# Shut down everything
 echo "Shutting down services"
 ./stop.sh
 sudo killall node_exporter
-docker volume rm klack-cloud-photoprism-db-1 klack-cloud-sftpgo-1 #Remove so maria database can be reprovisioned
+docker volume rm klack-cloud-photoprism-db-1 klack-cloud-sftpgo-1 # Remove so MariaDB can be reprovisioned
 
-#Run pre-run time scripts
+# Run pre-run scripts
 sudo ./scripts/pre_run.sh
 if [ $? -ne 0 ]; then
   echo "Pre-run setup failed"
   exit 1
 fi
 
-#Start
+# Start
 IN_SETUP=1 ./start.sh
 
-#Run first time scripts
+# Run first-time scripts
 sudo ./scripts/first_run.sh
 if [ $? -ne 0 ]; then
   echo "First run setup failed"
   exit 1
 fi
 
-#Start all docker containers
+# Start docker containers
 ./start.sh
