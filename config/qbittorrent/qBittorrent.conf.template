@@ -20,7 +20,7 @@ Session\TempPath=/data/Downloads/temp
 Session\TempPathEnabled=true
 Session\UseRandomPort=false
 Session\GlobalMaxSeedingMinutes=5
-Session\GlobalDLSpeedLimit=3000
+Session\GlobalDLSpeedLimit=5000
 Session\GlobalUPSpeedLimit=2000
 
 [Core]
