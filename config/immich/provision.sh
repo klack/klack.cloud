@@ -29,7 +29,7 @@ until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -k)" == "200" ]
         echo "immich did not return 200 after $SECONDS_WAITED seconds, exiting."
         exit 1
     fi
-    echo "Retrying in $RETRY_INTERVAL seconds..."
+    printf "."
     sleep $RETRY_INTERVAL
 done
 
