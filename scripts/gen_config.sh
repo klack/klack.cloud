@@ -76,10 +76,15 @@ IMMICH_DB_PASSWORD=$(tr </dev/urandom -dc 'A-Za-z0-9!@#%' | head -c 16)
 sed -i "s|^DB_PASSWORD=.*|DB_PASSWORD=\"$IMMICH_DB_PASSWORD\"|" .env
 
 #Set Servarr api keys
+SONARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
+RADARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
 cp -p ./config/radarr/config.xml.template ./config/radarr/config.xml
 sed -i "s/\${API_KEY}/${RADARR_API_KEY}/g" ./config/radarr/config.xml
+sed -i "s|^RADARR_API_KEY=.*|RADARR_API_KEY=\"$RADARR_API_KEY\"|" .env
+
 cp ./config/sonarr/config.xml.template ./config/sonarr/config.xml
 sed -i "s/\${API_KEY}/${SONARR_API_KEY}/g" ./config/sonarr/config.xml
+sed -i "s|^SONARR_API_KEY=.*|SONARR_API_KEY=\"$SONARR_API_KEY\"|" .env
 
 # Honeypot Setup
 NETWORK=$(echo "$DEFAULT_GATEWAY" | cut -d '.' -f 1-3)
