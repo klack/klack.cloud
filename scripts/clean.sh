@@ -18,6 +18,8 @@ source ./.env
 echo "Shutting down services"
 ./stop.sh
 
+chown -R 1000:1000 *
+
 #Remove docker volumes
 echo "Deleting docker volumes"
 docker volume ls -q | grep '^klack-cloud_' | xargs -r docker volume rm -f
