@@ -71,7 +71,7 @@ nano vpn.conf
 
 - Paste the contents of the VPN file you downloaded  
   Press `Ctrl-o`  
-  Press `enter`
+  Press `enter`  
   Press `Ctrl-x`  
 
 ```
