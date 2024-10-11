@@ -6,6 +6,6 @@ contactPoints:
         - uid: fdyfhvyrni5mof
           type: email
           settings:
-            addresses: notify@klack107.ddns.net
+            addresses: 
             singleEmail: false
           disableResolveMessage: true
