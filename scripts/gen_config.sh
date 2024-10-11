@@ -5,24 +5,32 @@ ARCH=$(uname -m)
 
 # Map architectures to platform strings
 case "$ARCH" in
-  x86_64)
-    PLATFORM="linux/amd64"
-    ;;
-  aarch64)
-    PLATFORM="linux/arm64"
-    ;;
-  *)
-    echo "Unsupported architecture: $ARCH"
-    exit 1
-    ;;
+x86_64)
+  PLATFORM="linux/amd64"
+  ;;
+aarch64)
+  PLATFORM="linux/arm64"
+  ;;
+*)
+  echo "Unsupported architecture: $ARCH"
+  exit 1
+  ;;
 esac
+
+DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
+DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
+DEFAULT_GATEWAY=$(ip route | grep default | awk '{print $3}')
+
+# Setup start messages
+clear
+echo -e "---klack.cloud Setup ($DEFAULT_HOST_IP)---\n"
 
 #.env file generation
 cp -p ./.env.template ./.env
 
 # Disable Downloaders if vpn.conf is not present
 if [ ! -e "./vpn.conf" ]; then
-  echo "vpn.conf is not present. Downloaders will not be set up."
+  echo -e "vpn.conf is not present. \nDownloaders will not be setup.\n"
   ENABLE_DOWNLOADERS=0
   sed -i "s|^ENABLE_DOWNLOADERS=.*|ENABLE_DOWNLOADERS=\"$ENABLE_DOWNLOADERS\"|" .env
 fi
@@ -90,20 +98,10 @@ sed -i "s/\${GF_SMTP_HOST}/${GF_SMTP_HOST}/g" .env
 sed -i "s/\${GF_SMTP_PORT}/${GF_SMTP_PORT}/g" .env
 
 # Honeypot Setup
-echo -e "\n\nHoneypot Setup"
-DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
-DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
-DEFAULT_GATEWAY=$(ip route | grep default | awk '{print $3}')
-read -p "Press enter for default network interface [$DEFAULT_INTERFACE]: " NETWORK_INTERFACE
-read -p "Press enter for default host IP [$DEFAULT_HOST_IP]: " HOST_IP
-read -p "Press enter for default gateway [$DEFAULT_GATEWAY]: " GATEWAY
-NETWORK_INTERFACE=${NETWORK_INTERFACE:-"$DEFAULT_INTERFACE"}
-HOST_IP=${HOST_IP:-"$DEFAULT_HOST_IP"}
-GATEWAY=${GATEWAY:-"$DEFAULT_GATEWAY"}
-NETWORK=$(echo "$GATEWAY" | cut -d '.' -f 1-3)
-sed -i "s|^HOST_IP=.*|HOST_IP=$HOST_IP|" .env
-sed -i "s|^HONEYPOT_GATEWAY=.*|HONEYPOT_GATEWAY=$GATEWAY|" .env
-sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$NETWORK_INTERFACE|" .env
+NETWORK=$(echo "$DEFAULT_GATEWAY" | cut -d '.' -f 1-3)
+sed -i "s|^HOST_IP=.*|HOST_IP=$DEFAULT_HOST_IP|" .env
+sed -i "s|^HONEYPOT_GATEWAY=.*|HONEYPOT_GATEWAY=$DEFAULT_GATEWAY|" .env
+sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$DEFAULT_INTERFACE|" .env
 sed -i "s/\${NETWORK}/${NETWORK}/g" .env
 
 echo -e "\n.env file generated"

@@ -35,8 +35,7 @@
       display: block;
     }
 
-    ,
-    download_managers {
+    #download_managers {
       display: block;
     }
 
@@ -107,7 +106,7 @@
     ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#setup-your-cloud-drive" target="_blank">Cloud
       Drive</a><br>
     💾 <a href="https://duplicati.${INTERNAL_DOMAIN}:4443/" target="_blank">Backups</a><br>
-    <div class="download_managers">
+    <div id="download_managers">
       🌀 Download Managers
       <ul>
         <li><a href="https://qbittorrent.${INTERNAL_DOMAIN}:4443/" target="_blank">Torrents</a></li>
