@@ -86,6 +86,11 @@ cp ./config/sonarr/config.xml.template ./config/sonarr/config.xml
 sed -i "s/\${API_KEY}/${SONARR_API_KEY}/g" ./config/sonarr/config.xml
 sed -i "s|^SONARR_API_KEY=.*|SONARR_API_KEY=\"$SONARR_API_KEY\"|" .env
 
+#Set qBittorrent password
+cp -p ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf
+PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim python generate_pkbdf2.py "$PASSWORD")"
+sed -i "s#\${PASSWORD_PBKDF2}#${PASSWORD_PBKDF2}#g" ./config/qbittorrent/qBittorrent.conf
+
 # Honeypot Setup
 NETWORK=$(echo "$DEFAULT_GATEWAY" | cut -d '.' -f 1-3)
 sed -i "s|^HOST_IP=.*|HOST_IP=$DEFAULT_HOST_IP|" .env
