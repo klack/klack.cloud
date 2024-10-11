@@ -71,9 +71,9 @@ docker run --rm httpd:latest htpasswd \
   -Bbn $USERNAME "$PASSWORD" > \
   ./config/traefik/htpasswd && echo "htpassword generated"
 
-# Photoprism Setup
-MARIADB_PASSWORD=$(tr </dev/urandom -dc 'A-Za-z0-9!@#%' | head -c 16)
-sed -i "s|^MARIADB_PASSWORD=.*|MARIADB_PASSWORD=\"$MARIADB_PASSWORD\"|" .env
+# Immich Setup
+IMMICH_DB_PASSWORD=$(tr </dev/urandom -dc 'A-Za-z0-9!@#%' | head -c 16)
+sed -i "s|^DB_PASSWORD=.*|DB_PASSWORD=\"$IMMICH_DB_PASSWORD\"|" .env
 
 #Set Servarr api keys
 cp -p ./config/radarr/config.xml.template ./config/radarr/config.xml
