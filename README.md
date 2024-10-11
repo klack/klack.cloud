@@ -63,7 +63,7 @@
 
 ### Run the following commands to begin
 ```bash
-sudo apt install jq -y
+sudo apt install openssl jq xxd -y
 git clone --recurse-submodules https://github.com/klack/klack.cloud.git
 cd klack.cloud
 nano vpn.conf
