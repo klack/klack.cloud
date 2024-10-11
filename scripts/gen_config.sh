@@ -98,6 +98,7 @@ sed -i "s|^JACKETT_API_KEY=.*|JACKETT_API_KEY=\"$JACKETT_API_KEY\"|" .env
 cp -p ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf
 PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim python generate_pkbdf2.py "$PASSWORD")"
 sed -i "s#\${PASSWORD_PBKDF2}#${PASSWORD_PBKDF2}#g" ./config/qbittorrent/qBittorrent.conf
+sed -i "s#\${USERNAME}#${USERNAME}#g" ./config/qbittorrent/qBittorrent.conf
 
 # Honeypot Setup
 NETWORK=$(echo "$DEFAULT_GATEWAY" | cut -d '.' -f 1-3)
