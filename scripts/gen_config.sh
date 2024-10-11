@@ -93,7 +93,6 @@ sed -i "s/\${API_KEY}/${JACKETT_API_KEY}/g" ./config/jackett/ServerConfig.json
 sed -i "s/\${INSTANCE_ID}/${JACKETT_INSTANCE_ID}/g" ./config/jackett/ServerConfig.json
 sed -i "s|^JACKETT_API_KEY=.*|JACKETT_API_KEY=\"$JACKETT_API_KEY\"|" .env
 
-
 #Set qBittorrent password
 cp -p ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBittorrent.conf
 PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim python generate_pkbdf2.py "$PASSWORD")"
@@ -106,5 +105,15 @@ sed -i "s|^HOST_IP=.*|HOST_IP=$DEFAULT_HOST_IP|" .env
 sed -i "s|^HONEYPOT_GATEWAY=.*|HONEYPOT_GATEWAY=$DEFAULT_GATEWAY|" .env
 sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$DEFAULT_INTERFACE|" .env
 sed -i "s/\${NETWORK}/${NETWORK}/g" .env
+
+# Email Notifications Setup
+DEFAULT_MAIL_HOST=smtp.protonmail.ch
+DEFAULT_MAIL_PORT=587
+DEFAULT_MAIL_FROM=notify@$EXTERNAL_DOMAIN
+DEFAULT_MAIL_USER=notify@$EXTERNAL_DOMAIN
+sed -i "s|^GF_SMTP_FROM_ADDRESS=.*|GF_SMTP_FROM_ADDRESS=$DEFAULT_MAIL_FROM|" .env
+sed -i "s|^GF_SMTP_USER=.*|GF_SMTP_USER=$DEFAULT_MAIL_USER|" .env
+sed -i "s/\${GF_SMTP_HOST}/${DEFAULT_MAIL_HOST}/g" .env
+sed -i "s/\${GF_SMTP_PORT}/${DEFAULT_MAIL_HOST}/g" .env
 
 echo -e "\n.env file generated"
