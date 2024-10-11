@@ -75,27 +75,11 @@ docker run --rm httpd:latest htpasswd \
 MARIADB_PASSWORD=$(tr </dev/urandom -dc 'A-Za-z0-9!@#%' | head -c 16)
 sed -i "s|^MARIADB_PASSWORD=.*|MARIADB_PASSWORD=\"$MARIADB_PASSWORD\"|" .env
 
-# Email Notifications Setup
-echo -e "\nEmail Notifications"
-DEFAULT_MAIL_HOST=smtp.protonmail.ch
-DEFAULT_MAIL_PORT=587
-DEFAULT_MAIL_FROM=notify@$EXTERNAL_DOMAIN
-DEFAULT_MAIL_USER=notify@$EXTERNAL_DOMAIN
-read -p "Enter your ISP mail server address, or press enter for Proton Mail [$DEFAULT_MAIL_HOST]: " GF_SMTP_HOST
-read -p "Enter your ISP mail server port, or press enter for Proton Mail [$DEFAULT_MAIL_PORT]: " GF_SMTP_PORT
-read -p "Enter your from address [$DEFAULT_MAIL_FROM]: " GF_SMTP_FROM_ADDRESS
-read -p "Enter your SMTP user [notify@$EXTERNAL_DOMAIN]: " GF_SMTP_USER
-read -s -p "Enter your SMTP password: " GF_SMTP_PASSWORD
-echo
-GF_SMTP_HOST=${GF_SMTP_HOST:-"$DEFAULT_MAIL_HOST"}
-GF_SMTP_PORT=${GF_SMTP_PORT:-"$DEFAULT_MAIL_PORT"}
-GF_SMTP_FROM_ADDRESS=${GF_SMTP_FROM_ADDRESS:-"$DEFAULT_MAIL_FROM"}
-GF_SMTP_USER=${GF_SMTP_USER:-"$DEFAULT_MAIL_USER"}
-sed -i "s|^GF_SMTP_FROM_ADDRESS=.*|GF_SMTP_FROM_ADDRESS=$GF_SMTP_FROM_ADDRESS|" .env
-sed -i "s|^GF_SMTP_USER=.*|GF_SMTP_USER=$GF_SMTP_USER|" .env
-sed -i "s|^GF_SMTP_PASSWORD=.*|GF_SMTP_PASSWORD=$GF_SMTP_PASSWORD|" .env
-sed -i "s/\${GF_SMTP_HOST}/${GF_SMTP_HOST}/g" .env
-sed -i "s/\${GF_SMTP_PORT}/${GF_SMTP_PORT}/g" .env
+#Set Servarr api keys
+cp -p ./config/radarr/config.xml.template ./config/radarr/config.xml
+sed -i "s/\${API_KEY}/${RADARR_API_KEY}/g" ./config/radarr/config.xml
+cp ./config/sonarr/config.xml.template ./config/sonarr/config.xml
+sed -i "s/\${API_KEY}/${SONARR_API_KEY}/g" ./config/sonarr/config.xml
 
 # Honeypot Setup
 NETWORK=$(echo "$DEFAULT_GATEWAY" | cut -d '.' -f 1-3)
