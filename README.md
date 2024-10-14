@@ -61,24 +61,7 @@
 ### Notes
 - Since you are using a self-signed cert, you will need to accept a security exception in your browser for each service.
 
-### Run the following commands to begin
-```bash
-sudo apt install openssl jq xxd -y
-git clone --recurse-submodules https://github.com/klack/klack.cloud.git
-cd klack.cloud
-nano vpn.conf
-```
-
-- Paste the contents of the VPN file you downloaded  
-  Press `Ctrl-o`  
-  Press `enter`  
-  Press `Ctrl-x`  
-
-```
-./setup.sh
-```
-
-After the script is run you will be given a link to finish setup.
+## [View the Raspberry Pi Guide](https://github.com/klack/klack.cloud/wiki/Raspberry-Pi-Guide)
 
 ## Home Page
 Visit `http://your-domain.com.internal` to access your home page.
