@@ -105,7 +105,7 @@ Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Click "Re-upload local data to sync target"
 
 ## Alerts
-You will receive email alerts for the following:
+You will receive alerts on the dashboard for the following:
 - High CPU temp (or no temp reported)  
 - Low Disk space  
 - High Ram utilization  
