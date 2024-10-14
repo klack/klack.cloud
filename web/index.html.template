@@ -92,8 +92,6 @@
     <h2>Final Steps</h2>
     <ul>
       <li>Download <a href="http://${HOST_IP}/hosts.txt" target="_blank">Hosts File</a></li>
-      <li><a href="https://github.com/klack/klack.cloud/wiki/Editing-your-Hosts-File" target="_blank">View
-          Instructions</a></li>
     </ul>
   </div>
   <div id="links">
