@@ -54,7 +54,7 @@
 - [ ] Port 443, 2283, and 32400 must be [forwarded to your machine](https://portforward.com/) from your router
 - [ ] To use "Download Managers", a [paid VPN subscription](https://protonvpn.com/) is required
   - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
-
+  - Enable the "Port Forward" option when configuring
 
 ### Notes
 - Since you are using a self-signed cert, you will need to accept a security exception in your browser for each service.
