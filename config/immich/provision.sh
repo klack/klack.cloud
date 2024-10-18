@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 echo -e "\nProvisioning immich"
 source ./.env
@@ -46,26 +46,26 @@ ACCESS_TOKEN=$(curl -s -L $SERVER/api/auth/login \
 # Upload sample files
 FILES=(./tmp/*)
 # Loop through each file in the list
-for FILE in "${FILES[@]}"; do
-  MTIME=$(stat -c %Y "$FILE")
-  DEVICE_ASSET_ID="${FILE}-${MTIME}"
-  FILE_CREATED_AT=$(date -d @$MTIME --utc +'%Y-%m-%dT%H:%M:%S.%NZ')
-  FILE_MODIFIED_AT=$(date -d @$MTIME --utc +'%Y-%m-%dT%H:%M:%S.%NZ')
+# for FILE in "${FILES[@]}"; do
+#   MTIME=$(stat -c %Y "$FILE")
+#   DEVICE_ASSET_ID="${FILE}-${MTIME}"
+#   FILE_CREATED_AT=$(date -d @$MTIME --utc +'%Y-%m-%dT%H:%M:%S.%NZ')
+#   FILE_MODIFIED_AT=$(date -d @$MTIME --utc +'%Y-%m-%dT%H:%M:%S.%NZ')
 
-  # Perform the upload for each file
-  curl -X POST $SERVER/api/assets \
-      -k \
-      -H "Accept: application/json" \
-      -H "Authorization: Bearer $ACCESS_TOKEN" \
-      -F "deviceAssetId=$DEVICE_ASSET_ID" \
-      -F "deviceId=provision" \
-      -F "fileCreatedAt=$FILE_CREATED_AT" \
-      -F "fileModifiedAt=$FILE_MODIFIED_AT" \
-      -F "isFavorite=false" \
-      -F "assetData=@$FILE"
+#   # Perform the upload for each file
+#   curl -X POST $SERVER/api/assets \
+#       -k \
+#       -H "Accept: application/json" \
+#       -H "Authorization: Bearer $ACCESS_TOKEN" \
+#       -F "deviceAssetId=$DEVICE_ASSET_ID" \
+#       -F "deviceId=provision" \
+#       -F "fileCreatedAt=$FILE_CREATED_AT" \
+#       -F "fileModifiedAt=$FILE_MODIFIED_AT" \
+#       -F "isFavorite=false" \
+#       -F "assetData=@$FILE"
 
-  echo "Uploaded $FILE"
-done
+#   echo "Uploaded $FILE"
+# done
 
 #Cleanup
 rm -rf ./tmp
