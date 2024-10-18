@@ -1,5 +1,0 @@
-# Used during provisioning to expose the api on localhost
-services:
-  immich-server:
-    ports:
-      - 2284:3001
