@@ -6,12 +6,8 @@ source ./.env
 SERVER=http://localhost:2284
 USER=$CLOUD_USER@$EXTERNAL_DOMAIN
 PASSWORD=$CLOUD_PASS
-
-#Start up immich
-docker compose down immich-server
-docker compose -f ./compose.yml -f ./compose/immich.provision.yml up immich-server -d
-
 #Download sample files
+echo "Downloading sample files"
 mkdir ./tmp
 wget -q --show-progress -O ./tmp/starry_night.jpg https://upload.wikimedia.org/wikipedia/commons/c/cd/VanGogh-starry_night.jpg
 wget -q --show-progress -O ./tmp/over_the_rhone.jpg https://upload.wikimedia.org/wikipedia/commons/9/94/Starry_Night_Over_the_Rhone.jpg
