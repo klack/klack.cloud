@@ -3,7 +3,7 @@
 echo -e "\nProvisioning immich"
 source ./.env
 
-SERVER=http://localhost:2284
+SERVER=https://$INTERNAL_DOMAIN:2283
 USER=$CLOUD_USER@$EXTERNAL_DOMAIN
 PASSWORD=$CLOUD_PASS
 #Download sample files
@@ -31,11 +31,13 @@ done
 
 # Create admin
 curl $SERVER/api/auth/admin-sign-up -X POST \
+    -k \
     -H 'content-type: application/json' \
     --data-raw "{\"email\": \"$USER\", \"password\": \"$PASSWORD\", \"name\":\"$CLOUD_USER\"}"
 
 # Get access token
 ACCESS_TOKEN=$(curl -s -L $SERVER/api/auth/login \
+    -k \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
     --data-raw "{\"email\": \"$USER\", \"password\": \"$PASSWORD\"}" \
@@ -52,6 +54,7 @@ for FILE in "${FILES[@]}"; do
 
   # Perform the upload for each file
   curl -X POST $SERVER/api/assets \
+      -k \
       -H "Accept: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       -F "deviceAssetId=$DEVICE_ASSET_ID" \

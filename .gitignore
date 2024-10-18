@@ -25,6 +25,7 @@ config/sftpgo/user.json
 config/hosts/hosts
 config/duplicati/Duplicati-server.sqlite
 config/grafana/dashboards/overview-dashboard.json
+config/grafana/provisioning/alerting/contact-points.yaml
 config/jackett/ServerConfig.json
 web/hosts.txt
 web/index.html
