@@ -2,5 +2,5 @@
 <Preferences customConnections="${EXTERNAL_DOMAIN}:32400/" TranscoderTempDirectory="/transcode"
     OldestPreviousVersion="legacy" MetricsEpoch="1" AcceptedEULA="1" GlobalMusicVideoPathMigrated="1" FriendlyName="${CLOUD_USER}'s Plex"
     PublishServerOnPlexOnlineKey="1" LastAutomaticMappedPort="0" logDebug="0" sendCrashReports="0"
-    FSEventLibraryPartialScanEnabled="1" FSEventLibraryUpdatesEnabled="1"
+    FSEventLibraryPartialScanEnabled="1" FSEventLibraryUpdatesEnabled="1" ManualPortMappingMode="1"
     ScheduledLibraryUpdatesEnabled="0" />
