@@ -16,7 +16,7 @@ services:
     volumes:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
       - .${DIR_CLOUD_ROOT}/${CLOUD_USER}/Library/Photos:/usr/src/app/upload
-      - ../config/immich/immich-config.json:immich-config.json
+      - ../config/immich/immich-config.json:/immich-config.json
       - /etc/localtime:/etc/localtime:ro
     user: 1000:1000
     environment:
