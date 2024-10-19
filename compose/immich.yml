@@ -17,8 +17,6 @@ services:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
       - .${DIR_CLOUD_ROOT}/${CLOUD_USER}/Library/Photos:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
-    # env_file:
-    # - .env
     user: 1000:1000
     environment:
       UPLOAD_LOCATION: .${DIR_CLOUD_ROOT}/${CLOUD_USER}/Library/Photos
@@ -41,7 +39,7 @@ services:
       - "traefik.http.routers.immich.tls.certresolver=myresolver"
       - "traefik.http.routers.immich.entrypoints=immich"
       - "traefik.http.routers.immich.service=immich"
-      - "traefik.http.services.immich.loadBalancer.server.port=3001"
+      - "traefik.http.services.immich.loadBalancer.server.port=2283"
       - "stack=klack.cloud"
 
   immich-machine-learning:
