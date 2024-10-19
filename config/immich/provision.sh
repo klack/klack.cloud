@@ -70,4 +70,4 @@ done
 #Cleanup
 rm -rf ./tmp
 
-echo "immich first time run complete"
+echo "\nimmich first time run complete"
