@@ -8,7 +8,7 @@ SERVER="https://jackett.$INTERNAL_DOMAIN:4443"
 # Wait for sonarr to be marked as healthy
 echo "Waiting for Jackett to be healthy..."
 CHECK_URL="$SERVER/UI/Dashboard"
-TIMEOUT=120       # Maximum time to wait (in seconds)
+TIMEOUT=120      # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5 # Time between retries
 SECONDS_WAITED=0
 until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -H "Authorization: Basic $BASIC_AUTH_BASE64" -k)" == "302" ]]; do
@@ -63,4 +63,14 @@ curl 'https://jackett.klack107.ddns.net.internal:4443/api/v2.0/indexers/eztv/con
     --data-raw '[{"id":"sitelink","type":"inputstring","name":"Site Link","value":"https://eztvx.to/"},{"id":"tags","type":"inputtags","name":"Tags","value":"","separator":",","delimiters":"[^A-Za-z0-9\\-\\._~]+","pattern":"^[A-Za-z0-9\\-\\._~]+$"}]' \
     -s -o /dev/null -w '%{http_code}\n'
 
+# Add Kickass.to
+echo "Adding Kickass.to"
+curl 'https://jackett.klack107.ddns.net.internal:4443/api/v2.0/indexers/kickasstorrents-to/config' \
+    -k -X POST \
+    -H 'Content-Type: application/json' \
+    -H "Authorization: Basic $BASIC_AUTH_BASE64" \
+    -H "Cookie: $COOKIE" \
+    --data-raw '[{"id":"sitelink","type":"inputstring","name":"Site Link","value":"https://kickasstorrents.to/"},{"id":"sortrequestedfromsite","type":"inputselect","name":"Sort requested from site","value":"time","options":{"time":"created","seeders":"seeders","size":"size"}},{"id":"orderrequestedfromsite","type":"inputselect","name":"Order requested from site","value":"desc","options":{"desc":"desc","asc":"asc"}},{"id":"tags","type":"inputtags","name":"Tags","value":"","separator":",","delimiters":"[^A-Za-z0-9\\-\\._~]+","pattern":"^[A-Za-z0-9\\-\\._~]+$"}]' \
+    -s -o /dev/null -w '%{http_code}\n'
+    
 echo "Jackett first time run complete"

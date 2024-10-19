@@ -7,7 +7,7 @@ source ./.env
 echo "Waiting for sonarr to be healthy..."
 SERVER="https://sonarr.${INTERNAL_DOMAIN}:4443"
 CHECK_URL="$SERVER"
-TIMEOUT=240       # Maximum time to wait (in seconds)
+TIMEOUT=240      # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5 # Time between retries
 SECONDS_WAITED=0
 until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -H "Authorization: Basic $BASIC_AUTH_BASE64" -k)" == "200" ]]; do
@@ -85,7 +85,7 @@ curl "$SERVER/api/v3/indexer?" \
     -s -o /dev/null -w '%{http_code}\n'
 
 # Add Nyaa.si
-echo "Nyaa.si"
+echo "Adding Nyaa.si"
 curl "$SERVER/api/v3/indexer?" \
     -k \
     -X POST \
@@ -97,7 +97,7 @@ curl "$SERVER/api/v3/indexer?" \
     -s -o /dev/null -w '%{http_code}\n'
 
 # Add EZTV
-echo "EZTV"
+echo "Adding EZTV"
 curl "$SERVER/api/v3/indexer?" \
     -k \
     -X POST \
@@ -106,6 +106,18 @@ curl "$SERVER/api/v3/indexer?" \
     -H "X-Api-Key: $SONARR_API_KEY" \
     -H "Authorization: Basic $BASIC_AUTH_BASE64" \
     --data-raw '{"enableRss":true,"enableAutomaticSearch":true,"enableInteractiveSearch":true,"supportsRss":true,"supportsSearch":true,"protocol":"torrent","priority":25,"seasonSearchMaximumSingleEpisodeAge":0,"downloadClientId":0,"name":"EZTV","fields":[{"name":"baseUrl","value":"http://localhost:9117/api/v2.0/indexers/eztv/results/torznab/"},{"name":"apiPath","value":"/api"},{"name":"apiKey","value":"'$JACKETT_API_KEY'"},{"name":"categories","value":[5000]},{"name":"animeCategories","value":[]},{"name":"animeStandardFormatSearch","value":false},{"name":"additionalParameters"},{"name":"multiLanguages","value":[]},{"name":"minimumSeeders","value":1},{"name":"seedCriteria.seedRatio"},{"name":"seedCriteria.seedTime"},{"name":"seedCriteria.seasonPackSeedTime"},{"name":"rejectBlocklistedTorrentHashesWhileGrabbing","value":false}],"implementationName":"Torznab","implementation":"Torznab","configContract":"TorznabSettings","infoLink":"https://wiki.servarr.com/sonarr/supported#torznab","tags":[]}' \
+    -s -o /dev/null -w '%{http_code}\n'
+
+# Add Kickass.to
+echo "Adding Kickass.to"
+curl "$SERVER/api/v3/indexer?" \
+    -k \
+    -X POST \
+    -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+    -H 'Content-Type: application/json' \
+    -H "X-Api-Key: $SONARR_API_KEY" \
+    -H "Authorization: Basic $BASIC_AUTH_BASE64" \
+    --data-raw '{"enableRss":true,"enableAutomaticSearch":true,"enableInteractiveSearch":true,"supportsRss":true,"supportsSearch":true,"protocol":"torrent","priority":25,"seasonSearchMaximumSingleEpisodeAge":0,"downloadClientId":0,"name":"Kickass.to","fields":[{"name":"baseUrl","value":"http://localhost:9117/api/v2.0/indexers/kickasstorrents-to/results/torznab/"},{"name":"apiPath","value":"/api"},{"name":"apiKey","value":"2fc1fc39c5600b295b0ba83ca7b22c78"},{"name":"categories","value":[103583]},{"name":"animeCategories","value":[5070,141745]},{"name":"animeStandardFormatSearch","value":false},{"name":"additionalParameters"},{"name":"multiLanguages","value":[]},{"name":"minimumSeeders","value":1},{"name":"seedCriteria.seedRatio"},{"name":"seedCriteria.seedTime"},{"name":"seedCriteria.seasonPackSeedTime"},{"name":"rejectBlocklistedTorrentHashesWhileGrabbing","value":false}],"implementationName":"Torznab","implementation":"Torznab","configContract":"TorznabSettings","infoLink":"https://wiki.servarr.com/sonarr/supported#torznab","tags":[]}' \
     -s -o /dev/null -w '%{http_code}\n'
 
 echo "Sonarr first time run complete"

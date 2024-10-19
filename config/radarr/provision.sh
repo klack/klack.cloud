@@ -7,7 +7,7 @@ source ./.env
 echo "Waiting for radarr to be healthy..."
 SERVER="https://radarr.${INTERNAL_DOMAIN}:4443"
 CHECK_URL="$SERVER"
-TIMEOUT=240       # Maximum time to wait (in seconds)
+TIMEOUT=240      # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5 # Time between retries
 SECONDS_WAITED=0
 until [[ "$(curl -k -s -o /dev/null -w '%{http_code}' $CHECK_URL -H "Authorization: Basic $BASIC_AUTH_BASE64" -k)" == "200" ]]; do
@@ -109,7 +109,7 @@ curl "$SERVER/api/v3/indexer?" \
     -s -o /dev/null -w '%{http_code}\n'
 
 # Add Nyaa.si
-echo "Nyaa.si"
+echo "Adding Nyaa.si"
 curl 'https://radarr.klack107.ddns.net.internal:4443/api/v3/indexer?' \
     -k \
     -X POST \
@@ -120,4 +120,16 @@ curl 'https://radarr.klack107.ddns.net.internal:4443/api/v3/indexer?' \
     --data-raw '{"enableRss":true,"enableAutomaticSearch":true,"enableInteractiveSearch":true,"supportsRss":true,"supportsSearch":true,"protocol":"torrent","priority":25,"downloadClientId":0,"name":"Nyaa.si","fields":[{"name":"baseUrl","value":"http://localhost:9117/api/v2.0/indexers/nyaasi/results/torznab/"},{"name":"apiPath","value":"/api"},{"name":"apiKey","value":"'$JACKETT_API_KEY'"},{"name":"categories","value":[2000,2020]},{"name":"additionalParameters"},{"name":"multiLanguages","value":[]},{"name":"removeYear","value":false},{"name":"minimumSeeders","value":1},{"name":"seedCriteria.seedRatio","value":null},{"name":"seedCriteria.seedTime"},{"name":"rejectBlocklistedTorrentHashesWhileGrabbing","value":false},{"name":"requiredFlags","value":[]}],"implementationName":"Torznab","implementation":"Torznab","configContract":"TorznabSettings","infoLink":"https://wiki.servarr.com/radarr/supported#torznab","tags":[]}' \
     -s -o /dev/null -w '%{http_code}\n'
 
+# Add Nyaa.si
+echo "Adding Kickass.to"
+curl 'https://radarr.klack107.ddns.net.internal:4443/api/v3/indexer?' \
+    -k \
+    -X POST \
+    -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+    -H 'Content-Type: application/json' \
+    -H "X-Api-Key: $RADARR_API_KEY" \
+    -H "Authorization: Basic $BASIC_AUTH_BASE64" \
+    --data-raw '{"enableRss":true,"enableAutomaticSearch":true,"enableInteractiveSearch":true,"supportsRss":true,"supportsSearch":true,"protocol":"torrent","priority":25,"downloadClientId":0,"name":"Kickass.to","fields":[{"name":"baseUrl","value":"http://localhost:9117/api/v2.0/indexers/kickasstorrents-to/results/torznab/"},{"name":"apiPath","value":"/api"},{"name":"apiKey","value":"2fc1fc39c5600b295b0ba83ca7b22c78"},{"name":"categories","value":[2000,2010,2020,2030,2040,2045,2050,2060]},{"name":"additionalParameters"},{"name":"multiLanguages","value":[]},{"name":"removeYear","value":false},{"name":"minimumSeeders","value":1},{"name":"seedCriteria.seedRatio"},{"name":"seedCriteria.seedTime"},{"name":"rejectBlocklistedTorrentHashesWhileGrabbing","value":false},{"name":"requiredFlags","value":[]}],"implementationName":"Torznab","implementation":"Torznab","configContract":"TorznabSettings","infoLink":"https://wiki.servarr.com/radarr/supported#torznab","tags":[]}' \
+    -s -o /dev/null -w '%{http_code}\n'
+    
 echo -e "Radarr first time run complete"
