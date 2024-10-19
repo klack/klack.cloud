@@ -8,7 +8,6 @@ compose.override.yml
 data
 cloud
 backups
-home
 tmp
 config/traefik/certs
 config/traefik/htpasswd
