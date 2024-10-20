@@ -5,8 +5,6 @@ if [ "$EUID" == 0 ]; then
   exit 1
 fi
 
-LOCAL_USER=$USER
-
 # Optionally run clean script
 if [[ "$1" == "--clean" ]]; then
   sudo ./scripts/clean.sh
@@ -14,7 +12,8 @@ if [[ "$1" == "--clean" ]]; then
 fi
 
 # Generate Config
-sudo ./scripts/gen_config.sh
+LOCAL_USER=$(whoami) 
+sudo LOCAL_USER=$LOCAL_USER ./scripts/gen_config.sh
 if [ $? -ne 0 ]; then
   echo ".env generation failed"
   exit 1
