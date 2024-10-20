@@ -2,7 +2,7 @@
 
 source ./.env
 
-#Run first time app scripts
+#First time run scripts
 ./config/sftpgo/provision.sh
 
 if [ "$ENABLE_DOWNLOADERS" = "1" ]; then
@@ -14,4 +14,4 @@ fi
 ./config/immich/provision.sh
 ./config/plex/provision.sh
 
-echo -e "\nFirst time run setup complete"
+echo -e "\nPost-run setup complete"

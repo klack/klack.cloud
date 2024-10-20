@@ -35,7 +35,7 @@ fi
 IN_SETUP=1 ./start.sh
 
 # Run first-time scripts
-sudo ./scripts/first_run.sh
+sudo ./scripts/post_run.sh
 if [ $? -ne 0 ]; then
   echo "First run setup failed"
   exit 1
