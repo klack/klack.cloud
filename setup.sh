@@ -5,6 +5,8 @@ if [ "$EUID" == 0 ]; then
   exit 1
 fi
 
+LOCAL_USER=$USER
+
 # Optionally run clean script
 if [[ "$1" == "--clean" ]]; then
   sudo ./scripts/clean.sh

@@ -47,6 +47,9 @@ if [ "$PASSWORD" != "$PASSWORD_CONFIRM" ]; then
   exit 1
 fi
 
+# Local user
+sed -i "s|^LOCAL_USER=.*|LOCAL_USER=\"$LOCAL_USER\"|" .env
+
 # Platform
 sed -i "s|^PLATFORM=.*|PLATFORM=\"$PLATFORM\"|" .env
 
