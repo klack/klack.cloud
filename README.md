@@ -63,7 +63,7 @@
 [View the Raspberry Pi Guide](https://github.com/klack/klack.cloud/wiki/Raspberry-Pi-Guide)
 
 ## Home Page
-Visit `http://your-domain.com.internal` to access your home page.
+Visit `http://your-domain.com.local` to access your home page.
 
 ## Setup your Cloud Drive
 WebDAV URL: `https://your-domain.com/dav`  
@@ -125,17 +125,17 @@ You will receive alerts on the dashboard for the following:
 | Plex          | 32400    | your-domain.com                      | /           | https://your-domain.com:32400/                         |                        | App           | Self          |
 | Immich        | 2283     | your-domain.com                      | /           | https://your-domain.com:2283/                          |                        | App           | Docker        |
 | WebDav        | 443      | your-domain.com                      | /dav        | https://your-domain.com/dav/                           |                        | Traefik       | Docker        |
-| SFTPGo UI     | 4443     | sftpgo.your-domain.com.internal      | /           | https://sftpgo.your-domain.com.internal:4443/          |                        | Traefik       | Docker        |
-| Traefik UI    | 4443     | traefik.your-domain.com.internal     | /           | https://traefik.your-domain.com.internal:4443/         |                        | Traefik       | logrotate     |
-| Grafana       | 4443     | grafana.your-domain.com.internal     | /           | https://grafana.your-domain.com.internal:4443/         |                        | App           | Docker        |
-| Prometheus    | 4443     | prometheus.your-domain.com.internal  | /           | https://prometheus.your-domain.com.internal:4443/      | http://prometheus:9090 | Traefk        | Docker        |
+| SFTPGo UI     | 4443     | sftpgo.your-domain.com.local      | /           | https://sftpgo.your-domain.com.local:4443/          |                        | Traefik       | Docker        |
+| Traefik UI    | 4443     | traefik.your-domain.com.local     | /           | https://traefik.your-domain.com.local:4443/         |                        | Traefik       | logrotate     |
+| Grafana       | 4443     | grafana.your-domain.com.local     | /           | https://grafana.your-domain.com.local:4443/         |                        | App           | Docker        |
+| Prometheus    | 4443     | prometheus.your-domain.com.local  | /           | https://prometheus.your-domain.com.local:4443/      | http://prometheus:9090 | Traefk        | Docker        |
 | Loki          |          |                                      |             |                                                        | http://loki:3100       |               | Docker        |
-| Node Exporter | 9101     | node-exp.your-domain.com.internal    | /           | https://node-exp.your-domain.com.internal:9101/metrics |                        | IPTABLES      | stdout        |
-| Duplicati     | 4443     | duplicati.your-domain.com.internal   | /           | https://duplicati.your-domain.com.internal:4443/       |                        | Traefik       | logrotate     |
-| qBittorrent   | 4443     | qbittorrent.your-domain.com.internal | /           | https://qbittorrent.your-domain.com.internal:4443/     |                        | App           | logs disabled |
-| Jackett       | 4443     | jackett.your-domain.com.internal     | /           | https://jackett.your-domain.com.internal:4443/         | http://localhost:9117  | Traefik       | logs disabled |
-| Sonarr        | 4443     | sonarr.your-domain.com.internal      | /           | https://sonarr.your-domain.com.internal:4443/          |                        | App           | Self          |
-| Radarr        | 4443     | radarr.your-domain.com.internal      | /           | https://radarr.your-domain.com.internal:4443/          |                        | App           | Self          |
+| Node Exporter | 9101     | node-exp.your-domain.com.local    | /           | https://node-exp.your-domain.com.local:9101/metrics |                        | IPTABLES      | stdout        |
+| Duplicati     | 4443     | duplicati.your-domain.com.local   | /           | https://duplicati.your-domain.com.local:4443/       |                        | Traefik       | logrotate     |
+| qBittorrent   | 4443     | qbittorrent.your-domain.com.local | /           | https://qbittorrent.your-domain.com.local:4443/     |                        | App           | logs disabled |
+| Jackett       | 4443     | jackett.your-domain.com.local     | /           | https://jackett.your-domain.com.local:4443/         | http://localhost:9117  | Traefik       | logs disabled |
+| Sonarr        | 4443     | sonarr.your-domain.com.local      | /           | https://sonarr.your-domain.com.local:4443/          |                        | App           | Self          |
+| Radarr        | 4443     | radarr.your-domain.com.local      | /           | https://radarr.your-domain.com.local:4443/          |                        | App           | Self          |
 | Cowrie        | 22,23    |                                      |             |                                                        |                        |               | logrotate     |
 | Dionaea       | Multiple |                                      |             |                                                        |                        |               | logrotate     |
 

@@ -85,7 +85,7 @@ groups:
                     uid: ddw4kf5ococ8wc
                 editorMode: code
                 exemplar: false
-                expr: 100 * (1 - avg(rate(node_cpu_seconds_total{mode="idle", instance="node-exp.klack.internal:9101"}[5m])))
+                expr: 100 * (1 - avg(rate(node_cpu_seconds_total{mode="idle", instance="node-exp.klack.local:9101"}[5m])))
                 instant: true
                 interval: ""
                 intervalFactor: 1
