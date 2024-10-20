@@ -110,7 +110,7 @@ curl "$SERVER/api/v3/indexer?" \
 
 # Add Nyaa.si
 echo "Adding Nyaa.si"
-curl 'https://radarr.klack107.ddns.net.internal:4443/api/v3/indexer?' \
+curl "$SERVER/api/v3/indexer?" \
     -k \
     -X POST \
     -H 'Accept: application/json, text/javascript, */*; q=0.01' \
@@ -122,7 +122,7 @@ curl 'https://radarr.klack107.ddns.net.internal:4443/api/v3/indexer?' \
 
 # Add Nyaa.si
 echo "Adding Kickass.to"
-curl 'https://radarr.klack107.ddns.net.internal:4443/api/v3/indexer?' \
+curl "$SERVER/api/v3/indexer?" \
     -k \
     -X POST \
     -H 'Accept: application/json, text/javascript, */*; q=0.01' \
