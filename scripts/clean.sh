@@ -46,7 +46,7 @@ rm -v /usr/local/bin/node_exporter
 # Clean crontab
 cp /etc/crontab /etc/crontab.bak #Backup original file
 sed -i '/node_exporter/d' /etc/crontab #Remove node_exporter
-sed -i '/build_images.sh/d' /etc/crontab #Remove arm65 image builder
+sed -i '/build_images.sh/d' /etc/crontab #Remove arm64 image builder
 echo "Entries containing 'node_exporter' have been removed from /etc/crontab."
 
 #######################################
