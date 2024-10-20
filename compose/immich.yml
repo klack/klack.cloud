@@ -5,6 +5,9 @@
 #
 # The compose file on main may not be compatible with the latest release.
 #
+volumes:
+  model-cache:
+
 services:
   immich-server:
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
@@ -75,9 +78,9 @@ services:
   redis:
     image: docker.io/redis:6.2-alpine@sha256:2d1463258f2764328496376f5d965f20c6a67f66ea2b06dc42af351f75248792
     networks:
-      klack:      
-    healthcheck:
-      test: redis-cli ping || exit 1
+volumes:
+  model-cache:
+
     restart: always
 
   database:
@@ -115,6 +118,3 @@ services:
         "wal_compression=on",
       ]
     restart: always
-
-volumes:
-  model-cache:
