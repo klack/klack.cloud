@@ -120,7 +120,7 @@ curl "$SERVER/api/v3/indexer?" \
     --data-raw '{"enableRss":true,"enableAutomaticSearch":true,"enableInteractiveSearch":true,"supportsRss":true,"supportsSearch":true,"protocol":"torrent","priority":25,"downloadClientId":0,"name":"Nyaa.si","fields":[{"name":"baseUrl","value":"http://localhost:9117/api/v2.0/indexers/nyaasi/results/torznab/"},{"name":"apiPath","value":"/api"},{"name":"apiKey","value":"'$JACKETT_API_KEY'"},{"name":"categories","value":[2000,2020]},{"name":"additionalParameters"},{"name":"multiLanguages","value":[]},{"name":"removeYear","value":false},{"name":"minimumSeeders","value":1},{"name":"seedCriteria.seedRatio","value":null},{"name":"seedCriteria.seedTime"},{"name":"rejectBlocklistedTorrentHashesWhileGrabbing","value":false},{"name":"requiredFlags","value":[]}],"implementationName":"Torznab","implementation":"Torznab","configContract":"TorznabSettings","infoLink":"https://wiki.servarr.com/radarr/supported#torznab","tags":[]}' \
     -s -o /dev/null -w '%{http_code}\n'
 
-# Add Nyaa.si
+# Add Kickass.to
 echo "Adding Kickass.to"
 curl "$SERVER/api/v3/indexer?" \
     -k \
@@ -129,7 +129,7 @@ curl "$SERVER/api/v3/indexer?" \
     -H 'Content-Type: application/json' \
     -H "X-Api-Key: $RADARR_API_KEY" \
     -H "Authorization: Basic $BASIC_AUTH_BASE64" \
-    --data-raw '{"enableRss":true,"enableAutomaticSearch":true,"enableInteractiveSearch":true,"supportsRss":true,"supportsSearch":true,"protocol":"torrent","priority":25,"downloadClientId":0,"name":"Kickass.to","fields":[{"name":"baseUrl","value":"http://localhost:9117/api/v2.0/indexers/kickasstorrents-to/results/torznab/"},{"name":"apiPath","value":"/api"},{"name":"apiKey","value":"2fc1fc39c5600b295b0ba83ca7b22c78"},{"name":"categories","value":[2000,2010,2020,2030,2040,2045,2050,2060]},{"name":"additionalParameters"},{"name":"multiLanguages","value":[]},{"name":"removeYear","value":false},{"name":"minimumSeeders","value":1},{"name":"seedCriteria.seedRatio"},{"name":"seedCriteria.seedTime"},{"name":"rejectBlocklistedTorrentHashesWhileGrabbing","value":false},{"name":"requiredFlags","value":[]}],"implementationName":"Torznab","implementation":"Torznab","configContract":"TorznabSettings","infoLink":"https://wiki.servarr.com/radarr/supported#torznab","tags":[]}' \
+    --data-raw '{"enableRss":true,"enableAutomaticSearch":true,"enableInteractiveSearch":true,"supportsRss":true,"supportsSearch":true,"protocol":"torrent","priority":25,"downloadClientId":0,"name":"Kickass.to","fields":[{"name":"baseUrl","value":"http://localhost:9117/api/v2.0/indexers/kickasstorrents-to/results/torznab/"},{"name":"apiPath","value":"/api"},{"name":"apiKey","value":"'$JACKETT_API_KEY'"},{"name":"categories","value":[2000,2010,2020,2030,2040,2045,2050,2060]},{"name":"additionalParameters"},{"name":"multiLanguages","value":[]},{"name":"removeYear","value":false},{"name":"minimumSeeders","value":1},{"name":"seedCriteria.seedRatio"},{"name":"seedCriteria.seedTime"},{"name":"rejectBlocklistedTorrentHashesWhileGrabbing","value":false},{"name":"requiredFlags","value":[]}],"implementationName":"Torznab","implementation":"Torznab","configContract":"TorznabSettings","infoLink":"https://wiki.servarr.com/radarr/supported#torznab","tags":[]}' \
     -s -o /dev/null -w '%{http_code}\n'
     
 echo -e "Radarr first time run complete"
