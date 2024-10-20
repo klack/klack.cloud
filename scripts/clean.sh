@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./.env
+
 if [ "$(basename "$PWD")" != "klack.cloud" ];then
   echo "Must be run from base project directory"
   exit 1
@@ -11,8 +13,6 @@ if [ "$EUID" != 0 ]; then
 fi
 
 read -p "WARNING: Destructive! Ctrl-C to quit now or press enter to proceed: "
-
-source ./.env
 
 #Shut down everything
 echo "Shutting down services"
@@ -52,17 +52,17 @@ echo "Entries containing 'node_exporter' have been removed from /etc/crontab."
 #######################################
 # Clean hosts file
 #######################################
-sudo cp /etc/hosts /etc/hosts.bak # Backup the original /etc/hosts file
+cp /etc/hosts /etc/hosts.bak # Backup the original /etc/hosts file
 
 if [ -n "$EXTERNAL_DOMAIN" ]; then
   # Escape special characters in EXTERNAL_DOMAIN for use in sed
   EXTERNAL_DOMAIN_ESCAPED=$(printf '%s\n' "$EXTERNAL_DOMAIN" | sed 's/[]\/$*.^[]/\\&/g')
 
   # Backup the original /etc/hosts file
-  sudo cp /etc/hosts /etc/hosts.bak
+  cp /etc/hosts /etc/hosts.bak
 
   # Remove entries containing EXTERNAL_DOMAIN
-  sudo sed -i "/$EXTERNAL_DOMAIN_ESCAPED/d" /etc/hosts
+  sed -i "/$EXTERNAL_DOMAIN_ESCAPED/d" /etc/hosts
 
   echo "Entries containing '$EXTERNAL_DOMAIN' have been removed from /etc/hosts."
 else
