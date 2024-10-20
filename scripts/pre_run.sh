@@ -92,7 +92,14 @@ nohup /usr/local/bin/node_exporter >/dev/null 2>&1 &
 echo -e "\nSetting up Duplicati"
 cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Duplicati-server.sqlite
 
-#Build Images
-./scripts/build_images.sh
+#Platform Specific
+./scripts/platform.sh
 
 echo -e "\nPre-run setup complete"
+#Edit crontab
+if ! grep -q "node_exporter" /etc/crontab; then
+    sudo sh -c "sudo echo -e \"@reboot root /usr/local/bin/node_exporter &\n\" >> /etc/crontab"
+    node_exporter added to crontab
+else
+    echo "node_exporter already added to crontab"
+fi
