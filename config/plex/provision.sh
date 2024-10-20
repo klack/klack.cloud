@@ -28,5 +28,5 @@ else
     sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" "$DIR_DATA_ROOT/plex/Library/Application Support/Plex Media Server/Preferences.xml"
     sed -i "s/\${CLOUD_USER}/${CLOUD_USER}/g" "$DIR_DATA_ROOT/plex/Library/Application Support/Plex Media Server/Preferences.xml"
     
-    echo -e "\nPlex Setup complete"
+    echo -e "\nPlex setup complete"
 fi
