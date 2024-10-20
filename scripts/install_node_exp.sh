@@ -16,7 +16,7 @@ sudo cp $DIR/node_exporter /usr/local/bin/node_exporter && echo "node_exporter c
 #Edit crontab
 if ! grep -q "node_exporter" /etc/crontab; then
     sudo sh -c "sudo echo -e \"@reboot root /usr/local/bin/node_exporter &\" >> /etc/crontab"
-    node_exporter added to crontab
+    echo "node_exporter added to crontab"
 else
     echo "node_exporter already added to crontab"
 fi
