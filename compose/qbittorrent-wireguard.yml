@@ -61,6 +61,7 @@ services:
       - "qbtw:/config"
       - "../vpn.conf:/config/wireguard/wg0.conf"
       - "../config/qbittorrent/qBittorrent.conf:/config/qBittorrent/config/qBittorrent.conf"
+      - "../config/qbittorrent/watched_folders.json:/config/qBittorrent/config/watched_folders.json"
       - ".${DIR_CLOUD_ROOT}/${CLOUD_USER}:/data"
     working_dir: "/opt"
     labels:

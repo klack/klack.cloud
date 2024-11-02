@@ -23,6 +23,7 @@ DATA_DIRS=(
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Documents"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Notes"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Downloads"
+  "$DIR_CLOUD_ROOT/$CLOUD_USER/Downloads/blackhole"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/Movies"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/TV"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/Photos"
