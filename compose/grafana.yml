@@ -53,8 +53,8 @@ services:
       - ../config/grafana/dashboards:/var/lib/grafana/dashboards
     environment:
       TZ: ${TZ}
-      GF_SECURITY_ADMIN_USER: ${BASIC_AUTH_USER}
-      GF_SECURITY_ADMIN_PASSWORD: ${BASIC_AUTH_PASS}      
+      GF_SECURITY_ADMIN_USER: ${CLOUD_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${CLOUD_PASS}      
       GF_SMTP_ENABLED: true
       GF_SMTP_HOST: ${GF_SMTP_HOST}
       GF_SMTP_FROM_ADDRESS: ${GF_SMTP_FROM_ADDRESS}

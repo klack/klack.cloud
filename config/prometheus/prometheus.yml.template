@@ -7,8 +7,8 @@ scrape_configs:
     static_configs:
       - targets: ["${NODE_EXPORTER_TARGET}"]
     basic_auth:
-      username: "${BASIC_AUTH_USER}"
-      password: "${BASIC_AUTH_PASS}"
+      username: "${CLOUD_USER}"
+      password: "${CLOUD_PASS}"
     tls_config:
       insecure_skip_verify: true
 
@@ -17,7 +17,7 @@ scrape_configs:
     static_configs:
       - targets: ["${TRAEFIK_TARGET}"]
     basic_auth:
-      username: "${BASIC_AUTH_USER}"
-      password: "${BASIC_AUTH_PASS}"
+      username: "${CLOUD_USER}"
+      password: "${CLOUD_PASS}"
     tls_config:
       insecure_skip_verify: true

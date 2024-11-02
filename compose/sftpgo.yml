@@ -12,8 +12,8 @@ services:
       - .${DIR_CLOUD_ROOT}:/srv/sftpgo/data
     environment:
       TZ: ${TZ}
-      SFTPGO_DEFAULT_ADMIN_USERNAME: ${BASIC_AUTH_USER}
-      SFTPGO_DEFAULT_ADMIN_PASSWORD: ${BASIC_AUTH_PASS}
+      SFTPGO_DEFAULT_ADMIN_USERNAME: ${CLOUD_USER}
+      SFTPGO_DEFAULT_ADMIN_PASSWORD: ${CLOUD_PASS}
     networks:
       klack:
     labels:

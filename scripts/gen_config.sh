@@ -63,8 +63,6 @@ sed -i "s/\${EXTERNAL_DOMAIN}/${EXTERNAL_DOMAIN}/g" .env
 # Passwords
 ESCAPED_PASSWORD=$(printf '%s\n' "$PASSWORD" | sed 's/\(["$]\)/\\\1/g')
 BASIC_AUTH_BASE64=$(echo -n "$USERNAME:$PASSWORD" | base64)
-sed -i "s|^BASIC_AUTH_USER=.*|BASIC_AUTH_USER=\"$USERNAME\"|" .env
-sed -i "s|^BASIC_AUTH_PASS=.*|BASIC_AUTH_PASS=\"$ESCAPED_PASSWORD\"|" .env
 sed -i "s|^CLOUD_USER=.*|CLOUD_USER=\"$USERNAME\"|" .env
 sed -i "s|^CLOUD_PASS=.*|CLOUD_PASS=\"$ESCAPED_PASSWORD\"|" .env
 sed -i "s|^BASIC_AUTH_BASE64=.*|BASIC_AUTH_BASE64=\"$BASIC_AUTH_BASE64\"|" .env

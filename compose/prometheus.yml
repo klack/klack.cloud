@@ -12,8 +12,8 @@ services:
       TZ: ${TZ}
       NODE_EXPORTER_TARGET: "node-exp.${INTERNAL_DOMAIN}:9101"
       TRAEFIK_TARGET: "traefik.${INTERNAL_DOMAIN}:4443"
-      BASIC_AUTH_USER: ${BASIC_AUTH_USER}
-      BASIC_AUTH_PASS: ${BASIC_AUTH_PASS}
+      CLOUD_USER: ${CLOUD_USER}
+      CLOUD_PASS: ${CLOUD_PASS}
     entrypoint: ["/entrypoint.sh"]
     # ports:
     #   - "9090:9090"
