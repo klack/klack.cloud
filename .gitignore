@@ -5,7 +5,7 @@ scrap
 *.drawio.bkp
 vpn.conf
 compose.override.yml
-data
+cloud-metadata
 cloud
 backups
 tmp
