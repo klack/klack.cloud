@@ -25,7 +25,7 @@ echo "Deleting docker volumes"
 docker volume ls -q | grep '^klack-cloud_' | grep -v '^klack-cloud_acme$' | xargs -r docker volume rm -f
 
 #Remove log, cloud, and data directories
-echo "Removing Data and Log Directories"
+echo "Removing default data and log directories"
 LOG_DIRS=(
     "/var/log/traefik"
     "/var/log/duplicati"
@@ -36,7 +36,7 @@ LOG_DIRS=(
     "/var/log/cowrie"
     "/var/log/plex/PMS Plugin Logs"
 )
-rm -rfv ./data ./backups ./cloud "${LOG_DIRS[@]}"
+rm -rfv ./cloud-metadata ./backups ./cloud "${LOG_DIRS[@]}"
 
 #Remove node_exporter
 echo "Removing node_exporter"
