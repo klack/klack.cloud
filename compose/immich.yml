@@ -15,12 +15,12 @@ services:
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
-      - .${DIR_CLOUD_ROOT}/${CLOUD_USER}/Library/Photos:/usr/src/app/upload
+      - ${DIR_CLOUD_ROOT}/${CLOUD_USER}/Library/Photos:/usr/src/app/upload
       - ../config/immich/immich-config.json:/immich-config.json
       - /etc/localtime:/etc/localtime:ro
     user: 1000:1000
     environment:
-      UPLOAD_LOCATION: .${DIR_CLOUD_ROOT}/${CLOUD_USER}/Library/Photos
+      UPLOAD_LOCATION: ${DIR_CLOUD_ROOT}/${CLOUD_USER}/Library/Photos
       DB_DATA_LOCATION: .${DB_DATA_LOCATION}
       IMMICH_VERSION: ${IMMICH_VERSION}
       IMMICH_CONFIG_FILE: /immich-config.json
@@ -59,7 +59,7 @@ services:
     # env_file:
     #   - .env
     environment:
-      UPLOAD_LOCATION: .${DIR_CLOUD_ROOT}/${CLOUD_USER}/Photos
+      UPLOAD_LOCATION: ${DIR_CLOUD_ROOT}/${CLOUD_USER}/Photos
       DB_DATA_LOCATION: .${DB_DATA_LOCATION}
       IMMICH_VERSION: ${IMMICH_VERSION}
       DB_PASSWORD: ${DB_PASSWORD}

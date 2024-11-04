@@ -16,7 +16,7 @@ aarch64)
   exit 1
   ;;
 esac
-
+PWD=$(pwd)
 DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
 DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
 DEFAULT_GATEWAY=$(ip route | grep default | awk '{print $3}')
@@ -27,6 +27,9 @@ echo -e "---klack.cloud Setup ($DEFAULT_HOST_IP)---\n"
 
 #.env file generation
 cp -p ./.env.template ./.env
+
+#Set PWD
+sed -i "s|\${PWD}|${PWD}|g" .env
 
 # Disable Downloaders if vpn.conf is not present
 if [ ! -e "./vpn.conf" ]; then
