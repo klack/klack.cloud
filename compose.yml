@@ -18,6 +18,7 @@ include:
   - ./compose/unpackerr.yml
   - ./compose/nginx.yml
   - ./compose/immich.yml
+  - ./compose/radicale.yml  
   # - ./compose/whoami.yml # Used to diagnose middleware
 
 networks:
