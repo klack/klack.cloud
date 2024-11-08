@@ -23,7 +23,7 @@ services:
       - "traefik.http.routers.sftpgo-ui.entrypoints=internal"
       - "traefik.http.routers.sftpgo-ui.tls.certresolver=myresolver"
       - "traefik.http.services.sftpgo-ui.loadBalancer.server.port=8080"
-      - "traefik.http.routers.sftpgo.rule=Host(`${EXTERNAL_DOMAIN}`) && PathPrefix(`/dav`)"
+      - "traefik.http.routers.sftpgo.rule=Host(`${EXTERNAL_DOMAIN}`) && PathPrefix(`/files`)"
       - "traefik.http.routers.sftpgo.service=sftpgo"
       - "traefik.http.routers.sftpgo.tls.certresolver=myresolver"
       - "traefik.http.services.sftpgo.loadBalancer.server.port=80"

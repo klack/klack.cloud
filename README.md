@@ -66,27 +66,27 @@
 Visit `http://your-domain.com.local` to access your home page.
 
 ## Setup your Cloud Drive
-WebDAV URL: `https://your-domain.com/dav`  
+Cloud Drive URL: `https://your-domain.com/files`  
   - Windows
     - Click on the Start icon/Windows icon  
     - Go into "This PC"
     - In the toolbar choose the option "Computer"
     - Click on "Map Network drive"
-    - Fill in the *WebDAV URL*
+    - Fill in the *Cloud Drive URL*
   - Mac
     - Open the Finder on your computer
     - Click on the "Go" menu and select "Connect to Server"
-    - In the new window enter the *WebDAV URL* and click on "Connect"
+    - In the new window enter the *Cloud Drive URL* and click on "Connect"
   - Linux (Gnome Desktop)
     - Open Nautilus file manager
     - Choose "Other Locations" from the menu on the left
-    - Type the *WebDAV URL* into "Connect to Server" field
+    - Type the *Cloud Drive URL* into "Connect to Server" field
     - Change https:// to davs://
   - Chromebook
-    - `sudo mount -t davfs https://your-domain.com/dav/ /home/localuser/klackcloud`
+    - `sudo mount -t davfs https://your-domain.com/files/ /home/localuser/klackcloud`
   - iPhone
     - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
-    - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *WebDAV URL*
+    - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *Cloud Drive URL*
 
 ## View and Sync your Photos
 - View your photos from any device at https://your-domain.com:2283

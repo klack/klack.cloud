@@ -18,11 +18,12 @@ DATA_DIRS=(
   "$DIR_BACKUPS/Documents"
   "$DIR_BACKUPS/Notes"
   "$DIR_BACKUPS/Photos"
+  "$DIR_BACKUPS/Planner"
   "$DIR_CLOUD_ROOT"
   "$DIR_CLOUD_ROOT/$CLOUD_USER"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Documents"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Notes"
-  "$DIR_CLOUD_ROOT/$CLOUD_USER/Calendar"
+  "$DIR_CLOUD_ROOT/$CLOUD_USER/Planner"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Downloads"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Downloads/blackhole"
   "$DIR_CLOUD_ROOT/$CLOUD_USER/Library/Movies"
@@ -89,6 +90,18 @@ cp ./config/logrotate.d/* /etc/logrotate.d
 echo -e "\nSetting up node_exporter"
 ./scripts/install_node_exp.sh
 nohup /usr/local/bin/node_exporter >/dev/null 2>&1 &
+
+#Radicale
+UUID=$(uuidgen)
+mkdir -p "$DIR_CLOUD_ROOT/$CLOUD_USER/Planner/collections/collection-root/$CLOUD_USER/$UUID"
+cp -r ./config/radicale/template/calendar/. $DIR_CLOUD_ROOT/$CLOUD_USER/Planner/collections/collection-root/$CLOUD_USER/$UUID
+UUID=$(uuidgen)
+mkdir -p "$DIR_CLOUD_ROOT/$CLOUD_USER/Planner/collections/collection-root/$CLOUD_USER/$UUID"
+cp -r ./config/radicale/template/contacts/. $DIR_CLOUD_ROOT/$CLOUD_USER/Planner/collections/collection-root/$CLOUD_USER/$UUID
+UUID=$(uuidgen)
+mkdir -p "$DIR_CLOUD_ROOT/$CLOUD_USER/Planner/collections/collection-root/$CLOUD_USER/$UUID"
+cp -r ./config/radicale/template/tasks/. $DIR_CLOUD_ROOT/$CLOUD_USER/Planner/collections/collection-root/$CLOUD_USER/$UUID
+
 
 #Duplicati
 echo -e "\nSetting up Duplicati"
