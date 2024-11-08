@@ -17,9 +17,9 @@ aarch64)
   ;;
 esac
 PWD=$(pwd)
-DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}')
+DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n 1)
 DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
-DEFAULT_GATEWAY=$(ip route | grep default | awk '{print $3}')
+DEFAULT_GATEWAY=$(ip route | grep default | awk '{print $3}' | head -n 1)
 
 # Setup start messages
 clear
