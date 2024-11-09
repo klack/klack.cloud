@@ -15,7 +15,7 @@ api: true
 
 metrics:
   prometheus:
-    entryPoint: internal
+    entryPoint: traefik
 
 entrypoints:
   web:
@@ -57,6 +57,11 @@ entrypoints:
     http:
       tls: true
 
+  jackett:
+    address: ":9117"
+    http:
+      tls: true
+
   sonarr:
     address: ":8989"
     http:
@@ -77,8 +82,8 @@ entrypoints:
     http:
       tls: true
 
-  internal:
-    address: ":4443"
+  prometheus:
+    address: ":9090"
     http:
       tls: true
 

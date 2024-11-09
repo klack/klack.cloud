@@ -11,7 +11,7 @@ services:
     environment:
       TZ: ${TZ}
       NODE_EXPORTER_TARGET: "${HOST_IP}:9101"
-      TRAEFIK_TARGET: "${HOST_IP}:4443"
+      TRAEFIK_TARGET: "${HOST_IP}:8082"
       CLOUD_USER: ${CLOUD_USER}
       CLOUD_PASS: ${CLOUD_PASS}
     entrypoint: ["/entrypoint.sh"]
@@ -22,7 +22,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.prometheus.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.prometheus.entrypoints=internal"
+      - "traefik.http.routers.prometheus.entrypoints=prometheus"
       - "traefik.http.routers.prometheus.service=prometheus"
       - "traefik.http.routers.prometheus.middlewares=traefik-auth@file"
       - "traefik.http.services.prometheus.loadBalancer.server.port=9090"

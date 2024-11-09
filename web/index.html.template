@@ -100,6 +100,7 @@
       target="_blank">Dashboard</a><br>
     <div id="video">📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_blank">Video Server</a><br></div>
     📷 <a href="https://${EXTERNAL_DOMAIN}:2283/" target="_blank">Photo Gallery</a><br>
+    📷 <a href="https://${EXTERNAL_DOMAIN}/planner/" target="_blank">Calendar, Contacts, and Reminders</a><br>
     📄 <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#sync-your-notes" target="_blank">Notebook
       Sync</a><br>
     ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#setup-your-cloud-drive" target="_blank">Cloud
@@ -115,7 +116,7 @@
     </div>
   </div>
   <div id="bottom">
-    <a href="https://${HOST_IP}:4443" target="_blank">Prometheus</a>
+    <a href="https://${HOST_IP}:9090" target="_blank">Prometheus</a>
     <a href="https://${EXTERNAL_DOMAIN}/planner/" target="_blank">Radicale</a>
     <a href="https://${HOST_IP}:8081/" target="_blank">SFTPGo</a>
     <a href="https://${HOST_IP}:8082/" target="_blank">Traefik</a>
