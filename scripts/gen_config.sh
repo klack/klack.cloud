@@ -36,6 +36,13 @@ if [ ! -e "./vpn.conf" ]; then
   sed -i "s|^ENABLE_DOWNLOADERS=.*|ENABLE_DOWNLOADERS=\"$ENABLE_DOWNLOADERS\"|" .env
 fi
 
+# Enable Plex updates through watchtower 
+if [ "$PLATFORM" == "linux/amd64" ]; then
+  PLEX_ENABLE_WATCHTOWER=true
+  sed -i "s|^PLEX_ENABLE_WATCHTOWER=.*|PLEX_ENABLE_WATCHTOWER=\"$PLEX_ENABLE_WATCHTOWER\"|" .env
+fi
+
+
 # Password Prompting
 read -p "Enter your domain name: " EXTERNAL_DOMAIN
 read -p "Create a username: " USERNAME
