@@ -32,8 +32,8 @@ sed -i "s|^NETWORK=.*|NETWORK=$NETWORK|" .env
 #Update Grafana dashboard and default contact point
 echo -e "\nUpdating Grafana dashboard"
 cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
-sed -i "s/\${NETWORK_INTERFACE}/${DEFAULT_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
-sed -i "s/\${HOST_IP}/${DEFAULT_HOST_IP}/g" ./config/grafana/dashboards/overview-dashboard.json
+sed -i "s/\${NETWORK_INTERFACE}/${NETWORK_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
+sed -i "s/\${HOST_IP}/${HOST_IP}/g" ./config/grafana/dashboards/overview-dashboard.json
 
 #Start
 echo -e "\nStarting"
