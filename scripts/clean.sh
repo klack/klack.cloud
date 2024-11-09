@@ -12,7 +12,7 @@ if [ "$EUID" != 0 ]; then
   exit 1
 fi
 
-read -p "WARNING: Destructive! Ctrl-C to quit now or press enter to proceed: "
+read -p "WARNING: Your data will be erased! Ctrl-C to quit now or press Enter to proceed: "
 
 #Shut down everything
 echo "Shutting down services"
@@ -36,7 +36,7 @@ LOG_DIRS=(
     "/var/log/cowrie"
     "/var/log/plex/PMS Plugin Logs"
 )
-rm -rfv ./cloud-metadata ./backups "${LOG_DIRS[@]}"
+rm -rfv ./cloud-metadata ./data ./backups ./cloud "${LOG_DIRS[@]}"
 
 #Remove node_exporter
 echo "Removing node_exporter"
