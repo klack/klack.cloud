@@ -17,9 +17,7 @@ aarch64)
   ;;
 esac
 PWD=$(pwd)
-DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n 1)
 DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
-DEFAULT_GATEWAY=$(ip route | grep default | awk '{print $3}' | head -n 1)
 
 # Setup start messages
 clear
@@ -102,13 +100,6 @@ cp -p ./config/qbittorrent/qBittorrent.conf.template ./config/qbittorrent/qBitto
 PASSWORD_PBKDF2="$(docker run --rm -v ./scripts:/app -w /app python:3.10-slim python generate_pkbdf2.py "$PASSWORD")"
 sed -i "s#\${PASSWORD_PBKDF2}#${PASSWORD_PBKDF2}#g" ./config/qbittorrent/qBittorrent.conf
 sed -i "s#\${USERNAME}#${USERNAME}#g" ./config/qbittorrent/qBittorrent.conf
-
-# Honeypot Setup
-NETWORK=$(echo "$DEFAULT_GATEWAY" | cut -d '.' -f 1-3)
-sed -i "s|^HOST_IP=.*|HOST_IP=$DEFAULT_HOST_IP|" .env
-sed -i "s|^HONEYPOT_GATEWAY=.*|HONEYPOT_GATEWAY=$DEFAULT_GATEWAY|" .env
-sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$DEFAULT_INTERFACE|" .env
-sed -i "s/\${NETWORK}/${NETWORK}/g" .env
 
 # Email Notifications Setup
 DEFAULT_MAIL_HOST=smtp.protonmail.ch
