@@ -5,7 +5,7 @@ source ./.env
 
 # Wait for sonarr to be marked as healthy
 echo "Waiting for sonarr to be healthy..."
-SERVER="https://sonarr.${INTERNAL_DOMAIN}:4443"
+SERVER="https://$HOST_IP:8989"
 CHECK_URL="$SERVER"
 TIMEOUT=500      # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5 # Time between retries

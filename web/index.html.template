@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>http://${INTERNAL_DOMAIN}</title>
+  <title>http://${EXTERNAL_DOMAIN}</title>
   <style>
     body,
     html {
@@ -57,9 +57,9 @@
             // Show the desired content
             document.getElementById("links").style.display = "block";
             document.getElementById("post-setup").style.display = "none";
-            if (window.location.hostname !== `${INTERNAL_DOMAIN}`) {
+            if (window.location.hostname !== `${EXTERNAL_DOMAIN}`) {
               // Construct the URL for the internal domain, keeping the same path
-              const newURL = `http://${INTERNAL_DOMAIN}`;
+              const newURL = `http://${EXTERNAL_DOMAIN}`;
 
               // Redirect to the new URL
               window.location.href = newURL;
@@ -82,12 +82,12 @@
     }
 
     // Start the initial check
-    checkHostReachability('http://${INTERNAL_DOMAIN}/');
+    checkHostReachability('https://${EXTERNAL_DOMAIN}/');
   </script>
 </head>
 
 <body>
-  <h1>${INTERNAL_DOMAIN}</h1>
+  <h1>${EXTERNAL_DOMAIN}</h1>
   <div id="post-setup">
     <h2>Final Steps</h2>
     <ul>
@@ -95,7 +95,7 @@
     </ul>
   </div>
   <div id="links">
-    📊 <a href="https://grafana.${INTERNAL_DOMAIN}:4443/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
+    📊 <a href="https://${HOST_IP}:3000/d/edwqapvydmmf4b/overview?orgId=1&from=now-1h&to=now&refresh=5s"
       target="_blank">Dashboard</a><br>
     <div id="video">📺 <a href="https://${EXTERNAL_DOMAIN}:32400/" target="_blank">Video Server</a><br></div>
     📷 <a href="https://${EXTERNAL_DOMAIN}:2283/" target="_blank">Photo Gallery</a><br>
@@ -103,21 +103,21 @@
       Sync</a><br>
     ☁️ <a href="https://github.com/klack/klack.cloud?tab=readme-ov-file#setup-your-cloud-drive" target="_blank">Cloud
       Drive</a><br>
-    💾 <a href="https://duplicati.${INTERNAL_DOMAIN}:4443/" target="_blank">Backups</a><br>
+    💾 <a href="https://${HOST_IP}:8200/" target="_blank">Backups</a><br>
     <div id="download_managers">
       🌀 Download Managers
       <ul>
-        <li><a href="https://qbittorrent.${INTERNAL_DOMAIN}:4443/" target="_blank">Torrents</a></li>
-        <li><a href="https://sonarr.${INTERNAL_DOMAIN}:4443/" target="_blank">Search TV</a></li>
-        <li><a href="https://radarr.${INTERNAL_DOMAIN}:4443/" target="_blank">Search Movies</a></li>
+        <li><a href="https://${HOST_IP}:8080/" target="_blank">Torrents</a></li>
+        <li><a href="https://${HOST_IP}:8989/" target="_blank">Search TV</a></li>
+        <li><a href="https://${HOST_IP}:7878/" target="_blank">Search Movies</a></li>
       </ul>
     </div>
   </div>
   <div id="bottom">
-    <a href="https://traefik.${INTERNAL_DOMAIN}:4443/" target="_blank">Traefik</a>
-    <a href="https://prometheus.${INTERNAL_DOMAIN}:4443" target="_blank">Prometheus</a>
-    <a href="https://sftpgo.${INTERNAL_DOMAIN}:4443/" target="_blank">SFTPGo</a>
-    <span class="downloaders"><a href="https://jackett.${INTERNAL_DOMAIN}:4443/" target="_blank">Jackett</a></span>
+    <a href="https://${HOST_IP}:4443" target="_blank">Prometheus</a>
+    <a href="https://${HOST_IP}:8081/" target="_blank">SFTPGo</a>
+    <a href="https://${HOST_IP}:8082/" target="_blank">Traefik</a>
+    <span class="downloaders"><a href="https://${HOST_IP}:9117/" target="_blank">Jackett</a></span>
   </div>
 </body>
 

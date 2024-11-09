@@ -5,7 +5,7 @@ source ./.env
 
 # Wait for radarr to be marked as healthy
 echo "Waiting for radarr to be healthy..."
-SERVER="https://radarr.${INTERNAL_DOMAIN}:4443"
+SERVER="https://$HOST_IP:7878"
 CHECK_URL="$SERVER"
 TIMEOUT=500      # Maximum time to wait (in seconds)
 RETRY_INTERVAL=5 # Time between retries

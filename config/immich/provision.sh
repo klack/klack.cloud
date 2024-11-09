@@ -3,7 +3,7 @@
 echo -e "\nProvisioning immich"
 source ./.env
 
-SERVER=https://$INTERNAL_DOMAIN:2283
+SERVER=https://$HOST_IP:2283
 USER=$CLOUD_USER@$EXTERNAL_DOMAIN
 PASSWORD=$CLOUD_PASS
 #Download sample files

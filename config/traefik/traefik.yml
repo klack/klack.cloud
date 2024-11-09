@@ -32,6 +32,46 @@ entrypoints:
     http:
       tls: true
 
+  grafana:
+    address: ":3000"
+    http:
+      tls: true
+
+  duplicati:
+    address: ":8200"
+    http:
+      tls: true
+
+  qbittorrent:
+    address: ":8080"
+    http:
+      tls: true
+
+  sftpgo:
+    address: ":8081"
+    http:
+      tls: true
+
+  traefik:
+    address: ":8082"
+    http:
+      tls: true
+
+  sonarr:
+    address: ":8989"
+    http:
+      tls: true
+
+  jackett:
+    address: ":9117"
+    http:
+      tls: true
+
+  radarr:
+    address: ":7878"
+    http:
+      tls: true
+
   plex:
     address: ":32400"
     http:

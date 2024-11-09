@@ -37,8 +37,9 @@ services:
       - TAKE_FILE_OWNERSHIP=false
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.radicale.rule=Host(`${EXTERNAL_DOMAIN}`) && PathPrefix(`/planner/`)"
+      - "traefik.http.routers.radicale.rule=PathPrefix(`/planner/`)"
       - "traefik.http.routers.radicale.entrypoints=web-secure"
       - "traefik.http.routers.radicale.middlewares=radicaleh,radicales"
       - "traefik.http.middlewares.radicaleh.headers.customrequestheaders.X-Script-Name=/planner/"
       - "traefik.http.middlewares.radicales.stripprefix.prefixes=/planner/"
+      - "stack=klack.cloud"

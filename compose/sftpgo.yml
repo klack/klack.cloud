@@ -18,13 +18,14 @@ services:
       klack:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sftpgo-ui.rule=Host(`sftpgo.${INTERNAL_DOMAIN}`)"
+      - "traefik.http.routers.sftpgo-ui.rule=PathPrefix(`/`)"
       - "traefik.http.routers.sftpgo-ui.service=sftpgo-ui"
-      - "traefik.http.routers.sftpgo-ui.entrypoints=internal"
+      - "traefik.http.routers.sftpgo-ui.entrypoints=sftpgo"
       - "traefik.http.routers.sftpgo-ui.tls.certresolver=myresolver"
       - "traefik.http.services.sftpgo-ui.loadBalancer.server.port=8080"
-      - "traefik.http.routers.sftpgo.rule=Host(`${EXTERNAL_DOMAIN}`) && PathPrefix(`/files`)"
+      - "traefik.http.routers.sftpgo.rule=PathPrefix(`/files`)"
       - "traefik.http.routers.sftpgo.service=sftpgo"
+      - "traefik.http.routers.sftpgo.entrypoints=web-secure"
       - "traefik.http.routers.sftpgo.tls.certresolver=myresolver"
       - "traefik.http.services.sftpgo.loadBalancer.server.port=80"
       - "stack=klack.cloud"

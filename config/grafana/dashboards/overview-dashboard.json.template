@@ -1426,8 +1426,8 @@
       {
         "current": {
           "selected": false,
-          "text": "node-exp.${INTERNAL_DOMAIN}:9101",
-          "value": "node-exp.${INTERNAL_DOMAIN}:9101"
+          "text": "${HOST_IP}:9101",
+          "value": "${HOST_IP}:9101"
         },
         "hide": 0,
         "includeAll": false,
@@ -1437,11 +1437,11 @@
         "options": [
           {
             "selected": true,
-            "text": "node-exp.${INTERNAL_DOMAIN}:9101",
-            "value": "node-exp.${INTERNAL_DOMAIN}:9101"
+            "text": "${HOST_IP}:9101",
+            "value": "${HOST_IP}:9101"
           }
         ],
-        "query": "node-exp.${INTERNAL_DOMAIN}:9101",
+        "query": "${HOST_IP}:9101",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"

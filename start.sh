@@ -46,5 +46,5 @@ echo -e "\nIndex.html created"
 if [ "$IN_SETUP" != "1" ]; then
   # Show home page
   echo -e "\nklack.cloud launched!"
-  echo -e "\nFinish setup at http://$HOST_IP"
+  echo -e "\nVisit your homepage at https://${EXTERNAL_DOMAIN}"
 fi

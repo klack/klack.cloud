@@ -23,12 +23,20 @@ services:
       - "4443:4443"
       - "2283:2283"
       - "9101:9101"
+      - "8200:8200"
+      - "3000:3000"
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+      - "9117:9117"      
+      - "7878:7878"
+      - "9090:9090"
     networks:
       klack:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=Host(`traefik.${INTERNAL_DOMAIN}`)"
-      - "traefik.http.routers.api.entrypoints=internal"
+      - "traefik.http.routers.api.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.api.entrypoints=traefik"
       - "traefik.http.routers.api.middlewares=traefik-auth@file"
       - "traefik.http.routers.api.service=api@internal"
       - "stack=klack.cloud"

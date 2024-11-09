@@ -12,6 +12,6 @@ services:
       F2B_LOG_LEVEL: INFO # Set log level to INFO
       F2B_DB_PURGE_AGE: 1d # Set database purge age to 1 day
     network_mode: "host"
+    restart: always
     labels:
       - "stack=klack.cloud"
-    restart: always

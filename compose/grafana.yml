@@ -60,13 +60,13 @@ services:
       GF_SMTP_FROM_ADDRESS: ${GF_SMTP_FROM_ADDRESS}
       GF_SMTP_USER: ${GF_SMTP_USER}
       GF_SMTP_PASSWORD: ${GF_SMTP_PASSWORD}
-      GF_SERVER_ROOT_URL: https://grafana.${INTERNAL_DOMAIN}:4443
+      GF_SERVER_ROOT_URL: https://${HOST_IP}:3000
     networks:
       - klack
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.${INTERNAL_DOMAIN}`)"
-      - "traefik.http.routers.grafana.entrypoints=internal"
+      - "traefik.http.routers.grafana.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.grafana.entrypoints=grafana"
       - "traefik.http.routers.grafana.service=grafana"
       - "traefik.http.services.grafana.loadBalancer.server.port=3000"
       - "stack=loggers"

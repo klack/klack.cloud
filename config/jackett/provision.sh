@@ -3,7 +3,7 @@
 echo -e "\nProvisioning Jackett"
 source ./.env
 
-SERVER="https://jackett.$INTERNAL_DOMAIN:4443"
+SERVER="https://$HOST_IP:9117"
 
 # Wait for sonarr to be marked as healthy
 echo "Waiting for Jackett to be healthy..."

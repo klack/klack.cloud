@@ -66,8 +66,8 @@ services:
     working_dir: "/opt"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.${INTERNAL_DOMAIN}`)"
-      - "traefik.http.routers.qbittorrent.entrypoints=internal"
+      - "traefik.http.routers.qbittorrent.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.qbittorrent.entrypoints=qbittorrent"
       - "traefik.http.routers.qbittorrent.service=qbittorrent"
       - "traefik.http.services.qbittorrent.loadBalancer.server.port=8080"
       - "stack=klack.cloud"

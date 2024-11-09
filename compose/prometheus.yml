@@ -10,8 +10,8 @@ services:
       - prometheus-storage:/prometheus
     environment:
       TZ: ${TZ}
-      NODE_EXPORTER_TARGET: "node-exp.${INTERNAL_DOMAIN}:9101"
-      TRAEFIK_TARGET: "traefik.${INTERNAL_DOMAIN}:4443"
+      NODE_EXPORTER_TARGET: "${HOST_IP}:9101"
+      TRAEFIK_TARGET: "${HOST_IP}:4443"
       CLOUD_USER: ${CLOUD_USER}
       CLOUD_PASS: ${CLOUD_PASS}
     entrypoint: ["/entrypoint.sh"]
@@ -19,12 +19,9 @@ services:
     #   - "9090:9090"
     networks:
       - klack
-    extra_hosts:
-      - "node-exp.${INTERNAL_DOMAIN}:${HOST_IP}" # Use host IP
-      - "traefik.${INTERNAL_DOMAIN}:${HOST_IP}"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.prometheus.rule=Host(`prometheus.${INTERNAL_DOMAIN}`)"
+      - "traefik.http.routers.prometheus.rule=PathPrefix(`/`)"
       - "traefik.http.routers.prometheus.entrypoints=internal"
       - "traefik.http.routers.prometheus.service=prometheus"
       - "traefik.http.routers.prometheus.middlewares=traefik-auth@file"

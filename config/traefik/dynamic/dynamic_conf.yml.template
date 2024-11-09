@@ -1,20 +1,20 @@
 http:
   routers:
     node-exporter:
-      rule: "Host(`node-exp.${INTERNAL_DOMAIN}`)"
+      rule: "PathPrefix(`/`)"
       service: node-exporter
       entryPoints:
         - metrics
       middlewares:
         - traefik-auth
   
-  middlewares:
-    traefik-auth:
-      basicAuth:
-        usersFile: "/htpasswd"
-  
   services:
     node-exporter:
       loadBalancer:
         servers:
           - url: "http://${HOST_IP}:9100"
+  
+  middlewares:
+    traefik-auth:
+      basicAuth:
+        usersFile: "/htpasswd"

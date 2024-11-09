@@ -38,7 +38,7 @@ services:
       disable: false
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.immich.rule=Host(`${EXTERNAL_DOMAIN}`) || Host(`${INTERNAL_DOMAIN}`)"
+      - "traefik.http.routers.immich.rule=PathPrefix(`/`)"
       - "traefik.http.routers.immich.tls.certresolver=myresolver"
       - "traefik.http.routers.immich.entrypoints=immich"
       - "traefik.http.routers.immich.service=immich"

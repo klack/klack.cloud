@@ -1,12 +1,15 @@
 services:
   nginx:
     image: nginx:alpine
-    ports:
-      - "80:80"
+    networks:
+      klack:
+    # ports:
+    # - "80:80"
     volumes:
       - ../web:/usr/share/nginx/html:ro
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nginx.rule=Host(`${INTERNAL_DOMAIN}`)"
-      - "traefik.http.routers.nginx.entrypoints=web"
+      - "traefik.http.routers.nginx.rule=Path(`/`)"
+      - "traefik.http.routers.nginx.middlewares=traefik-auth@file"
+      - "traefik.http.routers.nginx.entrypoints=web-secure"
       - "stack=klack.cloud"
