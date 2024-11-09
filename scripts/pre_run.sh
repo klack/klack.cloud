@@ -43,12 +43,6 @@ LOG_DIRS=(
 mkdir -vp "${DATA_DIRS[@]}" "${LOG_DIRS[@]}"
 touch ./config/promtail/positions.yaml
 
-#Setting Permissions
-echo -e "\nSetting Permissions"
-sudo chown -R 1000:1000 *
-sudo chown -R 1000:1000 "${LOG_DIRS[@]}"
-sudo chown -R 999:999 /var/log/cowrie
-
 #Copy docker daemon
 if [ ! -f /etc/docker/daemon.json ]; then
   cp -v ./config/docker/daemon.json /etc/docker/daemon.json
@@ -56,22 +50,6 @@ if [ ! -f /etc/docker/daemon.json ]; then
 else
   echo "Docker daemon.json already exists"
 fi
-
-#Generate hosts file
-# sed "s|\${HOST_IP}|${HOST_IP}|g; \
-#      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
-#   ./config/hosts/hosts.template >./web/hosts.txt
-
-# sed "s|\${HOST_IP}|127.0.0.1|g; \
-#      s|\${INTERNAL_DOMAIN}|${INTERNAL_DOMAIN}|g" \
-#   ./config/hosts/hosts.template >./config/hosts/hosts
-
-# if ! grep -q "$INTERNAL_DOMAIN" /etc/hosts; then
-#   sh -c "cat ./config/hosts/hosts >> /etc/hosts"
-#   echo "Hosts file modified"
-# else
-#   echo "Hosts file already modified."
-# fi
 
 #Update Grafana dashboard and default contact point
 echo -e "\nSetting up Grafana"
@@ -102,7 +80,6 @@ UUID=$(uuidgen)
 mkdir -p "$DIR_CLOUD_ROOT/$CLOUD_USER/Planner/collections/collection-root/$CLOUD_USER/$UUID"
 cp -r ./config/radicale/template/tasks/. $DIR_CLOUD_ROOT/$CLOUD_USER/Planner/collections/collection-root/$CLOUD_USER/$UUID
 
-
 #Duplicati
 echo -e "\nSetting up Duplicati"
 cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Duplicati-server.sqlite
@@ -110,5 +87,11 @@ cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Dupli
 #Platform Specific
 echo -e "\nRunning platform specific commands"
 ./scripts/platform.sh
+
+#Setting Permissions
+echo -e "\nSetting Permissions"
+sudo chown -R 1000:1000 *
+sudo chown -R 1000:1000 "${LOG_DIRS[@]}"
+sudo chown -R 999:999 /var/log/cowrie
 
 echo -e "\nPre-run setup complete"

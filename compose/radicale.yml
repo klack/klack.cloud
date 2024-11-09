@@ -28,7 +28,7 @@ services:
     profiles:
       - apps
     volumes:
-      - $DIR_CLOUD_ROOT/$CLOUD_USER/Calendar:/data
+      - $DIR_CLOUD_ROOT/$CLOUD_USER/Planner:/data
       - ../config/radicale:/config
       - ../config/traefik/htpasswd:/config/users
     networks:

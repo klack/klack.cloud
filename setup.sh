@@ -23,7 +23,6 @@ fi
 echo "Shutting down services"
 ./stop.sh
 sudo killall node_exporter
-docker volume rm klack-cloud-photoprism-db-1 klack-cloud-sftpgo-1 # Remove so MariaDB can be reprovisioned
 
 # Run pre-run scripts
 sudo ./scripts/pre_run.sh

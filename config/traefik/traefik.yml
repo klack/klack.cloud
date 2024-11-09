@@ -62,11 +62,6 @@ entrypoints:
     http:
       tls: true
 
-  jackett:
-    address: ":9117"
-    http:
-      tls: true
-
   radarr:
     address: ":7878"
     http:

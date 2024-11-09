@@ -49,25 +49,4 @@ sed -i '/node_exporter/d' /etc/crontab #Remove node_exporter
 sed -i '/build_images.sh/d' /etc/crontab #Remove arm64 image builder
 echo "Entries containing 'node_exporter' have been removed from /etc/crontab."
 
-#######################################
-# Clean hosts file
-#######################################
-cp /etc/hosts /etc/hosts.bak # Backup the original /etc/hosts file
-
-if [ -n "$EXTERNAL_DOMAIN" ]; then
-  # Escape special characters in EXTERNAL_DOMAIN for use in sed
-  EXTERNAL_DOMAIN_ESCAPED=$(printf '%s\n' "$EXTERNAL_DOMAIN" | sed 's/[]\/$*.^[]/\\&/g')
-
-  # Backup the original /etc/hosts file
-  cp /etc/hosts /etc/hosts.bak
-
-  # Remove entries containing EXTERNAL_DOMAIN
-  sed -i "/$EXTERNAL_DOMAIN_ESCAPED/d" /etc/hosts
-
-  echo "Entries containing '$EXTERNAL_DOMAIN' have been removed from /etc/hosts."
-else
-  echo "EXTERNAL_DOMAIN variable is not set. Skipping hosts removal."
-fi
-#######################################
-
 echo -e "\nCleaning complete"
