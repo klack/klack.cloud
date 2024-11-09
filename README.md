@@ -98,11 +98,14 @@ Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Open the app
   - Navigate to Options > synchronization
   - Set "Synchronization target" to "WebDAV"
-  - Enter `https://your-domain.com/dav/Notes` for the "WebDAV URL"
+  - Enter `https://your-domain.com/files/Notes` for the "WebDAV URL"
   - Enter your username and password
   - Click "Check synchronization configuration"
   - Upon success click "Show Advanced Settings"
   - Click "Re-upload local data to sync target"
+
+## Sync your Calendar, Contacts, and Reminders
+Use `https://your-domain.com/planner/username` as a CalDav and CardDav server
 
 ## Alerts
 You will receive alerts on the dashboard for the following:
