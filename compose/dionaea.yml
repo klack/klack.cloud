@@ -16,6 +16,6 @@ services:
       - ../config/dionaea/dionaea.cfg:/opt/dionaea/etc/dionaea/dionaea.cfg #Needs to have 777 perms
     networks:
       honey:
-        ipv4_address: ${HONEYPOT_IPV4}
+        ipv4_address: ${NETWORK}.50
     stop_grace_period: 5s
     restart: unless-stopped

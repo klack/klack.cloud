@@ -30,5 +30,5 @@ networks:
       parent: ${NETWORK_INTERFACE} # Replace 'eno1' with your actual network interface name
     ipam:
       config:
-        - subnet: ${HONEYPOT_SUBNET} # Replace with your network's subnet
-          gateway: ${HONEYPOT_GATEWAY} # Replace with your network's gateway
+        - subnet: ${NETWORK}.0/24 # Replace with your network's subnet
+          gateway: ${GATEWAY} # Replace with your network's gateway

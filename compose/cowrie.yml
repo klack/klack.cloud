@@ -16,5 +16,5 @@ services:
       - /var/log/cowrie:/cowrie/cowrie-git/var/log/cowrie
     networks:
       honey:
-        ipv4_address: ${HONEYPOTSSH_IPV4}
+        ipv4_address: ${NETWORK}.51
     restart: always

@@ -19,14 +19,15 @@ fi
 
 # Honeypot Setup
 echo -e "\nUpdating network settings"
-DEFAULT_INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n 1)
-DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
-DEFAULT_GATEWAY=$(ip route | grep default | awk '{print $3}' | head -n 1)
-NETWORK=$(echo "$DEFAULT_GATEWAY" | cut -d '.' -f 1-3)
-sed -i "s|^HOST_IP=.*|HOST_IP=$DEFAULT_HOST_IP|" .env
-sed -i "s|^HONEYPOT_GATEWAY=.*|HONEYPOT_GATEWAY=$DEFAULT_GATEWAY|" .env
-sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$DEFAULT_INTERFACE|" .env
-sed -i "s/\${NETWORK}/${NETWORK}/g" .env
+NETWORK_INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n 1)
+HOST_IP=$(hostname -I | awk '{print $1}' | head -n 1)
+GATEWAY=$(ip route | grep default | awk '{print $3}' | head -n 1)
+NETWORK=$(echo "$GATEWAY" | cut -d '.' -f 1-3)
+sed -i "s|^HOST_IP=.*|HOST_IP=$HOST_IP|" .env
+sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$NETWORK_INTERFACE|" .env
+sed -i "s|^GATEWAY=.*|GATEWAY=$GATEWAY|" .env
+sed -i "s|^NETWORK=.*|NETWORK=$NETWORK|" .env
+
 
 #Update Grafana dashboard and default contact point
 echo -e "\nUpdating Grafana dashboard"
