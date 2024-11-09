@@ -92,7 +92,7 @@
     <h2>Host Unreachable</h2>
     <ul>
       <li>Unable to connect to https://${EXTERNAL_DOMAIN}/</li>
-      <li>Check port forwarding</li>
+      <li>Ensure that ports are forwarded to ${HOST_IP}</li>
     </ul>
   </div>
   <div id="links">
