@@ -105,8 +105,8 @@ Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Click "Re-upload local data to sync target"
 
 ## Sync your Calendar, Contacts, and Reminders
-Use `https://your-domain.com/planner/username` as a CalDav and CardDav server
-
+  - [iPhone Guide](https://support.apple.com/guide/iphone/set-up-mail-contacts-and-calendar-accounts-ipha0d932e96/ios)
+    - Enter `https://your-domain.com/planner/username` as your CardDAV and CalDAV server
 ## Alerts
 You will receive alerts on the dashboard for the following:
 - High CPU temp (or no temp reported)  
