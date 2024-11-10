@@ -27,9 +27,9 @@ NETWORK=$(echo "$GATEWAY" | cut -d '.' -f 1-3)
 sed -i "s|^HOST_IP=.*|HOST_IP=$HOST_IP|" .env
 sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$NETWORK_INTERFACE|" .env
 sed -i "s|^GATEWAY=.*|GATEWAY=$GATEWAY|" .env
-sed -i "s|^NETWORK=.*|NETWORK=$NETWORK|" .envif [ "$EUID" == 0 ]; then
+sed -i "s|^NETWORK=.*|NETWORK=$NETWORK|" .env
 
-# Grafana dashboards
+#Update Grafana dashboard and default contact point
 echo -e "\nUpdating Grafana dashboard"
 cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
 sed -i "s/\${NETWORK_INTERFACE}/${NETWORK_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
