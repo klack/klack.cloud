@@ -10,14 +10,14 @@ if [ ! -f "./.env" ]; then
   exit 1
 fi
 
-source ./.env
-
 #Get out of the scripts directory
 if [ "$(basename "$(dirname "$PWD")")" = "scripts" ]; then
   cd ..
 fi
 
+source ./.env
 OLD_HOST_IP=$HOST_IP
+
 # Honeypot Setup
 echo -e "\nUpdating network settings"
 NETWORK_INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n 1)
@@ -28,9 +28,8 @@ sed -i "s|^HOST_IP=.*|HOST_IP=$HOST_IP|" .env
 sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$NETWORK_INTERFACE|" .env
 sed -i "s|^GATEWAY=.*|GATEWAY=$GATEWAY|" .env
 sed -i "s|^NETWORK=.*|NETWORK=$NETWORK|" .envif [ "$EUID" == 0 ]; then
-  echo "Do not run as root"
-  exit 1
-fi
+
+# Grafana dashboards
 echo -e "\nUpdating Grafana dashboard"
 cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
 sed -i "s/\${NETWORK_INTERFACE}/${NETWORK_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
