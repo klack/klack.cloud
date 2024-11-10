@@ -55,7 +55,7 @@ hosts = 0.0.0.0:5232
 
 # Authentication method
 # Value: none | htpasswd | remote_user | http_x_remote_user
-type = none
+type = htpasswd
 
 # Htpasswd filename
 htpasswd_filename = /config/users
