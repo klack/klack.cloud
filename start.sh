@@ -65,7 +65,7 @@ if [ "$IN_SETUP" != "1" ]; then
   # Show home page
   echo -e "\nklack.cloud launched!"
   if [ "$OLD_HOST_IP" != "$HOST_IP" ]; then
-    read -p "CRITICAL: Host IP Changed.  Change router port forwarding to ${HOST_IP}".  Press Enter to continue."
+    read -p "CRITICAL: Host IP Changed.  Change router port forwarding to ${HOST_IP}.  Press Enter to continue."
   fi
   echo -e "\nVisit your homepage at https://${HOST_IP}"
 fi
