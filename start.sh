@@ -17,6 +17,7 @@ if [ "$(basename "$(dirname "$PWD")")" = "scripts" ]; then
   cd ..
 fi
 
+OLD_HOST_IP=$HOST_IP
 # Honeypot Setup
 echo -e "\nUpdating network settings"
 NETWORK_INTERFACE=$(ip route | grep default | awk '{print $5}' | head -n 1)
@@ -26,10 +27,10 @@ NETWORK=$(echo "$GATEWAY" | cut -d '.' -f 1-3)
 sed -i "s|^HOST_IP=.*|HOST_IP=$HOST_IP|" .env
 sed -i "s|^NETWORK_INTERFACE=.*|NETWORK_INTERFACE=$NETWORK_INTERFACE|" .env
 sed -i "s|^GATEWAY=.*|GATEWAY=$GATEWAY|" .env
-sed -i "s|^NETWORK=.*|NETWORK=$NETWORK|" .env
-
-
-#Update Grafana dashboard and default contact point
+sed -i "s|^NETWORK=.*|NETWORK=$NETWORK|" .envif [ "$EUID" == 0 ]; then
+  echo "Do not run as root"
+  exit 1
+fi
 echo -e "\nUpdating Grafana dashboard"
 cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
 sed -i "s/\${NETWORK_INTERFACE}/${NETWORK_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
@@ -64,5 +65,8 @@ echo -e "\nIndex.html created"
 if [ "$IN_SETUP" != "1" ]; then
   # Show home page
   echo -e "\nklack.cloud launched!"
+  if [ "$OLD_HOST_IP" != "$HOST_IP" ]; then
+    echo -e "\nCRITICAL: Host IP Changed.  Change router port forwarding to ${HOST_IP}"
+  fi
   echo -e "\nVisit your homepage at https://${HOST_IP}"
 fi
