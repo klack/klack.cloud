@@ -66,7 +66,7 @@
 Visit `http://192.168.1.x` to access your home page.
 
 ## Setup your Cloud Drive
-Cloud Drive URL: `https://your-domain.com/files`  
+Cloud Drive URL: `https://your-domain.com/files/`  
   - Windows
     - Click on the Start icon/Windows icon  
     - Go into "This PC"
