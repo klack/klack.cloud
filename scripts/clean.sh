@@ -36,7 +36,7 @@ LOG_DIRS=(
     "/var/log/cowrie"
     "/var/log/plex/PMS Plugin Logs"
 )
-rm -rfv ./cloud-metadata ./data ./backups ./cloud "${LOG_DIRS[@]}"
+rm -rfv ./cloud-metadata ./backups ./cloud "${LOG_DIRS[@]}"
 
 #Remove node_exporter
 echo "Removing node_exporter"
