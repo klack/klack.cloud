@@ -4,3 +4,6 @@
 [submodule "config/plex/git"]
 	path = config/plex/git
 	url = https://github.com/plexinc/pms-docker.git
+[submodule "config/qbittorrent/git"]
+	path = config/qbittorrent/git
+	url = https://github.com/tenseiken/docker-qbittorrent-wireguard.git

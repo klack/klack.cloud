@@ -19,8 +19,10 @@ esac
 
 #Build docker images
 if [ $PLATFORM == "linux/arm64" ]; then
-    echo -e "Building Plex"
-    docker build --platform linux/arm64 --pull --no-cache -t plexinc/pms-docker ./config/plex/git
-    echo -e "Building Dionaea"
-    docker build --platform linux/arm64 --pull --no-cache -t dinotools/dionaea ./config/dionaea/git
+  echo -e "Building Plex"
+  docker build --platform linux/arm64 --pull --no-cache -t plexinc/pms-docker ./config/plex/git
+  echo -e "Building Dionaea"
+  docker build --platform linux/arm64 --pull --no-cache -t dinotools/dionaea ./config/dionaea/git
+  echo -e "Building qbittorrent-wireguard"
+  docker build --platform linux/arm64 --pull --no-cache -t tenseiken/qbittorrent-wireguard ./config/qbittorrent/git
 fi
