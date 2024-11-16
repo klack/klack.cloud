@@ -10,4 +10,4 @@ else
   echo -e "External drive not detected\n"
   PATH_ROOT=$(pwd)
 fi
-sed -i "s|\${PATH_ROOT}|${PATH_ROOT}|g" .env 
+sed -i "s|\${PATH_ROOT}|${PATH_ROOT}|g" .env

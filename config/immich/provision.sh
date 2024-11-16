@@ -53,6 +53,7 @@ for FILE in "${FILES[@]}"; do
     FILE_MODIFIED_AT=$(date -d @$MTIME --utc +'%Y-%m-%dT%H:%M:%S.%NZ')
 
     # Perform the upload for each file
+    echo
     curl -X POST $SERVER/api/assets \
         -k \
         -H "Accept: application/json" \
