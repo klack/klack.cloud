@@ -35,6 +35,8 @@ services:
       - klack
     environment:
       - TAKE_FILE_OWNERSHIP=false
+      - UID=1000
+      - GID=1000
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.radicale.rule=PathPrefix(`/planner/`)"
