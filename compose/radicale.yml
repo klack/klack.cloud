@@ -3,9 +3,7 @@ services:
     image: tomsquest/docker-radicale
     # ports:
     #   - 5232:5232
-    user: "1000:1000"
     init: true
-    read_only: true
     security_opt:
       - no-new-privileges:true
     cap_drop:
