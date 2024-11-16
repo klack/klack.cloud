@@ -10,9 +10,9 @@ services:
       ADVERTISE_IP: https://${EXTERNAL_DOMAIN}:32400/
     hostname: plex
     volumes:
-      - ${DIR_DATA_ROOT}/plex:/config
+      - ${DIR_META_DATA_ROOT}/plex:/config
       - /var/log/plex:/config/Library/Application Support/Plex Media Server/Logs
-      - ${DIR_DATA_ROOT}/transcode:/transcode/Transcode
+      - ${DIR_META_DATA_ROOT}/transcode:/transcode/Transcode
       - ${DIR_CLOUD_ROOT}/${CLOUD_USER}/Library:/data
     ports:
       # - "32400:32400/tcp"

@@ -11,6 +11,8 @@ if [[ "$1" == "--clean" ]]; then
   exit 0
 fi
 
+export COMPOSE_PROGRESS=plain
+
 # Generate Config
 LOCAL_USER=$(whoami) 
 sudo LOCAL_USER=$LOCAL_USER ./scripts/gen_config.sh

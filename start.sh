@@ -15,6 +15,8 @@ if [ "$(basename "$(dirname "$PWD")")" = "scripts" ]; then
   cd ..
 fi
 
+export COMPOSE_PROGRESS=plain
+
 source ./.env
 OLD_HOST_IP=$HOST_IP
 

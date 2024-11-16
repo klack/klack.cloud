@@ -21,7 +21,7 @@ services:
     user: 1000:1000
     environment:
       UPLOAD_LOCATION: ${DIR_CLOUD_ROOT}/${CLOUD_USER}/Library/Photos
-      DB_DATA_LOCATION: ${DIR_DATA_ROOT}/immich/postgres
+      DB_DATA_LOCATION: ${DIR_META_DATA_ROOT}/immich/postgres
       IMMICH_VERSION: ${IMMICH_VERSION}
       IMMICH_CONFIG_FILE: /immich-config.json
       DB_PASSWORD: ${DB_PASSWORD}
@@ -60,7 +60,7 @@ services:
     #   - .env
     environment:
       UPLOAD_LOCATION: ${DIR_CLOUD_ROOT}/${CLOUD_USER}/Photos
-      DB_DATA_LOCATION: ${DIR_DATA_ROOT}/immich/postgres
+      DB_DATA_LOCATION: ${DIR_META_DATA_ROOT}/immich/postgres
       IMMICH_VERSION: ${IMMICH_VERSION}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_USERNAME: ${DB_USERNAME}
@@ -91,7 +91,7 @@ services:
     user: 1000:1000
     volumes:
       # Do not edit the next line. If you want to change the database storage location on your system, edit the value of DB_DATA_LOCATION in the .env file
-      - ${DIR_DATA_ROOT}/immich/postgres:/var/lib/postgresql/data
+      - ${DIR_META_DATA_ROOT}/immich/postgres:/var/lib/postgresql/data
     networks:
       klack:      
     healthcheck:

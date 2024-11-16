@@ -16,18 +16,17 @@ aarch64)
   exit 1
   ;;
 esac
-PWD=$(pwd)
 DEFAULT_HOST_IP=$(hostname -I | awk '{print $1}')
 
 # Setup start messages
 clear
 echo -e "---klack.cloud Setup ($DEFAULT_HOST_IP)---\n"
 
-#.env file generation
+#.env new copy
 cp -p ./.env.template ./.env
 
-#Set PWD
-sed -i "s|\${PWD}|${PWD}|g" .env
+#Set PATH_ROOT
+./scripts/detect_drive.sh
 
 # Disable Downloaders if vpn.conf is not present
 if [ ! -e "./vpn.conf" ]; then
@@ -38,10 +37,9 @@ fi
 
 # Enable Plex updates through watchtower 
 if [ "$PLATFORM" == "linux/amd64" ]; then
-  IS_X64=true
-  sed -i "s|^IS_X64=.*|IS_X64=\"$IS_X64\"|" .env
+  PLEX_ENABLE_WATCHTOWER=true
+  sed -i "s|^PLEX_ENABLE_WATCHTOWER=.*|PLEX_ENABLE_WATCHTOWER=\"$PLEX_ENABLE_WATCHTOWER\"|" .env
 fi
-
 
 # Password Prompting
 read -p "Enter your domain name: " EXTERNAL_DOMAIN

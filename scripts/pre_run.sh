@@ -9,11 +9,11 @@ fi
 
 #Setup directories
 DATA_DIRS=(
-  "$DIR_DATA_ROOT"
-  "$DIR_DATA_ROOT/plex"
-  "$DIR_DATA_ROOT/transcode"
-  "$DIR_DATA_ROOT/duplicati"
-  "$DIR_DATA_ROOT/immich/postgres"
+  "$DIR_META_DATA_ROOT"
+  "$DIR_META_DATA_ROOT/plex"
+  "$DIR_META_DATA_ROOT/transcode"
+  "$DIR_META_DATA_ROOT/duplicati"
+  "$DIR_META_DATA_ROOT/immich/postgres"
   "$DIR_BACKUPS"
   "$DIR_BACKUPS/Documents"
   "$DIR_BACKUPS/Notes"
@@ -76,7 +76,7 @@ cp -r ./config/radicale/template/tasks/. $DIR_CLOUD_ROOT/$CLOUD_USER/Planner/col
 
 #Duplicati
 echo -e "\nSetting up Duplicati"
-cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_DATA_ROOT/duplicati/Duplicati-server.sqlite
+cp ./config/duplicati/Duplicati-server.sqlite.new $DIR_META_DATA_ROOT/duplicati/Duplicati-server.sqlite
 
 #Platform Specific
 echo -e "\nRunning platform specific commands"
@@ -85,7 +85,7 @@ echo -e "\nRunning platform specific commands"
 #Setting Permissions
 echo -e "\nSetting Permissions"
 sudo chown -R 1000:1000 *
-sudo chown -R 1000:1000 "${LOG_DIRS[@]}"
+sudo chown -R 1000:1000 "${LOG_DIRS[@]}" $DIR_META_DATA_ROOT $DIR_BACKUPS $DIR_CLOUD_ROOT
 sudo chown -R 999:999 /var/log/cowrie
 
 echo -e "\nPre-run setup complete"
