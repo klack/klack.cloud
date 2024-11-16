@@ -38,8 +38,8 @@ fi
 
 # Enable Plex updates through watchtower 
 if [ "$PLATFORM" == "linux/amd64" ]; then
-  PLEX_ENABLE_WATCHTOWER=true
-  sed -i "s|^PLEX_ENABLE_WATCHTOWER=.*|PLEX_ENABLE_WATCHTOWER=\"$PLEX_ENABLE_WATCHTOWER\"|" .env
+  IS_X64=true
+  sed -i "s|^IS_X64=.*|IS_X64=\"$IS_X64\"|" .env
 fi
 
 

@@ -14,6 +14,7 @@ services:
       - ../config/dionaea/fail2ban.yaml:/opt/dionaea/etc/dionaea/ihandlers-enabled/fail2ban.yaml #Needs to have 777 perms
       - ../config/dionaea/smb.yaml:/opt/dionaea/etc/dionaea/ihandlers-enabled/smb.yaml #Needs to have 777 perms
       - ../config/dionaea/dionaea.cfg:/opt/dionaea/etc/dionaea/dionaea.cfg #Needs to have 777 perms
+      - "com.centurylinklabs.watchtower.enable=${IS_X64}"      
     networks:
       honey:
         ipv4_address: ${NETWORK}.50

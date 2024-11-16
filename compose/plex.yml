@@ -33,6 +33,6 @@ services:
       - "traefik.http.routers.plex.entrypoints=plex"
       - "traefik.http.routers.plex.tls.certresolver=myresolver"
       - "traefik.http.services.plex.loadBalancer.server.port=32400"
-      - "com.centurylinklabs.watchtower.enable=${PLEX_ENABLE_WATCHTOWER}"
+      - "com.centurylinklabs.watchtower.enable=${IS_X64}"
       - "stack=klack.cloud"
     restart: unless-stopped
