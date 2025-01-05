@@ -51,7 +51,7 @@
 ### Pre-requisites
 - [ ] A Raspberry Pi 5 with 8GB of RAM
 - [ ] A free domain configured with Dynamic DNS, such as one from [No-IP](https://noip.com)
-- [ ] Port 443, 2283, and 32400 must be [forwarded to your machine](https://portforward.com/) from your router
+- [ ] Port 4443, 2283, and 32400 must be [forwarded to your machine](https://portforward.com/) from your router
 - [ ] To use "Download Managers", a [paid VPN subscription](https://protonvpn.com/) is required
   - Login to your VPN provider and [download a wireguard.conf file](https://protonvpn.com/support/wireguard-configurations/)
   - Enable the "Port Forward" option when configuring
@@ -127,8 +127,8 @@ You will receive alerts on the dashboard for the following:
 | ------------- | -------- | --------------- | ----------- | -------------------------------- | ---------------------- | ------------- | ------------- |
 | Plex          | 32400    | your-domain.com | /           | https://your-domain.com:32400/   |                        | App           | Self          |
 | Immich        | 2283     | your-domain.com | /           | https://your-domain.com:2283/    |                        | App           | Docker        |
-| WebDav        | 443      | your-domain.com | /files      | https://your-domain.com/files/   |                        | Traefik       | Docker        |
-| Radicale      | 443      | your-domain.com | /planner    | https://your-domain.com/planner/ |                        | Traefik       | Docker        |
+| WebDav        | 4443     | your-domain.com | /files/     | https://your-domain.com/files/   |                        | Traefik       | Docker        |
+| Radicale      | 4443     | your-domain.com | /planner/   | https://your-domain.com/planner/ |                        | Traefik       | Docker        |
 | SFTPGo UI     | 8081     | 192.168.1.x     | /           | https://192.168.1.x:8081/        |                        | Traefik       | Docker        |
 | Traefik UI    | 8082     | 192.168.1.x     | /           | https://192.168.1.x:8082/        |                        | Traefik       | logrotate     |
 | Grafana       | 3000     | 192.168.1.x     | /           | https://192.168.1.x:3000/        |                        | App           | Docker        |
