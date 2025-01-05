@@ -89,7 +89,7 @@ Cloud Drive URL: `https://your-domain.com:4443/files/`
     - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *Cloud Drive URL*
 
 ## View and Sync your Photos
-- View your photos from any device at https://your-domain.com:2283
+- View your photos from any device at `https://your-domain.com:2283`
 - Use the Immich app from the appstore on your phone
 - For your email address, use `username@your-domain.com`
 
