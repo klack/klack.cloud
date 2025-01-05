@@ -66,7 +66,7 @@
 Visit `http://192.168.1.x` to access your home page.
 
 ## Setup your Cloud Drive
-Cloud Drive URL: `https://your-domain.com/files/`  
+Cloud Drive URL: `https://your-domain.com:4443/files/`  
   - Windows
     - Click on the Start icon/Windows icon  
     - Go into "This PC"
@@ -83,7 +83,7 @@ Cloud Drive URL: `https://your-domain.com/files/`
     - Type the *Cloud Drive URL* into "Connect to Server" field
     - Change https:// to davs://
   - Chromebook
-    - `sudo mount -t davfs https://your-domain.com/files/ /home/localuser/klackcloud`
+    - `sudo mount -t davfs https://your-domain.com:4443/files/ /home/localuser/klackcloud`
   - iPhone
     - Download [Documents: File Manager & Docs by Readdle](https://apps.apple.com/us/app/documents-file-manager-docs/id364901807)
     - [Setup WebDAV](https://support.readdle.com/documents/transfer-share-your-files/transfer-files-to-another-ios-device-with-webdav) using the *Cloud Drive URL*
@@ -98,7 +98,7 @@ Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
   - Open the app
   - Navigate to Options > synchronization
   - Set "Synchronization target" to "WebDAV"
-  - Enter `https://your-domain.com/files/Notes` for the "WebDAV URL"
+  - Enter `https://your-domain.com:4443/files/Notes` for the "WebDAV URL"
   - Enter your username and password
   - Click "Check synchronization configuration"
   - Upon success click "Show Advanced Settings"
@@ -106,7 +106,7 @@ Setup notebook sync with [Joplin](https://joplinapp.org/help/install/)
 
 ## Sync your Calendar, Contacts, and Reminders
   - [iPhone Guide](https://support.apple.com/guide/iphone/set-up-mail-contacts-and-calendar-accounts-ipha0d932e96/ios)
-    - Enter `https://your-domain.com/planner/username` as your CardDAV and CalDAV server
+    - Enter `https://your-domain.com:4443/planner/username` as your CardDAV and CalDAV server
 ## Alerts
 You will receive alerts on the dashboard for the following:
 - High CPU temp (or no temp reported)  
@@ -123,25 +123,25 @@ You will receive alerts on the dashboard for the following:
 - If there is a backup failure, you will receive an alert on your dashboard.
 
 # Service Directory
-| Service       | Port     | Domain          | Hosted Path | URL                              | Service URL            | Auth Provider | Log Rotation  |
-| ------------- | -------- | --------------- | ----------- | -------------------------------- | ---------------------- | ------------- | ------------- |
-| Plex          | 32400    | your-domain.com | /           | https://your-domain.com:32400/   |                        | App           | Self          |
-| Immich        | 2283     | your-domain.com | /           | https://your-domain.com:2283/    |                        | App           | Docker        |
-| WebDav        | 4443     | your-domain.com | /files/     | https://your-domain.com/files/   |                        | Traefik       | Docker        |
-| Radicale      | 4443     | your-domain.com | /planner/   | https://your-domain.com/planner/ |                        | Traefik       | Docker        |
-| SFTPGo UI     | 8081     | 192.168.1.x     | /           | https://192.168.1.x:8081/        |                        | Traefik       | Docker        |
-| Traefik UI    | 8082     | 192.168.1.x     | /           | https://192.168.1.x:8082/        |                        | Traefik       | logrotate     |
-| Grafana       | 3000     | 192.168.1.x     | /           | https://192.168.1.x:3000/        |                        | App           | Docker        |
-| Prometheus    | 9090     | 192.168.1.x     | /           | https://192.168.1.x:9090/        | http://prometheus:9090 | Traefk        | Docker        |
-| Loki          |          |                 |             |                                  | http://loki:3100       |               | Docker        |
-| Node Exporter | 9101     | 192.168.1.x     | /           | https://192.168.1.x:9101/metrics |                        | IPTABLES      | stdout        |
-| Duplicati     | 8200     | 192.168.1.x     | /           | https://192.168.1.x:8200/        |                        | Traefik       | logrotate     |
-| qBittorrent   | 8080     | 192.168.1.x     | /           | https://192.168.1.x:8080/        |                        | App           | logs disabled |
-| Jackett       | 9117     | 192.168.1.x     | /           | https://192.168.1.x:9117/        | http://localhost:9117  | Traefik       | logs disabled |
-| Sonarr        | 8989     | 192.168.1.x     | /           | https://192.168.1.x:8989/        |                        | App           | Self          |
-| Radarr        | 7878     | 192.168.1.x     | /           | https://192.168.1.x:7878/        |                        | App           | Self          |
-| Dionaea       | Multiple | 192.168.50.x    |             |                                  |                        |               | logrotate     |
-| Cowrie        | 22,23    | 192.168.51.x    |             |                                  |                        |               | logrotate     |
+| Service       | Port     | Domain          | Hosted Path | URL                                   | Service URL            | Auth Provider | Log Rotation  |
+| ------------- | -------- | --------------- | ----------- | ------------------------------------- | ---------------------- | ------------- | ------------- |
+| Plex          | 32400    | your-domain.com | /           | https://your-domain.com:32400/        |                        | App           | Self          |
+| Immich        | 2283     | your-domain.com | /           | https://your-domain.com:2283/         |                        | App           | Docker        |
+| WebDav        | 4443     | your-domain.com | /files/     | https://your-domain.com:4443/files/   |                        | Traefik       | Docker        |
+| Radicale      | 4443     | your-domain.com | /planner/   | https://your-domain.com:4443/planner/ |                        | Traefik       | Docker        |
+| SFTPGo UI     | 8081     | 192.168.1.x     | /           | https://192.168.1.x:8081/             |                        | Traefik       | Docker        |
+| Traefik UI    | 8082     | 192.168.1.x     | /           | https://192.168.1.x:8082/             |                        | Traefik       | logrotate     |
+| Grafana       | 3000     | 192.168.1.x     | /           | https://192.168.1.x:3000/             |                        | App           | Docker        |
+| Prometheus    | 9090     | 192.168.1.x     | /           | https://192.168.1.x:9090/             | http://prometheus:9090 | Traefk        | Docker        |
+| Loki          |          |                 |             |                                       | http://loki:3100       |               | Docker        |
+| Node Exporter | 9101     | 192.168.1.x     | /           | https://192.168.1.x:9101/metrics      |                        | IPTABLES      | stdout        |
+| Duplicati     | 8200     | 192.168.1.x     | /           | https://192.168.1.x:8200/             |                        | Traefik       | logrotate     |
+| qBittorrent   | 8080     | 192.168.1.x     | /           | https://192.168.1.x:8080/             |                        | App           | logs disabled |
+| Jackett       | 9117     | 192.168.1.x     | /           | https://192.168.1.x:9117/             | http://localhost:9117  | Traefik       | logs disabled |
+| Sonarr        | 8989     | 192.168.1.x     | /           | https://192.168.1.x:8989/             |                        | App           | Self          |
+| Radarr        | 7878     | 192.168.1.x     | /           | https://192.168.1.x:7878/             |                        | App           | Self          |
+| Dionaea       | Multiple | 192.168.50.x    |             |                                       |                        |               | logrotate     |
+| Cowrie        | 22,23    | 192.168.51.x    |             |                                       |                        |               | logrotate     |
 
 # Notes
 ### Log Rotation
