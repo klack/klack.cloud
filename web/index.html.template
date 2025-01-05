@@ -59,7 +59,7 @@
             document.getElementById("post-setup").style.display = "none";
             if (window.location.hostname !== `${EXTERNAL_DOMAIN}`) {
               // Construct the URL for the internal domain, keeping the same path
-              const newURL = `http://${EXTERNAL_DOMAIN}`;
+              const newURL = `http://${EXTERNAL_DOMAIN}:4443/`;
 
               // Redirect to the new URL
               window.location.href = newURL;
@@ -82,7 +82,7 @@
     }
 
     // Start the initial check
-    checkHostReachability('https://${EXTERNAL_DOMAIN}/');
+    checkHostReachability('https://${EXTERNAL_DOMAIN}:4443/');
   </script>
 </head>
 
@@ -91,7 +91,7 @@
   <div id="post-setup">
     <h2>Host Unreachable</h2>
     <ul>
-      <li>Unable to connect to https://${EXTERNAL_DOMAIN}/</li>
+      <li>Unable to connect to https://${EXTERNAL_DOMAIN}:4443/</li>
       <li>Ensure that ports are forwarded to ${HOST_IP}</li>
     </ul>
   </div>
@@ -120,7 +120,7 @@
   </div>
   <div id="bottom">
     <a href="https://${HOST_IP}:9090" target="_blank">Prometheus</a>
-    <a href="https://${EXTERNAL_DOMAIN}/planner/" target="_blank">Radicale</a>
+    <a href="https://${EXTERNAL_DOMAIN}:4443/planner/" target="_blank">Radicale</a>
     <a href="https://${HOST_IP}:8081/" target="_blank">SFTPGo</a>
     <a href="https://${HOST_IP}:8082/" target="_blank">Traefik</a>
     <span class="downloaders"><a href="https://${HOST_IP}:9117/" target="_blank">Jackett</a></span>
