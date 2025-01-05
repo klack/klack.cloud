@@ -70,5 +70,5 @@ if [ "$IN_SETUP" != "1" ]; then
     echo -e "\nCRITICAL: Host IP Changed.  Change router port forwarding to ${HOST_IP}"
     read -p "Press Enter to continue"
   fi
-  echo -e "\nVisit your homepage at https://${HOST_IP}"
+  echo -e "\nVisit your homepage at https://${EXTERNAL_DOMAIN}:4443"
 fi
