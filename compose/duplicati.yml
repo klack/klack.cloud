@@ -20,7 +20,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.duplicati.rule=PathPrefix(`/`)"
       - "traefik.http.routers.duplicati.entrypoints=duplicati"
-      - "traefik.http.routers.duplicati.middlewares=traefik-auth@file"      
+#      - "traefik.http.routers.duplicati.middlewares=traefik-auth@file"      
       - "traefik.http.routers.duplicati.service=duplicati"
       - "traefik.http.services.duplicati.loadBalancer.server.port=8200"
       - "stack=klack.cloud"      
