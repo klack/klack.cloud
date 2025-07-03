@@ -49,7 +49,7 @@ logpath = %(default_logpath)s
 enabled = true
 chain = DOCKER-USER
 port = http,https
-filter = traefik-response-codes[router=sftpgo@docker,coderegex=4(?!99)\d{2}]
+filter = traefik-response-codes[router=sftpgo@docker,coderegex=4(?!04)\d{2}]
 logpath = %(default_logpath)s
 
 #Photoprism 400-498
