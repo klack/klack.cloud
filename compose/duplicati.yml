@@ -23,5 +23,5 @@ services:
 #      - "traefik.http.routers.duplicati.middlewares=traefik-auth@file"      
       - "traefik.http.routers.duplicati.service=duplicati"
       - "traefik.http.services.duplicati.loadBalancer.server.port=8200"
-      - "stack=klack.cloud"      
+      - "stack=klack.cloud"
     restart: always
