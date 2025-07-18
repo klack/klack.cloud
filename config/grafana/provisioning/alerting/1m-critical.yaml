@@ -65,7 +65,7 @@ groups:
           labels: {}
           isPaused: false
           notification_settings:
-            receiver: grafana-default-email
+            receiver: notify
         - uid: edwq9w4u3kx6of
           title: Cowrie
           condition: C
@@ -153,7 +153,7 @@ groups:
           labels: {}
           isPaused: false
           notification_settings:
-            receiver: grafana-default-email
+            receiver: notify
         - uid: fdwqacr5416o0a
           title: Dionaea
           condition: C
@@ -241,4 +241,4 @@ groups:
           labels: {}
           isPaused: false
           notification_settings:
-            receiver: grafana-default-email
+            receiver: notify
