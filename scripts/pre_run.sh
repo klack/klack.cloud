@@ -51,9 +51,6 @@ else
   echo "Docker daemon.json already exists"
 fi
 
-cp ./config/grafana/provisioning/alerting/contact-points.yaml.template ./config/grafana/provisioning/alerting/contact-points.yaml
-sed -i "s/\${GF_SMTP_FROM_ADDRESS}/${GF_SMTP_FROM_ADDRESS}/g" ./config/grafana/provisioning/alerting/contact-points.yaml
-
 #Setup logrotate
 echo -e "\nSetting up logrotate"
 cp ./config/logrotate.d/* /etc/logrotate.d

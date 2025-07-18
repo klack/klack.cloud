@@ -34,6 +34,8 @@ echo -e "\nUpdating Grafana dashboard"
 cp ./config/grafana/dashboards/overview-dashboard.json.template ./config/grafana/dashboards/overview-dashboard.json
 sed -i "s/\${NETWORK_INTERFACE}/${NETWORK_INTERFACE}/g" ./config/grafana/dashboards/overview-dashboard.json
 sed -i "s/\${HOST_IP}/${HOST_IP}/g" ./config/grafana/dashboards/overview-dashboard.json
+cp ./config/grafana/provisioning/alerting/contact-points.yaml.template ./config/grafana/provisioning/alerting/contact-points.yaml
+sed -i "s/\${GF_SMTP_FROM_ADDRESS}/${GF_SMTP_FROM_ADDRESS}/g" ./config/grafana/provisioning/alerting/contact-points.yaml
 
 #Start
 echo -e "\nStarting"
