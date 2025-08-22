@@ -8,6 +8,8 @@ services:
       TZ: ${TZ}
       PLEX_CLAIM: ${PLEX_CLAIM}
       ADVERTISE_IP: https://${EXTERNAL_DOMAIN}:32400/
+      PLEX_UID: 1000
+      PLEX_GID: 1000
     hostname: plex
     volumes:
       - ${DIR_DATA_ROOT}/plex:/config
