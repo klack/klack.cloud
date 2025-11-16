@@ -147,7 +147,15 @@ groups:
               datasourceUid: fdw4k6iv40fswd
               model:
                 editorMode: code
-                expr: sum(count_over_time({filename="/logs/duplicati/duplicati.log"} |= `[Error-`[$__auto]))
+                expr: |
+                  sum(
+                    count_over_time(
+                      {filename="/logs/duplicati/duplicati.log"}
+                        |= "Error-"
+                        != "Error-Duplicati.Server.Program-UnobservedTaskException"
+                      [$__auto]
+                    )
+                  )
                 intervalMs: 1000
                 maxDataPoints: 43200
                 queryType: instant
