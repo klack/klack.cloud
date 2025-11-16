@@ -27,5 +27,6 @@ config/grafana/dashboards/overview-dashboard.json
 config/grafana/provisioning/alerting/contact-points.yaml
 config/grafana/provisioning/alerting/1m-warning.yaml
 config/jackett/ServerConfig.json
+config/promtail/.positions*
 web/hosts.txt
 web/index.html
