@@ -7,6 +7,8 @@ services:
       - PGID=1000
       - TZ=America/Denver
       - CLI_ARGS= --log-file=/var/log/duplicati/duplicati.log --log-level=Information
+      - SETTINGS_ENCRYPTION_KEY=${CLOUD_PASS}
+      - DUPLICATI__WEBSERVICE_PASSWORD=${CLOUD_PASS}
     volumes:
       - /var/log/duplicati:/var/log/duplicati
       - ${DIR_DATA_ROOT}/duplicati:/config
