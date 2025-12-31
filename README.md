@@ -153,6 +153,13 @@ Honeypot's cannot be accessed by localhost due to macvlan network
 ### Custom CA Cert
 To use your own ca-signed certificates rename `config/traefik/dynamic/certs.yml.example` to `config/traefik/dynamic/certs.yml` and place `ca.crt`,`server.crt`, and `server.key` in `config/traefik/certs`
 
+### Public Share
+- Forward port `8081` from your router to your server computer.
+- Create a new folder on your Cloud drive such as `Share`.  
+- Log into the sftpgo ui at https://your-domain.com:8081/
+- Create a new share using the path `Share`
+- Copy the public link
+
 # Uninstall
 - Move the `backups` and `cloud` folders to a safe location to preserve your data  
 - Run `./setup.sh --clean`  
