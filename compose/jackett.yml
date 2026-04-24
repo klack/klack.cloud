@@ -31,3 +31,21 @@ services:
     restart: unless-stopped
     # ports:
     #   - 9117:9117
+  flaresolverr:
+    # DockerHub mirror flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    profiles:
+      - downloaders
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_FILE=${LOG_FILE:-none}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=America/Denver
+#    ports:
+#      - "${PORT:-8191}:8191"
+    network_mode: service:qbittorrent-wireguard
+    volumes:
+      - /var/lib/flaresolver:/config
+    restart: unless-stopped
