@@ -102,4 +102,5 @@ certificatesResolvers:
     acme:
       email: admin@suntrustmail.com
       storage: /acme/acme.json
+      certificatesDuration: 1080
       tlsChallenge: {}
