@@ -1,0 +1,1 @@
+Use Cloudflare DNS 01 with API token so port 443 can be closed to the public

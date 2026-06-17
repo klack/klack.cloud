@@ -9,7 +9,7 @@ services:
     command: -config.file=/etc/loki/loki-config.yml
     volumes:
       - ../config/loki:/etc/loki
-      - loki-storage:/tmp/loki
+      - loki-storage:/loki
     environment:
       TZ: ${TZ}
     networks:
@@ -53,7 +53,7 @@ services:
       TZ: ${TZ}
       POSTGRES_DB: grafana
       POSTGRES_USER: grafana
-      POSTGRES_PASSWORD: ${CLOUD_PASS}
+      POSTGRES_PASSWORD: ${GRAFANA_DB_PASSWORD}
     volumes:
       - grafana-db-storage:/var/lib/postgresql/data
     networks:
@@ -88,7 +88,7 @@ services:
       GF_DATABASE_HOST: grafana-db:5432
       GF_DATABASE_NAME: grafana
       GF_DATABASE_USER: grafana
-      GF_DATABASE_PASSWORD: ${CLOUD_PASS}
+      GF_DATABASE_PASSWORD: ${GRAFANA_DB_PASSWORD}
       GF_DATABASE_SSL_MODE: disable
     networks:
       - klack

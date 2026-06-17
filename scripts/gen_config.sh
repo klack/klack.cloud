@@ -84,6 +84,10 @@ docker run --rm httpd:latest htpasswd \
 IMMICH_DB_PASSWORD=$(tr </dev/urandom -dc 'A-Za-z0-9!@#%' | head -c 16)
 sed -i "s|^DB_PASSWORD=.*|DB_PASSWORD=\"$IMMICH_DB_PASSWORD\"|" .env
 
+# Grafana Setup
+GRAFANA_DB_PASSWORD=$(tr </dev/urandom -dc 'A-Za-z0-9_@#%' | head -c 32)
+sed -i "s|^GRAFANA_DB_PASSWORD=.*|GRAFANA_DB_PASSWORD=\"$GRAFANA_DB_PASSWORD\"|" .env
+
 #Set Servarr api keys
 RADARR_API_KEY=$(head -c 16 /dev/urandom | xxd -p)
 cp -p ./config/radarr/config.xml.template ./config/radarr/config.xml
