@@ -1,5 +1,7 @@
 volumes:
   grafana-storage:
+  loki-storage:
+  grafana-db-storage:
 
 services:
   loki:
@@ -7,6 +9,7 @@ services:
     command: -config.file=/etc/loki/loki-config.yml
     volumes:
       - ../config/loki:/etc/loki
+      - loki-storage:/tmp/loki
     environment:
       TZ: ${TZ}
     networks:
@@ -44,6 +47,26 @@ services:
     # ports:
     #   - "1514:1514" # this is only needed if you are going to send syslogs
 
+  grafana-db:
+    image: postgres:16-alpine
+    environment:
+      TZ: ${TZ}
+      POSTGRES_DB: grafana
+      POSTGRES_USER: grafana
+      POSTGRES_PASSWORD: ${CLOUD_PASS}
+    volumes:
+      - grafana-db-storage:/var/lib/postgresql/data
+    networks:
+      - klack
+    labels:
+      - "stack=loggers"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U grafana -d grafana"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
   grafana:
     image: grafana/grafana
     user: 1000:1000 # Required
@@ -61,6 +84,12 @@ services:
       GF_SMTP_USER: ${GF_SMTP_USER}
       GF_SMTP_PASSWORD: ${GF_SMTP_PASSWORD}
       GF_SERVER_ROOT_URL: https://${HOST_IP}:3000
+      GF_DATABASE_TYPE: postgres
+      GF_DATABASE_HOST: grafana-db:5432
+      GF_DATABASE_NAME: grafana
+      GF_DATABASE_USER: grafana
+      GF_DATABASE_PASSWORD: ${CLOUD_PASS}
+      GF_DATABASE_SSL_MODE: disable
     networks:
       - klack
     labels:
@@ -73,4 +102,6 @@ services:
     depends_on:
       loki:
         condition: service_started
+      grafana-db:
+        condition: service_healthy
     restart: always
