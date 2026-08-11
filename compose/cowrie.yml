@@ -4,7 +4,9 @@ volumes:
 
 services:
   cowrie:
-    image: cowrie/cowrie
+    image: cowrie/cowrie:3.0.12
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     environment:
       - TZ=${TZ}
       - "COWRIE_TELNET_ENABLED=yes"
