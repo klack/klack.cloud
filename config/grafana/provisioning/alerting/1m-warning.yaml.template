@@ -151,8 +151,7 @@ groups:
                   sum(
                     count_over_time(
                       {filename="/logs/duplicati/duplicati.log"}
-                        |= "Error-"
-                        != "Error-Duplicati.Server.Program-UnobservedTaskException"
+                        |~ "Controller-FailedOperation|BackupHandler-FatalError"
                       [$__auto]
                     )
                   )
