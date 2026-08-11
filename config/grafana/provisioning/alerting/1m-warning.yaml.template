@@ -321,3 +321,125 @@ groups:
           isPaused: false
           notification_settings:
             receiver: notify
+        - uid: duplstalelocal001
+          title: Local Backup Stale
+          condition: C
+          data:
+            - refId: A
+              queryType: instant
+              relativeTimeRange:
+                from: 93600
+                to: 0
+              datasourceUid: fdw4k6iv40fswd
+              model:
+                editorMode: code
+                expr: |
+                  sum(
+                    count_over_time(
+                      {filename="/logs/duplicati/duplicati.log", stack="local"}
+                        |= "The operation Backup has completed"
+                      [26h]
+                    )
+                  )
+                intervalMs: 1000
+                maxDataPoints: 43200
+                queryType: instant
+                refId: A
+            - refId: C
+              relativeTimeRange:
+                from: 93600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: Alerting
+          execErrState: Error
+          for: 0s
+          annotations:
+            summary: "No successful Duplicati backup on klack-prime (local Windows host) in the last 26 hours. A hung backup writes no error line, so this catches stalls that Local Backup Failure cannot."
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: notify
+        - uid: duplstaleremote01
+          title: Backup Stale
+          condition: C
+          data:
+            - refId: A
+              queryType: instant
+              relativeTimeRange:
+                from: 93600
+                to: 0
+              datasourceUid: fdw4k6iv40fswd
+              model:
+                editorMode: code
+                expr: |
+                  sum(
+                    count_over_time(
+                      {filename="/logs/duplicati/duplicati.log", stack="klack.cloud"}
+                        |= "The operation Backup has completed"
+                      [26h]
+                    )
+                  )
+                intervalMs: 1000
+                maxDataPoints: 43200
+                queryType: instant
+                refId: A
+            - refId: C
+              relativeTimeRange:
+                from: 93600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: Alerting
+          execErrState: Error
+          for: 0s
+          annotations:
+            summary: "No successful Duplicati backup on templeofbytes in the last 26 hours. This host normally completes 6 backups a day, so a full day of silence means backups stopped rather than ran late."
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: notify
