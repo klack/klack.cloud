@@ -14,4 +14,6 @@ sed "s|\${NODE_EXPORTER_TARGET}|${NODE_EXPORTER_TARGET}|g; \
      /etc/prometheus/prometheus.yml.template > /etc/prometheus/prometheus.yml
 
 # Start Prometheus with the updated configuration
-/bin/prometheus --config.file=/etc/prometheus/prometheus.yml
+/bin/prometheus --config.file=/etc/prometheus/prometheus.yml \
+  --storage.tsdb.retention.time=180d \
+  --storage.tsdb.retention.size=50GB
