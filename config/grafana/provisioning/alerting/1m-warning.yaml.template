@@ -321,67 +321,6 @@ groups:
           isPaused: false
           notification_settings:
             receiver: notify
-        - uid: duplstalelocal001
-          title: Local Backup Stale
-          condition: C
-          data:
-            - refId: A
-              queryType: instant
-              relativeTimeRange:
-                from: 93600
-                to: 0
-              datasourceUid: fdw4k6iv40fswd
-              model:
-                editorMode: code
-                expr: |
-                  sum(
-                    count_over_time(
-                      {filename="/logs/duplicati/duplicati.log", stack="local"}
-                        |= "The operation Backup has completed"
-                      [26h]
-                    )
-                  )
-                intervalMs: 1000
-                maxDataPoints: 43200
-                queryType: instant
-                refId: A
-            - refId: C
-              relativeTimeRange:
-                from: 93600
-                to: 0
-              datasourceUid: __expr__
-              model:
-                conditions:
-                    - evaluator:
-                        params:
-                            - 1
-                        type: lt
-                      operator:
-                        type: and
-                      query:
-                        params:
-                            - C
-                      reducer:
-                        params: []
-                        type: last
-                      type: query
-                datasource:
-                    type: __expr__
-                    uid: __expr__
-                expression: A
-                intervalMs: 1000
-                maxDataPoints: 43200
-                refId: C
-                type: threshold
-          noDataState: Alerting
-          execErrState: Error
-          for: 0s
-          annotations:
-            summary: "No successful Duplicati backup on klack-prime (local Windows host) in the last 26 hours. A hung backup writes no error line, so this catches stalls that Local Backup Failure cannot."
-          labels: {}
-          isPaused: false
-          notification_settings:
-            receiver: notify
         - uid: duplstaleremote01
           title: Backup Stale
           condition: C
@@ -439,6 +378,114 @@ groups:
           for: 0s
           annotations:
             summary: "No successful Duplicati backup on templeofbytes in the last 26 hours. This host normally completes 6 backups a day, so a full day of silence means backups stopped rather than ran late."
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: notify
+        - uid: dupljobfailed0001
+          title: Duplicati Job Failed
+          condition: C
+          data:
+            - refId: A
+              queryType: instant
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: fdw4k6iv40fswd
+              model:
+                editorMode: code
+                expr: 'sum by (job_name) (count_over_time({stack="local"} |= "JobStatus" | regexp `job="(?P<job_name>[^"]+)".*result=(?P<result>[^ ]+)` | result != "Success" [30m]))'
+                intervalMs: 1000
+                maxDataPoints: 43200
+                queryType: instant
+                refId: A
+            - refId: C
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: OK
+          execErrState: Error
+          for: 0s
+          annotations:
+            summary: "A Duplicati job on klack-prime last finished with a non-Success result. The job name is in the job_name label. Emitted by job-status.sh every 15 minutes from each job database."
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: notify
+        - uid: dupljobstale00001
+          title: Duplicati Job Stale
+          condition: C
+          data:
+            - refId: A
+              queryType: instant
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: fdw4k6iv40fswd
+              model:
+                editorMode: code
+                expr: 'max by (job_name) (max_over_time({stack="local"} |= "JobStatus" | regexp `job="(?P<job_name>[^"]+)".*age_hours=(?P<age>[-0-9.]+)` | unwrap age [30m]))'
+                intervalMs: 1000
+                maxDataPoints: 43200
+                queryType: instant
+                refId: A
+            - refId: C
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 26
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: Alerting
+          execErrState: Error
+          for: 0s
+          annotations:
+            summary: "A Duplicati job on klack-prime has not had a successful run in over 26 hours. Measured from the last run result, not the last fileset -- an unchanged source writes no fileset yet is healthy. NoData here means job-status.sh itself stopped reporting."
           labels: {}
           isPaused: false
           notification_settings:
