@@ -80,6 +80,15 @@ docker run --rm httpd:latest htpasswd \
   -Bbn $USERNAME "$PASSWORD" > \
   ./config/traefik/htpasswd && echo "htpassword generated"
 
+# Promtail log shipper user, kept separate from the admin user so a log
+# shipper never carries the credential that unlocks every other service.
+# Alphanumeric only: this value gets interpolated into promtail YAML.
+PROMTAIL_USER="promtail"
+PROMTAIL_PASS=$(tr </dev/urandom -dc 'A-Za-z0-9' | head -c 32)
+sed -i "s|^PROMTAIL_USER=.*|PROMTAIL_USER=\"$PROMTAIL_USER\"|" .env
+sed -i "s|^PROMTAIL_PASS=.*|PROMTAIL_PASS=\"$PROMTAIL_PASS\"|" .env
+docker run --rm httpd:latest htpasswd -Bbn "$PROMTAIL_USER" "$PROMTAIL_PASS" >> ./config/traefik/htpasswd && sed -i '/^$/d' ./config/traefik/htpasswd && echo "promtail htpassword appended"
+
 # Immich Setup
 IMMICH_DB_PASSWORD=$(tr </dev/urandom -dc 'A-Za-z0-9!@#%' | head -c 16)
 sed -i "s|^DB_PASSWORD=.*|DB_PASSWORD=\"$IMMICH_DB_PASSWORD\"|" .env
