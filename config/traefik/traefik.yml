@@ -97,6 +97,11 @@ entrypoints:
     http:
       tls: true
 
+  loki:
+    address: ":3100"
+    http:
+      tls: true
+
 certificatesResolvers:
   myresolver:
     acme:

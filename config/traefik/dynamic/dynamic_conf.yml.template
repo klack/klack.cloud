@@ -7,13 +7,26 @@ http:
         - metrics
       middlewares:
         - traefik-auth
-  
+
+    loki:
+      rule: "PathPrefix(`/`)"
+      service: loki
+      entryPoints:
+        - loki
+      middlewares:
+        - traefik-auth
+
   services:
     node-exporter:
       loadBalancer:
         servers:
           - url: "http://${HOST_IP}:9100"
-  
+
+    loki:
+      loadBalancer:
+        servers:
+          - url: "http://loki:3100"
+
   middlewares:
     traefik-auth:
       basicAuth:
