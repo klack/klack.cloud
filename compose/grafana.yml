@@ -34,6 +34,7 @@ services:
       - /var/log/cowrie:/logs/cowrie
       - /var/log/duplicati:/logs/duplicati
       - /var/log/plex:/logs/plex
+      - /var/log/rclone:/logs/rclone
     environment:
       TZ: ${TZ}
     networks:

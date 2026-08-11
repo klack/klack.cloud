@@ -199,3 +199,64 @@ groups:
           isPaused: false
           notification_settings:
             receiver: notify
+        - uid: y1nrf40hhlz3hc
+          title: Offsite Backup Failure
+          condition: C
+          data:
+            - refId: A
+              queryType: instant
+              relativeTimeRange:
+                from: 93600
+                to: 0
+              datasourceUid: fdw4k6iv40fswd
+              model:
+                editorMode: code
+                expr: |
+                  sum(
+                    count_over_time(
+                      {filename="/logs/rclone/rclone.log"}
+                        |= "RCLONE_BACKUP_RESULT status=FAILED"
+                      [$__auto]
+                    )
+                  )
+                intervalMs: 1000
+                maxDataPoints: 43200
+                queryType: instant
+                refId: A
+            - refId: C
+              relativeTimeRange:
+                from: 93600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: OK
+          execErrState: Error
+          for: 0s
+          annotations:
+            summary: "The nightly offsite rclone backup (/storage/backups -> koofr) failed. Check /var/log/rclone/rclone.log for details -- if the log shows reason=destination_full, the koofr remote is out of space."
+          labels: {}
+          isPaused: false
+          notification_settings:
+            receiver: notify

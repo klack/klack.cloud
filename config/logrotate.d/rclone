@@ -1,0 +1,10 @@
+/var/log/rclone/*.log {
+  size 10M
+  rotate 5
+  missingok
+  notifempty
+  delaycompress
+  compress
+  dateext
+  dateformat -%Y-%m-%d-%s
+}
